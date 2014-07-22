@@ -2,13 +2,6 @@
 
 dotfiles="$HOME/dotfiles"
 
-if [[ -d "$dotfiles" ]]; then
-    echo "Symlinking dotfiles from $dotfiles"
-else
-    echo "$dotfiles does not exist"
-    exit 1
-fi
-
 link() {
     from="$1"
     to="$2"
@@ -17,8 +10,14 @@ link() {
     ln -s "$from" "$to"
 }
 
+sudo bash spf13/install.sh
+sudo bash osx/custom.sh
+sudo bash homebrew/install.sh
+sudo zsh prezto/install.sh
+
 for location in $(find home -name '.*'); do
     file="${location##*/}"
     file="${file%.sh}"
     link "$dotfiles/$location" "$HOME/$file"
 done
+
