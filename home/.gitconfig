@@ -1,0 +1,17 @@
+[user]
+    name = Duncan Beaton
+    email = dunckr@gmail.com
+
+[github]
+    user = dunckr
+
+[color]
+    ui = true
+
+[core]
+    excludesfile = ~/.gitignore
+    editor = vim
+
+[apply]
+    whitepace = nowarn
+
