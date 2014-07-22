@@ -7,4 +7,3 @@ install tree
 install git
 install go
 
-exit 0
