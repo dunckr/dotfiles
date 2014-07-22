@@ -17,3 +17,15 @@ https://github.com/robb/.dotfiles
 https://github.com/cowboy/dotfiles
 https://github.com/gf3/dotfiles
 
+
+todo
+automatically set iterm
+set alfred
+
+screenshots
+
+install source code pro
+
+links for required softwar
+
+need to install node and jsbeautifier
