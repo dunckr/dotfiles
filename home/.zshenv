@@ -6,4 +6,14 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
 fi
 
 # Git short-cuts
+alias gst="git status"
 alias gaa="git add -A"
+alias gb="git branch"
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gcm="git commit -a"
+alias gco="git commit -m"
+alias gl="git log"
+alias gf="git fetch"
+alias grc="git rebase --continue"
+

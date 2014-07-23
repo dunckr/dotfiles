@@ -1,0 +1,1 @@
+Bundle 'maksimr/vim-jsbeautify'
