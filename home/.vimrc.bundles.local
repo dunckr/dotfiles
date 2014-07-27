@@ -1,1 +1,3 @@
 Bundle 'maksimr/vim-jsbeautify'
+Bundle 'chriskempson/base16-vim'
+Bundle 'dunckr/vim-eighties-extended'
