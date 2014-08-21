@@ -6,6 +6,17 @@
 	<string></string>
 	<key>connections</key>
 	<dict>
+		<key>009EEE34-1C4F-4EBB-A96B-7FDEA295FD08</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>6F20C9D4-A450-4291-80D5-8C19BD606EE7</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>0118BEE6-C8ED-4D13-8404-BB1C9CCAF437</key>
 		<array>
 			<dict>
@@ -22,6 +33,17 @@
 			<dict>
 				<key>destinationuid</key>
 				<string>4C46BB36-8935-435A-9231-80C2A5888449</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+		<key>61E46ACB-4A33-4F2A-84BB-13BF5D58F4A1</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>1EB3058D-720D-4B60-ABFE-7E79FAB74935</string>
 				<key>modifiers</key>
 				<integer>0</integer>
 				<key>modifiersubtext</key>
@@ -72,6 +94,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>D2561048-8CB1-4CFB-9987-0282FCDD7B69</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>53D2C0C9-7F08-485C-BDCE-5946FE2C770E</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string></string>
@@ -88,7 +121,7 @@
 			<dict>
 				<key>paths</key>
 				<array>
-					<string>/Applications/Atom.app</string>
+					<string>/Applications/Subl.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
@@ -108,11 +141,11 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>hotkey</key>
-				<integer>1</integer>
+				<integer>0</integer>
 				<key>hotmod</key>
-				<integer>1179648</integer>
+				<integer>0</integer>
 				<key>hotstring</key>
-				<string>S</string>
+				<string></string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -242,7 +275,7 @@
 				<key>hotkey</key>
 				<integer>2</integer>
 				<key>hotmod</key>
-				<integer>1179648</integer>
+				<integer>655360</integer>
 				<key>hotstring</key>
 				<string>D</string>
 				<key>leftcursor</key>
@@ -267,11 +300,11 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>hotkey</key>
-				<integer>37</integer>
+				<integer>45</integer>
 				<key>hotmod</key>
-				<integer>1179648</integer>
+				<integer>655360</integer>
 				<key>hotstring</key>
-				<string>L</string>
+				<string>N</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -311,11 +344,11 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>hotkey</key>
-				<integer>14</integer>
+				<integer>1</integer>
 				<key>hotmod</key>
-				<integer>1179648</integer>
+				<integer>655360</integer>
 				<key>hotstring</key>
-				<string>E</string>
+				<string>S</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -347,15 +380,157 @@
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>8</integer>
+				<key>hotmod</key>
+				<integer>655360</integer>
+				<key>hotstring</key>
+				<string>C</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>D2561048-8CB1-4CFB-9987-0282FCDD7B69</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/Firefox.app</string>
+				</array>
+				<key>toggle</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>53D2C0C9-7F08-485C-BDCE-5946FE2C770E</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>46</integer>
+				<key>hotmod</key>
+				<integer>655360</integer>
+				<key>hotstring</key>
+				<string>M</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>61E46ACB-4A33-4F2A-84BB-13BF5D58F4A1</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/Mail.app</string>
+				</array>
+				<key>toggle</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>1EB3058D-720D-4B60-ABFE-7E79FAB74935</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>1</integer>
+				<key>hotmod</key>
+				<integer>1179648</integer>
+				<key>hotstring</key>
+				<string>S</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>009EEE34-1C4F-4EBB-A96B-7FDEA295FD08</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/Xcode6-Beta4.app</string>
+				</array>
+				<key>toggle</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>6F20C9D4-A450-4291-80D5-8C19BD606EE7</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
 	<key>uidata</key>
 	<dict>
+		<key>009EEE34-1C4F-4EBB-A96B-7FDEA295FD08</key>
+		<dict>
+			<key>ypos</key>
+			<real>1010</real>
+		</dict>
 		<key>0118BEE6-C8ED-4D13-8404-BB1C9CCAF437</key>
 		<dict>
 			<key>ypos</key>
 			<real>300</real>
+		</dict>
+		<key>1EB3058D-720D-4B60-ABFE-7E79FAB74935</key>
+		<dict>
+			<key>ypos</key>
+			<real>900</real>
 		</dict>
 		<key>27F666DE-26B4-4CE9-870A-4BE4D8AC1036</key>
 		<dict>
@@ -372,10 +547,25 @@
 			<key>ypos</key>
 			<real>420</real>
 		</dict>
+		<key>53D2C0C9-7F08-485C-BDCE-5946FE2C770E</key>
+		<dict>
+			<key>ypos</key>
+			<real>780</real>
+		</dict>
 		<key>59EE9BC9-E361-43DB-810C-4F74F7B0DCC4</key>
 		<dict>
 			<key>ypos</key>
 			<real>540</real>
+		</dict>
+		<key>61E46ACB-4A33-4F2A-84BB-13BF5D58F4A1</key>
+		<dict>
+			<key>ypos</key>
+			<real>890</real>
+		</dict>
+		<key>6F20C9D4-A450-4291-80D5-8C19BD606EE7</key>
+		<dict>
+			<key>ypos</key>
+			<real>1020</real>
 		</dict>
 		<key>841A2336-3E8E-4B43-8A81-4F4BF8A3E10D</key>
 		<dict>
@@ -401,6 +591,11 @@
 		<dict>
 			<key>ypos</key>
 			<real>60</real>
+		</dict>
+		<key>D2561048-8CB1-4CFB-9987-0282FCDD7B69</key>
+		<dict>
+			<key>ypos</key>
+			<real>770</real>
 		</dict>
 		<key>EA253FB2-5BC3-4559-AC15-6DD7594E45CB</key>
 		<dict>

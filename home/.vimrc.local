@@ -4,7 +4,7 @@ syntax enable
 let base16colorspace=256
 set term=xterm-256color
 set t_Co=256
-colorscheme eighties-extended
+colorscheme Monokai
 set background=dark
 
 " line numbers

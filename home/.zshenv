@@ -17,3 +17,6 @@ alias gl="git log"
 alias gf="git fetch"
 alias grc="git rebase --continue"
 
+
+alias subl="/Applications/Subl.app/Contents/SharedSupport/bin/subl"
+alias cls="clear"
