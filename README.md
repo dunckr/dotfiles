@@ -1,3 +1,8 @@
+# dotfiles
+
+![Terminal](http://dunckr.com/imgs/terminal.png)
+![Vim](http://dunckr.com/imgs/vim.png)
+
 ## Requirements
 
 + [Bind ESC to Caps](https://pqrs.org/osx/karabiner/seil.html#commandlineinterface)
@@ -12,7 +17,7 @@
 + Links for all software
 + Install Node and jsbeautifier
 
-## Plagiarism
+## References
 
 + https://github.com/mathiasbynens/dotfiles
 + https://github.com/holman/dotfiles/
