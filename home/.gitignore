@@ -21,3 +21,4 @@ Icon?
 # Other stuff
 *.pyc
 /tmp
+/sass-cache
