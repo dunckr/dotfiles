@@ -105,6 +105,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>E6586ECC-7DA3-4AF2-B6FF-6AD4ED37C66D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>59F5CA4D-CE7A-4B1E-A569-58FF1153D63B</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 	</dict>
 	<key>createdby</key>
 	<string></string>
@@ -163,23 +174,6 @@
 		<dict>
 			<key>config</key>
 			<dict>
-				<key>paths</key>
-				<array>
-					<string>/Applications/iTerm.app</string>
-				</array>
-				<key>toggle</key>
-				<true/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
-			<key>uid</key>
-			<string>AB31FFF3-A040-4661-B474-AA92600C4328</string>
-			<key>version</key>
-			<integer>0</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -203,6 +197,23 @@
 			<string>9D904948-AC76-4685-9985-1C2FEDD263F9</string>
 			<key>version</key>
 			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/iTerm.app</string>
+				</array>
+				<key>toggle</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>AB31FFF3-A040-4661-B474-AA92600C4328</string>
+			<key>version</key>
+			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>config</key>
@@ -500,7 +511,7 @@
 			<dict>
 				<key>paths</key>
 				<array>
-					<string>/Applications/Xcode6-Beta4.app</string>
+					<string>/Applications/Xcode6-Beta7.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
@@ -509,6 +520,50 @@
 			<string>alfred.workflow.action.launchfiles</string>
 			<key>uid</key>
 			<string>6F20C9D4-A450-4291-80D5-8C19BD606EE7</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>35</integer>
+				<key>hotmod</key>
+				<integer>655360</integer>
+				<key>hotstring</key>
+				<string>P</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>E6586ECC-7DA3-4AF2-B6FF-6AD4ED37C66D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/Spotify.app</string>
+				</array>
+				<key>toggle</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>59F5CA4D-CE7A-4B1E-A569-58FF1153D63B</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -557,6 +612,11 @@
 			<key>ypos</key>
 			<real>540</real>
 		</dict>
+		<key>59F5CA4D-CE7A-4B1E-A569-58FF1153D63B</key>
+		<dict>
+			<key>ypos</key>
+			<real>1140</real>
+		</dict>
 		<key>61E46ACB-4A33-4F2A-84BB-13BF5D58F4A1</key>
 		<dict>
 			<key>ypos</key>
@@ -596,6 +656,11 @@
 		<dict>
 			<key>ypos</key>
 			<real>770</real>
+		</dict>
+		<key>E6586ECC-7DA3-4AF2-B6FF-6AD4ED37C66D</key>
+		<dict>
+			<key>ypos</key>
+			<real>1130</real>
 		</dict>
 		<key>EA253FB2-5BC3-4559-AC15-6DD7594E45CB</key>
 		<dict>

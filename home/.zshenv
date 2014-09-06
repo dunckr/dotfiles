@@ -17,6 +17,9 @@ alias gl="git log"
 alias gf="git fetch"
 alias grc="git rebase --continue"
 
-
+# Applications
 alias subl="/Applications/Subl.app/Contents/SharedSupport/bin/subl"
+
+# Shorthands
 alias cls="clear"
+alias server="python -m SimpleHTTPServer"
