@@ -50,6 +50,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>7443BB81-8859-41A4-9299-53420FDA063C</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>EBB702BB-5DA8-4728-81D4-331F9D431628</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>841A2336-3E8E-4B43-8A81-4F4BF8A3E10D</key>
 		<array>
 			<dict>
@@ -511,7 +522,7 @@
 			<dict>
 				<key>paths</key>
 				<array>
-					<string>/Applications/Xcode6-Beta7.app</string>
+					<string>/Applications/Xcode.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
@@ -564,6 +575,50 @@
 			<string>alfred.workflow.action.launchfiles</string>
 			<key>uid</key>
 			<string>59F5CA4D-CE7A-4B1E-A569-58FF1153D63B</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>31</integer>
+				<key>hotmod</key>
+				<integer>655360</integer>
+				<key>hotstring</key>
+				<string>O</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>7443BB81-8859-41A4-9299-53420FDA063C</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/Xcode.app/Contents/Developer/Applications/iOS Simulator.app</string>
+				</array>
+				<key>toggle</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>EBB702BB-5DA8-4728-81D4-331F9D431628</string>
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
@@ -627,6 +682,11 @@
 			<key>ypos</key>
 			<real>1020</real>
 		</dict>
+		<key>7443BB81-8859-41A4-9299-53420FDA063C</key>
+		<dict>
+			<key>ypos</key>
+			<real>1250</real>
+		</dict>
 		<key>841A2336-3E8E-4B43-8A81-4F4BF8A3E10D</key>
 		<dict>
 			<key>ypos</key>
@@ -666,6 +726,11 @@
 		<dict>
 			<key>ypos</key>
 			<real>300</real>
+		</dict>
+		<key>EBB702BB-5DA8-4728-81D4-331F9D431628</key>
+		<dict>
+			<key>ypos</key>
+			<real>1260</real>
 		</dict>
 		<key>F51AFF16-38A4-4E7D-ABC7-7F31B762FE32</key>
 		<dict>
