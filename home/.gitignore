@@ -15,9 +15,10 @@ Icon?
 .svn
 .sass-cache
 
-# Node.js package manager
+# Package manager
 /node_modules
 /npm-debug.log
+bower_components
 
 # Other stuff
 *.pyc
