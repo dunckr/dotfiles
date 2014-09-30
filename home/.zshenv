@@ -5,6 +5,11 @@ if [[ "$SHLVL" -eq 1 && ! -o LOGIN && -s "${ZDOTDIR:-$HOME}/.zprofile" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprofile"
 fi
 
+# Add private env
+if [ -f "${ZDOTDIR:-$HOME}/.zshenv.local" ]; then
+    source "${ZDOTDIR:-$HOME}/.zshenv.local"
+fi
+
 # Git short-cuts
 alias gst="git status"
 alias gaa="git add -A"
