@@ -23,3 +23,6 @@
 + https://github.com/holman/dotfiles/
 + https://github.com/paulmillr/dotfiles
 
+## License
+
+MIT © [Duncan Beaton](http://dunckr.com)
