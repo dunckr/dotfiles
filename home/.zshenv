@@ -24,6 +24,7 @@ alias grc="git rebase --continue"
 
 # Applications
 alias subl="/Applications/Subl.app/Contents/SharedSupport/bin/subl"
+alias sketch="/Applications/Sketch.app/Contents/MacOS/Sketch"
 
 # Shorthands
 alias cls="clear"
