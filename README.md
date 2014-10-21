@@ -1,7 +1,9 @@
 # dotfiles
 
-![Terminal](http://dunckr.com/imgs/terminal.png)
-![Vim](http://dunckr.com/imgs/vim.png)
+my personal dotfiles 🎮
+
+![Vim](https://raw.githubusercontent.com/dunckr/dotfiles/master/assets/vim.png)
+![Terminal](https://raw.githubusercontent.com/dunckr/dotfiles/master/assets/terminal.png)
 
 ## Requirements
 
@@ -11,11 +13,9 @@
 
 + Set iTerm2
 + Set Alfred
-+ Screenshots
-+ Customise Theme
-+ Install Source code pro
-+ Links for all software
-+ Install Node and jsbeautifier
++ Setup Homebrew casks 
+++ Install Source code pro
+++ Install jsbeautifier
 
 ## References
 
