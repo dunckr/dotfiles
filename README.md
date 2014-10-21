@@ -14,8 +14,8 @@ my personal dotfiles 🎮
 + Set iTerm2
 + Set Alfred
 + Setup Homebrew casks 
-++ Install Source code pro
-++ Install jsbeautifier
+ + Install Source code pro
+ + Install jsbeautifier
 
 ## References
 
