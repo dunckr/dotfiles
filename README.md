@@ -11,10 +11,7 @@ my personal dotfiles 🎮
 
 ## TODOs
 
-+ Set Alfred
-+ Setup Homebrew casks
- + Install Source code pro
- + Install jsbeautifier
++ Install jsbeautifier
 
 ## References
 
