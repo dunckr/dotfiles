@@ -21,3 +21,5 @@ for location in $(find home -name '.*'); do
     link "$dotfiles/$location" "$HOME/$file"
 done
 
+link "$dotfiles/iterm2/" "$HOME/Library/Preferences/"
+
