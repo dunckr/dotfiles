@@ -4,6 +4,7 @@ ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
 
 TAPS=(
     caskroom/cask
+    caskroom/fonts
 )
 FORMULAS=(
     caskroom/cask/brew-cask
@@ -20,6 +21,7 @@ CASKS=(
     dash
     dropbox
     firefox
+    font-source-code-pro
     google-chrome
     iterm2
     node
