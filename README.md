@@ -11,9 +11,8 @@ my personal dotfiles 🎮
 
 ## TODOs
 
-+ Set iTerm2
 + Set Alfred
-+ Setup Homebrew casks 
++ Setup Homebrew casks
  + Install Source code pro
  + Install jsbeautifier
 
