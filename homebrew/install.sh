@@ -29,6 +29,7 @@ CASKS=(
     seil
     sketch
     skype
+    slate
     spotify
     sublime-text3
     vlc
