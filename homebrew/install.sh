@@ -26,6 +26,7 @@ CASKS=(
     iterm2
     node
     onepassword
+    seil
     sketch
     skype
     spotify
