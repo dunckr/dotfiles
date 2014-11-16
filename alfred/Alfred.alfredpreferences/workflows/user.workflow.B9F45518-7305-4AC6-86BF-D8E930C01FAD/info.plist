@@ -215,6 +215,7 @@
 				<key>paths</key>
 				<array>
 					<string>/Applications/iTerm.app</string>
+					<string>/opt/homebrew-cask/Caskroom/iterm2/2.0.0/iTerm.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
@@ -391,6 +392,7 @@
 				<key>paths</key>
 				<array>
 					<string>/Applications/Sketch.app</string>
+					<string>/opt/homebrew-cask/Caskroom/sketch/latest/Sketch.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
@@ -435,6 +437,7 @@
 				<key>paths</key>
 				<array>
 					<string>/Applications/Firefox.app</string>
+					<string>/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
@@ -567,6 +570,7 @@
 				<key>paths</key>
 				<array>
 					<string>/Applications/Spotify.app</string>
+					<string>/opt/homebrew-cask/Caskroom/spotify/latest/Spotify.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
