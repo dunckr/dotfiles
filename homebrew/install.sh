@@ -32,7 +32,9 @@ CASKS=(
     slate
     spotify
     sublime-text3
+    vagrant
     vlc
+    virtualbox
 )
 
 for tap in ${TAPS[@]}
