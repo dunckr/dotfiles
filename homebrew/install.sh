@@ -31,7 +31,7 @@ CASKS=(
     skype
     slate
     spotify
-    sublime-text3
+    sublime-text
     vagrant
     vlc
     virtualbox
