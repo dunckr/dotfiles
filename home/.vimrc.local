@@ -3,13 +3,13 @@ set ff=unix
 " color scheme
 syntax enable
 
-set background=light
-colorscheme base16-chalk
+set background=dark
+colorscheme molokai
 
 highlight clear SignColumn
 highlight VertSplit    ctermbg=236
 highlight ColorColumn  ctermbg=237
-highlight LineNr       ctermbg=white ctermfg=240
+highlight LineNr       ctermbg=black ctermfg=240
 highlight CursorLineNr ctermbg=236 ctermfg=240
 highlight CursorLine   ctermbg=236
 highlight StatusLineNC ctermbg=238 ctermfg=0
@@ -57,6 +57,9 @@ set nocompatible
 " no backup files
 set nobackup
 
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 " no write backup
 set nowritebackup
@@ -139,3 +142,6 @@ autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 autocmd FileType scss noremap <buffer> <c-f> :call CSSBeautify()<cr>
 autocmd FileType javascript autocmd BufWritePre <buffer> :call JsBeautify()
+
+let g:syntastic_coffee_coffeelint_args = "--csv --file ~/.coffeelint.json"
+autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
