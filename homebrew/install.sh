@@ -18,6 +18,7 @@ FORMULAS=(
 )
 CASKS=(
     alfred
+    bartender
     dash
     dropbox
     firefox

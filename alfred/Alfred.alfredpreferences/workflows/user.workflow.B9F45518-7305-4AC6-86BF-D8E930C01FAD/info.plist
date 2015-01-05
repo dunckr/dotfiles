@@ -39,6 +39,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>3465BDD1-3FB3-460F-82DE-DDA9CECE238D</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DD4A7520-3AA7-47A0-A9C9-EECE6A320302</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>61E46ACB-4A33-4F2A-84BB-13BF5D58F4A1</key>
 		<array>
 			<dict>
@@ -144,6 +155,7 @@
 				<key>paths</key>
 				<array>
 					<string>/Applications/Subl.app</string>
+					<string>/opt/homebrew-cask/Caskroom/sublime-text/2.0.2/Sublime Text 2.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
@@ -626,6 +638,50 @@
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>16</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>Y</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>3465BDD1-3FB3-460F-82DE-DDA9CECE238D</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/opt/homebrew-cask/Caskroom/skype/latest/Skype.app</string>
+				</array>
+				<key>toggle</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>DD4A7520-3AA7-47A0-A9C9-EECE6A320302</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -650,6 +706,11 @@
 		<dict>
 			<key>ypos</key>
 			<real>420</real>
+		</dict>
+		<key>3465BDD1-3FB3-460F-82DE-DDA9CECE238D</key>
+		<dict>
+			<key>ypos</key>
+			<real>1370</real>
 		</dict>
 		<key>42BC51FC-5A89-404E-A83F-ABF932A23B13</key>
 		<dict>
@@ -720,6 +781,11 @@
 		<dict>
 			<key>ypos</key>
 			<real>770</real>
+		</dict>
+		<key>DD4A7520-3AA7-47A0-A9C9-EECE6A320302</key>
+		<dict>
+			<key>ypos</key>
+			<real>1380</real>
 		</dict>
 		<key>E6586ECC-7DA3-4AF2-B6FF-6AD4ED37C66D</key>
 		<dict>

@@ -2,17 +2,17 @@
 
 root = true
 
-[**.js]
+[*]
+charset = utf-8
+end_of_line = lf
 indent_style = space
 indent_size = 4
-end_of_line = lf
+trim_trailing_whitespace = true
+
+[**.js]
+indent_size = 2
 
 [**.css]
-indent_style = space
-indent_size = 4
 
 [**.html]
-indent_style = space
-indent_size = 4
 max_char = 78
-brace_style = expand

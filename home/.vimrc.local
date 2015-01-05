@@ -38,6 +38,8 @@ nnoremap <Down> :echoe "Use j"<CR>
 
 " mirror sublime shortcuts
 map <C-k><C-b> :NERDTreeToggle<CR>:NERDTreeMirror<CR>
+" quit nerdtree on open
+let NERDTreeQuitOnOpen = 0
 
 " noob commands
 nnoremap <C-t> :tabnew<CR>
@@ -138,10 +140,11 @@ let g:ctrlp_root_markers = ['.ctrlp']
 
 " auto beautify on save
 autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+"autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 autocmd FileType scss noremap <buffer> <c-f> :call CSSBeautify()<cr>
 autocmd FileType javascript autocmd BufWritePre <buffer> :call JsBeautify()
 
 let g:syntastic_coffee_coffeelint_args = "--csv --file ~/.coffeelint.json"
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
+
