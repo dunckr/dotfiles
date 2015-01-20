@@ -29,3 +29,7 @@ alias sketch="/Applications/Sketch.app/Contents/MacOS/Sketch"
 # Shorthands
 alias cls="clear"
 alias server="python -m SimpleHTTPServer"
+
+# Vagrant
+alias vu="vagrant up && vagrant ssh"
+alias vk="vagrant halt -f"
