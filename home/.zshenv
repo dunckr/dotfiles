@@ -23,7 +23,7 @@ alias gf="git fetch"
 alias grc="git rebase --continue"
 
 # Applications
-alias subl="/Applications/Subl.app/Contents/SharedSupport/bin/subl"
+alias subl="/opt/homebrew-cask/Caskroom/sublime-text/2.0.2/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
 alias sketch="/Applications/Sketch.app/Contents/MacOS/Sketch"
 
 # Shorthands
