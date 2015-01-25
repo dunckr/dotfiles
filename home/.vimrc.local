@@ -146,5 +146,6 @@ autocmd FileType scss noremap <buffer> <c-f> :call CSSBeautify()<cr>
 autocmd FileType javascript autocmd BufWritePre <buffer> :call JsBeautify()
 
 let g:syntastic_coffee_coffeelint_args = "--csv --file ~/.coffeelint.json"
+let g:syntastic_ruby_checkers = ['rubocop']
 autocmd BufNewFile,BufReadPost *.coffee setl shiftwidth=2 expandtab
 
