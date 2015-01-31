@@ -10,10 +10,20 @@ indent_size = 4
 trim_trailing_whitespace = true
 
 [**.js]
+; Path to the external file format
+; The default is taken from the lib folder inside the folder extension.
+; Javascript interpreter to be invoked by default 'node'
+bin=node
 indent_size = 2
 
 [**.css]
 indent_size = 2
 
 [**.html]
+; Using special comments
+; And such comments or apply only in global configuration
+; So it's best to avoid them
+;vim:max_char=78:brace_style=expand
+indent_style = space
+indent_size = 4
 max_char = 78
