@@ -3,29 +3,26 @@ config nudgePercentOf screenSize
 config resizePercentOf screenSize
 
 # Push Bindings
-bind 1:shift;cmd  push left bar-resize:screenSizeX/2
-bind 2:shift;cmd   push right bar-resize:screenSizeX/2
+bind 1:shift;cmd push left  bar-resize:screenSizeX/2
+bind 2:shift;cmd push right bar-resize:screenSizeX/2
 
-bind 3:shift;cmd   push up    bar-resize:screenSizeY/2
-bind 4:shift;cmd   push down  bar-resize:screenSizeY/2
+bind 3:shift;cmd push up    bar-resize:screenSizeY/2
+bind 4:shift;cmd push down  bar-resize:screenSizeY/2
 
 bind 5:shift;cmd corner top-left resize:screenSizeX/2;screenSizeY/2
 bind 6:shift;cmd corner bottom-left resize:screenSizeX/2;screenSizeY/2
 bind 7:shift;cmd corner top-right resize:screenSizeX/2;screenSizeY/2
 bind 8:shift;cmd corner bottom-right resize:screenSizeX/2;screenSizeY/2
 
+# Border
+bind 9:shift;cmd move screenOriginX+screenSizeX*0.1;screenOriginY+screenSizeY*0.1 screenSizeX*0.8;screenSizeY*0.8
+bind 0:shift;cmd move screenOriginX+screenSizeX*0.05;screenOriginY+screenSizeY*0.05 screenSizeX*0.9;screenSizeY*0.9
+
+# Fullscreen
 bind =:shift;cmd move screenOriginX;screenOriginY  screenSizeX;screenSizeY
 
 # Indent
 bind ]:shift;cmd nudge +10% +0
 bind [:shift;cmd nudge -10% +0
-
-# Sublime and iTerm setup
-layout tddMin 'Sublime Text 2' move screenOriginX;screenOriginY  screenSizeX;screenSizeY*0.9
-layout tddMin 'iTerm' push down    bar-resize:screenSizeY/10
-bind 9:shift;cmd layout tddMin
-
-layout tdd 'Sublime Text 2' move screenOriginX;screenOriginY  screenSizeX;screenSizeY*0.8
-layout tdd 'iTerm' move screenOriginX;screenSizeY*0.8  screenSizeX;screenSizeY*0.25
-bind 0:shift;cmd layout tdd
-
+bind [:alt;cmd nudge +0 -10%
+bind [:alt;cmd nudge +0 -10%

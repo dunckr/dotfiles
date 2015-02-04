@@ -1,7 +1,6 @@
+UnBundle 'spf13/vim-autoclose'
+
 Bundle 'maksimr/vim-jsbeautify'
 Bundle 'chriskempson/base16-vim'
-Bundle 'dunckr/vim-eighties-extended'
-Bundle 'digitaltoad/vim-jade'
+Bundle 'mattn/emmet-vim'
 
-UnBundle "vim-autoclose"
-UnBundle "vim-scripts/Vim-Autoclose"
