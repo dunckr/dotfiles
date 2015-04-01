@@ -147,9 +147,8 @@ autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
 autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType hbs noremap <buffer> <c-f> :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-autocmd FileType scss noremap <buffer> <c-f> :call CSSBeautify()<cr>
 autocmd FileType javascript autocmd BufWritePre <buffer> :call JsBeautify()
+autocmd BufWritePre *.scss Autoformat
 
 let g:syntastic_coffee_coffeelint_args = "--csv --file ~/.coffeelint.json"
 let g:syntastic_ruby_checkers = ['rubocop']
-

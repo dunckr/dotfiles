@@ -9,6 +9,7 @@
 .DS_Store
 .cache
 Icon?
+tags
 
 # Folders to ignore
 .hg

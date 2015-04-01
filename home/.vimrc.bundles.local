@@ -1,6 +1,6 @@
 UnBundle 'spf13/vim-autoclose'
 
 Bundle 'maksimr/vim-jsbeautify'
-Bundle 'chriskempson/base16-vim'
 Bundle 'mattn/emmet-vim'
-
+Bundle 'lukaszkorecki/CoffeeTags'
+Bundle 'Chiel92/vim-autoformat'
