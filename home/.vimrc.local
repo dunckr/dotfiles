@@ -143,11 +143,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 let g:ctrlp_root_markers = ['.ctrlp']
 
 " auto beautify on save
-autocmd FileType javascript noremap <buffer>  <c-f> :call JsBeautify()<cr>
-autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType hbs noremap <buffer> <c-f> :call HtmlBeautify()<cr>
-autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
-autocmd FileType javascript autocmd BufWritePre <buffer> :call JsBeautify()
+noremap <C-F> :Autoformat<CR><CR>
+autocmd BufWritePre *.js Autoformat
+autocmd BufWritePre *.css Autoformat
 autocmd BufWritePre *.scss Autoformat
 
 let g:syntastic_coffee_coffeelint_args = "--csv --file ~/.coffeelint.json"

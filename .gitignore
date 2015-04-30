@@ -4,7 +4,9 @@ private/
 # Folder view configuration files
 .DS_Store
 Desktop.ini
+.swp
 
 # Thumbnail cache files
 ._*
 Thumbs.db
+

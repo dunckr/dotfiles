@@ -5,6 +5,7 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 TAPS=(
     caskroom/cask
     caskroom/fonts
+    neovim/homebrew-neovim
 )
 FORMULAS=(
     caskroom/cask/brew-cask
@@ -27,12 +28,14 @@ CASKS=(
     iterm2
     node
     onepassword
+    neovim
     seil
     sketch
     skype
     slate
     spotify
     sublime-text
+    tmux
     vagrant
     vlc
     virtualbox
