@@ -10,6 +10,7 @@ TAPS=(
 FORMULAS=(
     caskroom/cask/brew-cask
     coreutils
+    cloc
     docker
     go
     git

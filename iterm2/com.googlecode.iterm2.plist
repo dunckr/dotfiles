@@ -27,7 +27,7 @@
 	<key>CopyLastNewline</key>
 	<false/>
 	<key>CopySelection</key>
-	<true/>
+	<false/>
 	<key>Custom Color Presets</key>
 	<dict>
 		<key>Blazer</key>
@@ -45745,6 +45745,8 @@
 	<string></string>
 	<key>NSScrollAnimationEnabled</key>
 	<false/>
+	<key>NSScrollViewShouldScrollUnderTitlebar</key>
+	<false/>
 	<key>NSTableView Columns KeyBingingTable</key>
 	<array>
 		<data>
@@ -45770,15 +45772,15 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>627 85 482 266 0 0 1280 777 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>1794 314 606 456 1280 -400 1920 1177 </string>
+	<string>1794 295 796 475 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1890 17 700 622 1280 -400 1920 1177 </string>
+	<string>1890 16 700 622 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1280 -374 1914 1151 1280 -400 1920 1177 </string>
+	<string>1280 -396 1914 1173 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2240 -374 955 1151 1280 -400 1920 1177 </string>
+	<string>2240 346 570 427 1280 -400 1920 1177 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -46685,7 +46687,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-02-11T02:37:15Z</date>
+	<date>2015-05-09T08:06:25Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -46737,6 +46739,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20150203-nightly</string>
+	<string>2.9.20150505-nightly</string>
 </dict>
 </plist>
