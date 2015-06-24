@@ -4,7 +4,5 @@
 <dict>
 	<key>windowBlur</key>
 	<real>3</real>
-	<key>yPoint</key>
-	<integer>1</integer>
 </dict>
 </plist>

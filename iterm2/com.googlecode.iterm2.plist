@@ -45772,13 +45772,15 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>627 85 482 266 0 0 1280 777 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>1794 295 796 475 1280 -400 1920 1177 </string>
+	<string>184 318 606 456 0 0 1280 777 </string>
+	<key>NSWindow Frame SUStatusFrame</key>
+	<string>2040 387 400 129 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1890 16 700 622 1280 -400 1920 1177 </string>
+	<string>1890 17 700 622 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1280 -396 1914 1173 1280 -400 1920 1177 </string>
+	<string>1280 -371 1914 1148 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>2240 346 570 427 1280 -400 1920 1177 </string>
 	<key>New Bookmarks</key>
@@ -46671,7 +46673,7 @@
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>
-	<false/>
+	<true/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>RightCommand</key>
@@ -46687,7 +46689,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-05-09T08:06:25Z</date>
+	<date>2015-06-10T09:55:08Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -46739,6 +46741,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20150505-nightly</string>
+	<string>2.9.20150606-nightly</string>
 </dict>
 </plist>

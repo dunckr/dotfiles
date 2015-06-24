@@ -38,6 +38,7 @@ CASKS=(
     sublime-text
     tmux
     vagrant
+    vim
     vlc
     virtualbox
 )
