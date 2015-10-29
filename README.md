@@ -9,15 +9,7 @@ my personal dotfiles 🎮
 
 + [Bind ESC to Caps](https://pqrs.org/osx/karabiner/seil.html#commandlineinterface)
 
-## TODOs
-
-+ Install jsbeautifier
-
-## References
-
-+ https://github.com/mathiasbynens/dotfiles
-+ https://github.com/holman/dotfiles/
-+ https://github.com/paulmillr/dotfiles
+## References [1](https://github.com/mathiasbynens/dotfiles) [2](https://github.com/holman/dotfiles/) [3](https://github.com/paulmillr/dotfiles)
 
 ## License
 

@@ -15,3 +15,5 @@
 [apply]
     whitepace = nowarn
 
+[push]
+	default = matching

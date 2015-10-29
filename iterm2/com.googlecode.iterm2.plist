@@ -45585,9 +45585,9 @@
 	<key>Default Bookmark Guid</key>
 	<string>0BFAE875-A4A9-45B5-8FF6-0E508FDFDFDD</string>
 	<key>DimBackgroundWindows</key>
-	<false/>
+	<true/>
 	<key>DimInactiveSplitPanes</key>
-	<false/>
+	<true/>
 	<key>DimOnlyText</key>
 	<false/>
 	<key>DisableFullscreenTransparency</key>
@@ -45770,19 +45770,19 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>627 85 482 266 0 0 1280 777 </string>
+	<string>2205 -159 482 132 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>184 318 606 456 0 0 1280 777 </string>
+	<string>1795 314 606 456 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>2040 387 400 129 1280 -400 1920 1177 </string>
+	<string>440 487 400 129 0 0 1280 777 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>1890 17 700 622 1280 -400 1920 1177 </string>
+	<string>290 117 700 622 0 0 1280 777 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
-	<string>80 193 592 584 0 0 1280 777 </string>
+	<string>1434 193 592 584 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1280 -371 1914 1148 1280 -400 1920 1177 </string>
+	<string>64 55 1151 683 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>2240 346 570 427 1280 -400 1920 1177 </string>
+	<string>2 420 490 352 0 0 1280 777 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -45793,7 +45793,7 @@
 			<key>Allow Title Setting</key>
 			<false/>
 			<key>Ambiguous Double Width</key>
-			<false/>
+			<true/>
 			<key>Ansi 0 Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -45976,14 +45976,16 @@
 			<true/>
 			<key>Background Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.13333333333333333</real>
+				<real>0.089510045945644379</real>
 				<key>Color Space</key>
-				<string>sRGB</string>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.15686274509803921</real>
+				<real>0.089508526027202606</real>
 				<key>Red Component</key>
-				<real>0.15294117647058825</real>
+				<real>0.089511208236217499</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -46418,7 +46420,7 @@
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
-			<real>0.085764438291139236</real>
+			<real>0.051498219936708861</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -46429,6 +46431,8 @@
 			<true/>
 			<key>Normal Font</key>
 			<string>SourceCodePro-Regular 12</string>
+			<key>Open Toolbelt</key>
+			<false/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -46577,6 +46581,8 @@
 					<string>\btelnet:([a-z0-9A-Z_]+@)?([a-zA-Z0-9\-]+\.)*[a-zA-Z0-9\-]+\b</string>
 				</dict>
 			</array>
+			<key>Space</key>
+			<integer>0</integer>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -46597,6 +46603,10 @@
 			<true/>
 			<key>Use Italic Font</key>
 			<false/>
+			<key>Use Non-ASCII Font</key>
+			<false/>
+			<key>Use Tab Color</key>
+			<false/>
 			<key>Vertical Spacing</key>
 			<real>1</real>
 			<key>Visual Bell</key>
@@ -46611,14 +46621,64 @@
 	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
 	<integer>0</integer>
+	<key>NoSyncLastTipTime</key>
+	<real>464604964.89303797</real>
 	<key>NoSyncNeverRemindPrefsChangesCopy</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
+	<key>NoSyncPermissionToShowTip</key>
+	<false/>
 	<key>NoSyncSuppressAnnyoingBellOffer</key>
 	<true/>
+	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
+	<real>464605045.41816902</real>
+	<key>NoSyncTipsToNotShow</key>
+	<array>
+		<string>0000</string>
+		<string>0001</string>
+		<string>0002</string>
+		<string>0003</string>
+		<string>0004</string>
+		<string>0005</string>
+		<string>0006</string>
+		<string>0007</string>
+		<string>0008</string>
+		<string>000</string>
+		<string>0009</string>
+		<string>0010</string>
+		<string>0011</string>
+		<string>0012</string>
+		<string>0013</string>
+		<string>0014</string>
+		<string>0015</string>
+		<string>0016</string>
+		<string>0017</string>
+		<string>0018</string>
+		<string>0019</string>
+		<string>0020</string>
+		<string>0021</string>
+		<string>0022</string>
+		<string>0023</string>
+		<string>0024</string>
+		<string>0025</string>
+		<string>0026</string>
+		<string>0027</string>
+		<string>0028</string>
+		<string>0029</string>
+		<string>0030</string>
+		<string>0031</string>
+		<string>0032</string>
+		<string>0033</string>
+		<string>0034</string>
+		<string>0035</string>
+		<string>0036</string>
+		<string>0037</string>
+		<string>0038</string>
+		<string>0039</string>
+	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -46689,7 +46749,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-06-10T09:55:08Z</date>
+	<date>2015-10-28T20:55:50Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -46707,7 +46767,7 @@
 	<key>SwitchWindowModifier</key>
 	<integer>6</integer>
 	<key>TabStyle</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>TabViewType</key>
 	<integer>0</integer>
 	<key>ThreeFingerEmulates</key>
@@ -46717,9 +46777,12 @@
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<false/>
 	<key>UKCrashReporterLastCrashReportDate</key>
-	<real>1416387584</real>
+	<real>1435750016</real>
 	<key>URLHandlersByGuid</key>
-	<dict/>
+	<dict>
+		<key>ssh</key>
+		<string>0BFAE875-A4A9-45B5-8FF6-0E508FDFDFDD</string>
+	</dict>
 	<key>UseBorder</key>
 	<false/>
 	<key>UseCompactLabel</key>
@@ -46741,6 +46804,10 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20150606-nightly</string>
+	<string>2.9.20151023-nightly</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>0</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>
