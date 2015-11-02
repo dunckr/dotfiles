@@ -8,14 +8,20 @@ TAPS=(
     neovim/homebrew-neovim
 )
 FORMULAS=(
+    boot2docker
     caskroom/cask/brew-cask
     coreutils
     cloc
     docker
+    docker-machine
+    docker-swarm
     go
     git
+    hub
+    neovim
     python
     python3
+    selenium-server-standalone
     tree
 )
 CASKS=(
@@ -29,7 +35,6 @@ CASKS=(
     iterm2
     node
     onepassword
-    neovim
     seil
     sketch
     skype

@@ -22,6 +22,9 @@ alias gl="git log"
 alias gf="git fetch"
 alias grc="git rebase --continue"
 
+# Hub
+eval "$(hub alias -s)"
+
 # Applications
 alias subl="/opt/homebrew-cask/Caskroom/sublime-text/2.0.2/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
 alias sketch="/Applications/Sketch.app/Contents/MacOS/Sketch"
