@@ -1,4 +1,4 @@
-  " ============================================================================
+    " ============================================================================
   " VIM-PLUG BLOCK {{{
 " ============================================================================
 
@@ -91,6 +91,8 @@ map <C-e> :NERDTreeToggle<CR>>
 noremap H :call WrapRelativeMotion("^")<CR>
 noremap L :call WrapRelativeMotion("$")<CR>
 
+imap <expr> <Tab> CleverTab()
+
 " }}}
 " ============================================================================
 " FUNCTIONS & COMMANDS {{{
@@ -108,6 +110,25 @@ function! WrapRelativeMotion(key, ...)
   endif
 endfunction
 
+function! CleverTab()
+  if pumvisible()
+    return "\<C-n>"
+  endif
+  let substr = strpart(getline('.'), 0, col('.') - 1)
+  let substr = matchstr(substr, '[^ \t]*$')
+  if strlen(substr) == 0
+    " nothing to match on empty string
+    return "\<Tab>"
+  else
+    " existing text matching
+    if neosnippet#expandable_or_jumpable()
+      return "\<Plug>(neosnippet_expand_or_jump)"
+    else
+      return neocomplete#start_manual_complete()
+    endif
+  endif
+endfunction
+
 " }}}
 " ============================================================================
 " PLUGINS {{{
@@ -116,7 +137,6 @@ endfunction
 " ----------------------------------------------------------------------------
 " syntastic
 " ----------------------------------------------------------------------------"
-
 let g:syntastic_coffee_coffeelint_args = "--csv --file ~/.coffeelint.json"
 let g:syntastic_ruby_checkers = ['rubocop']"
 
@@ -124,3 +144,15 @@ let g:syntastic_ruby_checkers = ['rubocop']"
 " deoplete 
 " ----------------------------------------------------------------------------"
 let g:deoplete#enable_at_startup = 1
+
+" ----------------------------------------------------------------------------
+" NERDTree
+" ----------------------------------------------------------------------------"
+let NERDTreeShowBookmarks=1
+let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
+let NERDTreeChDirMode=0
+let NERDTreeQuitOnOpen=1
+let NERDTreeMouseMode=2
+let NERDTreeShowHidden=1
+let NERDTreeKeepTreeInNewTab=1
+let NERDTreeMapToggleHidden=1
