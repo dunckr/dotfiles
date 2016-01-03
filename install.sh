@@ -13,6 +13,7 @@ link() {
 sudo bash spf13/install.sh
 sudo bash osx/custom.sh
 sudo bash homebrew/install.sh
+sudo bash nvim/install.sh
 
 for location in $(find home -name '.*'); do
   file="${location##*/}"
@@ -21,3 +22,4 @@ for location in $(find home -name '.*'); do
 done
 
 link "$dotfiles/iterm2/" "$HOME/Library/Preferences/"
+link "$dotfiles/nvim/" "$HOME/.config/nvim/"

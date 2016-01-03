@@ -33,3 +33,5 @@ alias server="python -m SimpleHTTPServer"
 # Vagrant
 alias vu="vagrant up && vagrant ssh"
 alias vk="vagrant halt -f"
+
+alias vim="nvim"
