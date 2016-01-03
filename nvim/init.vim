@@ -6,7 +6,6 @@ silent! if plug#begin('~/.config/nvim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'junegunn/rainbow_parentheses.vim'
-
 Plug 'shougo/deoplete.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'Chiel92/vim-autoformat'
@@ -14,10 +13,7 @@ Plug 'mtscout6/vim-cjsx'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
-
 Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
-autocmd! User indentLine doautocmd indentLine Syntax
-
 Plug 'ctrlpvim/ctrlp.vim'
 
 " 'elzr/vim-json'
@@ -81,6 +77,8 @@ set hlsearch
 " autocmd BufWritePre * :%s/\s\+$//e<Paste> 
 
 au FileType slim IndentLinesEnable
+
+autocmd! User indentLine doautocmd indentLine Syntax
 
 " }}}
 " ============================================================================
