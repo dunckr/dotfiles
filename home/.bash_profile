@@ -1,10 +1,18 @@
-# bash-git-prompt setup
+# bash-git-prompt
 if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   GIT_PROMPT_THEME=Single_line_Solarized
   source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
 fi
 
-# Git short-cuts
+# Aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
+alias ......='cd ../../../../..'
+alias ~='cd ~'
+
+# Git 
 alias gst="git status"
 alias gaa="git add -A"
 alias gb="git branch"
