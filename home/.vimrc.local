@@ -137,15 +137,16 @@ set expandtab
 set autoread
 
 " remove whitespace on save
-"autocmd BufWritePre * :%s/\s\+$//e
+autocmd BufWritePre * :%s/\s\+$//e
 
 " ctrl p root marker
 let g:ctrlp_root_markers = ['.ctrlp']
 
 " auto beautify on save
 noremap <C-F> :Autoformat<CR><CR>
-"autocmd BufWritePre *.css Autoformat
-"autocmd BufWritePre *.scss Autoformat
+autocmd BufWritePre *.css Autoformat
+autocmd BufWritePre *.scss Autoformat
+autocmd BufWritePre *.json Autoformat
 
 let g:syntastic_coffee_coffeelint_args = "--csv --file ~/.coffeelint.json"
 let g:syntastic_ruby_checkers = ['rubocop']
