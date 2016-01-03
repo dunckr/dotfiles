@@ -8,6 +8,7 @@ TAPS=(
     neovim/homebrew-neovim
 )
 FORMULAS=(
+    bash-git-prompt
     boot2docker
     caskroom/cask/brew-cask
     coreutils
