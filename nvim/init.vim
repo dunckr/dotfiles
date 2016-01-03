@@ -1,5 +1,5 @@
-    " ============================================================================
-  " VIM-PLUG BLOCK {{{
+" ============================================================================
+" VIM-PLUG BLOCK {{{
 " ============================================================================
 
 silent! if plug#begin('~/.config/nvim/plugged')
@@ -14,6 +14,11 @@ Plug 'mtscout6/vim-cjsx'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
+
+Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
+autocmd! User indentLine doautocmd indentLine Syntax
+
+Plug 'ctrlpvim/ctrlp.vim'
 
 " 'elzr/vim-json'
 " 'groenewege/vim-less'
@@ -74,6 +79,8 @@ set hlsearch
 
 " remove whitespace on save
 " autocmd BufWritePre * :%s/\s\+$//e<Paste> 
+
+au FileType slim IndentLinesEnable
 
 " }}}
 " ============================================================================

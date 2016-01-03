@@ -1,11 +1,8 @@
 # bash-git-prompt setup
 if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
-  GIT_PROMPT_THEME=Default
+  GIT_PROMPT_THEME=Single_line_Solarized
   source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
 fi
-
-# bash-git-prompt theme
-GIT_PROMPT_THEME=Single_line_Solarized
 
 # Git short-cuts
 alias gst="git status"
@@ -13,8 +10,7 @@ alias gaa="git add -A"
 alias gb="git branch"
 alias gd="git diff"
 alias gdc="git diff --cached"
-alias gcm="git commit --all"
-alias gco="git commit -m"
+alias gcm="git commit -m"
 alias gl="git log"
 alias gf="git fetch"
 alias grc="git rebase --continue"
