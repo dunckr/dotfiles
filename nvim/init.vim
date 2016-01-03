@@ -13,14 +13,24 @@ Plug 'mtscout6/vim-cjsx'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
-Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesEnable' }
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'nathanaelkane/vim-indent-guides'
 
-" 'elzr/vim-json'
-" 'groenewege/vim-less'
-" 'pangloss/vim-javascript'
-" 'briancollins/vim-jst'
-" 'kchmck/vim-coffee-script'
+" Lang
+Plug 'Shougo/neocomplcache'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
+Plug 'amirh/HTML-AutoCloseTag'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'tpope/vim-haml'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-markdown'
+Plug 'elzr/vim-json'
+Plug 'pangloss/vim-javascript'
+Plug 'briancollins/vim-jst'
+Plug 'kchmck/vim-coffee-script'
 
 call plug#end()
 endif
@@ -34,6 +44,7 @@ set ff=unix
 
 " color scheme
 syntax enable
+colorscheme default
 
 " line numbers
 set relativenumber
@@ -75,10 +86,6 @@ set hlsearch
 
 " remove whitespace on save
 " autocmd BufWritePre * :%s/\s\+$//e<Paste> 
-
-au FileType slim IndentLinesEnable
-
-autocmd! User indentLine doautocmd indentLine Syntax
 
 " }}}
 " ============================================================================
@@ -161,3 +168,10 @@ let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeMapToggleHidden=1
+
+" ----------------------------------------------------------------------------
+" indent_guides 
+" ----------------------------------------------------------------------------"
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+let g:indent_guides_enable_on_vim_startup = 1
