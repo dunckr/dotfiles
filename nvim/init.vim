@@ -5,32 +5,30 @@
 silent! if plug#begin('~/.config/nvim/plugged')
 
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'shougo/deoplete.nvim'
 Plug 'mattn/emmet-vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'mtscout6/vim-cjsx'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/syntastic', { 'on': 'SyntasticCheck' }
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'ctrlpvim/ctrlp.vim'
 
 " Lang
-Plug 'Shougo/neocomplcache'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
-Plug 'honza/vim-snippets'
-Plug 'amirh/HTML-AutoCloseTag'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'gorodinskiy/vim-coloresque'
-Plug 'tpope/vim-haml'
-Plug 'mattn/emmet-vim'
-Plug 'tpope/vim-markdown'
-Plug 'elzr/vim-json'
-Plug 'pangloss/vim-javascript'
-Plug 'briancollins/vim-jst'
-Plug 'kchmck/vim-coffee-script'
+"Plug 'Shougo/neocomplcache'
+"Plug 'Shougo/neosnippet'
+"Plug 'Shougo/neosnippet-snippets'
+"Plug 'honza/vim-snippets'
+"Plug 'amirh/HTML-AutoCloseTag'
+"Plug 'hail2u/vim-css3-syntax'
+"Plug 'gorodinskiy/vim-coloresque'
+"Plug 'tpope/vim-haml'
+"Plug 'mattn/emmet-vim'
+"Plug 'tpope/vim-markdown'
+"Plug 'elzr/vim-json'
+"Plug 'pangloss/vim-javascript'
+"Plug 'briancollins/vim-jst'
+"Plug 'kchmck/vim-coffee-script'
 
 call plug#end()
 endif
@@ -55,6 +53,7 @@ set ignorecase
 
 " use vim, not vi api
 set nocompatible
+set hidden
 
 " no backup files
 set nobackup
@@ -105,6 +104,8 @@ noremap L :call WrapRelativeMotion("$")<CR>
 
 imap <expr> <Tab> CleverTab()
 
+nnoremap <silent><C-p> :CtrlSpace O<CR>
+
 " }}}
 " ============================================================================
 " FUNCTIONS & COMMANDS {{{
@@ -147,12 +148,6 @@ endfunction
 " ============================================================================
 
 " ----------------------------------------------------------------------------
-" syntastic
-" ----------------------------------------------------------------------------"
-let g:syntastic_coffee_coffeelint_args = "--csv --file ~/.coffeelint.json"
-let g:syntastic_ruby_checkers = ['rubocop']"
-
-" ----------------------------------------------------------------------------
 " deoplete 
 " ----------------------------------------------------------------------------"
 let g:deoplete#enable_at_startup = 1
@@ -175,3 +170,12 @@ let NERDTreeMapToggleHidden=1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
+
+" ----------------------------------------------------------------------------
+" ctrlp
+" ----------------------------------------------------------------------------"
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](.git|.hg|.svn|node_modules|vendor|bower_components|temp|tmp)$',
+  \ 'file': '\v\.(exe|so|dll)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
