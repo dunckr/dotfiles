@@ -45772,17 +45772,17 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>2205 -159 482 132 1280 -400 1920 1177 </string>
 	<key>NSWindow Frame Preferences</key>
-	<string>184 318 606 456 0 0 1280 777 </string>
+	<string>1795 344 606 456 1280 -400 1920 1200 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>440 487 400 129 0 0 1280 777 </string>
+	<string>440 504 400 129 0 0 1280 800 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>290 117 700 622 0 0 1280 777 </string>
+	<string>1890 33 700 622 1280 -400 1920 1200 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1280 -400 1920 1200 1280 -400 1920 1177 </string>
+	<string>1280 -400 1920 1200 1280 -400 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1 328 570 448 0 0 1280 777 </string>
+	<string>1 340 570 448 0 0 1280 800 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -46240,7 +46240,7 @@
 					<key>Action</key>
 					<integer>10</integer>
 					<key>Text</key>
-					<string>[1;2D</string>
+					<string>b</string>
 				</dict>
 				<key>0xf702-0x240000</key>
 				<dict>
@@ -46762,7 +46762,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2015-11-16T21:40:16Z</date>
+	<date>2016-01-06T18:07:11Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -46817,7 +46817,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20151114-nightly</string>
+	<string>2.9.20160105-nightly</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

@@ -15,20 +15,20 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ctrlpvim/ctrlp.vim'
 
 " Lang
-"Plug 'Shougo/neocomplcache'
-"Plug 'Shougo/neosnippet'
-"Plug 'Shougo/neosnippet-snippets'
-"Plug 'honza/vim-snippets'
-"Plug 'amirh/HTML-AutoCloseTag'
-"Plug 'hail2u/vim-css3-syntax'
-"Plug 'gorodinskiy/vim-coloresque'
-"Plug 'tpope/vim-haml'
-"Plug 'mattn/emmet-vim'
-"Plug 'tpope/vim-markdown'
-"Plug 'elzr/vim-json'
-"Plug 'pangloss/vim-javascript'
-"Plug 'briancollins/vim-jst'
-"Plug 'kchmck/vim-coffee-script'
+Plug 'Shougo/neocomplcache'
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'honza/vim-snippets'
+Plug 'amirh/HTML-AutoCloseTag'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'gorodinskiy/vim-coloresque'
+Plug 'tpope/vim-haml'
+Plug 'mattn/emmet-vim'
+Plug 'tpope/vim-markdown'
+Plug 'elzr/vim-json'
+Plug 'pangloss/vim-javascript'
+Plug 'briancollins/vim-jst'
+Plug 'kchmck/vim-coffee-script'
 
 call plug#end()
 endif
@@ -84,7 +84,7 @@ set incsearch
 set hlsearch
 
 " remove whitespace on save
-" autocmd BufWritePre * :%s/\s\+$//e<Paste> 
+autocmd BufWritePre * :%s/\s\+$//e
 
 " }}}
 " ============================================================================
