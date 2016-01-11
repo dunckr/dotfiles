@@ -1,3 +1,10 @@
+dotfiles="$HOME/dotfiles"
+
+# private
+if [ -f "$dotfiles/private/.bashrc.local" ]; then
+  source "$dotfiles/private/.bashrc.local"
+fi
+
 # bash-git-prompt
 if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   GIT_PROMPT_THEME=Single_line_Solarized
@@ -12,7 +19,7 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias ~='cd ~'
 
-# Git 
+# Git
 alias gst="git status"
 alias gaa="git add -A"
 alias gb="git branch"
