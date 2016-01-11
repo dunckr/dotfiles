@@ -13,6 +13,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ctrlpvim/ctrlp.vim'
+Plug 'spf13/vim-colors'
 
 " Lang
 Plug 'Shougo/neocomplcache'
@@ -43,8 +44,9 @@ set ff=unix
 
 " color scheme
 syntax enable
-set background=light
 colorscheme default
+set background=dark
+colorscheme molokai
 
 " line numbers
 set relativenumber
