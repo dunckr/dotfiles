@@ -29,6 +29,7 @@ Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'briancollins/vim-jst'
 Plug 'kchmck/vim-coffee-script'
+Plug 'junegunn/rainbow_parentheses.vim'
 
 call plug#end()
 endif
@@ -42,14 +43,15 @@ set ff=unix
 
 " color scheme
 syntax enable
+set background=light
 colorscheme default
 
 " line numbers
 set relativenumber
 
 " search
-set smartcase 
-set ignorecase 
+set smartcase
+set ignorecase
 
 " use vim, not vi api
 set nocompatible
@@ -148,7 +150,7 @@ endfunction
 " ============================================================================
 
 " ----------------------------------------------------------------------------
-" deoplete 
+" deoplete
 " ----------------------------------------------------------------------------"
 let g:deoplete#enable_at_startup = 1
 
@@ -165,7 +167,7 @@ let NERDTreeKeepTreeInNewTab=1
 let NERDTreeMapToggleHidden=1
 
 " ----------------------------------------------------------------------------
-" indent_guides 
+" indent_guides
 " ----------------------------------------------------------------------------"
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
@@ -179,3 +181,8 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+
+" ----------------------------------------------------------------------------
+" ctrlp
+" ----------------------------------------------------------------------------"
+autocmd FileType javascript,coffee,json RainbowParentheses
