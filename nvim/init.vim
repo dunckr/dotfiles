@@ -31,6 +31,7 @@ Plug 'pangloss/vim-javascript'
 Plug 'briancollins/vim-jst'
 Plug 'kchmck/vim-coffee-script'
 Plug 'junegunn/rainbow_parentheses.vim'
+Plug 'benekastah/neomake'
 
 call plug#end()
 endif
@@ -47,6 +48,9 @@ syntax enable
 colorscheme default
 set background=dark
 colorscheme molokai
+
+" mouse
+set mouse=
 
 " line numbers
 set relativenumber
@@ -188,3 +192,10 @@ let g:ctrlp_custom_ignore = {
 " ctrlp
 " ----------------------------------------------------------------------------"
 autocmd FileType javascript,coffee,json RainbowParentheses
+
+" ----------------------------------------------------------------------------
+" neomake
+" ----------------------------------------------------------------------------"
+let g:neomake_javascript_enabled_makers = ['jshint']
+let g:neomake_coffeescript_enabled_makers = ['coffeelint']
+autocmd! BufWritePost * Neomake
