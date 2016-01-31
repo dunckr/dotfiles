@@ -14,6 +14,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'spf13/vim-colors'
+Plug 'mhinz/vim-signify'
 
 " Lang
 Plug 'Shougo/neocomplcache'
@@ -30,8 +31,9 @@ Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'briancollins/vim-jst'
 Plug 'kchmck/vim-coffee-script'
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'benekastah/neomake'
+Plug 'vim-ruby/vim-ruby'
+Plug 'honza/dockerfile.vim'
 
 call plug#end()
 endif

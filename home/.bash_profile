@@ -46,4 +46,10 @@ alias server="python -m SimpleHTTPServer"
 alias vu="vagrant up && vagrant ssh"
 alias vk="vagrant halt -f"
 
+# NeoVim
 alias vim="nvim"
+
+# Docker
+alias dm="docker-machine"
+alias dc="docker-compose"
+alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
