@@ -34,6 +34,7 @@ Plug 'kchmck/vim-coffee-script'
 Plug 'benekastah/neomake'
 Plug 'vim-ruby/vim-ruby'
 Plug 'honza/dockerfile.vim'
+Plug 'hashivim/vim-terraform'
 
 call plug#end()
 endif
@@ -189,11 +190,6 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
-
-" ----------------------------------------------------------------------------
-" ctrlp
-" ----------------------------------------------------------------------------"
-autocmd FileType javascript,coffee,json RainbowParentheses
 
 " ----------------------------------------------------------------------------
 " neomake

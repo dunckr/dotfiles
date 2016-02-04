@@ -25,6 +25,7 @@ FORMULAS=(
   python
   python3
   selenium-server-standalone
+  terraform
   tree
 )
 CASKS=(

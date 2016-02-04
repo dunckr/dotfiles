@@ -11,6 +11,8 @@ if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
 fi
 
+export EDITOR=vim
+
 # Aliases
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -53,3 +55,9 @@ alias vim="nvim"
 alias dm="docker-machine"
 alias dc="docker-compose"
 alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
+
+# GO
+export GOPATH=$HOME/Go
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$GOROOT/bin
