@@ -5,6 +5,16 @@ if [ -f "$dotfiles/private/.bashrc.local" ]; then
   source "$dotfiles/private/.bashrc.local"
 fi
 
+# bash completion
+if [ -f `brew --prefix`/etc/bash_completion ]; then
+  . `brew --prefix`/etc/bash_completion
+fi
+
+# brew completions
+if [ -f "$(brew --repository)/Library/Contributions/brew_bash_completion.sh" ]; then
+  source "$(brew --repository)/Library/Contributions/brew_bash_completion.sh"
+fi
+
 # bash-git-prompt
 if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   GIT_PROMPT_THEME=Single_line_Solarized
@@ -15,6 +25,7 @@ export EDITOR=vim
 
 # Aliases
 alias ..='cd ..'
+alias cd..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias .....='cd ../../../..'
@@ -32,6 +43,10 @@ alias gco="git checkout"
 alias gl="git log"
 alias gf="git fetch"
 alias grc="git rebase --continue"
+
+# Brew
+alias cask='brew cask'
+alias brewupdate="brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; brew doctor"
 
 # Hub
 eval "$(hub alias -s)"

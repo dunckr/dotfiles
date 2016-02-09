@@ -35,6 +35,7 @@ Plug 'benekastah/neomake'
 Plug 'vim-ruby/vim-ruby'
 Plug 'honza/dockerfile.vim'
 Plug 'hashivim/vim-terraform'
+Plug 'mustache/vim-mustache-handlebars'
 
 call plug#end()
 endif
@@ -108,13 +109,12 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 let mapleader = ','
 
+map <Leader>a :Autoformat<cr>
 map <C-e> :NERDTreeToggle<CR>>
 
 noremap H :call WrapRelativeMotion("^")<CR>
 noremap L :call WrapRelativeMotion("$")<CR>
-
 imap <expr> <Tab> CleverTab()
-
 nnoremap <silent><C-p> :CtrlSpace O<CR>
 
 " }}}
