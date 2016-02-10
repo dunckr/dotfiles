@@ -32,17 +32,22 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias ~='cd ~'
 
+alias ls='ls -FG'
+
 # Git
-alias gst="git status"
 alias gaa="git add -A"
 alias gb="git branch"
-alias gd="git diff"
-alias gdc="git diff --cached"
-alias gcm="git commit -m"
+alias gcm="git commit -am"
 alias gco="git checkout"
-alias gl="git log"
+alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
+alias gdf="git diff --color --color-words --abbrev"
 alias gf="git fetch"
+alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+alias gp="git push"
 alias grc="git rebase --continue"
+alias gsclone="git clone --depth=1"
+alias gst="git status"
+alias gup="git pull"
 
 # Brew
 alias cask='brew cask'
