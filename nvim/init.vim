@@ -15,6 +15,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'spf13/vim-colors'
 Plug 'mhinz/vim-signify'
+Plug 'easymotion/vim-easymotion'
 
 " Lang
 Plug 'Shougo/neocomplcache'
@@ -54,7 +55,7 @@ set background=dark
 colorscheme molokai
 
 " mouse
-set mouse=
+set mouse=a
 
 " line numbers
 set relativenumber
@@ -197,3 +198,21 @@ let g:ctrlp_custom_ignore = {
 let g:neomake_javascript_enabled_makers = ['jshint']
 let g:neomake_coffeescript_enabled_makers = ['coffeelint']
 autocmd! BufWritePost * Neomake
+
+" ----------------------------------------------------------------------------
+" easymotion
+" ----------------------------------------------------------------------------"
+" <Leader>f{char} to move to {char}
+map  <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+" s{char}{char} to move to {char}{char}
+nmap s <Plug>(easymotion-overwin-f2)
+
+" Move to line
+map <Leader>L <Plug>(easymotion-bd-jk)
+nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+" Move to word
+map  <Leader>w <Plug>(easymotion-bd-w)
+nmap <Leader>w <Plug>(easymotion-overwin-w)

@@ -35,14 +35,15 @@ alias ~='cd ~'
 alias ls='ls -FG'
 
 # Git
-alias gaa="git add -A"
+alias gaa="git add -v -A"
 alias gb="git branch"
-alias gcm="git commit -am"
+alias gcm="git commit -v -am"
 alias gco="git checkout"
 alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 alias gdf="git diff --color --color-words --abbrev"
 alias gf="git fetch"
-alias gl="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
+alias gl="git log"
+alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 alias gp="git push"
 alias grc="git rebase --continue"
 alias gsclone="git clone --depth=1"
