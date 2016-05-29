@@ -50,6 +50,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>35CF16B4-B526-415F-8AFB-04A0C8196824</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>192885B4-6B35-400C-B28D-5C52AF830B97</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>61E46ACB-4A33-4F2A-84BB-13BF5D58F4A1</key>
 		<array>
 			<dict>
@@ -424,11 +435,11 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>hotkey</key>
-				<integer>8</integer>
+				<integer>7</integer>
 				<key>hotmod</key>
-				<integer>655360</integer>
+				<integer>1179648</integer>
 				<key>hotstring</key>
-				<string>C</string>
+				<string>X</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -448,8 +459,7 @@
 			<dict>
 				<key>paths</key>
 				<array>
-					<string>/Applications/Firefox.app</string>
-					<string>/opt/homebrew-cask/Caskroom/firefox/latest/Firefox.app</string>
+					<string>/Applications/Google Chrome Canary.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
@@ -682,6 +692,50 @@
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>8</integer>
+				<key>hotmod</key>
+				<integer>655360</integer>
+				<key>hotstring</key>
+				<string>C</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>35CF16B4-B526-415F-8AFB-04A0C8196824</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/Firefox.app</string>
+				</array>
+				<key>toggle</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>192885B4-6B35-400C-B28D-5C52AF830B97</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -697,6 +751,11 @@
 			<key>ypos</key>
 			<real>300</real>
 		</dict>
+		<key>192885B4-6B35-400C-B28D-5C52AF830B97</key>
+		<dict>
+			<key>ypos</key>
+			<real>1500</real>
+		</dict>
 		<key>1EB3058D-720D-4B60-ABFE-7E79FAB74935</key>
 		<dict>
 			<key>ypos</key>
@@ -711,6 +770,11 @@
 		<dict>
 			<key>ypos</key>
 			<real>1370</real>
+		</dict>
+		<key>35CF16B4-B526-415F-8AFB-04A0C8196824</key>
+		<dict>
+			<key>ypos</key>
+			<real>1490</real>
 		</dict>
 		<key>42BC51FC-5A89-404E-A83F-ABF932A23B13</key>
 		<dict>

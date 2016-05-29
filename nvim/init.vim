@@ -7,7 +7,6 @@ silent! if plug#begin('~/.config/nvim/plugged')
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'shougo/deoplete.nvim'
 Plug 'mattn/emmet-vim'
-Plug 'Chiel92/vim-autoformat'
 Plug 'mtscout6/vim-cjsx'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'scrooloose/nerdcommenter'
@@ -16,6 +15,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'spf13/vim-colors'
 Plug 'mhinz/vim-signify'
 Plug 'easymotion/vim-easymotion'
+Plug 'chriskempson/base16-vim'
 
 " Lang
 Plug 'Shougo/neocomplcache'
@@ -27,6 +27,7 @@ Plug 'hail2u/vim-css3-syntax'
 Plug 'gorodinskiy/vim-coloresque'
 Plug 'tpope/vim-haml'
 Plug 'mattn/emmet-vim'
+Plug 'Chiel92/vim-autoformat'
 Plug 'tpope/vim-markdown'
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
@@ -34,6 +35,9 @@ Plug 'briancollins/vim-jst'
 Plug 'kchmck/vim-coffee-script'
 Plug 'benekastah/neomake'
 Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-cucumber'
 Plug 'honza/dockerfile.vim'
 Plug 'hashivim/vim-terraform'
 Plug 'mustache/vim-mustache-handlebars'
@@ -49,13 +53,14 @@ endif
 set ff=unix
 
 " color scheme
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 syntax enable
 colorscheme default
 set background=dark
 colorscheme molokai
 
 " mouse
-set mouse=a
+set mouse=
 
 " line numbers
 set relativenumber
@@ -117,6 +122,8 @@ noremap H :call WrapRelativeMotion("^")<CR>
 noremap L :call WrapRelativeMotion("$")<CR>
 imap <expr> <Tab> CleverTab()
 nnoremap <silent><C-p> :CtrlSpace O<CR>
+
+autocmd BufRead,BufNewFile *.md setlocal spell
 
 " }}}
 " ============================================================================

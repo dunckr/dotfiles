@@ -18,13 +18,14 @@ FORMULAS=(
   docker-machine
   docker-swarm
   git
-  go
   graphicsmagick
   hub
   imagemagick
+  kubectl
   neovim
   python
   python3
+  rust
   selenium-server-standalone
   terraform
   tree
@@ -38,6 +39,7 @@ CASKS=(
   firefox
   font-source-code-pro
   google-chrome
+  google-cloud-sdk
   iterm2
   node
   onepassword
