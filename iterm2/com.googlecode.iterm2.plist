@@ -45585,9 +45585,9 @@
 	<key>Default Bookmark Guid</key>
 	<string>0BFAE875-A4A9-45B5-8FF6-0E508FDFDFDD</string>
 	<key>DimBackgroundWindows</key>
-	<true/>
+	<false/>
 	<key>DimInactiveSplitPanes</key>
-	<true/>
+	<false/>
 	<key>DimOnlyText</key>
 	<false/>
 	<key>DisableFullscreenTransparency</key>
@@ -45790,7 +45790,7 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>760 804 400 129 0 0 1920 1200 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>610 434 700 622 0 0 1920 1200 </string>
+	<string>490 322 700 622 0 0 1680 1050 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
@@ -45992,16 +45992,14 @@
 			<true/>
 			<key>Background Color</key>
 			<dict>
-				<key>Alpha Component</key>
-				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.089510045945644379</real>
+				<real>0.13333333333333333</real>
 				<key>Color Space</key>
-				<string>Calibrated</string>
+				<string>sRGB</string>
 				<key>Green Component</key>
-				<real>0.089508526027202606</real>
+				<real>0.15686274509803921</real>
 				<key>Red Component</key>
-				<real>0.089511208236217499</real>
+				<real>0.15294117647058825</real>
 			</dict>
 			<key>Background Image Is Tiled</key>
 			<false/>
@@ -46436,7 +46434,7 @@
 			<key>Log Directory</key>
 			<string></string>
 			<key>Minimum Contrast</key>
-			<real>0.051498219936708861</real>
+			<real>0.027788765822784809</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -46656,6 +46654,8 @@
 	<true/>
 	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
 	<integer>1</integer>
+	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
+	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>07F8E408-18E1-4D4B-A82D-F8C39BAB338C</string>
 	<key>NoSyncLastTipTime</key>
@@ -46786,7 +46786,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-05-22T18:07:00Z</date>
+	<date>2016-06-01T19:29:10Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -46798,7 +46798,7 @@
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.3392703325320513</real>
+	<real>0.14180438701923076</real>
 	<key>SwitchTabModifier</key>
 	<integer>4</integer>
 	<key>SwitchWindowModifier</key>
@@ -46841,7 +46841,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>2.9.20160510</string>
+	<string>3.0.0</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

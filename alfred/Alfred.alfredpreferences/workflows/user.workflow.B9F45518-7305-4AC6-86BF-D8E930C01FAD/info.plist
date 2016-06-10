@@ -83,6 +83,17 @@
 				<string></string>
 			</dict>
 		</array>
+		<key>80F08D0F-5108-4C03-8F3E-DB2C19BAD756</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>FD4C1E50-C173-4D0A-9506-AA428A2011F8</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
 		<key>841A2336-3E8E-4B43-8A81-4F4BF8A3E10D</key>
 		<array>
 			<dict>
@@ -319,11 +330,11 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>hotkey</key>
-				<integer>2</integer>
+				<integer>40</integer>
 				<key>hotmod</key>
-				<integer>655360</integer>
+				<integer>1048576</integer>
 				<key>hotstring</key>
-				<string>D</string>
+				<string>K</string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -435,11 +446,11 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>hotkey</key>
-				<integer>7</integer>
+				<integer>0</integer>
 				<key>hotmod</key>
-				<integer>1179648</integer>
+				<integer>0</integer>
 				<key>hotstring</key>
-				<string>X</string>
+				<string></string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
@@ -736,6 +747,50 @@
 			<key>version</key>
 			<integer>0</integer>
 		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>action</key>
+				<integer>0</integer>
+				<key>argument</key>
+				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>38</integer>
+				<key>hotmod</key>
+				<integer>1048576</integer>
+				<key>hotstring</key>
+				<string>J</string>
+				<key>leftcursor</key>
+				<false/>
+				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
+				<integer>0</integer>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.trigger.hotkey</string>
+			<key>uid</key>
+			<string>80F08D0F-5108-4C03-8F3E-DB2C19BAD756</string>
+			<key>version</key>
+			<integer>1</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/Helium.app</string>
+				</array>
+				<key>toggle</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>FD4C1E50-C173-4D0A-9506-AA428A2011F8</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
 	</array>
 	<key>readme</key>
 	<string></string>
@@ -816,6 +871,11 @@
 			<key>ypos</key>
 			<real>1250</real>
 		</dict>
+		<key>80F08D0F-5108-4C03-8F3E-DB2C19BAD756</key>
+		<dict>
+			<key>ypos</key>
+			<real>1610</real>
+		</dict>
 		<key>841A2336-3E8E-4B43-8A81-4F4BF8A3E10D</key>
 		<dict>
 			<key>ypos</key>
@@ -870,6 +930,11 @@
 		<dict>
 			<key>ypos</key>
 			<real>60</real>
+		</dict>
+		<key>FD4C1E50-C173-4D0A-9506-AA428A2011F8</key>
+		<dict>
+			<key>ypos</key>
+			<real>1620</real>
 		</dict>
 	</dict>
 	<key>webaddress</key>

@@ -15,6 +15,7 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'shougo/deoplete.nvim'
 Plug 'tomasr/molokai'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tommcdo/vim-lion'
 
 " Lang
 Plug 'Chiel92/vim-autoformat'
