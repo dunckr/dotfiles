@@ -101,6 +101,9 @@ set incsearch
 " highlight search
 set hlsearch
 
+" turn off spell checking
+set nospell
+
 " remove whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
 

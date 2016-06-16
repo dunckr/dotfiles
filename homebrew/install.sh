@@ -14,6 +14,7 @@ FORMULAS=(
   caskroom/cask/brew-cask
   cloc
   coreutils
+  diff-so-fancy
   docker
   docker-machine
   docker-swarm
