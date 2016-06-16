@@ -1,10 +1,10 @@
 # .dotfiles
 
-![Terminal](https://raw.githubusercontent.com/dunckr/dotfiles/master/assets/terminal.jpg)
+![Terminal][screenshot]
 
 ## Requirements
 
-+ [Bind ESC to Caps](https://pqrs.org/osx/karabiner/seil.html#commandlineinterface)
++ [Bind ESC to Caps][seil]
 
 ## Install
 
@@ -12,10 +12,16 @@
 ./install.sh
 ```
 
-## References 
-
-[1](https://github.com/mathiasbynens/dotfiles) [2](https://github.com/holman/dotfiles/) [3](https://github.com/paulmillr/dotfiles)
+## References [1][1] [2][2] [3][3]
 
 ## License
 
-MIT © [Duncan Beaton](http://dunckr.com)
+MIT © [Duncan Beaton][author]
+
+<!-- Definitions -->
+[screenshot]: https://raw.githubusercontent.com/dunckr/dotfiles/master/assets/screenshot.jpg
+[seil]: https://pqrs.org/osx/karabiner/seil.html#commandlineinterface
+[1]: https://github.com/mathiasbynens/dotfiles
+[2]: https://github.com/holman/dotfiles/
+[3]: https://github.com/paulmillr/dotfiles
+[author]: http://dunckr.com
