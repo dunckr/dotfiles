@@ -52,9 +52,14 @@ CASKS=(
   sublime-text
   tmux
   vagrant
-  vim
   virtualbox
   vlc
+)
+PACKAGES=(
+  coffee-react
+  coffee-react-transform
+  coffee-script
+  coffeelint-cjsx
 )
 
 for tap in ${TAPS[@]}
@@ -67,3 +72,5 @@ brew update
 brew cask install ${CASKS[@]}
 brew cask alfred link
 brew cleanup
+npm update npm -g
+npm install -g ${PACKAGES[@]}

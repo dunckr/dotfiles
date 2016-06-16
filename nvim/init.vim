@@ -201,6 +201,7 @@ let g:ctrlp_custom_ignore = {
   \ 'file': '\v\.(exe|so|dll)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
+let g:ctrlp_show_hidden = 1
 
 " ----------------------------------------------------------------------------
 " neomake
