@@ -250,6 +250,7 @@
 				<array>
 					<string>/Applications/iTerm.app</string>
 					<string>/opt/homebrew-cask/Caskroom/iterm2/2.0.0/iTerm.app</string>
+					<string>/opt/homebrew-cask/Caskroom/iterm2-nightly/3.0.3/iTerm.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>

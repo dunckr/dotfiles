@@ -6,15 +6,17 @@ silent! if plug#begin('~/.config/nvim/plugged')
 
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'easymotion/vim-easymotion'
+Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
+Plug 'mhinz/vim-startify'
 Plug 'mtscout6/vim-cjsx'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'shougo/deoplete.nvim'
-Plug 'tomasr/molokai'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'tomasr/molokai'
 Plug 'tommcdo/vim-lion'
 
 " Lang
@@ -60,7 +62,7 @@ set background=dark
 colorscheme molokai
 
 " mouse
-set mouse=
+set mouse=a
 
 " line numbers
 set relativenumber
@@ -106,6 +108,9 @@ set nospell
 
 " remove whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
+
+" ctags
+set tags=./tags;/
 
 " }}}
 " ============================================================================

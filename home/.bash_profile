@@ -38,6 +38,11 @@ alias ~='cd ~'
 
 alias ls='ls -FG'
 
+# IP
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
 # Git
 alias gaa="git add -v -A"
 alias gb="git branch"
@@ -53,6 +58,7 @@ alias grc="git rebase --continue"
 alias gsclone="git clone --depth=1"
 alias gst="git status"
 alias gup="git pull"
+alias glast="git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 
 # Brew
 alias cask='brew cask'
