@@ -103,8 +103,9 @@ set incsearch
 " highlight search
 set hlsearch
 
-" turn off spell checking
-set nospell
+" spell checking
+set spell
+set spell spelllang=en_us
 
 " remove whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
@@ -130,8 +131,6 @@ noremap H :call WrapRelativeMotion("^")<CR>
 noremap L :call WrapRelativeMotion("$")<CR>
 imap <expr> <Tab> CleverTab()
 nnoremap <silent><C-p> :CtrlSpace O<CR>
-
-autocmd BufRead,BufNewFile *.md setlocal spell
 
 " }}}
 " ============================================================================

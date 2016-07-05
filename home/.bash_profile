@@ -62,7 +62,7 @@ alias glast="git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 
 # Brew
 alias cask='brew cask'
-alias brewupdate="brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; brew doctor"
+alias update='softwareupdate -i -a; brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; gem update --system; gem update'
 
 # Hub
 eval "$(hub alias -s)"
