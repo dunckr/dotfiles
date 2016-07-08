@@ -1,3 +1,13 @@
+v1.7
+22 March 2014
+
+* List now always shows in same the order. (Achieved by removing “uid” parameter.)
+
+v1.61a
+16 March 2014
+
+*Removed Alleyoop update.json file. That’s all.
+
 v1.61
 2 April 2013
 

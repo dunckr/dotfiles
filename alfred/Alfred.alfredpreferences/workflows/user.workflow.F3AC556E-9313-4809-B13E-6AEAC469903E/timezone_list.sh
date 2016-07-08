@@ -39,7 +39,7 @@ while IFS= read -r line
 	#echo "$flag_icon" >> ~/Desktop/flags.txt
 	if [[ "$city" == "$search"* ]]; then
 		match=1
-		echo '<item uid="'$city'" arg="'$city_returned'|'$city_time'|'$city_date'|'$country'|'$tz_name'|'$display_offset'" valid="yes">
+		echo '<item arg="'$city_returned'|'$city_time'|'$city_date'|'$country'|'$tz_name'|'$display_offset'" valid="yes">
 		<title>'$city_returned: $city_time'</title>	
 		<subtitle>on '$city_date'  •  '$country' • '$tz_name' ('$display_offset')</subtitle>
 		<icon>./flags/'$flag_icon'</icon>

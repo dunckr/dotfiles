@@ -143,7 +143,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>TimeZones v1.61</string>
+	<string>TimeZones v1.7.0</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -153,9 +153,15 @@
 				<integer>0</integer>
 				<key>argument</key>
 				<integer>0</integer>
+				<key>hotkey</key>
+				<integer>0</integer>
+				<key>hotmod</key>
+				<integer>0</integer>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
+				<integer>0</integer>
+				<key>relatedAppsMode</key>
 				<integer>0</integer>
 			</dict>
 			<key>type</key>
@@ -163,11 +169,13 @@
 			<key>uid</key>
 			<string>BD27CF53-3880-47C9-9AAC-4B443E7BA1BD</string>
 			<key>version</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -202,6 +210,14 @@ echo "Current time in $city, $country:"$'\n'"$city_time on $city_date"$'\n'" •
 				<integer>0</integer>
 				<key>keyword</key>
 				<string>tz</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>runningsubtext</key>
 				<string>Fetching time data...</string>
 				<key>script</key>
@@ -254,6 +270,8 @@ echo "Current time in $city, $country:"$'\n'"$city_time on $city_date"$'\n'" •
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -296,6 +314,8 @@ echo "Current time in $city, $country:"$'\n'"$city_time on $city_date"$'\n'" •
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>0</integer>
 				<key>script</key>
@@ -317,6 +337,14 @@ echo "Current time in $city, $country:"$'\n'"$city_time on $city_date"$'\n'" •
 				<integer>0</integer>
 				<key>escaping</key>
 				<integer>0</integer>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>runningsubtext</key>
 				<string>Getting locations...</string>
 				<key>script</key>
@@ -340,6 +368,8 @@ echo "Current time in $city, $country:"$'\n'"$city_time on $city_date"$'\n'" •
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>63</integer>
 				<key>script</key>
@@ -378,6 +408,8 @@ echo "Current time in $city, $country:"$'\n'"$city_time on $city_date"$'\n'" •
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>concurrently</key>
+				<false/>
 				<key>escaping</key>
 				<integer>63</integer>
 				<key>script</key>
@@ -415,8 +447,8 @@ echo "Current time in $city, $country:"$'\n'"$city_time on $city_date"$'\n'" •
 		</dict>
 	</array>
 	<key>readme</key>
-	<string>TimeZones v1.6
-31 March 2013
+	<string>TimeZones v1.7
+22 March 2014
 
 =====
 USAGE
@@ -445,6 +477,16 @@ Workflow icon credit: Oliver Scholtz (http://schollidesign.deviantart.com/art/Hu
 =========
 CHANGELOG
 =========
+
+v1.7
+22 March 2014
+
+* City List now always shows in the same order. (Achieved by removing “uid” parameter.)
+
+v1.61a
+16 March 2014
+
+*Removed Alleyoop update.json file. That’s all.
 
 v1.61
 2 April 2013

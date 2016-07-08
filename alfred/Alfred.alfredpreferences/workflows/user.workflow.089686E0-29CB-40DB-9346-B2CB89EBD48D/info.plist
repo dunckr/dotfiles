@@ -25,7 +25,7 @@
 	<key>disabled</key>
 	<false/>
 	<key>name</key>
-	<string>IP Address v1.1</string>
+	<string>IP Address v1.2.0</string>
 	<key>objects</key>
 	<array>
 		<dict>
@@ -52,10 +52,18 @@
 				<integer>63</integer>
 				<key>keyword</key>
 				<string>ip</string>
+				<key>queuedelaycustom</key>
+				<integer>1</integer>
+				<key>queuedelayimmediatelyinitially</key>
+				<false/>
+				<key>queuedelaymode</key>
+				<integer>0</integer>
+				<key>queuemode</key>
+				<integer>1</integer>
 				<key>runningsubtext</key>
 				<string>Reading ip address</string>
 				<key>script</key>
-				<string>LOCAL=$(ipconfig getifaddr en0 || ipconfig getifaddr en1)
+				<string>LOCAL=$(ifconfig | grep -A 1 "en" | grep broadcast | cut -d " " -f 2 | tr "\\n" " ")
 EXTERNAL=$(curl --silent http://icanhazip.com)
 
 cat&lt;&lt;EOB
@@ -91,7 +99,7 @@ EOB</string>
 		</dict>
 	</array>
 	<key>readme</key>
-	<string></string>
+	<string>Updated by Andreas Stokholm to be able to handle multiple local IP-addresses.</string>
 	<key>uidata</key>
 	<dict>
 		<key>4DE38804-DD3A-4619-B68A-D9290EC54602</key>

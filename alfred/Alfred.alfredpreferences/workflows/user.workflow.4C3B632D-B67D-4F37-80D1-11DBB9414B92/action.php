@@ -2,97 +2,89 @@
 
 require 'workflow.php';
 
-Workflow::init();
-
 $query = trim($argv[1]);
+
+if ('>' !== $query[0] && 0 !== strpos($query, 'e >')) {
+    if ('.git' == substr($query, -4)) {
+        $query = 'github-mac://openRepo/' . substr($query, 0, -4);
+    }
+    exec('osascript -e "open location \"' . $query . '\""');
+    return;
+}
+
+$enterprise = 0 === strpos($query, 'e ');
+if ($enterprise) {
+    $query = substr($query, 2);
+}
 $parts = explode(' ', $query);
 
-switch ($parts[0]) {
+Workflow::init($enterprise);
 
-    case '>':
-        switch ($parts[1]) {
-            case 'login':
-                $password = exec('osascript <<END
-tell application "Alfred 2"
-  activate
-  set alfredPath to (path to application "Alfred 2")
-  set alfredIcon to path to resource "appicon.icns" in bundle (alfredPath as alias)
-  display dialog "Password for \"' . escapeshellcmd($parts[2]) . '\":" with title "GitHub Login" buttons {"OK"} default button "OK" default answer "" with icon alfredIcon with hidden answer
-  set answer to text returned of result
-end tell
-END');
+switch ($parts[1]) {
+    case 'enterprise-url':
+        Workflow::setConfig('enterprise_url', rtrim($parts[2], '/'));
+        exec('osascript -e "tell application \"Alfred 2\" to search \"ghe \""');
+        break;
 
-                $content = Workflow::request('https://github.com/session', $status, $etag, true, null, array('authenticity_token' => Workflow::getToken(), 'login' => $parts[2], 'password' => $password));
-                if ($status === 200 && false === strpos($content, '<title>Sign in · GitHub</title>')) {
-                    $authCode = exec('osascript <<END
-tell application "Alfred 2"
-  activate
-  set alfredPath to (path to application "Alfred 2")
-  set alfredIcon to path to resource "appicon.icns" in bundle (alfredPath as alias)
-  display dialog "Authentication code:" with title "GitHub two-factor authentication" buttons {"OK"} default button "OK" default answer "" with icon alfredIcon with hidden answer
-  set answer to text returned of result
-end tell
-END');
-                    $content = Workflow::request('https://github.com/sessions/two_factor', $status, $etag2, true, null, array('authenticity_token' => Workflow::getToken($content), 'otp' => $authCode));
-                }
-                if ($status === 302) {
-                    Workflow::request('https://github.com/');
-                    echo 'Successfully logged in';
-                    Workflow::deleteCache();
-                    Workflow::setConfig('user', $parts[2]);
-                } else {
-                    echo 'Login failed';
-                }
-                break;
+    case 'enterprise-reset':
+        Workflow::removeConfig('enterprise_url');
+        Workflow::removeConfig('enterprise_access_token');
+        Workflow::deleteCache();
+        break;
 
-            case 'logout':
-                Workflow::deleteCookies();
-                Workflow::deleteCache();
-                echo 'Successfully logged out';
-                break;
-
-            case 'delete-cache':
-                Workflow::deleteCache();
-                echo 'Successfully deleted cache';
-                break;
-
-            case 'refresh-cache':
-                Workflow::requestCache($parts[2], 0, false);
-                break;
-
-            case 'activate-autoupdate':
-                Workflow::setConfig('autoupdate', 1);
-                echo 'Activated auto updating';
-                break;
-
-            case 'deactivate-autoupdate':
-                Workflow::setConfig('autoupdate', 0);
-                echo 'Deactivated auto updating';
-                break;
-
-            case 'update':
-                $c = Workflow::request('http://gh01.de/alfred/github/github.alfredworkflow', $status);
-                if ($status != 200) {
-                    echo 'Update failed';
-                    exit;
-                }
-                $zip = __DIR__ . '/workflow.zip';
-                file_put_contents($zip, $c);
-                $phar = new PharData($zip);
-                foreach ($phar as $path => $file) {
-                    copy($path, __DIR__ . '/' . $file->getFilename());
-                }
-                unlink($zip);
-                Workflow::deleteCache();
-                echo 'Successfully updated the GitHub Workflow';
-                break;
+    case 'login':
+        if (isset($parts[2]) && $parts[2]) {
+            Workflow::setAccessToken($parts[2]);
+            echo 'Successfully logged in';
+        } elseif (!$enterprise) {
+            Workflow::startServer();
+            $state = version_compare(PHP_VERSION, '5.4', '<') ? 'm' : '';
+            $url = Workflow::getBaseUrl() . '/login/oauth/authorize?client_id=2d4f43826cb68e11c17c&scope=repo&state=' . $state;
+            exec('open ' . escapeshellarg($url));
         }
         break;
 
-    default:
-        if ('.git' == substr($query, -4)) {
-            $query = 'github-mac://openRepo/' . substr($query, 0, -4);
-        }
-        exec('osascript -e "open location \"' . $query . '\""');
+    case 'logout':
+        Workflow::removeAccessToken();
+        Workflow::deleteCache();
+        echo 'Successfully logged out';
+        break;
 
+    case 'delete-cache':
+        Workflow::deleteCache();
+        echo 'Successfully deleted cache';
+        break;
+
+    case 'refresh-cache':
+        $curl = new Curl();
+        foreach (explode(',', $parts[2]) as $url) {
+            Workflow::requestCache($url, $curl, null, 0, false);
+        }
+        $curl->execute();
+        Workflow::cleanCache();
+        break;
+
+    case 'activate-autoupdate':
+        Workflow::setConfig('autoupdate', 1);
+        echo 'Activated auto updating';
+        break;
+
+    case 'deactivate-autoupdate':
+        Workflow::setConfig('autoupdate', 0);
+        echo 'Deactivated auto updating';
+        break;
+
+    case 'update':
+        $response = Workflow::request('http://gh01.de/alfred/github/github.alfredworkflow');
+        if (!$response) {
+            echo 'Update failed';
+            exit;
+        }
+        $zip = __DIR__ . '/workflow.zip';
+        file_put_contents($zip, $response);
+        exec('unzip -o workflow.zip');
+        unlink($zip);
+        Workflow::deleteCache();
+        echo 'Successfully updated the GitHub Workflow';
+        break;
 }
