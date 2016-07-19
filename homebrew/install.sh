@@ -60,6 +60,7 @@ PACKAGES=(
   coffee-react-transform
   coffee-script
   coffeelint-cjsx
+  eslint
 )
 
 for tap in ${TAPS[@]}

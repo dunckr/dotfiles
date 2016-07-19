@@ -12,7 +12,7 @@
 ./install.sh
 ```
 
-## References [1][1] [2][2] [3][3]
+## Thanks [1][1] [2][2] [3][3]
 
 ## License
 

@@ -63,9 +63,12 @@ alias gst="git status"
 alias gup="git pull"
 alias glast="git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 
+# Pip
+alias pip3update='pip3 list -o | cut -f 1 -d " " | xargs -n 1 pip3 install --upgrade'
+
 # Brew
 alias cask='brew cask'
-alias update='softwareupdate -i -a; brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; gem update --system; gem update'
+alias update='softwareupdate -i -a; brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; gem update --system; gem update; pip3update;'
 
 # Hub
 eval "$(hub alias -s)"

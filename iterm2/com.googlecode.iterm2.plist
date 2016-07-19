@@ -45737,6 +45737,8 @@
 	<integer>84</integer>
 	<key>HotkeyCode</key>
 	<integer>17</integer>
+	<key>HotkeyMigratedFromSingleToMulti</key>
+	<true/>
 	<key>HotkeyModifiers</key>
 	<integer>1179914</integer>
 	<key>IRMemory</key>
@@ -45790,17 +45792,17 @@
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>760 804 400 129 0 0 1920 1200 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>610 434 700 622 0 0 1920 1200 </string>
+	<string>490 322 700 622 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>291 237 796 473 0 0 1920 1200 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>80 193 592 584 0 0 1280 777 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1080 677 810 523 0 0 1920 1200 </string>
+	<string>840 14 840 1036 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 0 1920 1200 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>0 0 1920 1200 0 0 1920 1200 </string>
+	<string>0 0 1680 1050 0 0 1680 1050 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -46792,7 +46794,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-07-08T08:03:22Z</date>
+	<date>2016-07-17T08:52:47Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Show Toolbelt</key>
@@ -46847,7 +46849,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.20160708-nightly</string>
+	<string>3.0.20160717-nightly</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

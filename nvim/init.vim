@@ -10,13 +10,12 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'mhinz/vim-startify'
-Plug 'mtscout6/vim-cjsx'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'shougo/deoplete.nvim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tomasr/molokai'
+Plug 'dunckr/molokai'
 Plug 'tommcdo/vim-lion'
 
 " Lang
@@ -34,8 +33,11 @@ Plug 'hashivim/vim-terraform'
 Plug 'honza/dockerfile.vim'
 Plug 'honza/vim-snippets'
 Plug 'kchmck/vim-coffee-script'
+Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim'
+Plug 'mtscout6/vim-cjsx'
 Plug 'mustache/vim-mustache-handlebars'
+Plug 'mxw/vim-jsx'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
@@ -174,9 +176,14 @@ endfunction
 " ============================================================================
 
 " ----------------------------------------------------------------------------
+" jsx
+" ----------------------------------------------------------------------------"
+let g:jsx_ext_required=0
+
+" ----------------------------------------------------------------------------
 " deoplete
 " ----------------------------------------------------------------------------"
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup=1
 
 " ----------------------------------------------------------------------------
 " NERDTree
@@ -210,7 +217,7 @@ let g:ctrlp_show_hidden = 1
 " ----------------------------------------------------------------------------
 " neomake
 " ----------------------------------------------------------------------------"
-let g:neomake_javascript_enabled_makers = ['jshint']
+let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_coffeescript_enabled_makers = ['coffeelint']
 autocmd! BufWritePost * Neomake
 
