@@ -17,6 +17,7 @@ Plug 'shougo/deoplete.nvim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'dunckr/molokai'
 Plug 'tommcdo/vim-lion'
+Plug 'mhinz/vim-hugefile'
 
 " Lang
 Plug 'Chiel92/vim-autoformat'
@@ -27,7 +28,7 @@ Plug 'amirh/HTML-AutoCloseTag'
 Plug 'benekastah/neomake'
 Plug 'briancollins/vim-jst'
 Plug 'elzr/vim-json'
-Plug 'gorodinskiy/vim-coloresque'
+Plug 'chrisbra/Colorizer'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'hashivim/vim-terraform'
 Plug 'honza/dockerfile.vim'
@@ -115,6 +116,9 @@ autocmd BufWritePre * :%s/\s\+$//e
 " ctags
 set tags=./tags;/
 
+" only syntax highlight first columns
+set synmaxcol=120
+
 " }}}
 " ============================================================================
 " MAPPINGS {{{
@@ -176,6 +180,11 @@ endfunction
 " ============================================================================
 
 " ----------------------------------------------------------------------------
+" Colorizer
+" ----------------------------------------------------------------------------"
+autocmd BufRead,BufNewFile   *.scss :ColorHighlight
+
+" ----------------------------------------------------------------------------
 " jsx
 " ----------------------------------------------------------------------------"
 let g:jsx_ext_required=0
@@ -217,7 +226,7 @@ let g:ctrlp_show_hidden = 1
 " ----------------------------------------------------------------------------
 " neomake
 " ----------------------------------------------------------------------------"
-let g:neomake_javascript_enabled_makers = ['eslint']
+let g:neomake_javascript_enabled_makers = ['jshint']
 let g:neomake_coffeescript_enabled_makers = ['coffeelint']
 autocmd! BufWritePost * Neomake
 

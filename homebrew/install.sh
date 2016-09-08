@@ -10,23 +10,17 @@ TAPS=(
 FORMULAS=(
   bash-completion
   bash-git-prompt
-  boot2docker
   caskroom/cask/brew-cask
   cloc
   coreutils
   diff-so-fancy
   docker
-  docker-machine
-  docker-swarm
   git
-  graphicsmagick
   hub
-  imagemagick
   kubectl
   neovim
   python
   python3
-  rust
   selenium-server-standalone
   terraform
   tree
@@ -42,6 +36,7 @@ CASKS=(
   google-chrome
   google-cloud-sdk
   iterm2
+  licecap
   node
   onepassword
   seil
@@ -61,6 +56,7 @@ PACKAGES=(
   coffee-script
   coffeelint-cjsx
   eslint
+  js-beautify
 )
 
 for tap in ${TAPS[@]}
