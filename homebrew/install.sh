@@ -50,13 +50,23 @@ CASKS=(
   virtualbox
   vlc
 )
-PACKAGES=(
+NPM_PACKAGES=(
   coffee-react
   coffee-react-transform
   coffee-script
   coffeelint-cjsx
   eslint
   js-beautify
+)
+GEMS=(
+  ruby-beautify
+  sass
+)
+PIP_PACAKGES=(
+  flake8
+  neovim
+  pyflakes
+  pylint
 )
 
 for tap in ${TAPS[@]}
@@ -70,4 +80,6 @@ brew cask install ${CASKS[@]}
 brew cask alfred link
 brew cleanup
 npm update npm -g
-npm install -g ${PACKAGES[@]}
+npm install -g ${NPM_PACKAGES[@]}
+gem install ${GEMS[@]}
+pip install ${PIP_PACAKGES[@]}

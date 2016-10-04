@@ -1,8 +1,8 @@
 dotfiles="$HOME/dotfiles"
 
 # private
-if [ -f "$dotfiles/private/.bashrc.local" ]; then
-  source "$dotfiles/private/.bashrc.local"
+if [ -f "$dotfiles/secret/.bashrc.local" ]; then
+  source "$dotfiles/secret/.bashrc.local"
 fi
 
 # bash completion
@@ -93,3 +93,5 @@ alias dm="docker-machine"
 alias dc="docker-compose"
 alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
 alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; unset -f __dopen; }; __dopen'
+alias dclean='docker rmi $(docker images --filter dangling=true)'
+alias dkill='docker rmi $(docker images -a -q)'

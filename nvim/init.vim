@@ -63,6 +63,7 @@ syntax enable
 colorscheme default
 set background=dark
 colorscheme molokai
+set background=dark
 
 " mouse
 set mouse=a
@@ -131,12 +132,15 @@ set synmaxcol=120
 let mapleader = ','
 
 map <Leader>a :Autoformat<cr>
+map <Leader>w <ESC>:w<cr>
 map <C-e> :NERDTreeToggle<CR>>
 
 noremap H :call WrapRelativeMotion("^")<CR>
 noremap L :call WrapRelativeMotion("$")<CR>
 imap <expr> <Tab> CleverTab()
 nnoremap <silent><C-p> :CtrlSpace O<CR>
+
+map <Leader>t :set expandtab<cr>
 
 " }}}
 " ============================================================================
@@ -217,10 +221,10 @@ let g:indent_guides_enable_on_vim_startup = 1
 " ctrlp
 " ----------------------------------------------------------------------------"
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](.git|.hg|.svn|node_modules|vendor|bower_components|temp|tmp)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ 'link': 'some_bad_symbolic_links',
-  \ }
+      \ 'dir':  '\v[\/](.git|.hg|.svn|node_modules|vendor|bower_components|temp|tmp)$',
+      \ 'file': '\v\.(exe|so|dll)$',
+      \ 'link': 'some_bad_symbolic_links',
+      \ }
 let g:ctrlp_show_hidden = 1
 
 " ----------------------------------------------------------------------------
@@ -228,6 +232,8 @@ let g:ctrlp_show_hidden = 1
 " ----------------------------------------------------------------------------"
 let g:neomake_javascript_enabled_makers = ['jshint']
 let g:neomake_coffeescript_enabled_makers = ['coffeelint']
+let g:neomake_python_enabledmarkers= ['python', 'flake8', 'pylint', 'pyflakes']
+
 autocmd! BufWritePost * Neomake
 
 " ----------------------------------------------------------------------------
@@ -245,5 +251,13 @@ map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
 
 " Move to word
-map  <Leader>w <Plug>(easymotion-bd-w)
-nmap <Leader>w <Plug>(easymotion-overwin-w)
+"map  <Leader>w <Plug>(easymotion-bd-w)
+"nmap <Leader>w <Plug>(easymotion-overwin-w)
+"
+
+" ----------------------------------------------------------------------------
+" commenter
+" ----------------------------------------------------------------------------"
+let g:NERDDefaultAlign = 'left'
+let g:NERDCompactSexyComs = 1
+let g:NERDSpaceDelims = 1
