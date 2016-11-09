@@ -1,4 +1,3 @@
-" ============================================================================
 " VIM-PLUG BLOCK {{{
 " ============================================================================
 
@@ -27,18 +26,18 @@ Plug 'Shougo/neosnippet-snippets'
 Plug 'amirh/HTML-AutoCloseTag'
 Plug 'benekastah/neomake'
 Plug 'briancollins/vim-jst'
-Plug 'elzr/vim-json'
 Plug 'chrisbra/Colorizer'
+Plug 'elzr/vim-json'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'hashivim/vim-terraform'
 Plug 'honza/dockerfile.vim'
 Plug 'honza/vim-snippets'
 Plug 'kchmck/vim-coffee-script'
-Plug 'marijnh/tern_for_vim', { 'do': 'npm install' }
 Plug 'mattn/emmet-vim'
 Plug 'mtscout6/vim-cjsx'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mxw/vim-jsx'
+Plug 'othree/tern_for_vim_coffee'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
@@ -66,7 +65,8 @@ colorscheme molokai
 set background=dark
 
 " mouse
-set mouse=a
+set mouse=
+set cb=unnamed
 
 " line numbers
 set relativenumber
@@ -141,6 +141,12 @@ imap <expr> <Tab> CleverTab()
 nnoremap <silent><C-p> :CtrlSpace O<CR>
 
 map <Leader>t :set expandtab<cr>
+
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 " }}}
 " ============================================================================

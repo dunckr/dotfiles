@@ -1,5 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
-<dict/>
+<dict>
+	<key>themes</key>
+	<dict>
+		<key>alfred.theme.custom.F286AC62-4ED7-450A-B546-868AB4F9B008</key>
+		<dict>
+			<key>background</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmAAAAg83MTD+G
+			</data>
+			<key>border</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmAAAAAIY=
+			</data>
+			<key>cornerRoundness</key>
+			<integer>3</integer>
+			<key>credits</key>
+			<string>Abby Hark</string>
+			<key>imageStyle</key>
+			<integer>9</integer>
+			<key>name</key>
+			<string>Dark and Dim</string>
+			<key>resultPaddingSize</key>
+			<integer>2</integer>
+			<key>resultSelectedBackgroundColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg5mYGD6DmZgYPoOZmBg+g83MTD+G
+			</data>
+			<key>resultSelectedSubtextColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg7u6Oj+Du7o6P4O7ujo/AYY=
+			</data>
+			<key>resultSelectedTextColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg7OyMj+Ds7IyP4OzsjI/AYY=
+			</data>
+			<key>resultSubtextColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg//+/j6D//7+PoP//v4+AYY=
+			</data>
+			<key>resultSubtextFont</key>
+			<string>Helvetica Neue Light</string>
+			<key>resultSubtextFontSize</key>
+			<integer>1</integer>
+			<key>resultTextColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg5OSEj+Dk5ISP4OTkhI/AYY=
+			</data>
+			<key>resultTextFont</key>
+			<string>Helvetica Neue Light</string>
+			<key>resultTextFontSize</key>
+			<integer>2</integer>
+			<key>scrollbarColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg5mYGD6DmZgYPoOZmBg+g83MTD+G
+			</data>
+			<key>searchBackgroundColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg5STEz+DlJMTP4OUkxM/AIY=
+			</data>
+			<key>searchFont</key>
+			<string>Helvetica Neue Light</string>
+			<key>searchFontSize</key>
+			<integer>3</integer>
+			<key>searchForegroundColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg769PT+Dvr09P4O+vT0/AYY=
+			</data>
+			<key>searchPaddingSize</key>
+			<integer>0</integer>
+			<key>searchSelectionBackgroundColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg7u6uj6Du7q6PoO7uro+g5qZGT+G
+			</data>
+			<key>searchSelectionForegroundColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg8XERD+DxcREP4PFxEQ/AYY=
+			</data>
+			<key>separatorColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmAAAAAIY=
+			</data>
+			<key>shortcutColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg+noaD6D6ehoPoPp6Gg+AYY=
+			</data>
+			<key>shortcutFont</key>
+			<string>Helvetica Neue Light</string>
+			<key>shortcutFontSize</key>
+			<integer>2</integer>
+			<key>shortcutSelectedColor</key>
+			<data>
+			BAtzdHJlYW10eXBlZIHoA4QBQISEhAdOU0NvbG9yAISECE5TT2Jq
+			ZWN0AIWEAWMChARmZmZmg//+/j6D//7+PoP//v4+AYY=
+			</data>
+			<key>uid</key>
+			<string>alfred.theme.custom.F286AC62-4ED7-450A-B546-868AB4F9B008</string>
+			<key>widthSize</key>
+			<integer>2</integer>
+		</dict>
+	</dict>
+</dict>
 </plist>

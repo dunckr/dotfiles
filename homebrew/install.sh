@@ -27,7 +27,6 @@ FORMULAS=(
 )
 CASKS=(
   alfred
-  bartender
   beardedspice
   dash
   dropbox
@@ -36,10 +35,10 @@ CASKS=(
   google-chrome
   google-cloud-sdk
   iterm2
+  karabiner-elements
   licecap
   node
   onepassword
-  seil
   sketch
   skype
   slate
@@ -59,7 +58,11 @@ NPM_PACKAGES=(
   js-beautify
 )
 GEMS=(
+  rails_best_practices
+  ripper-tags
   ruby-beautify
+  rubycritic
+  sandi_meter
   sass
 )
 PIP_PACAKGES=(

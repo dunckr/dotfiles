@@ -9,3 +9,5 @@ Desktop.ini
 # Thumbnail cache files
 ._*
 Thumbs.db
+
+.listen_test
