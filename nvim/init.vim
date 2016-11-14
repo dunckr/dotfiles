@@ -37,7 +37,6 @@ Plug 'mattn/emmet-vim'
 Plug 'mtscout6/vim-cjsx'
 Plug 'mustache/vim-mustache-handlebars'
 Plug 'mxw/vim-jsx'
-Plug 'othree/tern_for_vim_coffee'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
@@ -59,10 +58,8 @@ set ff=unix
 " color scheme
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 syntax enable
-colorscheme default
 set background=dark
 colorscheme molokai
-set background=dark
 
 " mouse
 set mouse=

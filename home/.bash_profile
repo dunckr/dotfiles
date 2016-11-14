@@ -37,6 +37,21 @@ alias ......='cd ../../../../..'
 alias ~='cd ~'
 
 alias ls='ls -FG'
+alias cp="cp -iv"
+alias rm="rm -iv"
+alias mv="mv -iv"
+alias ls="ls -FGh"
+alias du="du -cksh"
+alias df="df -h"
+# Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
+alias sed="sed -E"
+# Just print request/response headers
+alias curl="curl --verbose"
+# Use modern regexps for grep, and do show color when `grep` is the final
+# command, but don't when piping to something else, because the added color
+# codes will mess up the expected input.
+alias grep="egrep --color=auto"
+alias mkdir="\mkdir -p"
 
 # IP
 alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
@@ -68,7 +83,8 @@ alias pip3update='pip3 list -o | cut -f 1 -d " " | xargs -n 1 pip3 install --upg
 
 # Brew
 alias cask='brew cask'
-alias update='softwareupdate -i -a; brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; gem update --system; gem update; pip3update;'
+alias macupdate='softwareupdate -i -a;'
+alias update='brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system; gem update;'
 
 # Hub
 eval "$(hub alias -s)"
