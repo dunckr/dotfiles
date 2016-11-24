@@ -14,7 +14,6 @@ FORMULAS=(
   cloc
   coreutils
   diff-so-fancy
-  docker
   git
   hub
   kubectl
@@ -29,6 +28,7 @@ CASKS=(
   alfred
   beardedspice
   dash
+  docker
   dropbox
   firefox
   font-source-code-pro
@@ -59,7 +59,6 @@ NPM_PACKAGES=(
 )
 GEMS=(
   rails_best_practices
-  ripper-tags
   ruby-beautify
   rubycritic
   sandi_meter

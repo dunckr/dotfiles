@@ -11,3 +11,6 @@ Desktop.ini
 Thumbs.db
 
 .listen_test
+
+tags.lock
+tags.temp

@@ -17,6 +17,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'dunckr/molokai'
 Plug 'tommcdo/vim-lion'
 Plug 'mhinz/vim-hugefile'
+Plug 'ludovicchabant/vim-gutentags'
 
 " Lang
 Plug 'Chiel92/vim-autoformat'
@@ -82,6 +83,8 @@ set nobackup
 set tabstop=2
 set shiftwidth=2
 set expandtab
+
+set nopaste
 
 " no write backup
 set nowritebackup

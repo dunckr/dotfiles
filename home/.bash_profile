@@ -37,9 +37,9 @@ alias ......='cd ../../../../..'
 alias ~='cd ~'
 
 alias ls='ls -FG'
-alias cp="cp -iv"
-alias rm="rm -iv"
-alias mv="mv -iv"
+alias cp="cp -v"
+alias rm="rm -v"
+alias mv="mv -v"
 alias ls="ls -FGh"
 alias du="du -cksh"
 alias df="df -h"
@@ -64,7 +64,7 @@ alias battery="pmset -g batt"
 # Git
 alias gaa="git add -v -A"
 alias gb="git branch"
-alias gcm="git commit -v -am"
+alias gcm="git commit -v -m"
 alias gco="git checkout"
 alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 alias gdf="git diff --color --color-words --abbrev"
