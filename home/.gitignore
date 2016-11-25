@@ -13,7 +13,8 @@ tags
 # Folders to ignore
 .hg
 .svn
-.sass-cache
+Desktop.ini
+.swp
 
 # Package manager
 /node_modules
@@ -23,3 +24,18 @@ bower_components
 # Other stuff
 *.pyc
 /tmp
+.sass-cache
+.listen_test
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Tags
+tags.lock
+tags.temp
+
+# Ignore certs
+*.pem
+*.crt
+*.key

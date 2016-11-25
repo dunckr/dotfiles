@@ -1,16 +1,2 @@
 # Top Secret
 secret/
-
-# Folder view configuration files
-.DS_Store
-Desktop.ini
-.swp
-
-# Thumbnail cache files
-._*
-Thumbs.db
-
-.listen_test
-
-tags.lock
-tags.temp
