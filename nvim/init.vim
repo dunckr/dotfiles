@@ -29,6 +29,7 @@ Plug 'benekastah/neomake'
 Plug 'briancollins/vim-jst'
 Plug 'chrisbra/Colorizer'
 Plug 'elzr/vim-json'
+Plug 'fatih/vim-nginx'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'hashivim/vim-terraform'
 Plug 'honza/dockerfile.vim'
@@ -119,6 +120,11 @@ set tags=./tags;/
 
 " only syntax highlight first columns
 set synmaxcol=120
+
+set inccommand=nosplit
+
+set cursorline
+" set cursorcolumn
 
 " }}}
 " ============================================================================

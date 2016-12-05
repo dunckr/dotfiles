@@ -38,7 +38,6 @@ alias ~='cd ~'
 
 alias ls='ls -FG'
 alias cp="cp -v"
-alias rm="rm -v"
 alias mv="mv -v"
 alias ls="ls -FGh"
 alias du="du -cksh"
@@ -84,7 +83,7 @@ alias pip3update='pip3 list -o | cut -f 1 -d " " | xargs -n 1 pip3 install --upg
 # Brew
 alias cask='brew cask'
 alias macupdate='softwareupdate -i -a;'
-alias update='brew -v update; brew -v upgrade --all; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system; gem update;'
+alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system; gem update;'
 
 # Hub
 eval "$(hub alias -s)"
@@ -110,4 +109,7 @@ alias dc="docker-compose"
 alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
 alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; unset -f __dopen; }; __dopen'
 alias dclean='docker rmi $(docker images --filter dangling=true)'
-alias dkill='docker rmi $(docker images -a -q)'
+alias dkill='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
+
+# Ruby
+alias critic=" rubycritic -f console && sandi_meter -d || true && rails_best_practices"
