@@ -54,8 +54,12 @@ NPM_PACKAGES=(
   coffee-react-transform
   coffee-script
   coffeelint-cjsx
+  esformatter
   eslint
-  js-beautify
+  eslint-config-airbnb
+  eslint-config-airbnb-base
+  eslint-plugin-import
+  svgo
 )
 GEMS=(
   rails_best_practices

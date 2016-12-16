@@ -26,6 +26,7 @@ bower_components
 /tmp
 .sass-cache
 .listen_test
+.tern-port
 
 # Thumbnail cache files
 ._*
