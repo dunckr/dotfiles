@@ -20,6 +20,7 @@ Plug 'shougo/deoplete.nvim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-surround'
+Plug 'Raimondi/delimitMate'
 
 " Lang
 Plug 'Chiel92/vim-autoformat'
@@ -184,6 +185,7 @@ let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 
 let g:SuperTabClosePreviewOnPopupClose = 1
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
 autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:UltiSnipsExpandTrigger="<C-j>"
