@@ -10,10 +10,10 @@ link() {
   ln -s "$from" "$to"
 }
 
-sudo bash spf13/install.sh
-sudo bash osx/custom.sh
-sudo bash homebrew/install.sh
-sudo bash nvim/install.sh
+bash osx/setup.sh
+bash homebrew/install.sh
+bash homebrew/dependancies.sh
+bash nvim/setup.sh
 
 for location in $(find home -name '.*'); do
   file="${location##*/}"
