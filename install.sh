@@ -22,4 +22,5 @@ for location in $(find home -name '.*'); do
 done
 
 link "$dotfiles/iterm2/" "$HOME/Library/Preferences/"
-link "$dotfiles/nvim/" "$HOME/.config/nvim/"
+link "$dotfiles/nvim/init.vim" "$HOME/.config/nvim/"
+link "$dotfiles/karabiner/karabiner.json" "$HOME/.config/karabiner/"
