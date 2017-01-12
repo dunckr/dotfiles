@@ -2,10 +2,6 @@
 
 ![Terminal][screenshot]
 
-## Requirements
-
-+ [Bind ESC to Caps][seil]
-
 ## Install
 
 ```sh
