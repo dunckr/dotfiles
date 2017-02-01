@@ -11,7 +11,6 @@ FORMULAS=(
   caskroom/cask/brew-cask
   cloc
   coreutils
-  diff-so-fancy
   git
   hub
   neovim
@@ -30,6 +29,7 @@ CASKS=(
   dropbox
   firefox
   font-source-code-pro
+  font-droid-sans-mono
   google-chrome
   iterm2
   karabiner-elements
@@ -50,11 +50,13 @@ NPM_PACKAGES=(
   coffee-react-transform
   coffee-script
   coffeelint-cjsx
+  diff-so-fancy
   esformatter
   eslint
   eslint-config-airbnb
   eslint-config-airbnb-base
   eslint-plugin-import
+  prettier
   svgo
 )
 GEMS=(
@@ -84,4 +86,4 @@ brew cleanup
 npm update npm -g
 npm install -g ${NPM_PACKAGES[@]}
 gem install ${GEMS[@]}
-pip install ${PIP_PACAKGES[@]}
+pip3 install ${PIP_PACAKGES[@]}

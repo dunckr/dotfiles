@@ -254,3 +254,5 @@ let g:NERDSpaceDelims = 1
 " ----------------------------------------------------------------------------"
 let g:formatdef_esformatter = '"esformatter"'
 let g:formatters_cs = ['esformatter']
+
+autocmd FileType javascript set formatprg=prettier\ --stdin
