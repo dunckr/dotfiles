@@ -2,10 +2,12 @@
 " ============================================================================
 silent! if plug#begin('~/.config/nvim/plugged')
 
+Plug 'Raimondi/delimitMate'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dunckr/molokai'
 Plug 'easymotion/vim-easymotion'
+Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
@@ -19,8 +21,8 @@ Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'shougo/deoplete.nvim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tommcdo/vim-lion'
+Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'Raimondi/delimitMate'
 
 " Lang
 Plug 'Chiel92/vim-autoformat'
@@ -28,7 +30,6 @@ Plug 'Shougo/neocomplcache'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'SirVer/ultisnips'
-Plug 'amirh/HTML-AutoCloseTag'
 Plug 'ap/vim-css-color'
 Plug 'benekastah/neomake'
 Plug 'briancollins/vim-jst'

@@ -21,6 +21,10 @@ if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
 fi
 
+# NVM
+export NVM_DIR="$HOME/.nvm"
+. "/usr/local/opt/nvm/nvm.sh"
+
 export EDITOR=vim
 
 # Aliases

@@ -58,6 +58,7 @@ NPM_PACKAGES=(
   eslint-plugin-import
   prettier
   svgo
+  tern
 )
 GEMS=(
   rails_best_practices
