@@ -6,6 +6,7 @@ TAPS=(
   neovim/homebrew-neovim
 )
 FORMULAS=(
+  bash
   bash-completion
   bash-git-prompt
   caskroom/cask/brew-cask
