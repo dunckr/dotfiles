@@ -31,6 +31,7 @@ Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'SirVer/ultisnips'
 Plug 'ap/vim-css-color'
+Plug 'beloglazov/vim-online-thesaurus'
 Plug 'benekastah/neomake'
 Plug 'briancollins/vim-jst'
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
@@ -42,6 +43,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'honza/dockerfile.vim'
 Plug 'honza/vim-snippets'
+Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/emmet-vim'
 Plug 'moll/vim-node'
@@ -51,6 +53,7 @@ Plug 'mxw/vim-jsx'
 Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript'
+Plug 'rhysd/vim-grammarous'
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
@@ -222,11 +225,20 @@ let g:ctrlp_custom_ignore = {
       \ }
 let g:ctrlp_show_hidden = 1
 " ----------------------------------------------------------------------------
+" RainbowParentheses
+" ----------------------------------------------------------------------------"
+augroup vimrc
+  autocmd FileType javascript,coffescript RainbowParentheses
+augroup END
+" ----------------------------------------------------------------------------
 " neomake
 " ----------------------------------------------------------------------------"
-let g:neomake_javascript_enabled_makers = ['eslint']
 let g:neomake_coffeescript_enabled_makers = ['coffeelint']
 let g:neomake_python_enabledmarkers= ['python', 'flake8', 'pylint', 'pyflakes']
+
+let g:neomake_javascript_enabled_makers = ['eslint']
+let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
+let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
 autocmd! BufWritePost * Neomake
 
