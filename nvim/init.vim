@@ -142,6 +142,8 @@ set cursorline
 
 set completeopt-=preview
 
+let g:loaded_python_provider = 1
+
 " }}}
 " ============================================================================
 " MAPPINGS {{{
