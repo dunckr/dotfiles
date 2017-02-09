@@ -4,11 +4,11 @@ silent! if plug#begin('~/.config/nvim/plugged')
 
 Plug 'Raimondi/delimitMate'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'dunckr/molokai'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
+Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mattn/emmet-vim'
@@ -157,7 +157,6 @@ let mapleader = ','
 map <Leader>a :Autoformat<cr>
 map <Leader>w <ESC>:w<cr>
 map <C-e> :NERDTreeToggle<CR>>
-nnoremap <silent><C-p> :CtrlSpace O<CR>
 noremap H ^
 noremap L $
 map <Leader>t :set expandtab<cr>
@@ -218,20 +217,16 @@ let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
 " ----------------------------------------------------------------------------
-" ctrlp
-" ----------------------------------------------------------------------------"
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\v[\/](.git|.hg|.svn|node_modules|vendor|bower_components|temp|tmp)$',
-      \ 'file': '\v\.(exe|so|dll)$',
-      \ 'link': 'some_bad_symbolic_links',
-      \ }
-let g:ctrlp_show_hidden = 1
-" ----------------------------------------------------------------------------
 " RainbowParentheses
 " ----------------------------------------------------------------------------"
 augroup vimrc
   autocmd FileType javascript,coffescript RainbowParentheses
 augroup END
+" ----------------------------------------------------------------------------
+" fzf
+" ----------------------------------------------------------------------------"
+set rtp+=/usr/local/opt/fzf
+nnoremap <silent><C-p> :Files<cr>
 " ----------------------------------------------------------------------------
 " neomake
 " ----------------------------------------------------------------------------"

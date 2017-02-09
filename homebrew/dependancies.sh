@@ -12,6 +12,7 @@ FORMULAS=(
   caskroom/cask/brew-cask
   cloc
   coreutils
+  fzf
   git
   hub
   neovim
