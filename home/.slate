@@ -17,7 +17,7 @@ bind 8:shift;cmd corner bottom-right resize:screenSizeX/2;screenSizeY/2
 bind 9:shift;cmd push left  bar-resize:screenSizeX/3
 bind 0:shift;cmd push right bar-resize:screenSizeX/3
 
-# Sizing
+# Center Positioning
 bind 1:ctrl;cmd move screenOriginX+screenSizeX*0.45;screenOriginY+screenSizeY*0.45 screenSizeX*0.1;screenSizeY*0.1
 bind 2:ctrl;cmd move screenOriginX+screenSizeX*0.4;screenOriginY+screenSizeY*0.4 screenSizeX*0.2;screenSizeY*0.2
 bind 3:ctrl;cmd move screenOriginX+screenSizeX*0.35;screenOriginY+screenSizeY*0.35 screenSizeX*0.3;screenSizeY*0.3
@@ -27,7 +27,7 @@ bind 6:ctrl;cmd move screenOriginX+screenSizeX*0.2;screenOriginY+screenSizeY*0.2
 bind 7:ctrl;cmd move screenOriginX+screenSizeX*0.15;screenOriginY+screenSizeY*0.15 screenSizeX*0.7;screenSizeY*0.7
 bind 8:ctrl;cmd move screenOriginX+screenSizeX*0.1;screenOriginY+screenSizeY*0.1 screenSizeX*0.8;screenSizeY*0.8
 bind 9:ctrl;cmd move screenOriginX+screenSizeX*0.05;screenOriginY+screenSizeY*0.05 screenSizeX*0.9;screenSizeY*0.9
-bind 0:ctrl;cmd move screenOriginX+screenSizeX*0.05;screenOriginY+screenSizeY*0.05 screenSizeX*0.9;screenSizeY*0.9
+bind 0:ctrl;cmd move screenOriginX+screenSizeX*0.01;screenOriginY+screenSizeY*0.01 screenSizeX*0.98;screenSizeY*0.98
 
 # Fullscreen
 bind =:shift;cmd move screenOriginX;screenOriginY  screenSizeX;screenSizeY
@@ -42,3 +42,13 @@ bind up:ctrl;cmd nudge +0 -10%
 bind down:ctrl;cmd nudge +0 +10%
 bind right:ctrl;cmd nudge +10% +0
 bind left:ctrl;cmd nudge -10% +0
+
+# Resize
+bind right:ctrl resize +10% +0
+bind left:ctrl  resize -10% +0
+bind up:ctrl    resize +0   -10%
+bind down:ctrl  resize +0   +10%
+bind right:alt  resize -10% +0 bottom-right
+bind left:alt   resize +10% +0 bottom-right
+bind up:alt     resize +0   +10% bottom-right
+bind down:alt   resize +0   -10% bottom-right
