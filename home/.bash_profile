@@ -83,7 +83,7 @@ alias pip3update='pip3 list -o | cut -f 1 -d " " | xargs -n 1 pip3 install --upg
 # Brew
 alias cask='brew cask'
 alias macupdate='softwareupdate -i -a;'
-alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system; gem update;'
+alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system; gem update; vim +PlugUpdate +PlugUpgrade +qall;'
 
 # Hub
 eval "$(hub alias -s)"
