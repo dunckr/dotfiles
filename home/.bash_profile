@@ -83,7 +83,7 @@ alias pip3update='pip3 list -o | cut -f 1 -d " " | xargs -n 1 pip3 install --upg
 # Brew
 alias cask='brew cask'
 alias macupdate='softwareupdate -i -a;'
-alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system; gem update; vim +PlugUpdate +PlugUpgrade +qall;'
+alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system; gem update; vim +PlugUpdate +PlugUpgrade +UpdateRemotePlugins +qall;'
 
 # Hub
 eval "$(hub alias -s)"
@@ -112,4 +112,7 @@ alias dclean='docker rmi $(docker images --filter dangling=true)'
 alias dkill='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
 
 # Ruby
-alias critic=" rubycritic -f console && sandi_meter -d || true && rails_best_practices"
+alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
+
+# watchman
+alias tdd="watchman-make -p 'src/js/**/*.js' 'src/js/**/*.jsx' --make=./node_modules/.bin/jest -t $@"

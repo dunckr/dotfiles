@@ -43,7 +43,6 @@ Plug 'hashivim/vim-terraform'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'honza/dockerfile.vim'
 Plug 'honza/vim-snippets'
-Plug 'junegunn/rainbow_parentheses.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/emmet-vim'
 Plug 'moll/vim-node'
@@ -95,10 +94,8 @@ set hidden
 " no backup files
 set nobackup
 
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
+set autoindent
+set noexpandtab
 set nopaste
 
 " no write backup
@@ -193,10 +190,9 @@ let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 
-let g:SuperTabClosePreviewOnPopupClose = 1
 let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabClosePreviewOnPopupClose = 1
 
-autocmd FileType javascript let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 let g:UltiSnipsExpandTrigger="<C-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " " ----------------------------------------------------------------------------
@@ -216,12 +212,6 @@ let NERDTreeMapToggleHidden=1
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
-" ----------------------------------------------------------------------------
-" RainbowParentheses
-" ----------------------------------------------------------------------------"
-augroup vimrc
-  autocmd FileType javascript,coffescript RainbowParentheses
-augroup END
 " ----------------------------------------------------------------------------
 " fzf
 " ----------------------------------------------------------------------------"
@@ -269,4 +259,4 @@ let g:NERDSpaceDelims = 1
 let g:formatdef_esformatter = '"esformatter"'
 let g:formatters_cs = ['esformatter']
 
-autocmd FileType javascript set formatprg=prettier\ --stdin
+autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ --tab-width\ 4

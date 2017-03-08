@@ -45820,7 +45820,7 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>714 260 603 122 0 0 1920 1200 </string>
+	<string>584 121 603 94 0 0 1680 1050 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
 	<string>760 804 400 129 0 0 1920 1200 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
@@ -45828,15 +45828,15 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>329 174 606 456 0 0 1920 1200 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>607 203 918 495 0 0 1920 1200 </string>
+	<string>477 189 918 495 0 0 1680 1050 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>155 616 592 584 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1680 1050 0 0 1680 1050 </string>
+	<string>0 4 1680 1046 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 0 1680 1050 0 0 1680 1050 </string>
+	<string>1680 -150 1920 1200 1680 -150 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>192 557 810 523 0 0 1920 1200 </string>
+	<string>96 64 1728 1076 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>96 64 1728 1076 0 0 1920 1200 </string>
 	<key>New Bookmarks</key>
@@ -46484,7 +46484,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>NotoMono 15</string>
+			<string>NotoMono 14</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -47611,6 +47611,8 @@
 	</dict>
 	<key>PrefsCustomFolder</key>
 	<string>/Users/duncan/dotfiles/iterm2</string>
+	<key>Print In Black And White</key>
+	<true/>
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>
@@ -47630,7 +47632,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-12-12T20:12:06Z</date>
+	<date>2017-03-02T17:46:20Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -47687,7 +47689,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.0.12</string>
+	<string>3.0.14</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
