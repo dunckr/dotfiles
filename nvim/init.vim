@@ -1,5 +1,16 @@
-" VIM-PLUG BLOCK {{{
 " ============================================================================
+"
+"        ██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗
+"        ██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝
+"        ██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗
+"        ██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║
+"     ██╗██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║
+"     ╚═╝╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝
+"
+" ============================================================================
+" Plugins {{{
+" ============================================================================
+
 silent! if plug#begin('~/.config/nvim/plugged')
 
 Plug 'Raimondi/delimitMate'
@@ -43,6 +54,7 @@ Plug 'hashivim/vim-terraform'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'honza/dockerfile.vim'
 Plug 'honza/vim-snippets'
+Plug 'junegunn/vader.vim'
 Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/emmet-vim'
 Plug 'moll/vim-node'
@@ -63,10 +75,12 @@ Plug 'vim-ruby/vim-ruby'
 
 call plug#end()
 endif
+
 " }}}
 " ============================================================================
-" BASIC SETTINGS {{{
+" Basic {{{
 " ============================================================================
+
 set ff=unix
 
 " color scheme
@@ -141,14 +155,17 @@ set completeopt-=preview
 
 let g:loaded_python_provider = 1
 
+set foldmethod=marker foldlevel=0
+
 " }}}
 " ============================================================================
-" MAPPINGS {{{
+" Mappings {{{
 " ============================================================================
 
 " ----------------------------------------------------------------------------
-" Basic mappings
+" Basic
 " ----------------------------------------------------------------------------
+
 let mapleader = ','
 
 map <Leader>a :Autoformat<cr>
@@ -157,27 +174,43 @@ map <C-e> :NERDTreeToggle<CR>>
 noremap H ^
 noremap L $
 map <Leader>t :set expandtab<cr>
+
+" reload vimrc
+map <Leader>r :so $MYVIMRC<cr>
+
+augroup filetype_vim
+	autocmd!
+	autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
 " }}}
 " ============================================================================
-" SCRIPTS {{{
+" Scripts {{{
 " ============================================================================
-" ----------------------------------------------------------------------------
+
 map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+
 " }}}
 " ============================================================================
-" PLUGINS {{{
+" Plugins {{{
 " ============================================================================
+
 " ----------------------------------------------------------------------------
-" Tmux
+" tmux
 " ----------------------------------------------------------------------------
+
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
+
 " ----------------------------------------------------------------------------
 " jsx
 " ----------------------------------------------------------------------------"
+"
 let g:jsx_ext_required=0
+
 " ----------------------------------------------------------------------------
 " deoplete
 " ----------------------------------------------------------------------------"
+
 let g:deoplete#enable_at_startup=1
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
@@ -195,9 +228,11 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 
 let g:UltiSnipsExpandTrigger="<C-j>"
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
 " " ----------------------------------------------------------------------------
 " NERDTree
 " ----------------------------------------------------------------------------"
+
 let NERDTreeShowBookmarks=1
 let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$', '\.tern-port$']
 let NERDTreeChDirMode=0
@@ -206,20 +241,26 @@ let NERDTreeMouseMode=2
 let NERDTreeShowHidden=1
 let NERDTreeKeepTreeInNewTab=1
 let NERDTreeMapToggleHidden=1
+
 " ----------------------------------------------------------------------------
 " indent_guides
 " ----------------------------------------------------------------------------"
+
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
+
 " ----------------------------------------------------------------------------
 " fzf
 " ----------------------------------------------------------------------------"
+
 set rtp+=/usr/local/opt/fzf
 nnoremap <silent><C-p> :GFiles<cr>
+
 " ----------------------------------------------------------------------------
 " neomake
 " ----------------------------------------------------------------------------"
+
 let g:neomake_coffeescript_enabled_makers = ['coffeelint']
 let g:neomake_python_enabledmarkers= ['python', 'flake8', 'pylint', 'pyflakes']
 
@@ -238,7 +279,7 @@ nmap <Leader><Space>p :lprev<CR>      " previous error/warning
 " ----------------------------------------------------------------------------
 " easymotion
 " ----------------------------------------------------------------------------"
-" <Leader>f{char} to move to {char}
+
 map  <Leader>f <Plug>(easymotion-bd-f)
 nmap <Leader>f <Plug>(easymotion-overwin-f)
 
@@ -248,16 +289,22 @@ nmap s <Plug>(easymotion-overwin-f2)
 " Move to line
 map <Leader>L <Plug>(easymotion-bd-jk)
 nmap <Leader>L <Plug>(easymotion-overwin-line)
+
 " ----------------------------------------------------------------------------
 " commenter
 " ----------------------------------------------------------------------------"
+
 let g:NERDDefaultAlign = 'left'
 let g:NERDCompactSexyComs = 1
 let g:NERDSpaceDelims = 1
+
 " ----------------------------------------------------------------------------
 " format
 " ----------------------------------------------------------------------------"
+
 let g:formatdef_esformatter = '"esformatter"'
 let g:formatters_cs = ['esformatter']
 
 autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ --tab-width\ 4
+
+" }}}
