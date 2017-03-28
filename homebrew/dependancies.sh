@@ -19,6 +19,8 @@ FORMULAS=(
   node
   python
   python3
+  rbenv
+  ruby-build
   selenium-server-standalone
   terraform
   tree
@@ -68,6 +70,7 @@ GEMS=(
   rubycritic
   sandi_meter
   sass
+  scss-lint
 )
 PIP_PACAKGES=(
   flake8
