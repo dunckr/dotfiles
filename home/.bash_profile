@@ -92,7 +92,7 @@ alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; 
 eval "$(hub alias -s)"
 
 # Applications
-alias subl="/opt/homebrew-cask/Caskroom/sublime-text/2.0.2/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl"
+alias subl="/usr/local/bin/subl"
 alias sketch="/Applications/Sketch.app/Contents/MacOS/Sketch"
 
 # Shorthands
@@ -118,4 +118,5 @@ alias dkill='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
 
 # watchman
-alias tdd="watchman-make -p 'src/js/**/*.js' 'src/js/**/*.jsx' --make=./node_modules/.bin/jest -t $@"
+# alias tdd="watchman-make -p 'src/js/**/*.js' 'src/js/**/*.jsx' --make=./node_modules/.bin/jest -t $@"
+alias tdd="chokidar 'src/**/*' -c 'if [ '{event}' = 'change' ]; then npm test -- {path}; fi;'"

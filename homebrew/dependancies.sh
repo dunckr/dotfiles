@@ -6,6 +6,7 @@ TAPS=(
   neovim/homebrew-neovim
 )
 FORMULAS=(
+  alfred2
   bash
   bash-completion
   bash-git-prompt
@@ -14,6 +15,7 @@ FORMULAS=(
   coreutils
   fzf
   git
+  hipchat
   hub
   neovim
   node
@@ -22,18 +24,20 @@ FORMULAS=(
   rbenv
   ruby-build
   selenium-server-standalone
+  shellcheck
+  slack
   terraform
+  tmux
   tree
 )
 CASKS=(
-  alfred2
   beardedspice
   dash
   docker
   dropbox
   firefox
-  font-source-code-pro
   font-droid-sans-mono
+  font-source-code-pro
   google-chrome
   iterm2
   karabiner-elements
@@ -48,6 +52,7 @@ CASKS=(
   vagrant
   virtualbox
   vlc
+  xquartz
 )
 NPM_PACKAGES=(
   coffee-react

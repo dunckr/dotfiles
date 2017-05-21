@@ -25,3 +25,7 @@ defaults write com.apple.systemuiserver menuExtras -array \
     "/System/Library/CoreServices/Menu Extras/AirPort.menu" \
     "/System/Library/CoreServices/Menu Extras/Battery.menu" \
     "/System/Library/CoreServices/Menu Extras/Clock.menu"
+
+# Stop xQuartz opening XTern
+defaults write org.macosforge.xquartz.X11 nolisten_tcp 0
+defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
