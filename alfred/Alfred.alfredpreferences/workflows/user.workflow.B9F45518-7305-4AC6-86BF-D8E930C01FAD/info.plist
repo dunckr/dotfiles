@@ -275,7 +275,7 @@
 					<string>/opt/homebrew-cask/Caskroom/iterm2-nightly/3.0.3/iTerm.app</string>
 				</array>
 				<key>toggle</key>
-				<true/>
+				<false/>
 			</dict>
 			<key>type</key>
 			<string>alfred.workflow.action.launchfiles</string>

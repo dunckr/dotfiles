@@ -15,7 +15,9 @@ silent! if plug#begin('~/.config/nvim/plugged')
 
 Plug 'Raimondi/delimitMate'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'dunckr/js_alternate.vim'
 Plug 'dunckr/molokai'
+Plug 'dunckr/vim-base16-unikitty-light'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
@@ -25,7 +27,6 @@ Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
 Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-hugefile'
 Plug 'mhinz/vim-signify'
-Plug 'mhinz/vim-startify'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
@@ -34,9 +35,9 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tommcdo/vim-lion'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'vim-scripts/SyntaxAttr.vim'
 
 " Lang
-Plug 'Chiel92/vim-autoformat'
 Plug 'Shougo/neocomplcache'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
@@ -65,6 +66,7 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript'
 Plug 'rhysd/vim-grammarous'
+Plug 'sbdchd/neoformat'
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
@@ -72,6 +74,7 @@ Plug 'tpope/vim-haml'
 Plug 'tpope/vim-markdown'
 Plug 'tpope/vim-rails'
 Plug 'vim-ruby/vim-ruby'
+Plug 'vim-scripts/groovy.vim'
 
 call plug#end()
 endif
@@ -157,6 +160,8 @@ let g:loaded_python_provider = 1
 
 set foldmethod=marker foldlevel=0
 
+au BufNewFile,BufRead Jenkinsfile setf groovy
+
 " }}}
 " ============================================================================
 " Mappings {{{
@@ -168,7 +173,7 @@ set foldmethod=marker foldlevel=0
 
 let mapleader = ','
 
-map <Leader>a :Autoformat<cr>
+map <Leader>a :Neoformat<cr>
 map <Leader>w <ESC>:w<cr>
 map <C-e> :NERDTreeToggle<CR>>
 noremap H ^
@@ -188,7 +193,17 @@ augroup END
 " Scripts {{{
 " ============================================================================
 
-map <Leader>bg :let &background = ( &background == "dark"? "light" : "dark" )<CR>
+function! BackgroundSwitch()
+	if &background == "light"
+		set background=dark
+		colorscheme molokai
+	else
+		set background=light
+		colorscheme base16-unikitty-light
+	endif
+endfunction
+
+nnoremap <leader>b :call BackgroundSwitch()<cr>
 
 " }}}
 " ============================================================================
@@ -243,9 +258,10 @@ let NERDTreeKeepTreeInNewTab=1
 let NERDTreeMapToggleHidden=1
 
 " ----------------------------------------------------------------------------
-" indent_guides
+" indent-guides
 " ----------------------------------------------------------------------------"
 
+let g:indent_guides_auto_colors = 0
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size = 1
 let g:indent_guides_enable_on_vim_startup = 1
@@ -269,7 +285,23 @@ let g:neomake_javascript_enabled_makers = ['eslint']
 let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
 let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
 
+let config_names = [
+  \'.eslintrc.js',
+  \'.eslintrc.yaml',
+  \'.eslintrc.yml',
+  \'.eslintrc.json',
+  \'.eslintrc',
+  \'eslint.js'
+\]
+let config = filter(config_names, 'findfile(v:val, ".;") !=# ""')
+if len(config) == 1
+	let g:neomake_javascript_eslint_args = ['-f', 'compact', '--no-eslintrc', '--config', config[0]]
+endif
+
 autocmd! BufWritePost * Neomake
+
+" TODO
+" remove prettier from auto format...
 
 nmap <Leader><Space>o :lopen<CR>      " open location window
 nmap <Leader><Space>c :lclose<CR>     " close location window
@@ -302,9 +334,33 @@ let g:NERDSpaceDelims = 1
 " format
 " ----------------------------------------------------------------------------"
 
-let g:formatdef_esformatter = '"esformatter"'
-let g:formatters_cs = ['esformatter']
+let g:neoformat_python_jsbeautify = {
+            \ 'exe': 'js-beautify',
+            \ 'args': ['-t', '-s:4'],
+            \ 'stdin': 1,
+            \ }
 
-autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ --tab-width\ 4
+" let g:formatdef_esformatter = '"esformatter"'
+" let g:formatters_cs = ['esformatter']
 
+" let g:neoformat_enabled_javascript = ['esformatter']
+" function! neoformat#formatters#javascript#enabled() abort
+"     return ['esformatter']
+" endfunction
+
+" function! neoformat#formatters#javascript#esformatter() abort
+"     return {
+"         \ 'exe': 'esformatter',
+"         \ 'args': ['indent.value:"\t"'],
+"         \ 'stdin': 1,
+"         \ }
+" endfunction
+
+" autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ all\ --tab-width\ 4
+
+" ----------------------------------------------------------------------------
+" js_alternate
+" ----------------------------------------------------------------------------"
+nnoremap <leader>t :call js_alternate#run()<cr>
 " }}}
+"
