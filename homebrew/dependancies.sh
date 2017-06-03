@@ -65,9 +65,11 @@ NPM_PACKAGES=(
   eslint-config-airbnb
   eslint-config-airbnb-base
   eslint-plugin-import
+  jsbeautify
   prettier
   svgo
   tern
+  yarn
 )
 GEMS=(
   rails_best_practices
@@ -84,17 +86,17 @@ PIP_PACAKGES=(
   pylint
 )
 
-for tap in ${TAPS[@]}
+for tap in "${TAPS[@]}"
 do
   brew tap $tap
 done
 
-brew install ${FORMULAS[@]}
+brew install "${FORMULAS[@]}"
 brew update
-brew cask install ${CASKS[@]}
+brew cask install "${CASKS[@]}"
 brew cask alfred link
 brew cleanup
 npm update npm -g
-npm install -g ${NPM_PACKAGES[@]}
-gem install ${GEMS[@]}
-pip3 install ${PIP_PACAKGES[@]}
+npm install -g "${NPM_PACKAGES[@]}"
+gem install "${GEMS[@]}"
+pip3 install "${PIP_PACAKGES[@]}"

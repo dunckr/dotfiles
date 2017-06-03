@@ -300,9 +300,6 @@ endif
 
 autocmd! BufWritePost * Neomake
 
-" TODO
-" remove prettier from auto format...
-
 nmap <Leader><Space>o :lopen<CR>      " open location window
 nmap <Leader><Space>c :lclose<CR>     " close location window
 nmap <Leader><Space>, :ll<CR>         " go to current error/warning
@@ -334,33 +331,18 @@ let g:NERDSpaceDelims = 1
 " format
 " ----------------------------------------------------------------------------"
 
-let g:neoformat_python_jsbeautify = {
-            \ 'exe': 'js-beautify',
-            \ 'args': ['-t', '-s:4'],
-            \ 'stdin': 1,
-            \ }
+let g:neoformat_enabled_javascript = ['jsbeautify', 'esformatter']
 
-" let g:formatdef_esformatter = '"esformatter"'
-" let g:formatters_cs = ['esformatter']
+" ----------------------------------------------------------------------------
+" format
+" ----------------------------------------------------------------------------"
 
-" let g:neoformat_enabled_javascript = ['esformatter']
-" function! neoformat#formatters#javascript#enabled() abort
-"     return ['esformatter']
-" endfunction
-
-" function! neoformat#formatters#javascript#esformatter() abort
-"     return {
-"         \ 'exe': 'esformatter',
-"         \ 'args': ['indent.value:"\t"'],
-"         \ 'stdin': 1,
-"         \ }
-" endfunction
-
-" autocmd FileType javascript set formatprg=prettier\ --stdin\ --single-quote\ --trailing-comma\ all\ --tab-width\ 4
+nnoremap <leader>p :silent %!prettier --stdin --trailing-comma all --tab-width 4 --single-quote<CR>
 
 " ----------------------------------------------------------------------------
 " js_alternate
 " ----------------------------------------------------------------------------"
 nnoremap <leader>t :call js_alternate#run()<cr>
+
 " }}}
 "
