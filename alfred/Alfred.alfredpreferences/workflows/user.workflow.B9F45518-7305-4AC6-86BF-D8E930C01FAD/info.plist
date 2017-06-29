@@ -241,6 +241,25 @@
 		<dict>
 			<key>config</key>
 			<dict>
+				<key>paths</key>
+				<array>
+					<string>/Applications/iTerm.app</string>
+					<string>/opt/homebrew-cask/Caskroom/iterm2/2.0.0/iTerm.app</string>
+					<string>/opt/homebrew-cask/Caskroom/iterm2-nightly/3.0.3/iTerm.app</string>
+				</array>
+				<key>toggle</key>
+				<false/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.launchfiles</string>
+			<key>uid</key>
+			<string>AB31FFF3-A040-4661-B474-AA92600C4328</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
 				<key>action</key>
 				<integer>0</integer>
 				<key>argument</key>
@@ -264,25 +283,6 @@
 			<string>9D904948-AC76-4685-9985-1C2FEDD263F9</string>
 			<key>version</key>
 			<integer>1</integer>
-		</dict>
-		<dict>
-			<key>config</key>
-			<dict>
-				<key>paths</key>
-				<array>
-					<string>/Applications/iTerm.app</string>
-					<string>/opt/homebrew-cask/Caskroom/iterm2/2.0.0/iTerm.app</string>
-					<string>/opt/homebrew-cask/Caskroom/iterm2-nightly/3.0.3/iTerm.app</string>
-				</array>
-				<key>toggle</key>
-				<false/>
-			</dict>
-			<key>type</key>
-			<string>alfred.workflow.action.launchfiles</string>
-			<key>uid</key>
-			<string>AB31FFF3-A040-4661-B474-AA92600C4328</string>
-			<key>version</key>
-			<integer>0</integer>
 		</dict>
 		<dict>
 			<key>config</key>

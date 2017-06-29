@@ -15,16 +15,12 @@ silent! if plug#begin('~/.config/nvim/plugged')
 
 Plug 'Raimondi/delimitMate'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'dunckr/js_alternate.vim'
 Plug 'dunckr/molokai'
 Plug 'dunckr/vim-base16-unikitty-light'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
 Plug 'junegunn/fzf.vim'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-hugefile'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
@@ -32,50 +28,47 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'shougo/deoplete.nvim'
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tommcdo/vim-lion'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
-Plug 'vim-scripts/SyntaxAttr.vim'
 
 " Lang
 Plug 'Shougo/neocomplcache'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
 Plug 'SirVer/ultisnips'
-Plug 'ap/vim-css-color'
-Plug 'beloglazov/vim-online-thesaurus'
 Plug 'benekastah/neomake'
-Plug 'briancollins/vim-jst'
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'elixir-lang/vim-elixir'
-Plug 'elzr/vim-json'
-Plug 'fatih/vim-nginx'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'hashivim/vim-terraform'
-Plug 'heavenshell/vim-jsdoc'
-Plug 'honza/dockerfile.vim'
-Plug 'honza/vim-snippets'
-Plug 'junegunn/vader.vim'
-Plug 'kchmck/vim-coffee-script'
 Plug 'mattn/emmet-vim'
-Plug 'moll/vim-node'
-Plug 'mtscout6/vim-cjsx'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'mxw/vim-jsx'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'othree/jspc.vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'pangloss/vim-javascript'
-Plug 'rhysd/vim-grammarous'
 Plug 'sbdchd/neoformat'
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'tpope/vim-cucumber'
 Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-haml'
-Plug 'tpope/vim-markdown'
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/groovy.vim'
 
+" JS
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+
+" Coffee
+Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffeescript.cjsx'] }
+Plug 'mtscout6/vim-cjsx', { 'for': ['coffeescript', 'coffeescript.cjsx'] }
+
+" Ruby
+Plug 'tpope/vim-rails', { 'for': ['ruby'] }
+Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
+
+" Elixir
+Plug 'elixir-lang/vim-elixir' , { 'for': ['elixir'] }
+Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
+
+" Go
+Plug 'fatih/vim-go', { 'for': ['go'] }
+Plug 'zchee/deoplete-go', { 'for': ['go'], 'do': 'make'}
+
+" Other
+Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'less'] }
+Plug 'elzr/vim-json', { 'for': ['json'] }
+Plug 'hail2u/vim-css3-syntax', { 'for': ['css'] }
+Plug 'junegunn/vader.vim', { 'for': ['vim'], 'on': 'Vader' }
+Plug 'tpope/vim-markdown', { 'for': ['md'] }
 call plug#end()
 endif
 
@@ -162,6 +155,8 @@ set foldmethod=marker foldlevel=0
 
 au BufNewFile,BufRead Jenkinsfile setf groovy
 
+autocmd Filetype gitcommit setlocal spell textwidth=72
+
 " }}}
 " ============================================================================
 " Mappings {{{
@@ -180,8 +175,7 @@ noremap H ^
 noremap L $
 map <Leader>t :set expandtab<cr>
 
-" reload vimrc
-map <Leader>r :so $MYVIMRC<cr>
+map <Leader>z :so $MYVIMRC<cr>
 
 augroup filetype_vim
 	autocmd!
@@ -203,7 +197,7 @@ function! BackgroundSwitch()
 	endif
 endfunction
 
-nnoremap <leader>b :call BackgroundSwitch()<cr>
+nnoremap <leader>l :call BackgroundSwitch()<cr>
 
 " }}}
 " ============================================================================
@@ -242,7 +236,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabClosePreviewOnPopupClose = 1
 
 let g:UltiSnipsExpandTrigger="<C-j>"
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " " ----------------------------------------------------------------------------
 " NERDTree
@@ -291,12 +285,15 @@ let config_names = [
   \'.eslintrc.yml',
   \'.eslintrc.json',
   \'.eslintrc',
-  \'eslint.js'
+  \'eslint.js',
+  \'~/.eslint.js'
 \]
 let config = filter(config_names, 'findfile(v:val, ".;") !=# ""')
 if len(config) == 1
 	let g:neomake_javascript_eslint_args = ['-f', 'compact', '--no-eslintrc', '--config', config[0]]
 endif
+
+let g:neomake_elixir_enabled_makers = ['credo', 'dogma']
 
 autocmd! BufWritePost * Neomake
 
@@ -337,12 +334,38 @@ let g:neoformat_enabled_javascript = ['jsbeautify', 'esformatter']
 " format
 " ----------------------------------------------------------------------------"
 
-nnoremap <leader>p :silent %!prettier --stdin --trailing-comma all --tab-width 4 --single-quote<CR>
+autocmd FileType javascript.jsx nnoremap <leader>p :silent %!prettier --stdin --trailing-comma es5 --tab-width 2 --use-tabs --single-quote<CR>
 
 " ----------------------------------------------------------------------------
 " js_alternate
 " ----------------------------------------------------------------------------"
-nnoremap <leader>t :call js_alternate#run()<cr>
+
+autocmd FileType javascript.jsx,coffee nnoremap <leader>t :call js_alternate#run()<cr>
+
+" ----------------------------------------------------------------------------
+" go
+" ----------------------------------------------------------------------------"
+
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_term_mode = "split"
+
+
+function! s:go_run_or_test()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+		call go#cmd#Run(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>t :GoAlternate<CR>
+autocmd FileType go nmap <leader>r :<C-u>call <SID>go_run_or_test()<CR>
 
 " }}}
 "

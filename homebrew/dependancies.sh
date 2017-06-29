@@ -7,6 +7,7 @@ TAPS=(
 )
 FORMULAS=(
   alfred2
+  awscli
   bash
   bash-completion
   bash-git-prompt
@@ -88,7 +89,7 @@ PIP_PACAKGES=(
 
 for tap in "${TAPS[@]}"
 do
-  brew tap $tap
+  brew tap "$tap"
 done
 
 brew install "${FORMULAS[@]}"
