@@ -34,7 +34,6 @@ Plug 'tpope/vim-surround'
 Plug 'Shougo/neocomplcache'
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'SirVer/ultisnips'
 Plug 'benekastah/neomake'
 Plug 'mattn/emmet-vim'
 Plug 'sbdchd/neoformat'
@@ -46,6 +45,10 @@ Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
+
+" elm
+Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
+Plug 'pbogut/deoplete-elm', { 'for': ['elm'] }
 
 " Coffee
 Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffeescript.cjsx'] }
@@ -87,8 +90,10 @@ set background=light
 colorscheme molokai
 
 " mouse
-set mouse=
+set mouse=a
 set cb=unnamed
+
+set clipboard+=unnamedplus
 
 " line numbers
 set relativenumber
@@ -228,14 +233,17 @@ let g:deoplete#omni#functions.javascript = [
 \]
 set completeopt=longest,menuone,preview
 let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+let g:deoplete#sources['javascript.jsx'] = ['file', 'neosnippet', 'ternjs']
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabClosePreviewOnPopupClose = 1
 
-let g:UltiSnipsExpandTrigger="<C-j>"
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
 " " ----------------------------------------------------------------------------
@@ -367,5 +375,10 @@ endfunction
 autocmd FileType go nmap <leader>t :GoAlternate<CR>
 autocmd FileType go nmap <leader>r :<C-u>call <SID>go_run_or_test()<CR>
 
+" ----------------------------------------------------------------------------
+" elm
+" ----------------------------------------------------------------------------"
+
+let g:elm_format_autosave = 1
+
 " }}}
-"

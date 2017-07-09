@@ -45799,13 +45799,13 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>530 494 620 392 0 0 1680 1050 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>35 468 937 465 0 0 1680 1050 </string>
+	<string>411 420 796 473 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 1680 1050 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 0 1680 1050 0 0 1680 1050 </string>
+	<string>0 5 840 1045 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>69 -1050 1680 1050 69 -1050 1680 1050 </string>
+	<string>200 -994 1512 941 116 -1050 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>84 56 1512 941 0 0 1680 1050 </string>
 	<key>New Bookmarks</key>
@@ -46411,7 +46411,7 @@
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>DroidSansMono 12</string>
+			<string>DroidSansMono 14</string>
 			<key>Open Toolbelt</key>
 			<false/>
 			<key>Option Key Sends</key>
@@ -47527,7 +47527,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-06-08T19:45:34Z</date>
+	<date>2017-06-29T08:13:17Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -47586,7 +47586,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.1.beta.4</string>
+	<string>3.1.beta.5</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>

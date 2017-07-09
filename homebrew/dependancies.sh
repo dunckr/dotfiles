@@ -23,6 +23,7 @@ FORMULAS=(
   python
   python3
   rbenv
+  reattach-to-user-namespace
   ruby-build
   selenium-server-standalone
   shellcheck
@@ -61,6 +62,10 @@ NPM_PACKAGES=(
   coffee-script
   coffeelint-cjsx
   diff-so-fancy
+  elm
+  elm-format
+  elm-oracle
+  elm-test
   esformatter
   eslint
   eslint-config-airbnb
