@@ -32,9 +32,9 @@ Plug 'tpope/vim-surround'
 
 " Lang
 Plug 'Shougo/neocomplcache'
-Plug 'Shougo/neosnippet'
-Plug 'Shougo/neosnippet-snippets'
+Plug 'SirVer/ultisnips'
 Plug 'benekastah/neomake'
+Plug 'dunckr/vim-snippets'
 Plug 'mattn/emmet-vim'
 Plug 'sbdchd/neoformat'
 Plug 'tpope/vim-endwise'
@@ -233,16 +233,14 @@ let g:deoplete#omni#functions.javascript = [
 \]
 set completeopt=longest,menuone,preview
 let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['file', 'neosnippet', 'ternjs']
+let g:deoplete#sources['javascript.jsx'] = ['ternjs', 'ultisnips', 'file']
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 
 let g:SuperTabDefaultCompletionType = "<c-n>"
 let g:SuperTabClosePreviewOnPopupClose = 1
 
-imap <C-k> <Plug>(neosnippet_expand_or_jump)
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
+let g:UltiSnipsExpandTrigger="<C-k>"
 
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 

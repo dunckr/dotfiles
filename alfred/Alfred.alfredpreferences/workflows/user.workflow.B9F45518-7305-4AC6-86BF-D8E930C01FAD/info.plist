@@ -795,7 +795,7 @@
 				<key>hotkey</key>
 				<integer>38</integer>
 				<key>hotmod</key>
-				<integer>1179648</integer>
+				<integer>1048576</integer>
 				<key>hotstring</key>
 				<string>J</string>
 				<key>leftcursor</key>
@@ -925,11 +925,11 @@
 				<key>argument</key>
 				<integer>0</integer>
 				<key>hotkey</key>
-				<integer>38</integer>
+				<integer>0</integer>
 				<key>hotmod</key>
-				<integer>1048576</integer>
+				<integer>0</integer>
 				<key>hotstring</key>
-				<string>J</string>
+				<string></string>
 				<key>leftcursor</key>
 				<false/>
 				<key>modsmode</key>
