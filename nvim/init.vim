@@ -1,13 +1,3 @@
-" ============================================================================
-"
-"        ██████╗  ██████╗ ████████╗███████╗██╗██╗     ███████╗███████╗
-"        ██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝██║██║     ██╔════╝██╔════╝
-"        ██║  ██║██║   ██║   ██║   █████╗  ██║██║     █████╗  ███████╗
-"        ██║  ██║██║   ██║   ██║   ██╔══╝  ██║██║     ██╔══╝  ╚════██║
-"     ██╗██████╔╝╚██████╔╝   ██║   ██║     ██║███████╗███████╗███████║
-"     ╚═╝╚═════╝  ╚═════╝    ╚═╝   ╚═╝     ╚═╝╚══════╝╚══════╝╚══════╝
-"
-" ============================================================================
 " Plugins {{{
 " ============================================================================
 
@@ -17,6 +7,7 @@ Plug 'Raimondi/delimitMate'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dunckr/molokai'
 Plug 'dunckr/vim-base16-unikitty-light'
+Plug 'dyng/ctrlsf.vim'
 Plug 'easymotion/vim-easymotion'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'ervandew/supertab'
@@ -24,6 +15,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'mhinz/vim-hugefile'
 Plug 'mhinz/vim-signify'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'rizzatti/dash.vim', { 'on': 'Dash' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'shougo/deoplete.nvim'
@@ -34,7 +26,7 @@ Plug 'tpope/vim-surround'
 Plug 'Shougo/neocomplcache'
 Plug 'SirVer/ultisnips'
 Plug 'benekastah/neomake'
-Plug 'dunckr/vim-snippets'
+Plug 'dunckr/vim-ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'sbdchd/neoformat'
 Plug 'tpope/vim-endwise'
@@ -226,21 +218,25 @@ let g:jsx_ext_required=0
 " ----------------------------------------------------------------------------"
 
 let g:deoplete#enable_at_startup=1
+
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
   \ 'tern#Complete',
-  \ 'jspc#omni'
 \]
 set completeopt=longest,menuone,preview
 let g:deoplete#sources = {}
 let g:deoplete#sources['javascript.jsx'] = ['ternjs', 'ultisnips', 'file']
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
+let g:tern_show_argument_hints = 'on_hold'
+let g:tern_show_signature_in_pum = 1
 
-let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "<C-n>"
 let g:SuperTabClosePreviewOnPopupClose = 1
 
-let g:UltiSnipsExpandTrigger="<C-k>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 
@@ -360,7 +356,6 @@ let g:go_highlight_operators = 1
 let g:go_highlight_extra_types = 1
 let g:go_term_mode = "split"
 
-
 function! s:go_run_or_test()
   let l:file = expand('%')
   if l:file =~# '^\f\+_test\.go$'
@@ -378,5 +373,18 @@ autocmd FileType go nmap <leader>r :<C-u>call <SID>go_run_or_test()<CR>
 " ----------------------------------------------------------------------------"
 
 let g:elm_format_autosave = 1
+
+" ----------------------------------------------------------------------------
+" ctrlsf
+" ----------------------------------------------------------------------------"
+
+nmap <C-F> <Plug>CtrlSFPrompt
+
+" ----------------------------------------------------------------------------
+" dash
+" ----------------------------------------------------------------------------"
+
+let g:dash_activate = 0
+nmap <silent> <leader>d <Plug>DashSearch
 
 " }}}

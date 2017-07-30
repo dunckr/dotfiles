@@ -21,7 +21,7 @@ if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
   source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
 fi
 
-# NVM
+# nvm
 export NVM_DIR="$HOME/.nvm"
 . "/usr/local/opt/nvm/nvm.sh"
 
@@ -94,6 +94,7 @@ eval "$(hub alias -s)"
 # Applications
 alias subl="/usr/local/bin/subl"
 alias sketch="/Applications/Sketch.app/Contents/MacOS/Sketch"
+alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 # Shorthands
 alias cls="clear"
@@ -105,6 +106,9 @@ alias vk="vagrant halt -f"
 
 # NeoVim
 alias vim="nvim"
+
+# Tmux
+alias mux="tmuxinator"
 
 # Docker
 alias dm="docker-machine"
@@ -126,3 +130,4 @@ export PATH=$PATH:$GOROOT/bin
 # watchman
 # alias tdd="watchman-make -p 'src/js/**/*.js' 'src/js/**/*.jsx' --make=./node_modules/.bin/jest -t $@"
 alias tdd="chokidar 'src/**/*' -c 'if [ '{event}' = 'change' ]; then npm test -- {path}; fi;'"
+

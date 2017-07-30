@@ -1,0 +1,14 @@
+name: web-app
+root: /Users/dbeaton/waracle/web-app
+
+windows:
+  - editor:
+      layout: c6a6,238x128,0,0[238x64,0,0{119x64,0,0,11,118x64,120,0[118x20,120,0,4,118x43,120,21,5]},238x63,0,65,16]
+      panes:
+        - tests:
+            - npm run watch
+        - server:
+            - gulp --bank CB
+        - #
+        - vim:
+            - vim

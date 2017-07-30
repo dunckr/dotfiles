@@ -1,0 +1,14 @@
+name: node
+
+windows:
+  - editor:
+      layout: 67ff,238x64,0,0{119x64,0,0,4,118x64,120,0[118x32,120,0,5,118x31,120,33,6]}
+      panes:
+        - editor:
+            - vim
+        - tests:
+            - make sh
+            - yarn test:watch
+        - server:
+            - make sh
+            - yarn start

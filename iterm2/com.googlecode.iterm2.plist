@@ -45806,11 +45806,11 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>523 642 958 433 0 0 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 600 570 450 0 0 1680 1050 </string>
+	<string>0 0 1680 1050 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>840 -1045 840 1045 0 -1050 1680 1050 </string>
+	<string>0 0 1680 1050 0 0 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>0 -1050 1680 1050 0 -1050 1680 1050 </string>
+	<string>0 -1045 840 1045 0 -1050 1680 1050 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>84 56 1512 941 0 0 1680 1050 </string>
 	<key>New Bookmarks</key>
@@ -47532,7 +47532,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-07-13T15:12:33Z</date>
+	<date>2017-07-27T17:43:27Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -47542,7 +47542,7 @@
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>ShowPaneTitles</key>
 	<true/>
 	<key>SmartPlacement</key>

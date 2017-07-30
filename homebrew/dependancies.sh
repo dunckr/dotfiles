@@ -6,6 +6,7 @@ TAPS=(
   neovim/homebrew-neovim
 )
 FORMULAS=(
+  ack
   alfred2
   awscli
   bash
@@ -30,6 +31,7 @@ FORMULAS=(
   slack
   terraform
   tmux
+  tmuxinator-completion
   tree
 )
 CASKS=(
@@ -84,6 +86,7 @@ GEMS=(
   sandi_meter
   sass
   scss-lint
+  tmuxinator
 )
 PIP_PACAKGES=(
   flake8
