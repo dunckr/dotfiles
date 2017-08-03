@@ -64,10 +64,15 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 alias battery="pmset -g batt"
 
 # Git
+alias g="git"
+__git_complete g _git
+alias gb="git branch "
+__git_complete gb _git_branch
+alias gco="git checkout "
+__git_complete gco _git_checkout
+
 alias gaa="git add -v -A"
-alias gb="git branch"
 alias gcm="git commit -v -m"
-alias gco="git checkout"
 alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 alias gdf="git diff --color --color-words --abbrev"
 alias gf="git fetch"
