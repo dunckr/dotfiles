@@ -859,7 +859,7 @@
 			<dict>
 				<key>paths</key>
 				<array>
-					<string>/Applications/Firefox.app</string>
+					<string>/Applications/FirefoxDeveloperEdition.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>
@@ -1080,7 +1080,7 @@
 			<key>xpos</key>
 			<integer>100</integer>
 			<key>ypos</key>
-			<real>300</real>
+			<integer>300</integer>
 		</dict>
 		<key>09BA4429-7831-431E-A0C6-C2C7D6530EE0</key>
 		<dict>

@@ -336,7 +336,7 @@ let g:neoformat_enabled_javascript = ['jsbeautify', 'esformatter']
 " format
 " ----------------------------------------------------------------------------"
 
-autocmd FileType javascript.jsx nnoremap <leader>p :silent %!prettier --stdin --trailing-comma es5 --tab-width 2 --use-tabs --single-quote<CR>
+autocmd FileType javascript.jsx,css,json nnoremap <leader>p :silent %!prettier --stdin --trailing-comma es5 --tab-width 2 --use-tabs --single-quote --print-width 120<CR>
 
 " ----------------------------------------------------------------------------
 " js_alternate

@@ -4,5 +4,9 @@
 <dict>
 	<key>enabled</key>
 	<true/>
+	<key>enabledFiles</key>
+	<true/>
+	<key>enabledImages</key>
+	<true/>
 </dict>
 </plist>

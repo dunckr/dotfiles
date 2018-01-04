@@ -23,10 +23,13 @@ fi
 
 # nvm
 export NVM_DIR="$HOME/.nvm"
-. "/usr/local/opt/nvm/nvm.sh"
+  . "/usr/local/opt/nvm/nvm.sh"
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+
+# python
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 export EDITOR=vim
 
@@ -121,7 +124,7 @@ alias dc="docker-compose"
 alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
 alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; unset -f __dopen; }; __dopen'
 alias dclean='docker rmi $(docker images --filter dangling=true)'
-alias dkill='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
+alias dkill='docker rmi $(docker images -a -q)'
 
 # Ruby
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
@@ -132,7 +135,4 @@ export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
-# watchman
-# alias tdd="watchman-make -p 'src/js/**/*.js' 'src/js/**/*.jsx' --make=./node_modules/.bin/jest -t $@"
-alias tdd="chokidar 'src/**/*' -c 'if [ '{event}' = 'change' ]; then npm test -- {path}; fi;'"
-
+alias killforce='function __killforce() { eval "pgrep $@ | xargs kill -9"; unset -f __killforce; }; __killforce'
