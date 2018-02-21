@@ -7,17 +7,14 @@ TAPS=(
 )
 FORMULAS=(
   ack
-  alfred2
   awscli
   bash
   bash-completion
   bash-git-prompt
-  caskroom/cask/brew-cask
   cloc
   coreutils
   fzf
   git
-  hipchat
   hub
   neovim
   node
@@ -40,11 +37,9 @@ CASKS=(
   docker
   dropbox
   firefox
-  font-droid-sans-mono
   font-source-code-pro
   google-chrome
   iterm2
-  karabiner-elements
   licecap
   onepassword
   sketch
@@ -52,7 +47,6 @@ CASKS=(
   slate
   spotify
   sublime-text
-  tmux
   vagrant
   virtualbox
   vlc
@@ -74,6 +68,7 @@ NPM_PACKAGES=(
   eslint-config-airbnb-base
   eslint-plugin-import
   jsbeautify
+  neovim
   prettier
   svgo
   tern

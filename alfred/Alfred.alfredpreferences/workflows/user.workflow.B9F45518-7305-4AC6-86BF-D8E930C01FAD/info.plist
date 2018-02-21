@@ -859,7 +859,7 @@
 			<dict>
 				<key>paths</key>
 				<array>
-					<string>/Applications/FirefoxDeveloperEdition.app</string>
+					<string>/Applications/Google Chrome Canary.app</string>
 				</array>
 				<key>toggle</key>
 				<true/>

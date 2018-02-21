@@ -23,7 +23,6 @@ done
 
 link "$dotfiles/iterm2/" "$HOME/Library/Preferences/"
 link "$dotfiles/nvim/init.vim" "$HOME/.config/nvim/"
-link "$dotfiles/karabiner/" "$HOME/.config/karabiner/"
 link "$dotfiles/tmuxinator" "$HOME/.tmuxinator"
 
 mkdir ~/.nvm
