@@ -25,11 +25,11 @@ Plug 'tpope/vim-surround'
 " Lang
 Plug 'Shougo/neocomplcache'
 Plug 'SirVer/ultisnips'
-Plug 'benekastah/neomake'
 Plug 'dunckr/vim-ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'sbdchd/neoformat'
 Plug 'tpope/vim-endwise'
+Plug 'w0rp/ale'
 
 " JS
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
@@ -270,40 +270,28 @@ set rtp+=/usr/local/opt/fzf
 nnoremap <silent><C-p> :GFiles<cr>
 
 " ----------------------------------------------------------------------------
-" neomake
+" ale
 " ----------------------------------------------------------------------------"
-
-let g:neomake_coffeescript_enabled_makers = ['coffeelint']
-let g:neomake_python_enabledmarkers= ['python', 'flake8', 'pylint', 'pyflakes']
-
-let g:neomake_javascript_enabled_makers = ['eslint']
-
-let s:eslint_path = system('PATH=$(npm bin):$PATH && which eslint')
-let g:neomake_javascript_eslint_exe = substitute(s:eslint_path, '^\n*\s*\(.\{-}\)\n*\s*$', '\1', '')
-
-let config_names = [
-  \'.eslintrc.js',
-  \'.eslintrc.yaml',
-  \'.eslintrc.yml',
-  \'.eslintrc.json',
-  \'.eslintrc',
-  \'eslint.js',
-  \'~/.eslint.js'
-\]
-let config = filter(config_names, 'findfile(v:val, ".;") !=# ""')
-if len(config) == 1
-	let g:neomake_javascript_eslint_args = ['-f', 'compact', '--no-eslintrc', '--config', config[0]]
+if filereadable(".eslintrc")
+  let g:ale_linters = { 'javascript': [ 'eslint' ] }
 endif
 
-let g:neomake_elixir_enabled_makers = ['credo', 'dogma']
+if filereadable(".eslintrc.js")
+  let g:ale_linters = { 'javascript': [ 'eslint' ] }
+endif
 
-autocmd! BufWritePost * Neomake
+if filereadable(".eslintrc.yml")
+  let g:ale_linters = { 'javascript': [ 'eslint' ] }
+endif
 
-nmap <Leader><Space>o :lopen<CR>      " open location window
-nmap <Leader><Space>c :lclose<CR>     " close location window
-nmap <Leader><Space>, :ll<CR>         " go to current error/warning
-nmap <Leader><Space>n :lnext<CR>      " next error/warning
-nmap <Leader><Space>p :lprev<CR>      " previous error/warning
+if filereadable(".eslintrc.json")
+  let g:ale_linters = { 'javascript': [ 'eslint' ] }
+endif
+
+let g:ale_set_quickfix = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+
 " ----------------------------------------------------------------------------
 " easymotion
 " ----------------------------------------------------------------------------"

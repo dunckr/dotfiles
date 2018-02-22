@@ -65,8 +65,9 @@ NPM_PACKAGES=(
   esformatter
   eslint
   eslint-config-airbnb
-  eslint-config-airbnb-base
   eslint-plugin-import
+  eslint-plugin-jsx-a11y
+  eslint-plugin-react
   jsbeautify
   neovim
   prettier
