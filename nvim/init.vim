@@ -165,7 +165,6 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 
 let mapleader = ','
 
-map <Leader>a :Neoformat<cr>
 map <Leader>w <ESC>:w<cr>
 map <C-e> :NERDTreeToggle<CR>>
 noremap H ^
@@ -318,7 +317,10 @@ let g:NERDSpaceDelims = 1
 " format
 " ----------------------------------------------------------------------------"
 
-let g:neoformat_enabled_javascript = ['jsbeautify', 'esformatter']
+map <Leader>a :Neoformat<cr>
+
+let g:neoformat_enabled_javascript = ['jsbeautify']
+let g:neoformat_enabled_json = ['jsbeautify']
 
 " ----------------------------------------------------------------------------
 " format
