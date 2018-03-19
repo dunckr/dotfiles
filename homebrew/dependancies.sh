@@ -53,16 +53,7 @@ CASKS=(
   xquartz
 )
 NPM_PACKAGES=(
-  # coffee-react
-  # coffee-react-transform
-  # coffee-script
-  # coffeelint-cjsx
   diff-so-fancy
-  # elm
-  # elm-format
-  # elm-oracle
-  # elm-test
-  # esformatter
   eslint
   eslint-config-airbnb
   eslint-plugin-import
@@ -85,10 +76,7 @@ GEMS=(
   tmuxinator
 )
 PIP_PACAKGES=(
-  # flake8
   neovim
-  # pyflakes
-  # pylint
 )
 
 for tap in "${TAPS[@]}"

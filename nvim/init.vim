@@ -1,4 +1,4 @@
-" Plugins {{{
+" Plugins
 " ============================================================================
 
 silent! if plug#begin('~/.config/nvim/plugged')
@@ -38,25 +38,9 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 
-" elm
-Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
-Plug 'pbogut/deoplete-elm', { 'for': ['elm'] }
-
-" Coffee
-Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffeescript.cjsx'] }
-Plug 'mtscout6/vim-cjsx', { 'for': ['coffeescript', 'coffeescript.cjsx'] }
-
 " Ruby
 Plug 'tpope/vim-rails', { 'for': ['ruby'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
-
-" Elixir
-Plug 'elixir-lang/vim-elixir' , { 'for': ['elixir'] }
-Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
-
-" Go
-Plug 'fatih/vim-go', { 'for': ['go'] }
-Plug 'zchee/deoplete-go', { 'for': ['go'], 'do': 'make'}
 
 " Other
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'less'] }
@@ -67,9 +51,9 @@ Plug 'tpope/vim-markdown', { 'for': ['md'] }
 call plug#end()
 endif
 
-" }}}
+"
 " ============================================================================
-" Basic {{{
+" Basic
 " ============================================================================
 
 set ff=unix
@@ -154,9 +138,9 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" }}}
+"
 " ============================================================================
-" Mappings {{{
+" Mappings
 " ============================================================================
 
 " ----------------------------------------------------------------------------
@@ -178,9 +162,9 @@ augroup filetype_vim
 	autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
-" }}}
+"
 " ============================================================================
-" Scripts {{{
+" Scripts
 " ============================================================================
 
 function! BackgroundSwitch()
@@ -195,9 +179,9 @@ endfunction
 
 nnoremap <leader>l :call BackgroundSwitch()<cr>
 
-" }}}
+"
 " ============================================================================
-" Plugins {{{
+" Plugins
 " ============================================================================
 
 " ----------------------------------------------------------------------------
@@ -332,37 +316,7 @@ autocmd FileType javascript.jsx,css,json nnoremap <leader>p :silent %!prettier -
 " js_alternate
 " ----------------------------------------------------------------------------"
 
-autocmd FileType javascript.jsx,coffee nnoremap <leader>t :call js_alternate#run()<cr>
-
-" ----------------------------------------------------------------------------
-" go
-" ----------------------------------------------------------------------------"
-
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_term_mode = "split"
-
-function! s:go_run_or_test()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-		call go#cmd#Run(0)
-  endif
-endfunction
-
-autocmd FileType go nmap <leader>t :GoAlternate<CR>
-autocmd FileType go nmap <leader>r :<C-u>call <SID>go_run_or_test()<CR>
-
-" ----------------------------------------------------------------------------
-" elm
-" ----------------------------------------------------------------------------"
-
-let g:elm_format_autosave = 1
+autocmd FileType javascript.jsx nnoremap <leader>t :call js_alternate#run()<cr>
 
 " ----------------------------------------------------------------------------
 " ctrlsf
@@ -376,5 +330,3 @@ nmap <C-F> <Plug>CtrlSFPrompt
 
 let g:dash_activate = 0
 nmap <silent> <leader>d <Plug>DashSearch
-
-" }}}
