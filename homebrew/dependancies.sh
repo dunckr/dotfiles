@@ -25,13 +25,13 @@ FORMULAS=(
   ruby-build
   selenium-server-standalone
   shellcheck
-  slack
   terraform
   tmux
   tmuxinator-completion
   tree
 )
 CASKS=(
+  1password
   beardedspice
   dash
   docker
@@ -41,14 +41,15 @@ CASKS=(
   google-chrome
   iterm2
   licecap
-  onepassword
   sketch
   skype
+  slack
   slate
   spotify
   sublime-text
   vagrant
-  virtualbox
+  # Failing
+  # virtualbox
   vlc
   xquartz
 )
@@ -90,8 +91,8 @@ done
 brew install "${FORMULAS[@]}"
 brew update
 brew cask install "${CASKS[@]}"
-brew cask alfred link
 brew cleanup
+npm prune -g
 npm update npm -g
 npm install -g "${NPM_PACKAGES[@]}"
 gem install "${GEMS[@]}"
