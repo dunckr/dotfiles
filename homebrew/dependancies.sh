@@ -53,6 +53,7 @@ CASKS=(
   xquartz
 )
 NPM_PACKAGES=(
+  bs-platform
   diff-so-fancy
   eslint
   eslint-config-airbnb
@@ -60,8 +61,10 @@ NPM_PACKAGES=(
   eslint-plugin-jsx-a11y
   eslint-plugin-react
   js-beautify
+  jsonlint
   neovim
   prettier
+  reason-cli
   svgo
   tern
   yarn
