@@ -1,4 +1,4 @@
-" Plugins {{{
+" Plugins
 " ============================================================================
 
 silent! if plug#begin('~/.config/nvim/plugged')
@@ -18,45 +18,35 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rizzatti/dash.vim', { 'on': 'Dash' }
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'shougo/deoplete.nvim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 
 " Lang
-Plug 'Shougo/neocomplcache'
 Plug 'SirVer/ultisnips'
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 Plug 'dunckr/vim-ultisnips'
 Plug 'mattn/emmet-vim'
 Plug 'sbdchd/neoformat'
+Plug 'shougo/deoplete.nvim'
 Plug 'tpope/vim-endwise'
 Plug 'w0rp/ale'
 
 " JS
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx', 'reason'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 
-" elm
-Plug 'ElmCast/elm-vim', { 'for': ['elm'] }
-Plug 'pbogut/deoplete-elm', { 'for': ['elm'] }
-
-" Coffee
-Plug 'kchmck/vim-coffee-script', { 'for': ['coffeescript', 'coffeescript.cjsx'] }
-Plug 'mtscout6/vim-cjsx', { 'for': ['coffeescript', 'coffeescript.cjsx'] }
+" Reason
+Plug 'reasonml-editor/vim-reason-plus'
 
 " Ruby
 Plug 'tpope/vim-rails', { 'for': ['ruby'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
-
-" Elixir
-Plug 'elixir-lang/vim-elixir' , { 'for': ['elixir'] }
-Plug 'slashmili/alchemist.vim', { 'for': ['elixir'] }
-
-" Go
-Plug 'fatih/vim-go', { 'for': ['go'] }
-Plug 'zchee/deoplete-go', { 'for': ['go'], 'do': 'make'}
 
 " Other
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'less'] }
@@ -64,12 +54,13 @@ Plug 'elzr/vim-json', { 'for': ['json'] }
 Plug 'hail2u/vim-css3-syntax', { 'for': ['css'] }
 Plug 'junegunn/vader.vim', { 'for': ['vim'], 'on': 'Vader' }
 Plug 'tpope/vim-markdown', { 'for': ['md'] }
+
 call plug#end()
 endif
 
-" }}}
+"
 " ============================================================================
-" Basic {{{
+" Basic
 " ============================================================================
 
 set ff=unix
@@ -154,9 +145,13 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" }}}
+" ocaml/reason
+" set rtp+=<SHARE_DIR>/merlin/vim
+" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+" execute "set rtp+=" . g:opamshare . "/merlin/vim"
+"
 " ============================================================================
-" Mappings {{{
+" Mappings
 " ============================================================================
 
 " ----------------------------------------------------------------------------
@@ -178,9 +173,9 @@ augroup filetype_vim
 	autocmd FileType vim setlocal foldmethod=marker
 augroup END
 
-" }}}
+"
 " ============================================================================
-" Scripts {{{
+" Scripts
 " ============================================================================
 
 function! BackgroundSwitch()
@@ -195,9 +190,9 @@ endfunction
 
 nnoremap <leader>l :call BackgroundSwitch()<cr>
 
-" }}}
+"
 " ============================================================================
-" Plugins {{{
+" Plugins
 " ============================================================================
 
 " ----------------------------------------------------------------------------
@@ -332,37 +327,8 @@ autocmd FileType javascript.jsx,css,json nnoremap <leader>p :silent %!prettier -
 " js_alternate
 " ----------------------------------------------------------------------------"
 
-autocmd FileType javascript.jsx,coffee nnoremap <leader>t :call js_alternate#run()<cr>
-
-" ----------------------------------------------------------------------------
-" go
-" ----------------------------------------------------------------------------"
-
-let g:go_highlight_types = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_term_mode = "split"
-
-function! s:go_run_or_test()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-		call go#cmd#Run(0)
-  endif
-endfunction
-
-autocmd FileType go nmap <leader>t :GoAlternate<CR>
-autocmd FileType go nmap <leader>r :<C-u>call <SID>go_run_or_test()<CR>
-
-" ----------------------------------------------------------------------------
-" elm
-" ----------------------------------------------------------------------------"
-
-let g:elm_format_autosave = 1
+let g:js_alternate#extension_types = ['js', 'jsx', 're']
+autocmd FileType javascript.jsx,reason nnoremap <leader>t :call js_alternate#run()<cr>
 
 " ----------------------------------------------------------------------------
 " ctrlsf
@@ -377,4 +343,14 @@ nmap <C-F> <Plug>CtrlSFPrompt
 let g:dash_activate = 0
 nmap <silent> <leader>d <Plug>DashSearch
 
-" }}}
+
+" ----------------------------------------------------------------------------
+" LanguageClient
+" ----------------------------------------------------------------------------"
+let g:LanguageClient_serverCommands = {
+    \ 'reason': ['ocaml-language-server', '--stdio'],
+    \ }
+
+autocmd FileType reason nnoremap <silent> <leader>p :call LanguageClient_textDocument_formatting()<cr>
+autocmd FileType reason nnoremap <silent> <leader>K nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
+nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
