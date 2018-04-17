@@ -45,5 +45,3 @@ bind left:ctrl;cmd nudge -10% +0
 
 # Custom
 bind 0:ctrl;cmd;alt move screenOriginX+69;screenOriginY+0 1680;2125
-bind j:shift;cmd corner bottom-right resize:screenSizeX/4;screenSizeY/4
-bind j:ctrl;cmd corner top-right resize:screenSizeX/4;screenSizeY/4

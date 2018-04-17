@@ -31,6 +31,8 @@ FORMULAS=(
   tree
 )
 CASKS=(
+  # Failing
+  # virtualbox
   1password
   beardedspice
   dash
@@ -40,21 +42,19 @@ CASKS=(
   font-source-code-pro
   google-chrome
   iterm2
+  jadengeller-helium
   licecap
+  phoenix
   sketch
   skype
   slack
-  slate
   spotify
   sublime-text
   vagrant
-  # Failing
-  # virtualbox
   vlc
   xquartz
 )
 NPM_PACKAGES=(
-  bs-platform
   diff-so-fancy
   eslint
   eslint-config-airbnb
@@ -65,16 +65,11 @@ NPM_PACKAGES=(
   jsonlint
   neovim
   prettier
-  reason-cli
   svgo
   tern
   yarn
 )
 GEMS=(
-  # rails_best_practices
-  # ruby-beautify
-  # rubycritic
-  # sandi_meter
   sass
   scss-lint
   tmuxinator

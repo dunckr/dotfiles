@@ -45798,25 +45798,12 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
-	<key>NSToolbar Configuration com.apple.NSColorPanel</key>
-	<dict>
-		<key>TB Is Shown</key>
-		<integer>1</integer>
-	</dict>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>650 516 620 392 0 0 1920 1080 </string>
-	<key>NSWindow Frame SessionsPreferences</key>
-	<string>269 126 606 469 0 0 1920 1080 </string>
+	<string>650 606 620 392 0 0 1920 1200 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>411 572 796 473 0 0 1680 1050 </string>
+	<string>432 470 918 381 0 0 1920 1200 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1680 1050 0 0 1680 1050 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 600 570 450 0 0 1680 1050 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
-	<string>0 -1045 840 1045 0 -1050 1680 1050 </string>
-	<key>NSWindow Frame iTerm Window 3</key>
-	<string>84 56 1512 941 0 0 1680 1050 </string>
+	<string>0 0 1920 1200 0 0 1920 1200 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -47447,15 +47434,20 @@
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>AE6BA490-AEFD-4907-AB80-400FF690121D</string>
-	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
-	<true/>
-	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
-	<integer>0</integer>
+	<string>DC075A5C-2264-469C-BDF8-55A70E2E2FD0</string>
+	<key>NoSyncLastTipTime</key>
+	<real>544802733.61042702</real>
 	<key>NoSyncPermissionToShowTip</key>
-	<false/>
+	<true/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>513887127.22836697</real>
+	<real>544461435.67996502</real>
+	<key>NoSyncTipsDisabled</key>
+	<true/>
+	<key>NoSyncTipsToNotShow</key>
+	<array>
+		<string>000</string>
+		<string>0000</string>
+	</array>
 	<key>OnlyWhenMoreTabs</key>
 	<false/>
 	<key>OpenArrangementAtStartup</key>
@@ -47534,11 +47526,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/testing.xml?shard=15</string>
+	<string>https://iterm2.com/appcasts/testing.xml?shard=21</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2018-04-02T19:11:32Z</date>
+	<date>2018-04-07T11:48:12Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SavePasteHistory</key>

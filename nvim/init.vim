@@ -23,11 +23,8 @@ Plug 'tpope/vim-surround'
 
 " Lang
 Plug 'SirVer/ultisnips'
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
 Plug 'dunckr/vim-ultisnips'
+Plug 'heavenshell/vim-jsdoc'
 Plug 'mattn/emmet-vim'
 Plug 'sbdchd/neoformat'
 Plug 'shougo/deoplete.nvim'
@@ -36,13 +33,10 @@ Plug 'w0rp/ale'
 
 " JS
 Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx', 'reason'] }
+Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
-
-" Reason
-Plug 'reasonml-editor/vim-reason-plus'
 
 " Ruby
 Plug 'tpope/vim-rails', { 'for': ['ruby'] }
@@ -145,11 +139,6 @@ au BufNewFile,BufRead Jenkinsfile setf groovy
 
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
-" ocaml/reason
-" set rtp+=<SHARE_DIR>/merlin/vim
-" let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
-" execute "set rtp+=" . g:opamshare . "/merlin/vim"
-"
 " ============================================================================
 " Mappings
 " ============================================================================
@@ -166,7 +155,7 @@ noremap H ^
 noremap L $
 map <Leader>t :set expandtab<cr>
 
-map <Leader>z :so $MYVIMRC<cr>
+map <Leader>r :so $MYVIMRC<cr>
 
 augroup filetype_vim
 	autocmd!
@@ -328,7 +317,7 @@ autocmd FileType javascript.jsx,css,json nnoremap <leader>p :silent %!prettier -
 " ----------------------------------------------------------------------------"
 
 let g:js_alternate#extension_types = ['js', 'jsx', 're']
-autocmd FileType javascript.jsx,reason nnoremap <leader>t :call js_alternate#run()<cr>
+autocmd FileType javascript.jsx nnoremap <leader>t :call js_alternate#run()<cr>
 
 " ----------------------------------------------------------------------------
 " ctrlsf
@@ -343,14 +332,13 @@ nmap <C-F> <Plug>CtrlSFPrompt
 let g:dash_activate = 0
 nmap <silent> <leader>d <Plug>DashSearch
 
-
 " ----------------------------------------------------------------------------
-" LanguageClient
+" jsdoc
 " ----------------------------------------------------------------------------"
-let g:LanguageClient_serverCommands = {
-    \ 'reason': ['ocaml-language-server', '--stdio'],
-    \ }
 
-autocmd FileType reason nnoremap <silent> <leader>p :call LanguageClient_textDocument_formatting()<cr>
-autocmd FileType reason nnoremap <silent> <leader>K nnoremap <silent> gd :call LanguageClient_textDocument_definition()<cr>
-nnoremap <silent> <cr> :call LanguageClient_textDocument_hover()<cr>
+let g:jsdoc_allow_input_prompt = 1
+let g:jsdoc_input_description = 1
+let g:jsdoc_enable_es6 = 1
+let g:jsdoc_underscore_private = 1
+
+autocmd FileType javascript.jsx nnoremap <leader>y :JsDoc<cr>
