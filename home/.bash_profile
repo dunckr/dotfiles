@@ -106,7 +106,6 @@ alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 
 # Shorthands
 alias cls="clear"
-alias server="python3 -m http.server"
 
 # Vagrant
 alias vu="vagrant up && vagrant ssh"

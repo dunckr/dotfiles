@@ -61,6 +61,7 @@ NPM_PACKAGES=(
   eslint-plugin-import
   eslint-plugin-jsx-a11y
   eslint-plugin-react
+  http-server
   js-beautify
   jsonlint
   neovim
