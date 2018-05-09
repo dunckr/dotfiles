@@ -68,6 +68,7 @@ NPM_PACKAGES=(
   prettier
   svgo
   tern
+  typescript
   yarn
 )
 GEMS=(

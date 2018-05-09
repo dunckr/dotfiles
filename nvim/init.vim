@@ -38,6 +38,10 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 
+" TS
+Plug 'leafgarland/typescript-vim'
+Plug 'mhartington/nvim-typescript'
+
 " Ruby
 Plug 'tpope/vim-rails', { 'for': ['ruby'] }
 Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
@@ -342,3 +346,12 @@ let g:jsdoc_enable_es6 = 1
 let g:jsdoc_underscore_private = 1
 
 autocmd FileType javascript.jsx nnoremap <leader>y :JsDoc<cr>
+
+" ----------------------------------------------------------------------------
+" emmet
+" ----------------------------------------------------------------------------"
+let g:user_emmet_settings = {
+\  'javascript.jsx' : {
+\      'extends' : 'jsx',
+\  },
+\}
