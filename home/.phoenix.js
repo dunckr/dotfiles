@@ -133,6 +133,28 @@ move('j', ({ width, height }) => ({
 	height: height * 0.25,
 }));
 
+Key.on('1', ['ctrl', 'cmd', 'alt'], () => {
+	const win = Window.focused();
+	if (win) {
+		const { width, height } = win.screen().flippedVisibleFrame();
+		const iterm = App.launch('iTerm');
+		const chrome = App.launch('Google Chrome');
+		iterm.mainWindow().setFrame({
+			x: 0,
+			y: 0,
+			width: width * (2 / 3),
+			height,
+		});
+		chrome.mainWindow().setFrame({
+			x: width * (2 / 3),
+			y: 0,
+			width: width * (1 / 3),
+			height,
+		});
+		iterm.focus();
+	}
+});
+
 // # Movement
 // bind [:alt;cmd nudge +0 +10%
 // bind ]:alt;cmd nudge +0 -10%
