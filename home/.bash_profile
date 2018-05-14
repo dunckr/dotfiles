@@ -124,6 +124,7 @@ alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
 alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; unset -f __dopen; }; __dopen'
 alias dclean='docker rmi $(docker images --filter dangling=true)'
 alias dkill='docker rmi $(docker images -a -q)'
+alias dprune='docker image prune -a -f && docker container prune -f && docker volume prune -f'
 
 # Ruby
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
