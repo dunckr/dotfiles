@@ -11,6 +11,7 @@ link() {
 }
 
 bash osx/setup.sh
+bash osx/background.sh
 bash homebrew/install.sh
 bash homebrew/dependancies.sh
 bash nvim/setup.sh
