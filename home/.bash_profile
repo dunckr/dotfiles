@@ -111,10 +111,10 @@ alias cls="clear"
 alias vu="vagrant up && vagrant ssh"
 alias vk="vagrant halt -f"
 
-# NeoVim
+# Neovim
 alias vim="nvim"
 
-# Tmux
+# tmux
 alias mux="tmuxinator"
 
 # Docker
@@ -127,6 +127,7 @@ alias dkill='docker rmi $(docker images -a -q)'
 alias dprune='docker image prune -a -f && docker container prune -f && docker volume prune -f'
 
 # Ruby
+alias be="bundle exec"
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
 
 # GO

@@ -39,12 +39,13 @@ Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " TS
-Plug 'leafgarland/typescript-vim'
-Plug 'mhartington/nvim-typescript'
+Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'ts'] }
+Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'ts'] }
 
 " Ruby
-Plug 'tpope/vim-rails', { 'for': ['ruby'] }
-Plug 'vim-ruby/vim-ruby', { 'for': ['ruby'] }
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
+Plug 'uplus/deoplete-solargraph', { 'for': 'ruby', 'do': 'gem install solargraph -v 0.18.0; pip install solargraph-utils.py --user; yard gems; yard config --gem-install-yri' }
 
 " Other
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'less'] }
@@ -205,6 +206,9 @@ let g:jsx_ext_required=0
 " ----------------------------------------------------------------------------"
 
 let g:deoplete#enable_at_startup=1
+let g:deoplete#enable_ignore_case = 1
+let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_complete_start_length = 2
 
 let g:deoplete#omni#functions = {}
 let g:deoplete#omni#functions.javascript = [
@@ -212,11 +216,15 @@ let g:deoplete#omni#functions.javascript = [
 \]
 set completeopt=longest,menuone,preview
 let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['ternjs', 'ultisnips', 'file']
+let g:deoplete#sources['javascript.jsx'] = ['ternjs', 'file', 'ultisnips']
 let g:tern#command = ['tern']
 let g:tern#arguments = ['--persistent']
 let g:tern_show_argument_hints = 'on_hold'
 let g:tern_show_signature_in_pum = 1
+
+let g:deoplete#sources#omni#input_patterns = {}
+let g:deoplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
+let g:deoplete#sources['ruby'] = ['solargraph', 'file']
 
 let g:SuperTabDefaultCompletionType = "<C-n>"
 let g:SuperTabClosePreviewOnPopupClose = 1
@@ -225,7 +233,7 @@ let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
 " " ----------------------------------------------------------------------------
 " NERDTree
@@ -255,6 +263,7 @@ let g:indent_guides_enable_on_vim_startup = 1
 
 set rtp+=/usr/local/opt/fzf
 nnoremap <silent><C-p> :GFiles<cr>
+nnoremap <silent><C-t> :Tags<cr>
 
 " ----------------------------------------------------------------------------
 " ale
@@ -306,8 +315,9 @@ let g:NERDSpaceDelims = 1
 " ----------------------------------------------------------------------------"
 
 map <Leader>a :Neoformat<cr>
+autocmd FileType ruby nnoremap <Leader>p :Neoformat<cr>
 
-let g:neoformat_enabled_javascript = ['jsbeautify']
+let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_json = ['jsbeautify']
 
 " ----------------------------------------------------------------------------
