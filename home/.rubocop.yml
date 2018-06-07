@@ -1,8 +1,8 @@
 AllCops:
-  Includes:
+  Include:
     - Rakefile
     - config.ru
-  Excludes:
+  Exclude:
     - db/**
     - config/**
     - script/**
@@ -24,11 +24,8 @@ Documentation:
 Encoding:
   Enabled: false
 
-AllCops:
-  RunRailsCops: true
+Rails:
+  Enabled: true
 
 MethodLength:
   Max: 15
-
-ReduceArguments:
-  Enabled: false

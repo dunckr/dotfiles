@@ -13,6 +13,7 @@ FORMULAS=(
   bash-git-prompt
   cloc
   coreutils
+  ctags
   fzf
   git
   hub
@@ -72,12 +73,17 @@ NPM_PACKAGES=(
   yarn
 )
 GEMS=(
+  # solargraph - deooplete requires older version
+  rails_best_practices
+  rubocop
+  rubycritic
+  sandi_meter
   sass
-  scss-lint
   tmuxinator
 )
 PIP_PACAKGES=(
   neovim
+  solargraph-utils.py
 )
 
 for tap in "${TAPS[@]}"
