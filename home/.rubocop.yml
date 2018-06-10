@@ -29,3 +29,6 @@ Rails:
 
 MethodLength:
   Max: 15
+
+FrozenStringLiteralComment:
+  Enabled: false

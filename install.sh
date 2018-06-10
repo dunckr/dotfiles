@@ -8,4 +8,4 @@ mkdir "$dir"
 git clone https://github.com/dunckr/dotfiles "$dir"
 
 cd "$dir"
-bash update.sh
+bash setup.sh

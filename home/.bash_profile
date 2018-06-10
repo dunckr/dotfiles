@@ -1,8 +1,8 @@
 dotfiles="$HOME/dotfiles"
 
-# private
-if [ -f "$dotfiles/secret/.bashrc.local" ]; then
-  source "$dotfiles/secret/.bashrc.local"
+# Locals
+if [ -f "$HOME/.bashrc.local" ]; then
+  source "$HOME/.bashrc.local"
 fi
 
 # bash completion
