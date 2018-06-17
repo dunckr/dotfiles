@@ -56,6 +56,10 @@ CASKS=(
   xquartz
 )
 NPM_PACKAGES=(
+  coffee-react
+  coffee-react-transform
+  coffeescript
+  coffeelint-cjsx
   diff-so-fancy
   eslint
   eslint-config-airbnb

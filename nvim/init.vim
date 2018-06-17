@@ -38,6 +38,10 @@ Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 
+" Coffee
+Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript', 'coffeescript.cjsx'] }
+Plug 'mtscout6/vim-cjsx', { 'for': ['coffee', 'coffeescript', 'coffeescript.cjsx'] }
+
 " TS
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'ts'] }
 Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'ts'] }
