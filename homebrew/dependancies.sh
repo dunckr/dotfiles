@@ -58,8 +58,8 @@ CASKS=(
 NPM_PACKAGES=(
   coffee-react
   coffee-react-transform
-  coffeescript
   coffeelint-cjsx
+  coffeescript
   diff-so-fancy
   eslint
   eslint-config-airbnb
@@ -67,13 +67,14 @@ NPM_PACKAGES=(
   eslint-plugin-jsx-a11y
   eslint-plugin-react
   http-server
+  javascript-typescript-langserver
   js-beautify
   jsonlint
   neovim
   prettier
   svgo
-  tern
   typescript
+  vscode-css-languageserver-bin
   yarn
 )
 GEMS=(
