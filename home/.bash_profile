@@ -95,7 +95,7 @@ alias pip3update='pip3 list -o | cut -f 1 -d " " | xargs -n 1 pip3 install --upg
 # Brew
 alias cask='brew cask'
 alias macupdate='softwareupdate -i -a;'
-alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system -y; gem update -y; vim +PlugUpdate +PlugUpgrade +UpdateRemotePlugins +qall;'
+alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system -f; gem update -f; vim +PlugUpdate +PlugUpgrade +UpdateRemotePlugins +qall;'
 
 # Hub
 eval "$(hub alias -s)"
@@ -137,5 +137,5 @@ export GOROOT=/usr/local/opt/go/libexec
 export PATH=$PATH:$GOPATH/bin
 export PATH=$PATH:$GOROOT/bin
 
-alias killforce='function __killforce() { eval "pgrep $@ | xargs kill -9"; unset -f __killforce; }; __killforce'
+alias killall='pkill -f Python node bash nvim ruby'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'

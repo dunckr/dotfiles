@@ -32,11 +32,9 @@ Plug 'tpope/vim-endwise'
 Plug 'w0rp/ale'
 
 " JS
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'ternjs/tern_for_vim', { 'for': ['javascript', 'javascript.jsx'] }
 
 " Coffee
 Plug 'kchmck/vim-coffee-script', { 'for': ['coffee', 'coffeescript', 'coffeescript.cjsx'] }
@@ -44,15 +42,18 @@ Plug 'mtscout6/vim-cjsx', { 'for': ['coffee', 'coffeescript', 'coffeescript.cjsx
 
 " TS
 Plug 'leafgarland/typescript-vim', { 'for': ['typescript', 'ts'] }
-Plug 'mhartington/nvim-typescript', { 'for': ['typescript', 'ts'] }
 
 " Ruby
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'uplus/deoplete-solargraph', { 'for': 'ruby', 'do': 'gem install solargraph -v 0.18.0; pip install solargraph-utils.py --user; yard gems; yard config --gem-install-yri' }
 
 " Other
 Plug 'ap/vim-css-color', { 'for': ['css', 'scss', 'sass', 'less'] }
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+Plug 'chr4/nginx.vim', { 'for': ['nginx'] }
 Plug 'elzr/vim-json', { 'for': ['json'] }
 Plug 'hail2u/vim-css3-syntax', { 'for': ['css'] }
 Plug 'junegunn/vader.vim', { 'for': ['vim'], 'on': 'Vader' }
@@ -209,26 +210,11 @@ let g:jsx_ext_required=0
 " deoplete
 " ----------------------------------------------------------------------------"
 
+set completeopt=longest,menuone,preview
+
 let g:deoplete#enable_at_startup=1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
-let g:deoplete#auto_complete_start_length = 2
-
-let g:deoplete#omni#functions = {}
-let g:deoplete#omni#functions.javascript = [
-  \ 'tern#Complete',
-\]
-set completeopt=longest,menuone,preview
-let g:deoplete#sources = {}
-let g:deoplete#sources['javascript.jsx'] = ['ternjs', 'file', 'ultisnips']
-let g:tern#command = ['tern']
-let g:tern#arguments = ['--persistent']
-let g:tern_show_argument_hints = 'on_hold'
-let g:tern_show_signature_in_pum = 1
-
-let g:deoplete#sources#omni#input_patterns = {}
-let g:deoplete#sources#omni#input_patterns.ruby = '[^. *\t]\.\w*\|\h\w*::'
-let g:deoplete#sources['ruby'] = ['solargraph', 'file']
 
 let g:SuperTabDefaultCompletionType = "<C-n>"
 let g:SuperTabClosePreviewOnPopupClose = 1
@@ -281,6 +267,11 @@ if filereadable(".eslintrc.js")
 endif
 
 if filereadable(".eslintrc.yml")
+  let g:ale_linters = { 'javascript': [ 'eslint' ] }
+endif
+
+
+if filereadable(".eslintrc.yaml")
   let g:ale_linters = { 'javascript': [ 'eslint' ] }
 endif
 
@@ -369,3 +360,47 @@ let g:user_emmet_settings = {
 \      'extends' : 'jsx',
 \  },
 \}
+
+" ----------------------------------------------------------------------------
+" LanguageClient
+" ----------------------------------------------------------------------------"
+
+let g:LanguageClient_serverCommands = {
+    \ 'javascript': ['javascript-typescript-stdio'],
+    \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'css': ['css-languageserver', '--stdio'],
+    \ 'scss': ['css-languageserver', '--stdio'],
+    \ 'sass': ['css-languageserver', '--stdio'],
+    \ 'ruby': ['tcp://localhost:7658']
+    \ }
+
+let g:LanguageClient_autoStart=1
+let g:LanguageClient_loggingLevel='DEBUG'
+
+set completefunc=LanguageClient#complete
+set formatexpr=LanguageClient_textDocument_rangeFormatting()
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+function! EnsureSolargraphRunning()
+  let s:start_server = empty(system("ps | grep solargraph | grep -v grep"))
+  if !empty(glob("Gemfile"))
+	  if s:start_server == 1
+		let s:job = jobstart("solargraph socket")
+		if s:job == 0
+		  echohl Error | echomsg 'Solargraph: Invalid arguments' | echohl None
+		  return 0
+		elseif s:job == -1
+		  echohl Error | echomsg 'Solargraph: Not installed' | echohl None
+		  return 0
+		else
+		  return 1
+		endif
+	  endif
+  endif
+endfunction
+
+call EnsureSolargraphRunning()
