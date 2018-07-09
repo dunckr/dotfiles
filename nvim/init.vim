@@ -371,7 +371,7 @@ let g:LanguageClient_serverCommands = {
     \ 'css': ['css-languageserver', '--stdio'],
     \ 'scss': ['css-languageserver', '--stdio'],
     \ 'sass': ['css-languageserver', '--stdio'],
-    \ 'ruby': ['tcp://localhost:7658']
+	\ 'ruby': [ 'solargraph',  'stdio' ]
     \ }
 
 let g:LanguageClient_autoStart=1
@@ -384,23 +384,3 @@ nnoremap <F5> :call LanguageClient_contextMenu()<CR>
 nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
 nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
 nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-function! EnsureSolargraphRunning()
-  let s:start_server = empty(system("ps | grep solargraph | grep -v grep"))
-  if !empty(glob("Gemfile"))
-	  if s:start_server == 1
-		let s:job = jobstart("solargraph socket")
-		if s:job == 0
-		  echohl Error | echomsg 'Solargraph: Invalid arguments' | echohl None
-		  return 0
-		elseif s:job == -1
-		  echohl Error | echomsg 'Solargraph: Not installed' | echohl None
-		  return 0
-		else
-		  return 1
-		endif
-	  endif
-  endif
-endfunction
-
-call EnsureSolargraphRunning()

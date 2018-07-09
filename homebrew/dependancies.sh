@@ -32,7 +32,6 @@ FORMULAS=(
   tree
 )
 CASKS=(
-  # Failing
   # virtualbox
   1password
   beardedspice
@@ -78,12 +77,12 @@ NPM_PACKAGES=(
   yarn
 )
 GEMS=(
-  # solargraph - deooplete requires older version
   rails_best_practices
   rubocop
   rubycritic
   sandi_meter
   sass
+  solargraph
   tmuxinator
 )
 PIP_PACAKGES=(
