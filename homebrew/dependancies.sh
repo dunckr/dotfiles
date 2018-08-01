@@ -19,6 +19,7 @@ FORMULAS=(
   hub
   neovim
   node
+  nvm
   python
   python3
   rbenv
@@ -72,6 +73,10 @@ NPM_PACKAGES=(
   neovim
   prettier
   svgo
+  tslint
+  tslint-config-prettier
+  tslint-config-standard
+  tslint-react
   typescript
   vscode-css-languageserver-bin
   yarn
@@ -87,7 +92,6 @@ GEMS=(
 )
 PIP_PACAKGES=(
   neovim
-  solargraph-utils.py
 )
 
 for tap in "${TAPS[@]}"

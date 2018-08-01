@@ -32,7 +32,7 @@ Plug 'tpope/vim-endwise'
 Plug 'w0rp/ale'
 
 " JS
-Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx', 'typescript', 'ts', 'typescript.tsx'] }
 Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
 
@@ -270,7 +270,6 @@ if filereadable(".eslintrc.yml")
   let g:ale_linters = { 'javascript': [ 'eslint' ] }
 endif
 
-
 if filereadable(".eslintrc.yaml")
   let g:ale_linters = { 'javascript': [ 'eslint' ] }
 endif
@@ -278,6 +277,10 @@ endif
 if filereadable(".eslintrc.json")
   let g:ale_linters = { 'javascript': [ 'eslint' ] }
 endif
+
+let g:ale_linters = {
+\   'typescript': ['tslint'],
+\}
 
 let g:ale_set_quickfix = 0
 let g:ale_lint_on_save = 1
@@ -319,13 +322,13 @@ let g:neoformat_enabled_json = ['jsbeautify']
 " format
 " ----------------------------------------------------------------------------"
 
-autocmd FileType javascript.jsx,css,json nnoremap <leader>p :silent %!prettier --stdin --trailing-comma es5 --tab-width 2 --use-tabs --single-quote --print-width 120<CR>
+autocmd FileType javascript.jsx,typescript,css,json nnoremap <leader>p :silent %!prettier --stdin --trailing-comma es5 --tab-width 2 --use-tabs --single-quote --print-width 120 --parser typescript<CR>
 
 " ----------------------------------------------------------------------------
 " js_alternate
 " ----------------------------------------------------------------------------"
 
-let g:js_alternate#extension_types = ['js', 'jsx', 're']
+let g:js_alternate#extension_types = ['js', 'jsx', 're', 'ts', 'tsx']
 autocmd FileType javascript.jsx nnoremap <leader>t :call js_alternate#run()<cr>
 
 " ----------------------------------------------------------------------------
@@ -359,6 +362,9 @@ let g:user_emmet_settings = {
 \  'javascript.jsx' : {
 \      'extends' : 'jsx',
 \  },
+\  'typescript.tsx' : {
+\      'extends' : 'tsx',
+\  },
 \}
 
 " ----------------------------------------------------------------------------
@@ -368,6 +374,8 @@ let g:user_emmet_settings = {
 let g:LanguageClient_serverCommands = {
     \ 'javascript': ['javascript-typescript-stdio'],
     \ 'javascript.jsx': ['javascript-typescript-stdio'],
+    \ 'typescript': ['javascript-typescript-stdio'],
+    \ 'typescript.tsx': ['javascript-typescript-stdio'],
     \ 'css': ['css-languageserver', '--stdio'],
     \ 'scss': ['css-languageserver', '--stdio'],
     \ 'sass': ['css-languageserver', '--stdio'],
