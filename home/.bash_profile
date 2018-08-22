@@ -76,7 +76,7 @@ __git_complete gco _git_checkout
 
 alias gaa="git add -v -A"
 alias gc="git commit -v"
-alias gcm="git commit -v -m 'WIP'"
+alias gcm="git commit -v -m 'WIP' --no-verify"
 alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 alias gdf="git diff --color --color-words --abbrev"
 alias gf="git fetch"
