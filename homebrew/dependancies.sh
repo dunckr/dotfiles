@@ -21,22 +21,17 @@ FORMULAS=(
   node
   nvm
   python
-  python3
   rbenv
-  reattach-to-user-namespace
   ruby-build
-  selenium-server-standalone
   shellcheck
   terraform
   tmux
-  tmuxinator-completion
   tree
 )
 CASKS=(
   # virtualbox
   1password
   beardedspice
-  dash
   docker
   dropbox
   firefox
@@ -56,37 +51,18 @@ CASKS=(
   xquartz
 )
 NPM_PACKAGES=(
-  coffee-react
-  coffee-react-transform
-  coffeelint-cjsx
-  coffeescript
   diff-so-fancy
-  eslint
-  eslint-config-airbnb
-  eslint-plugin-import
-  eslint-plugin-jsx-a11y
-  eslint-plugin-react
-  http-server
   javascript-typescript-langserver
-  js-beautify
-  jsonlint
-  neovim
   prettier
-  svgo
-  tslint
-  tslint-config-prettier
-  tslint-config-standard
-  tslint-react
   typescript
-  vscode-css-languageserver-bin
   yarn
 )
 GEMS=(
   rails_best_practices
+  reek
   rubocop
   rubycritic
   sandi_meter
-  sass
   solargraph
   tmuxinator
 )
