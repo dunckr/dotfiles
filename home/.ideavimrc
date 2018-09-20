@@ -1,0 +1,47 @@
+" https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md
+set history=1000
+set hlsearch
+set ignorecase
+set multiple-cursors
+set noerrorbells
+set relativenumber
+set scrolloff=3
+set showmode
+set smartcase
+set visualbell
+
+let mapleader = ','
+
+noremap H ^
+noremap L $
+
+nnoremap <leader>c<space> :action CommentByLineComment<CR>
+vnoremap <leader>c<space> :<bs><bs><bs><bs><bs>action VimVisualSwapSelections<CR>:action CommentByLineComment<CR>
+
+nmap <leader>T :action RunClass<CR>
+nmap <leader>t :action Run<CR>
+
+nmap <leader>p :action ReformatCode<CR>
+
+nnoremap <leader>z :source ~/.ideavimrc<CR>
+
+nnoremap <silent> <C-h> :action VimWindowLeft<CR>
+nnoremap <silent> <C-j> :action VimWindowDown<CR>
+nnoremap <silent> <C-k> :action VimWindowUp<CR>
+nnoremap <silent> <C-l> :action VimWindowRight<CR>
+
+nnoremap <silent> <C-w>h :action SplitHorizontally<CR>
+nnoremap <silent> <C-w>v :action SplitVertically<CR>
+
+nnoremap <silent> <C-p> :action GotoFile<CR>
+
+nmap <leader>a :action GotoTest<CR>
+nnoremap <silent> <C-e> :action ToggleSideMode<CR>
+
+nnoremap <silent> <C-a>f :action ToggleFullScreen<CR>
+
+nnoremap <silent> <C-t> :action ActivateTerminalToolWindow<CR>
+
+nnoremap <silent> <C-K> :action GoToDeclaration<CR>
+
+nnoremap <silent> <C-S-F> :action FindInPath<CR>

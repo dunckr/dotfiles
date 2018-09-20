@@ -40,3 +40,7 @@ tags.temp
 *.pem
 *.crt
 *.key
+
+.yardoc
+
+.idea/
