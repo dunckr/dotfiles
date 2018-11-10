@@ -16,6 +16,7 @@ FORMULAS=(
   ctags
   fzf
   git
+  gnupg
   hub
   neovim
   node
