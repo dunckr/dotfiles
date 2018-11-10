@@ -1,0 +1,75 @@
+" https://github.com/JetBrains/ideavim/blob/master/doc/set-commands.md
+set history=1000
+set hlsearch
+set ignorecase
+set multiple-cursors
+set noerrorbells
+set relativenumber
+set scrolloff=3
+set showmode
+set smartcase
+set visualbell
+
+let mapleader = ','
+
+noremap H ^
+noremap L $
+
+nnoremap <leader>c<space> :action CommentByLineComment<CR>
+vnoremap <leader>c<space> :<bs><bs><bs><bs><bs>action VimVisualSwapSelections<CR>:action CommentByLineComment<CR>
+
+nmap <leader>T :action RunClass<CR>
+nmap <leader>t :action Run<CR>
+
+nmap <leader>p :action ReformatCode<CR><ESC>
+nnoremap <silent> <M-p> :action ReformatCode<CR><ESC>
+
+nnoremap <leader>z :source ~/.ideavimrc<CR>
+
+nnoremap <silent> <C-h> :action VimWindowLeft<CR>
+nnoremap <silent> <C-j> :action VimWindowDown<CR>
+nnoremap <silent> <C-k> :action VimWindowUp<CR>
+nnoremap <silent> <C-l> :action VimWindowRight<CR>
+
+nnoremap <silent> <C-w>h :action SplitHorizontally<CR>
+nnoremap <silent> <C-w>v :action SplitVertically<CR>
+
+nnoremap <silent> <C-p> :action GotoFile<CR>
+
+nmap <leader>a :action GotoTest<CR>
+nnoremap <silent> <C-e> :action ToggleSideMode<CR>
+
+nnoremap <silent> <C-a>f :action ToggleFullScreen<CR>
+
+nnoremap <silent> <C-t> :action Refactorings.QuickListPopupAction<CR>
+nnoremap <silent> <M-t> :action ActivateTerminalToolWindow<CR>
+
+nnoremap <silent> <C-K> :action GoToDeclaration<CR>
+
+nnoremap <silent> <C-S-F> :action FindInPath<CR>
+
+nnoremap <Leader>k :action HighlightUsagesInFile<cr>
+
+nnoremap <leader>fu :action FindUsages<cr>
+nnoremap <leader>su :action ShowUsages<cr>
+nnoremap <leader>cv :action ChangeView<cr>
+nnoremap <leader>bb :action ToggleLineBreakpoint<cr>
+nnoremap <leader>br :action ViewBreakpoints<cr>
+nnoremap <leader>ic :action InspectCode<cr>
+nnoremap <leader>oi :action OptimizeImports<cr>
+nnoremap <leader>re :action RenameElement<cr>
+nnoremap <leader>rf :action RenameFile<cr>
+nnoremap <leader>gq :action ReformatCode<cr>
+nnoremap <leader>mv :action ActivateMavenProjectsToolWindow<cr>
+nnoremap <leader>dd :action Debug<cr>
+nnoremap <leader>dc :action ChooseDebugConfiguration<cr>
+nnoremap <leader>rr :action Run<cr>
+nnoremap <leader>rc :action ChooseRunConfiguration<cr>
+nnoremap <leader>ga :action GotoAction<cr>
+nnoremap <Leader>gd :action GotoImplementation<CR>
+nnoremap <leader>qi :action QuickImplementations<CR>
+nnoremap <leader>gs :action GotoSuperMethod<cr>
+nnoremap <leader>gd :action GotoDeclaration<cr>
+nnoremap <leader>gt :action GotoTest<cr>
+nnoremap <leader>gr :action GotoRelated<cr>
+nnoremap <leader>gb :action Annotate<cr>
