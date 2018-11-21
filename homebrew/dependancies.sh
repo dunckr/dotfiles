@@ -30,8 +30,6 @@ FORMULAS=(
   tree
 )
 CASKS=(
-  # virtualbox
-  1password
   beardedspice
   docker
   dropbox
@@ -39,7 +37,6 @@ CASKS=(
   font-source-code-pro
   google-chrome
   iterm2
-  jadengeller-helium
   licecap
   phoenix
   sketch
@@ -47,8 +44,8 @@ CASKS=(
   slack
   spotify
   sublime-text
-  vagrant
   vlc
+  webstorm
   xquartz
 )
 NPM_PACKAGES=(
