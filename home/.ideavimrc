@@ -73,3 +73,4 @@ nnoremap <leader>gd :action GotoDeclaration<cr>
 nnoremap <leader>gt :action GotoTest<cr>
 nnoremap <leader>gr :action GotoRelated<cr>
 nnoremap <leader>gb :action Annotate<cr>
+nnoremap <leader>gc :action Git.ResolveConflicts<cr>
