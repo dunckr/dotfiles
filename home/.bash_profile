@@ -121,6 +121,7 @@ alias mux="tmuxinator"
 # Docker
 alias dm="docker-machine"
 alias dc="docker-compose"
+alias dcr="docker-compose run --rm"
 alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
 alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; unset -f __dopen; }; __dopen'
 alias dclean='docker rmi $(docker images --filter dangling=true)'

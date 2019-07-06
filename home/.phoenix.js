@@ -10,8 +10,6 @@ const bindLaunch = (appName, key, modifiers) =>
 	});
 
 bindLaunch('Google Chrome', 'c', ['cmd', 'shift']);
-bindLaunch('Helium', 'j', ['cmd']);
-bindLaunch('Hipchat', 'u', ['alt', 'shift']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
 bindLaunch('Slack', 'u', ['cmd']);
 bindLaunch('Spotify', 'p', ['alt', 'shift']);
@@ -154,14 +152,3 @@ Key.on('1', ['ctrl', 'cmd', 'alt'], () => {
 		iterm.focus();
 	}
 });
-
-// # Movement
-// bind [:alt;cmd nudge +0 +10%
-// bind ]:alt;cmd nudge +0 -10%
-// bind ]:shift;cmd nudge +10% +0
-// bind [:shift;cmd nudge -10% +0
-
-// bind up:ctrl;cmd nudge +0 -10%
-// bind down:ctrl;cmd nudge +0 +10%
-// bind right:ctrl;cmd nudge +10% +0
-// bind left:ctrl;cmd nudge -10% +0

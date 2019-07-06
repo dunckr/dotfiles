@@ -21,6 +21,7 @@ FORMULAS=(
   neovim
   node
   nvm
+  puma/puma/puma-dev
   python
   rbenv
   ruby-build
@@ -45,7 +46,6 @@ CASKS=(
   spotify
   sublime-text
   vlc
-  webstorm
   xquartz
 )
 NPM_PACKAGES=(
@@ -56,12 +56,12 @@ NPM_PACKAGES=(
   yarn
 )
 GEMS=(
+  brakeman
   rails_best_practices
   reek
   rubocop
   rubycritic
   sandi_meter
-  solargraph
   tmuxinator
 )
 PIP_PACAKGES=(
