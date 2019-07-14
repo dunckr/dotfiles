@@ -49,6 +49,7 @@ CASKS=(
   xquartz
 )
 NPM_PACKAGES=(
+  @prettier/plugin-ruby
   diff-so-fancy
   javascript-typescript-langserver
   prettier
@@ -57,6 +58,7 @@ NPM_PACKAGES=(
 )
 GEMS=(
   brakeman
+  bundler-audit
   rails_best_practices
   reek
   rubocop

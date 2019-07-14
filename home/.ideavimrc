@@ -52,11 +52,9 @@ nnoremap <Leader>k :action HighlightUsagesInFile<cr>
 
 nnoremap <leader>fu :action FindUsages<cr>
 nnoremap <leader>su :action ShowUsages<cr>
-nnoremap <leader>cv :action ChangeView<cr>
 nnoremap <leader>bb :action ToggleLineBreakpoint<cr>
 nnoremap <leader>br :action ViewBreakpoints<cr>
 nnoremap <leader>ic :action InspectCode<cr>
-nnoremap <leader>oi :action OptimizeImports<cr>
 nnoremap <leader>re :action RenameElement<cr>
 nnoremap <leader>rf :action RenameFile<cr>
 nnoremap <leader>gq :action ReformatCode<cr>
@@ -71,4 +69,5 @@ nnoremap <leader>gd :action GotoDeclaration<cr>
 nnoremap <leader>gr :action GotoRelated<cr>
 nnoremap <leader>gb :action Annotate<cr>
 nnoremap <leader>gc :action Git.ResolveConflicts<cr>
-nnoremap <leader>gh :action Vcs.ShowHistoryForBlock<cr>
+nnoremap <leader>gi :action Vcs.ShowHistoryForBlock<cr>
+nnoremap <leader>gh :action Vcs.ShowTabbedFileHistory<cr>
