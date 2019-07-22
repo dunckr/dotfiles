@@ -127,6 +127,7 @@ alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; 
 alias dclean='docker rmi $(docker images --filter dangling=true)'
 alias dkill='docker rmi $(docker images -a -q)'
 alias dprune='docker image prune -a -f && docker container prune -f && docker volume prune -f'
+alias dca='function __dca() { docker attach --sig-proxy=false --detach-keys=ctrl-c $(docker-compose ps -q "$1"); unset -f __dca; }; __dca'
 
 # Ruby
 alias be="bundle exec"

@@ -44,3 +44,5 @@ tags.temp
 .yardoc
 
 .idea/
+
+*.iml
