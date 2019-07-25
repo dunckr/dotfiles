@@ -17,28 +17,7 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
 Plug 'terryma/vim-multiple-cursors'
 
-" Lang
-" Plug 'SirVer/ultisnips'
-Plug 'dunckr/vim-ultisnips'
-Plug 'mattn/emmet-vim'
 Plug 'tpope/vim-endwise'
-Plug 'w0rp/ale'
-
-" JS
-Plug 'dunckr/js_alternate.vim', { 'for': ['javascript', 'javascript.jsx', 'typescript', 'ts', 'typescript.tsx'] }
-Plug 'mxw/vim-jsx', { 'for': ['javascript', 'javascript.jsx'] }
-Plug 'pangloss/vim-javascript', { 'for': ['javascript', 'javascript.jsx'] }
-
-" Ruby
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
-Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-
-" Other
-Plug 'autozimu/LanguageClient-neovim', {
-	\ 'branch': 'next',
-	\ 'do': 'bash install.sh',
-	\ 'for': 'ruby',
-	\ }
 
 call plug#end()
 endif
@@ -157,12 +136,6 @@ map <Leader>r :so $MYVIMRC<cr>
 
 nnoremap <silent> <BS> :TmuxNavigateLeft<cr>
 
-" ----------------------------------------------------------------------------
-" jsx
-" ----------------------------------------------------------------------------"
-"
-let g:jsx_ext_required=0
-
 " " ----------------------------------------------------------------------------
 " NERDTree
 " ----------------------------------------------------------------------------"
@@ -194,32 +167,6 @@ nnoremap <silent><C-p> :GFiles<cr>
 nnoremap <silent><C-t> :Tags<cr>
 
 " ----------------------------------------------------------------------------
-" ale
-" ----------------------------------------------------------------------------"
-
-let g:ale_set_quickfix = 0
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 0
-
-" let g:ale_completion_enabled = 1
-let g:ale_completion_enabled = 0
-
-nnoremap <silent> K :ALEHover<CR>
-nnoremap <silent> gd :ALEGoToDefinition<CR>
-nnoremap <M-LeftMouse> <LeftMouse>:ALEGoToDefinition<CR>
-
-" ----------------------------------------------------------------------------
-" LanguageClient
-" ----------------------------------------------------------------------------"
-
-nnoremap <F5> :call LanguageClient_contextMenu()<CR>
-nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
-nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
-
-autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
-
-" ----------------------------------------------------------------------------
 " commenter
 " ----------------------------------------------------------------------------"
 
@@ -245,20 +192,3 @@ autocmd FileType javascript.jsx nnoremap <leader>t :call js_alternate#run()<cr>
 " ----------------------------------------------------------------------------"
 
 nmap <C-F> <Plug>CtrlSFPrompt
-
-" ----------------------------------------------------------------------------
-" emmet
-" ----------------------------------------------------------------------------"
-let g:user_emmet_settings = {
-\  'javascript.jsx' : {
-\      'extends' : 'jsx',
-\  },
-\  'typescript.tsx' : {
-\      'extends' : 'tsx',
-\  },
-\}
-
-" ----------------------------------------------------------------------------
-" supertab
-" ----------------------------------------------------------------------------"
-let g:SuperTabDefaultCompletionType = "<c-n>"
