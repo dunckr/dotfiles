@@ -13,7 +13,8 @@ bindLaunch('Google Chrome', 'c', ['cmd', 'shift']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
 bindLaunch('Slack', 'u', ['cmd']);
 bindLaunch('Spotify', 'p', ['alt', 'shift']);
-bindLaunch('iTerm', 't', ['cmd', 'shift']);
+bindLaunch('IntelliJ IDEA', 't', ['cmd', 'shift']);
+bindLaunch('Iterm', 't', ['alt', 'shift']);
 
 const maximise = key => {
 	Key.on(key, ['cmd', 'ctrl'], () => {
