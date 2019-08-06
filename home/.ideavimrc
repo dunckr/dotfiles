@@ -9,6 +9,7 @@ set scrolloff=3
 set showmode
 set smartcase
 set visualbell
+set commentary
 
 let mapleader = ','
 
@@ -16,7 +17,7 @@ noremap H ^
 noremap L $
 
 nnoremap <leader>c<space> :action CommentByLineComment<CR>
-vnoremap <leader>c<space> :<bs><bs><bs><bs><bs>action VimVisualSwapSelections<CR>:action CommentByLineComment<CR>
+vnoremap <leader>c<space> :action CommentByLineComment<CR>:action VimVisualExitMode<CR>
 
 nmap <leader>T :action RunClass<CR>
 nmap <leader>t :action Run<CR>
