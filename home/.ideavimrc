@@ -37,7 +37,9 @@ nnoremap <silent> <C-w>v :action SplitVertically<CR>
 
 nnoremap <silent> <C-p> :action GotoFile<CR>
 
+
 nmap <leader>a :action GotoTest<CR>
+nmap <leader>t :action RunClass<CR>
 nnoremap <silent> <C-e> :action ToggleSideMode<CR>
 
 nnoremap <silent> <C-a>f :action ToggleFullScreen<CR>
