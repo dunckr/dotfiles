@@ -39,6 +39,7 @@ CASKS=(
   google-chrome
   iterm2
   licecap
+  pennywise
   phoenix
   sketch
   skype
