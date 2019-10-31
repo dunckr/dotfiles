@@ -11,7 +11,7 @@ const bindLaunch = (appName, key, modifiers) =>
 
 bindLaunch('Google Chrome', 'c', ['cmd', 'shift']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
-bindLaunch('Slack', 'u', ['cmd']);
+bindLaunch('Slack', 'u', ['alt', 'shift']);
 bindLaunch('Spotify', 'p', ['alt', 'shift']);
 bindLaunch('IntelliJ IDEA', 't', ['cmd', 'shift']);
 bindLaunch('Iterm', 't', ['alt', 'shift']);

@@ -26,6 +26,7 @@ FORMULAS=(
   rbenv
   ruby-build
   shellcheck
+  siege
   terraform
   tmux
   tree
