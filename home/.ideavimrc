@@ -27,16 +27,15 @@ nnoremap <silent> <M-p> :action ReformatCode<CR><ESC>
 
 nnoremap <leader>z :source ~/.ideavimrc<CR>
 
-nnoremap <silent> <C-h> :action VimWindowLeft<CR>
-nnoremap <silent> <C-j> :action VimWindowDown<CR>
-nnoremap <silent> <C-k> :action VimWindowUp<CR>
-nnoremap <silent> <C-l> :action VimWindowRight<CR>
-
 nnoremap <silent> <C-w>h :action SplitHorizontally<CR>
 nnoremap <silent> <C-w>v :action SplitVertically<CR>
 
-nnoremap <silent> <C-p> :action GotoFile<CR>
+nnoremap <C-k> <C-W>k
+nnoremap <C-j> <C-W>j
+nnoremap <C-h> <C-W>h
+nnoremap <C-l> <C-W>l
 
+nnoremap <silent> <C-p> :action GotoFile<CR>
 
 nmap <leader>a :action GotoTest<CR>
 nmap <leader>t :action RunClass<CR>
