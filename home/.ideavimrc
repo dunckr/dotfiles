@@ -39,6 +39,11 @@ nnoremap <silent> <C-p> :action GotoFile<CR>
 
 nmap <leader>a :action GotoTest<CR>
 nmap <leader>t :action RunClass<CR>
+nmap <leader>o :action Github.Open.In.Browser<CR>
+nmap <leader>h :action CollapseRegion<CR>
+nmap <leader>f :action FileStructurePopup<CR>
+nmap <leader><space> :action QuickJavaDoc<CR>
+
 nnoremap <silent> <C-e> :action ToggleSideMode<CR>
 
 nnoremap <silent> <C-a>f :action ToggleFullScreen<CR>
