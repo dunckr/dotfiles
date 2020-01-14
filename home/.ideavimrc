@@ -38,7 +38,6 @@ nnoremap <C-l> <C-W>l
 nnoremap <silent> <C-p> :action GotoFile<CR>
 
 nmap <leader>a :action GotoTest<CR>
-nmap <leader>t :action RunClass<CR>
 nmap <leader>o :action Github.Open.In.Browser<CR>
 nmap <leader>h :action CollapseRegion<CR>
 nmap <leader>f :action FileStructurePopup<CR>
@@ -66,9 +65,10 @@ nnoremap <leader>re :action RenameElement<cr>
 nnoremap <leader>rf :action RenameFile<cr>
 nnoremap <leader>gq :action ReformatCode<cr>
 nnoremap <leader>dd :action Debug<cr>
-nnoremap <leader>dc :action ChooseDebugConfiguration<cr>
-nnoremap <leader>rr :action Run<cr>
-nnoremap <leader>rc :action ChooseRunConfiguration<cr>
+nmap <leader>dc :action DebugConfiguration<cr>
+nmap <leader>rr :action RunAnything<cr>
+nmap <leader>rc :action RunConfiguration<cr>
+
 nnoremap <Leader>gd :action GotoImplementation<CR>
 nnoremap <leader>qi :action QuickImplementations<CR>
 nnoremap <leader>gs :action GotoSuperMethod<cr>

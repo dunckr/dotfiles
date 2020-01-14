@@ -134,10 +134,7 @@ alias be="bundle exec"
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
 
 # GO
-export GOPATH=$HOME/go
-export GOROOT=/usr/local/opt/go/libexec
-export PATH=$PATH:$GOPATH/bin
-export PATH=$PATH:$GOROOT/bin
+export PATH=$PATH:/usr/local/opt/go/libexec
 
 alias killall='pkill -f Python node bash nvim ruby'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
