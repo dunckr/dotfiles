@@ -40,6 +40,7 @@ CASKS=(
   google-chrome
   iterm2
   licecap
+  muzzle
   pennywise
   phoenix
   sketch
