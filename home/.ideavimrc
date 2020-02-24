@@ -10,6 +10,7 @@ set showmode
 set smartcase
 set visualbell
 set commentary
+set surround
 
 let mapleader = ','
 
