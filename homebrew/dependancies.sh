@@ -24,7 +24,7 @@ FORMULAS=(
   neovim
   node
   nvm
-  puma/puma/puma-dev
+  postgres
   python
   rbenv
   ruby-build
