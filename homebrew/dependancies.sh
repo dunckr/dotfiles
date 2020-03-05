@@ -1,8 +1,11 @@
 #!/bin/sh
 
+NODE_VERSION=13.9.0
+RUBY_VERSION=2.5.1
+
 TAPS=(
-  caskroom/cask
-  caskroom/fonts
+  homebrew/cask
+  homebrew/cask-fonts
   neovim/homebrew-neovim
 )
 FORMULAS=(
@@ -38,6 +41,7 @@ CASKS=(
   firefox
   font-source-code-pro
   google-chrome
+  intellij-idea
   iterm2
   licecap
   muzzle
@@ -82,8 +86,19 @@ brew install "${FORMULAS[@]}"
 brew update
 brew cask install "${CASKS[@]}"
 brew cleanup
+
+source /usr/local/opt/nvm/nvm.sh
+
+nvm install $NODE_VERSION
+nvm alias default $NODE_VERSION
+
+rbenv install $RUBY_VERSION -s
+rbenv global $RUBY_VERSION
+
 npm prune -g
 npm update npm -g
 npm install -g "${NPM_PACKAGES[@]}"
 gem install "${GEMS[@]}"
 pip3 install "${PIP_PACAKGES[@]}"
+
+vim +PlugUpdate +PlugUpgrade +UpdateRemotePlugins +qall

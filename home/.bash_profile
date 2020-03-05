@@ -138,6 +138,3 @@ export PATH=$PATH:/usr/local/opt/go/libexec
 
 alias killall='pkill -f Python node bash nvim ruby'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
-
-# load shopify-app-cli, but only if present and the shell is interactive
-if [[ -f "/Users/d/.shopify-app-cli/shopify.sh" ]]; then source "/Users/d/.shopify-app-cli/shopify.sh"; fi
