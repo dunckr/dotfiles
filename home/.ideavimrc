@@ -70,7 +70,6 @@ nmap <leader>dc :action DebugConfiguration<cr>
 nmap <leader>rr :action RunAnything<cr>
 nmap <leader>rc :action RunConfiguration<cr>
 
-nnoremap <Leader>gd :action GotoImplementation<CR>
 nnoremap <leader>qi :action QuickImplementations<CR>
 nnoremap <leader>gs :action GotoSuperMethod<cr>
 nnoremap <leader>gd :action GotoDeclaration<cr>
