@@ -77,4 +77,5 @@ nnoremap <leader>gr :action GotoRelated<cr>
 nnoremap <leader>gb :action Annotate<cr>
 nnoremap <leader>gc :action Git.ResolveConflicts<cr>
 nnoremap <leader>gi :action Vcs.ShowHistoryForBlock<cr>
+vnoremap <leader>gi :action Vcs.ShowHistoryForBlock<CR>:action VimVisualExitMode<CR>
 nnoremap <leader>gh :action Vcs.ShowTabbedFileHistory<cr>
