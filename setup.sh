@@ -12,7 +12,7 @@ link() {
 
 ./osx/setup.sh
 ./homebrew/install.sh
-./homebrew/dependancies.sh
+./homebrew/dependencies.sh
 ./nvim/setup.sh
 
 for location in $(find home -name '.*'); do
