@@ -13,7 +13,6 @@ FORMULAS=(
   awscli
   cloc
   coreutils
-  ctags
   fzf
   git
   gnupg
@@ -41,6 +40,7 @@ CASKS=(
   iterm2
   licecap
   muzzle
+  ngrok
   pennywise
   phoenix
   sketch

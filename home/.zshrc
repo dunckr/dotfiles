@@ -1,5 +1,7 @@
 dotfiles="$HOME/dotfiles"
 
+[ -s "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"
+
 # brew
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -146,3 +148,4 @@ alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -n
 
 # starship
 eval "$(starship init zsh)"
+

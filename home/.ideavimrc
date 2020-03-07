@@ -25,6 +25,7 @@ nmap <leader>t :action Run<CR>
 
 nmap <leader>p :action ReformatCode<CR><ESC>
 nnoremap <silent> <M-p> :action ReformatCode<CR><ESC>
+nnoremap <silent> <C-S-P> :action ReformatWithPrettierAction<CR>
 
 nnoremap <leader>z :source ~/.ideavimrc<CR>
 

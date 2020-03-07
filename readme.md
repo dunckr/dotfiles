@@ -18,7 +18,7 @@ update
 
 ## Extend
 
-* `~/.bashrc.local`
+* `~/.zshrc.local`
 * `~/.gitconfig.local`
 
 ## Thanks
