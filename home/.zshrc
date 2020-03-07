@@ -1,39 +1,46 @@
 dotfiles="$HOME/dotfiles"
 
-# Locals
-if [ -f "$HOME/.bashrc.local" ]; then
-  source "$HOME/.bashrc.local"
-fi
+# brew
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 
-# bash completion
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
-fi
-
-# brew completions
-if [ -f "$(brew --repository)/Library/Contributions/brew_bash_completion.sh" ]; then
-  source "$(brew --repository)/Library/Contributions/brew_bash_completion.sh"
-fi
-
-# bash-git-prompt
-if [ -f "$(brew --prefix bash-git-prompt)/share/gitprompt.sh" ]; then
-  GIT_PROMPT_THEME=Single_line_Solarized
-  source "$(brew --prefix bash-git-prompt)/share/gitprompt.sh"
+  autoload -Uz compinit
+  compinit
 fi
 
 # nvm
-export NVM_DIR="$HOME/.nvm"
-  . "/usr/local/opt/nvm/nvm.sh"
+ export NVM_DIR="$HOME/.nvm"
+
+[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
-# python
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
-
 export EDITOR=vim
 
-# Aliases
+# aliases
 alias ..='cd ..'
 alias cd..='cd ..'
 alias ...='cd ../..'
@@ -63,17 +70,13 @@ alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
 alias localip="ipconfig getifaddr en0"
 alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
 
-# System
+# system
 alias battery="pmset -g batt"
 
-# Git
+# git
 alias g="git"
-__git_complete g _git
 alias gb="git branch "
-__git_complete gb _git_branch
 alias gco="git checkout "
-__git_complete gco _git_checkout
-
 alias gaa="git add -v -A"
 alias gc="git commit -v"
 alias gcm="git commit -v -m 'WIP' --no-verify"
@@ -89,36 +92,34 @@ alias gst="git status"
 alias gup="git pull"
 alias glast="git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 
-# Pip
+# pip
 alias pip3update='pip3 list -o | cut -f 1 -d " " | xargs -n 1 pip3 install --upgrade'
 
-# Brew
+# brew
 alias cask='brew cask'
 alias macupdate='softwareupdate -i -a;'
 alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system -f; gem update -f; vim +PlugUpdate +PlugUpgrade +UpdateRemotePlugins +qall;'
 
-# Hub
-eval "$(hub alias -s)"
-
-# Applications
+# applications
 alias subl="/usr/local/bin/subl"
 alias sketch="/Applications/Sketch.app/Contents/MacOS/Sketch"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
+alias idea='function __idea() { eval "$(open -na 'IntelliJ IDEA.app' --args '$@')"; unset -f __idea; }; __idea'
 
-# Shorthands
+# shorthands
 alias cls="clear"
 
-# Vagrant
+# vagrant
 alias vu="vagrant up && vagrant ssh"
 alias vk="vagrant halt -f"
 
-# Neovim
+# neovim
 alias vim="nvim"
 
 # tmux
 alias mux="tmuxinator"
 
-# Docker
+# docker
 alias dm="docker-machine"
 alias dc="docker-compose"
 alias dcr="docker-compose run --rm"
@@ -129,12 +130,19 @@ alias dkill='docker rmi $(docker images -a -q)'
 alias dprune='docker image prune -a -f && docker container prune -f && docker volume prune -f'
 alias dca='function __dca() { docker attach --sig-proxy=false --detach-keys=ctrl-c $(docker-compose ps -q "$1"); unset -f __dca; }; __dca'
 
-# Ruby
+# ruby
 alias be="bundle exec"
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
 
-# GO
+# python
+export PATH="/usr/local/opt/python/libexec/bin:$PATH"
+
+# go
 export PATH=$PATH:/usr/local/opt/go/libexec
 
+# commands
 alias killall='pkill -f Python node bash nvim ruby'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
+
+# starship
+eval "$(starship init zsh)"

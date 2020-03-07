@@ -11,16 +11,12 @@ TAPS=(
 FORMULAS=(
   ack
   awscli
-  bash
-  bash-completion
-  bash-git-prompt
   cloc
   coreutils
   ctags
   fzf
   git
   gnupg
-  hub
   neovim
   node
   nvm
@@ -30,8 +26,8 @@ FORMULAS=(
   ruby-build
   shellcheck
   siege
+  starship
   terraform
-  tmux
   tree
 )
 CASKS=(
@@ -54,6 +50,7 @@ CASKS=(
   sublime-text
   vlc
   xquartz
+  zoomus
 )
 NPM_PACKAGES=(
   @prettier/plugin-ruby
@@ -71,14 +68,12 @@ GEMS=(
   rubocop
   rubycritic
   sandi_meter
-  tmuxinator
 )
 PIP_PACAKGES=(
   neovim
 )
 
-for tap in "${TAPS[@]}"
-do
+for tap in "${TAPS[@]}"; do
   brew tap "$tap"
 done
 
@@ -87,7 +82,7 @@ brew update
 brew cask install "${CASKS[@]}"
 brew cleanup
 
-source /usr/local/opt/nvm/nvm.sh
+. /usr/local/opt/nvm/nvm.sh
 
 nvm install $NODE_VERSION
 nvm alias default $NODE_VERSION

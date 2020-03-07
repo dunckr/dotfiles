@@ -10,10 +10,10 @@ link() {
   ln -s "$from" "$to"
 }
 
-bash osx/setup.sh
-bash homebrew/install.sh
-bash homebrew/dependancies.sh
-bash nvim/setup.sh
+./osx/setup.sh
+./homebrew/install.sh
+./homebrew/dependancies.sh
+./nvim/setup.sh
 
 for location in $(find home -name '.*'); do
   file="${location##*/}"
@@ -23,6 +23,5 @@ done
 
 link "$dotfiles/iterm2/" "$HOME/Library/Preferences/"
 link "$dotfiles/nvim/init.vim" "$HOME/.config/nvim/"
-link "$dotfiles/tmuxinator" "$HOME/.tmuxinator"
 
 mkdir ~/.nvm
