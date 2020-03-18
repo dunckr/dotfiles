@@ -103,10 +103,9 @@ alias macupdate='softwareupdate -i -a;'
 alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system -f; gem update -f; vim +PlugUpdate +PlugUpgrade +UpdateRemotePlugins +qall;'
 
 # applications
-alias subl="/usr/local/bin/subl"
 alias sketch="/Applications/Sketch.app/Contents/MacOS/Sketch"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-alias idea='function __idea() { eval "$(open -na 'IntelliJ IDEA.app' --args '$@')"; unset -f __idea; }; __idea'
+alias idea='function __idea() { eval "$(/Applications/IntelliJ\ IDEA.app/Contents/MacOS/idea --args \"$@\")"; unset -f __idea; }; __idea'
 
 # shorthands
 alias cls="clear"
@@ -125,6 +124,7 @@ alias mux="tmuxinator"
 alias dm="docker-machine"
 alias dc="docker-compose"
 alias dcr="docker-compose run --rm"
+alias dcrp="docker-compose run --rm --service-ports"
 alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
 alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; unset -f __dopen; }; __dopen'
 alias dclean='docker rmi $(docker images --filter dangling=true)'
@@ -148,4 +148,3 @@ alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -n
 
 # starship
 eval "$(starship init zsh)"
-

@@ -10,6 +10,10 @@
 bash <(curl -s https://raw.githubusercontent.com/dunckr/dotfiles/master/install.sh)
 ```
 
+### Manual
+
+* [Emoji shortcuts](https://github.com/warpling/Macmoji)
+
 ## Update
 
 ```sh
