@@ -1,7 +1,7 @@
 #!/bin/sh
 
 NODE_VERSION=13.9.0
-RUBY_VERSION=2.5.1
+RUBY_VERSION=2.5.7
 
 TAPS=(
   homebrew/cask
@@ -16,6 +16,7 @@ FORMULAS=(
   fzf
   git
   gnupg
+  https://raw.githubusercontent.com/Homebrew/homebrew-core/86a44a0a552c673a05f11018459c9f5faae3becc/Formula/python@2.rb
   neovim
   node
   nvm
