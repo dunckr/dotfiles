@@ -153,3 +153,20 @@ Key.on('1', ['ctrl', 'cmd', 'alt'], () => {
 		iterm.focus();
 	}
 });
+
+let lastQuitTimestamp = 0;
+const DOUBLE_KEY_INTERVAL = 250;
+
+Key.on('q', ['cmd'], () => {
+	const timestamp = Date.now();
+
+	if (timestamp - lastQuitTimestamp <= DOUBLE_KEY_INTERVAL) {
+		lastQuitTimestamp = 0;
+		const app = App.focused();
+
+		if (!app) return;
+		app.terminate();
+	} else {
+		lastQuitTimestamp = timestamp;
+	}
+});
