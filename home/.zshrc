@@ -143,7 +143,7 @@ export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 export PATH=$PATH:/usr/local/opt/go/libexec
 
 # commands
-alias killall='pkill -f Python node bash nvim ruby'
+alias killall='pkill -f Python node bash nvim ruby ngrok'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 
 # starship
