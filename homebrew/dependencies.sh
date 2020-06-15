@@ -29,6 +29,7 @@ FORMULAS=(
   starship
   terraform
   tree
+  zsh-autosuggestions
 )
 CASKS=(
   beardedspice
