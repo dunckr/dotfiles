@@ -15,7 +15,6 @@ fi
 
 [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
 [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
-
 autoload -U add-zsh-hook
 load-nvmrc() {
   local node_version="$(nvm version)"
@@ -148,3 +147,11 @@ alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -n
 
 # starship
 eval "$(starship init zsh)"
+
+# autosuggestions
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# terminal keybinds
+bindkey '^B' backward-word
+bindkey '^F' forward-word
+bindkey '^D' delete-word

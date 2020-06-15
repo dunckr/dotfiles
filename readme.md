@@ -13,6 +13,7 @@ bash <(curl -s https://raw.githubusercontent.com/dunckr/dotfiles/master/install.
 ### Manual
 
 * [Emoji shortcuts](https://github.com/warpling/Macmoji)
+* [IE11](https://github.com/xdissent/ievms)
 
 ## Update
 

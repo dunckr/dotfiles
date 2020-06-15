@@ -1,7 +1,7 @@
 #!/bin/sh
 
 NODE_VERSION=13.9.0
-RUBY_VERSION=2.5.7
+RUBY_VERSION=2.5.8
 
 TAPS=(
   homebrew/cask
@@ -49,6 +49,7 @@ CASKS=(
   slack
   spotify
   sublime-text
+  virtualbox
   vlc
   xquartz
   zoomus
