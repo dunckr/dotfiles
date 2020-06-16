@@ -148,10 +148,9 @@ alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -n
 # starship
 eval "$(starship init zsh)"
 
-# autosuggestions
+# zsh
 source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
-# terminal keybinds
 bindkey '^B' backward-word
 bindkey '^F' forward-word
 bindkey '^D' delete-word
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

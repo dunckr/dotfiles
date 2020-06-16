@@ -30,6 +30,7 @@ FORMULAS=(
   terraform
   tree
   zsh-autosuggestions
+  zsh-syntax-highlighting
 )
 CASKS=(
   beardedspice
