@@ -45817,9 +45817,9 @@
 	<key>NSWindow Frame NSNavPanelAutosaveName</key>
 	<string>624 624 799 448 0 0 2048 1280 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>96 444 700 622 -67 1120 1920 1080 </string>
+	<string>802 505 700 622 0 0 2304 1296 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1792 1120 0 0 1792 1120 </string>
+	<string>2483 732 650 492 2304 216 1792 1120 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>228 120 650 492 0 0 1792 1120 </string>
 	<key>New Bookmarks</key>
@@ -47527,6 +47527,7 @@
 	<array>
 		<string>3.3.9</string>
 		<string>3.3.11</string>
+		<string>3.3.12</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
@@ -47538,7 +47539,11 @@
 	<key>NoSyncInstallationId</key>
 	<string>012AA21B-DEAB-44CE-B196-6C55274F52AD</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>47</integer>
+	<integer>75</integer>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
+	<true/>
+	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
+	<integer>0</integer>
 	<key>NoSyncNextAnnoyanceTime</key>
 	<real>605542311.80183995</real>
 	<key>NoSyncOnboardingWindowHasBeenShown</key>
@@ -48301,7 +48306,7 @@
 	<key>PromptOnClose</key>
 	<true/>
 	<key>PromptOnQuit</key>
-	<true/>
+	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>RightCommand</key>
@@ -48317,11 +48322,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2020-06-15T09:46:26Z</date>
+	<date>2020-07-02T11:47:10Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateGroupIdentifier</key>
-	<integer>3584924711</integer>
+	<integer>1590548851</integer>
 	<key>SUUpdateRelaunchingMarker</key>
 	<false/>
 	<key>SavePasteHistory</key>
@@ -48388,7 +48393,7 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>3.3.11</string>
+	<string>3.3.12</string>
 	<key>kCPKSelectionViewPreferredModeKey</key>
 	<integer>0</integer>
 	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
