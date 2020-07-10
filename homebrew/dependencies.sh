@@ -2,6 +2,7 @@
 
 NODE_VERSION=13.9.0
 RUBY_VERSION=2.5.8
+PYTHON_VERSION=3.8.3
 
 TAPS=(
   homebrew/cask
@@ -16,12 +17,10 @@ FORMULAS=(
   fzf
   git
   gnupg
-  https://raw.githubusercontent.com/Homebrew/homebrew-core/86a44a0a552c673a05f11018459c9f5faae3becc/Formula/python@2.rb
   neovim
   node
   nvm
   postgres
-  python
   rbenv
   ruby-build
   shellcheck
@@ -93,6 +92,9 @@ nvm alias default $NODE_VERSION
 
 rbenv install $RUBY_VERSION -s
 rbenv global $RUBY_VERSION
+
+pyenv install $PYTHON_VERSION -s
+pyenv global $PYTHON_VERSION
 
 npm prune -g
 npm update npm -g
