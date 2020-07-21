@@ -10,31 +10,8 @@ if type brew &>/dev/null; then
   compinit
 fi
 
-# nvm
- export NVM_DIR="$HOME/.nvm"
-
-[ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
-[ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"
-autoload -U add-zsh-hook
-load-nvmrc() {
-  local node_version="$(nvm version)"
-  local nvmrc_path="$(nvm_find_nvmrc)"
-
-  if [ -n "$nvmrc_path" ]; then
-    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-    if [ "$nvmrc_node_version" = "N/A" ]; then
-      nvm install
-    elif [ "$nvmrc_node_version" != "$node_version" ]; then
-      nvm use
-    fi
-  elif [ "$node_version" != "$(nvm version default)" ]; then
-    echo "Reverting to nvm default version"
-    nvm use default
-  fi
-}
-add-zsh-hook chpwd load-nvmrc
-load-nvmrc
+# nodenv
+if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
 
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -102,6 +79,25 @@ alias gup="git pull"
 alias glast="git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 alias gprune='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch is merged into master and can be deleted"; done'
 alias gprunef='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias ct="echo '
+^--^  ^------------^
+|     |
+|     +-> Summary in present tense.
+|
++-------> Type: build, chore, ci, docs, feat, fix, perf, refactor, revert, style, or test
+
+feat: new feature for the user, not a new feature for build script
+fix: a bug fix
+docs: changes to the documentation only
+style: formatting, white-space, etc; no production code change
+refactor: code change that does not fix a bug or add a feature, eg. renaming a variable
+perf: code change that improves performance
+test: adding missing tests, refactoring tests; no production code change
+build: change that affects the build system or external dependencies (example scopes: gulp, npm)
+ci: change to the CI configuration files and scripts
+chore: change that does not modify src or test files
+revert: reverts a previous commit
+'"
 
 # pip
 alias pip3update='pip3 list -o | cut -f 1 -d " " | xargs -n 1 pip3 install --upgrade'
@@ -144,9 +140,6 @@ alias dca='function __dca() { docker attach --sig-proxy=false --detach-keys=ctrl
 # ruby
 alias be="bundle exec"
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
-
-# python
-export PATH="/usr/local/opt/python/libexec/bin:$PATH"
 
 # go
 export PATH=$PATH:/usr/local/opt/go/libexec

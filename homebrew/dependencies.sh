@@ -1,6 +1,6 @@
 #!/bin/sh
 
-NODE_VERSION=13.9.0
+NODE_VERSION=12.18.2
 RUBY_VERSION=2.5.8
 PYTHON_VERSION=3.8.3
 
@@ -17,9 +17,10 @@ FORMULAS=(
   fzf
   git
   gnupg
+  jq
+  kompose
   neovim
-  node
-  nvm
+  nodenv
   postgres
   rbenv
   ruby-build
@@ -73,6 +74,7 @@ GEMS=(
   sandi_meter
 )
 PIP_PACAKGES=(
+  aws-shell
   neovim
 )
 
@@ -85,10 +87,8 @@ brew update
 brew cask install "${CASKS[@]}"
 brew cleanup
 
-. /usr/local/opt/nvm/nvm.sh
-
-nvm install $NODE_VERSION
-nvm alias default $NODE_VERSION
+nodenv install $NODE_VERSION -s
+nodenv global $NODE_VERSION
 
 rbenv install $RUBY_VERSION -s
 rbenv global $RUBY_VERSION
