@@ -80,3 +80,10 @@ nnoremap <leader>gc :action Git.ResolveConflicts<cr>
 nnoremap <leader>gi :action Vcs.ShowHistoryForBlock<cr>
 vnoremap <leader>gi :action Vcs.ShowHistoryForBlock<CR>:action VimVisualExitMode<CR>
 nnoremap <leader>gh :action Vcs.ShowTabbedFileHistory<cr>
+
+nnoremap g; :action JumpToLastChange<Enter>
+nnoremap g, :action JumpToNextChange<Enter>
+nnoremap [c :action VcsShowPrevChangeMarker<cr>
+nnoremap ]c :action VcsShowNextChangeMarker<cr>
+nnoremap ]e :action GotoNextError<cr>
+nnoremap [e :action GotoPreviousError<cr>
