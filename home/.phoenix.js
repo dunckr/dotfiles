@@ -16,8 +16,9 @@ bindLaunch('Slack', 'm', ['alt', 'shift']);
 bindLaunch('Spotify', 'p', ['alt', 'shift']);
 bindLaunch('IntelliJ IDEA', 't', ['cmd', 'shift']);
 bindLaunch('Iterm', 't', ['alt', 'shift']);
+bindLaunch('Podcasts', 'p', ['alt', 'ctrl']);
 
-const maximise = key => {
+const maximise = (key) => {
 	Key.on(key, ['cmd', 'ctrl'], () => {
 		const win = Window.focused();
 		if (win) {

@@ -16,6 +16,7 @@ FORMULAS=(
   coreutils
   fzf
   git
+  git-delta
   gnupg
   jq
   kompose
@@ -50,7 +51,6 @@ CASKS=(
   skype
   slack
   spotify
-  sublime-text
   virtualbox
   vlc
   xquartz
@@ -58,7 +58,6 @@ CASKS=(
 )
 NPM_PACKAGES=(
   @prettier/plugin-ruby
-  diff-so-fancy
   javascript-typescript-langserver
   prettier
   typescript
