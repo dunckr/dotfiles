@@ -10,7 +10,8 @@ const bindLaunch = (appName, key, modifiers) =>
 	});
 
 bindLaunch('Google Chrome', 'c', ['cmd', 'shift']);
-bindLaunch('Firefox', 'c', ['alt', 'shift']);
+// bindLaunch('Firefox', 'c', ['alt', 'shift']);
+bindLaunch('Safari', 'c', ['cmd', 'ctrl']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
 bindLaunch('Slack', 'm', ['alt', 'shift']);
 bindLaunch('Spotify', 'p', ['alt', 'shift']);

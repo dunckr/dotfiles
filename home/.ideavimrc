@@ -20,8 +20,11 @@ noremap L $
 nnoremap <leader>c<space> :action CommentByLineComment<CR>
 vnoremap <leader>c<space> :action CommentByLineComment<CR>:action VimVisualExitMode<CR>
 
-nmap <leader>T :action RunClass<CR>
-nmap <leader>t :action Run<CR>
+nmap <leader>t :action Stop<CR>:action RunClass<CR>
+map <leader>T :action Stop<CR>:action Run<CR>
+
+nnoremap <leader>n :action GotoNextError<CR>
+nnoremap <leader>N :action GotoPreviousError<CR>
 
 nmap <leader>p :action ReformatCode<CR><ESC>
 nnoremap <silent> <M-p> :action ReformatCode<CR><ESC>
@@ -41,6 +44,8 @@ nnoremap <silent> <C-p> :action GotoFile<CR>
 
 nmap <leader>a :action GotoTest<CR>
 nmap <leader>o :action Github.Open.In.Browser<CR>
+
+nmap <leader>p :action CopyFileName<CR>
 nmap <leader>h :action CollapseRegion<CR>
 nmap <leader>f :action FileStructurePopup<CR>
 nmap <leader><space> :action QuickJavaDoc<CR>
@@ -85,5 +90,3 @@ nnoremap g; :action JumpToLastChange<Enter>
 nnoremap g, :action JumpToNextChange<Enter>
 nnoremap [c :action VcsShowPrevChangeMarker<cr>
 nnoremap ]c :action VcsShowNextChangeMarker<cr>
-nnoremap ]e :action GotoNextError<cr>
-nnoremap [e :action GotoPreviousError<cr>

@@ -62,6 +62,7 @@ alias battery="pmset -g batt"
 # git
 alias g="git"
 alias gb="git branch "
+alias gbc="git branch --show-current && echo 'copied!' && git branch --show-current | pbcopy"
 alias gco="git checkout "
 alias gaa="git add -v -A"
 alias gc="git commit -v"
@@ -76,7 +77,7 @@ alias grc="git rebase --continue"
 alias gsclone="git clone --depth=1"
 alias gst="git status"
 alias gup="git pull"
-alias glast="git log -1 --pretty=%B | tr -d '\n' | pbcopy"
+alias glast="echo 'copied!' && git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 alias gprune='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch is merged into master and can be deleted"; done'
 alias gprunef='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias ct="echo '
