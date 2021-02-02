@@ -17,20 +17,22 @@ let mapleader = ','
 noremap H ^
 noremap L $
 
+nnoremap <leader>z :source ~/.ideavimrc<CR>
+
+nmap <leader>q :action Stop<CR>
+
 nnoremap <leader>c<space> :action CommentByLineComment<CR>
 vnoremap <leader>c<space> :action CommentByLineComment<CR>:action VimVisualExitMode<CR>
 
-nmap <leader>t :action Stop<CR>:action RunClass<CR>
-map <leader>T :action Stop<CR>:action Run<CR>
+nmap <leader>t :action Stop<CR>:action RunClass<CR>:action AutoTestShortcutAction<CR>
+" Assume 'all' is defined
+map <leader>T :action Stop<CR>:action RunConfigurationAsAction_Run_all_default_target<CR>
 
-nnoremap <leader>n :action GotoNextError<CR>
-nnoremap <leader>N :action GotoPreviousError<CR>
+nmap <leader>h :action CollapseSelection<CR><ESC>
 
 nmap <leader>p :action ReformatCode<CR><ESC>
 nnoremap <silent> <M-p> :action ReformatCode<CR><ESC>
 nnoremap <silent> <C-S-P> :action ReformatWithPrettierAction<CR> :update<CR>
-
-nnoremap <leader>z :source ~/.ideavimrc<CR>
 
 nnoremap <silent> <C-w>h :action SplitHorizontally<CR>
 nnoremap <silent> <C-w>v :action SplitVertically<CR>
@@ -46,7 +48,6 @@ nmap <leader>a :action GotoTest<CR>
 nmap <leader>o :action Github.Open.In.Browser<CR>
 
 nmap <leader>p :action CopyFileName<CR>
-nmap <leader>h :action CollapseRegion<CR>
 nmap <leader>f :action FileStructurePopup<CR>
 nmap <leader><space> :action QuickJavaDoc<CR>
 
