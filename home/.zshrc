@@ -139,8 +139,48 @@ alias dprune='docker image prune -a -f && docker container prune -f && docker vo
 alias dca='function __dca() { docker attach --sig-proxy=false --detach-keys=ctrl-c $(docker-compose ps -q "$1"); unset -f __dca; }; __dca'
 
 # ruby
-alias be="bundle exec"
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
+
+# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rails/rails.plugin.zsh
+function _rails_command () {
+  if [ -e "bin/stubs/rails" ]; then
+    bin/stubs/rails $@
+  elif [ -e "bin/rails" ]; then
+    bin/rails $@
+  elif [ -e "script/rails" ]; then
+    ruby script/rails $@
+  elif [ -e "script/server" ]; then
+    ruby script/$@
+  else
+    command rails $@
+  fi
+}
+
+function _rake_command () {
+  if [ -e "bin/stubs/rake" ]; then
+    bin/stubs/rake $@
+  elif [ -e "bin/rake" ]; then
+    bin/rake $@
+  elif type bundle &> /dev/null && ([ -e "Gemfile" ] || [ -e "gems.rb" ]); then
+    bundle exec rake $@
+  else
+    command rake $@
+  fi
+}
+
+function _rspec_command () {
+  if type bundle &> /dev/null && ([ -e "Gemfile" ] || [ -e "gems.rb" ]); then
+    bundle exec rspec $@
+  else
+    command rspec $@
+  fi
+}
+
+alias rails='_rails_command'
+
+alias rake='_rake_command'
+
+alias rspec='_rspec_command'
 
 # go
 export PATH=$PATH:/usr/local/opt/go/libexec
