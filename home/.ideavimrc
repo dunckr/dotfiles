@@ -11,6 +11,7 @@ set smartcase
 set visualbell
 set commentary
 set surround
+set NERDTree
 
 let mapleader = ','
 
@@ -21,9 +22,12 @@ nnoremap <leader>z :source ~/.ideavimrc<CR>
 
 nmap <leader>q :action Stop<CR>
 
+nmap <C-e> :NERDTreeToggle<CR>
+
 nnoremap <leader>c<space> :action CommentByLineComment<CR>
 vnoremap <leader>c<space> :action CommentByLineComment<CR>:action VimVisualExitMode<CR>
 
+" nmap <leader>t :action Stop<CR>:action RunClass<CR>
 nmap <leader>t :action Stop<CR>:action RunClass<CR>:action AutoTestShortcutAction<CR>
 " Assume 'all' is defined
 map <leader>T :action Stop<CR>:action RunConfigurationAsAction_Run_all_default_target<CR>
@@ -31,8 +35,6 @@ map <leader>T :action Stop<CR>:action RunConfigurationAsAction_Run_all_default_t
 nmap <leader>h :action CollapseSelection<CR><ESC>
 
 nmap <leader>p :action ReformatCode<CR><ESC>
-nnoremap <silent> <M-p> :action ReformatCode<CR><ESC>
-nnoremap <silent> <C-S-P> :action ReformatWithPrettierAction<CR> :update<CR>
 
 nnoremap <silent> <C-w>h :action SplitHorizontally<CR>
 nnoremap <silent> <C-w>v :action SplitVertically<CR>
