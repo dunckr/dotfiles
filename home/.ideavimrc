@@ -20,17 +20,14 @@ noremap L $
 
 nnoremap <leader>z :source ~/.ideavimrc<CR>
 
-nmap <leader>q :action Stop<CR>
+nmap <leader>q :action Stop<CR>:action CloseTabsAction<CR>
 
 nmap <C-e> :NERDTreeToggle<CR>
 
 nnoremap <leader>c<space> :action CommentByLineComment<CR>
 vnoremap <leader>c<space> :action CommentByLineComment<CR>:action VimVisualExitMode<CR>
 
-" nmap <leader>t :action Stop<CR>:action RunClass<CR>
 nmap <leader>t :action Stop<CR>:action RunClass<CR>:action AutoTestShortcutAction<CR>
-" Assume 'all' is defined
-map <leader>T :action Stop<CR>:action RunConfigurationAsAction_Run_all_default_target<CR>
 
 nmap <leader>h :action CollapseSelection<CR><ESC>
 

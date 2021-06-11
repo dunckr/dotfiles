@@ -34,7 +34,6 @@ FORMULAS=(
   zsh-syntax-highlighting
 )
 CASKS=(
-  beardedspice
   docker
   dropbox
   firefox

@@ -80,7 +80,7 @@ alias gup="git pull"
 alias glast="echo 'copied!' && git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 alias gprune='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch is merged into master and can be deleted"; done'
 alias gprunef='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
-alias ct="echo '
+alias commithelp="echo '
 ^--^  ^------------^
 |     |
 |     +-> Summary in present tense.
@@ -187,7 +187,7 @@ export PATH=$PATH:/usr/local/opt/go/libexec
 
 # commands
 alias serve="python -m http.server"
-alias killall='pkill -f Python node bash nvim ruby ngrok'
+alias killall='pkill -f Python node bash nvim ruby ngrok spring'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 
 # starship
