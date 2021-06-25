@@ -22,12 +22,10 @@ nnoremap <leader>z :source ~/.ideavimrc<CR>
 
 nmap <leader>q :action Stop<CR>:action CloseTabsAction<CR>
 
-nmap <C-e> :NERDTreeToggle<CR>
-
 nnoremap <leader>c<space> :action CommentByLineComment<CR>
 vnoremap <leader>c<space> :action CommentByLineComment<CR>:action VimVisualExitMode<CR>
 
-nmap <leader>t :action Stop<CR>:action RunClass<CR>:action AutoTestShortcutAction<CR>
+nmap <leader>t :action Stop<CR>:action CloseTabsAction<CR>:action RunClass<CR>:action AutoTestShortcutAction<CR>
 
 nmap <leader>h :action CollapseSelection<CR><ESC>
 
@@ -50,8 +48,6 @@ nmap <leader>p :action CopyFileName<CR>
 nmap <leader>f :action FileStructurePopup<CR>
 nmap <leader><space> :action QuickJavaDoc<CR>
 
-nnoremap <silent> <C-e> :action ToggleSideMode<CR>
-
 nnoremap <silent> <C-a>f :action ToggleFullScreen<CR>
 
 nnoremap <silent> <C-t> :action Refactorings.QuickListPopupAction<CR>
@@ -62,6 +58,8 @@ nnoremap <silent> <C-K> :action GoToDeclaration<CR>
 nnoremap <silent> <C-S-F> :action FindInPath<CR>
 
 nnoremap <Leader>k :action HighlightUsagesInFile<cr>
+
+nnoremap <silent> <C-E> :action SelectInProjectView<cr>
 
 nnoremap <leader>fu :action FindUsages<cr>
 nnoremap <leader>su :action ShowUsages<cr>
