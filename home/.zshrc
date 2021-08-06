@@ -138,6 +138,9 @@ alias dkill='docker rmi $(docker images -a -q)'
 alias dprune='docker image prune -a -f && docker container prune -f && docker volume prune -f'
 alias dca='function __dca() { docker attach --sig-proxy=false --detach-keys=ctrl-c $(docker-compose ps -q "$1"); unset -f __dca; }; __dca'
 
+# kubernetes
+alias k="kubectl"
+
 # ruby
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
 
@@ -199,3 +202,10 @@ bindkey '^B' backward-word
 bindkey '^F' forward-word
 bindkey '^D' delete-word
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+fi

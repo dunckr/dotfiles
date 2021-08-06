@@ -1,7 +1,7 @@
 #!/bin/sh
 
-NODE_VERSION=12.18.2
-RUBY_VERSION=2.5.8
+NODE_VERSION=14.17.0
+RUBY_VERSION=2.7.3
 PYTHON_VERSION=3.8.3
 
 TAPS=(
@@ -30,6 +30,7 @@ FORMULAS=(
   starship
   terraform
   tree
+  zsh-completions
   zsh-autosuggestions
   zsh-syntax-highlighting
 )

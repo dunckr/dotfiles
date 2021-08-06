@@ -25,7 +25,7 @@ nmap <leader>q :action Stop<CR>:action CloseTabsAction<CR>
 nnoremap <leader>c<space> :action CommentByLineComment<CR>
 vnoremap <leader>c<space> :action CommentByLineComment<CR>:action VimVisualExitMode<CR>
 
-nmap <leader>t :action Stop<CR>:action CloseTabsAction<CR>:action RunClass<CR>:action AutoTestShortcutAction<CR>
+nmap <leader>t :action Stop<CR>:action CloseTabsAction<CR>:action RunClass<CR>
 
 nmap <leader>h :action CollapseSelection<CR><ESC>
 
