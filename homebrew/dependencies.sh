@@ -30,8 +30,9 @@ FORMULAS=(
   starship
   terraform
   tree
-  zsh-completions
   zsh-autosuggestions
+  zsh-completions
+  zsh-history-substring-search
   zsh-syntax-highlighting
 )
 CASKS=(
