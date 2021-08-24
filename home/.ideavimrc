@@ -47,6 +47,7 @@ nmap <leader>o :action Github.Open.In.Browser<CR>
 nmap <leader>p :action CopyFileName<CR>
 nmap <leader>f :action FileStructurePopup<CR>
 nmap <leader><space> :action QuickJavaDoc<CR>
+nmap <leader>e :action ShowErrorDescription<CR>
 
 nnoremap <silent> <C-a>f :action ToggleFullScreen<CR>
 
