@@ -8,12 +8,15 @@
 # OS or Editor folders
 .DS_Store
 .cache
+.idea/
+*.iml
 
 # Folders to ignore
 .hg
 .svn
 Desktop.ini
 .swp
+.secrets
 
 # Package manager
 /node_modules
@@ -41,7 +44,4 @@ tags.temp
 *.key
 
 .yardoc
-
-.idea/
-
-*.iml
+*.rest

@@ -12,6 +12,9 @@ set visualbell
 set commentary
 set surround
 set NERDTree
+set matchit
+set vim-paragraph-motion
+set textobj-indent
 
 let mapleader = ','
 
@@ -19,6 +22,7 @@ noremap H ^
 noremap L $
 
 nnoremap <leader>z :source ~/.ideavimrc<CR>
+nnoremap <leader>? :actionlist<CR>
 
 nmap <leader>q :action Stop<CR>:action CloseTabsAction<CR>
 
@@ -79,7 +83,8 @@ nnoremap <leader>qi :action QuickImplementations<CR>
 nnoremap <leader>gs :action GotoSuperMethod<cr>
 nnoremap <leader>gd :action GotoDeclaration<cr>
 nnoremap <leader>gr :action GotoRelated<cr>
-nnoremap <leader>gb :action Annotate<cr>
+
+nnoremap <leader>gb :action Annotate<cr> " git blame
 nnoremap <leader>gc :action Git.ResolveConflicts<cr>
 nnoremap <leader>gi :action Vcs.ShowHistoryForBlock<cr>
 vnoremap <leader>gi :action Vcs.ShowHistoryForBlock<CR>:action VimVisualExitMode<CR>

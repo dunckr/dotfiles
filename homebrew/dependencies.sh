@@ -44,6 +44,7 @@ CASKS=(
   intellij-idea
   iterm2
   licecap
+  mongodb-compass
   muzzle
   ngrok
   pennywise

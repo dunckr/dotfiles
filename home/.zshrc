@@ -40,7 +40,6 @@ alias cp="cp -v"
 alias mv="mv -v"
 alias ls="ls -FGh"
 alias du="du -cksh"
-alias df="df -h"
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 # Just print request/response headers
@@ -58,6 +57,7 @@ alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[
 
 # system
 alias battery="pmset -g batt"
+alias diskspace_report="df -P -kHl"
 
 # git
 alias g="git"
@@ -80,6 +80,7 @@ alias gup="git pull"
 alias glast="echo 'copied!' && git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 alias gprune='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch is merged into master and can be deleted"; done'
 alias gprunef='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias gprunefdev='git checkout -q dev && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base dev $branch) && [[ $(git cherry dev $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias commithelp="echo '
 ^--^  ^------------^
 |     |
@@ -134,12 +135,16 @@ alias dcrp="docker-compose run --rm --service-ports"
 alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
 alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; unset -f __dopen; }; __dopen'
 alias dclean='docker rmi $(docker images --filter dangling=true)'
-alias dkill='docker rmi $(docker images -a -q)'
+alias ddestroy='docker rmi $(docker images -a -q)'
 alias dprune='docker image prune -a -f && docker container prune -f && docker volume prune -f'
 alias dca='function __dca() { docker attach --sig-proxy=false --detach-keys=ctrl-c $(docker-compose ps -q "$1"); unset -f __dca; }; __dca'
+alias dkill='pkill -f docker'
 
 # kubernetes
 alias k="kubectl"
+
+# node
+alias tc="tsc --pretty --noEmit --watch"
 
 # ruby
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
@@ -212,3 +217,5 @@ if type brew &>/dev/null; then
     autoload -Uz compinit
     compinit
 fi
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"

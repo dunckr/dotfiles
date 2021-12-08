@@ -14,7 +14,7 @@ bindLaunch('Google Chrome', 'c', ['cmd', 'shift']);
 bindLaunch('Safari', 'c', ['cmd', 'ctrl']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
 bindLaunch('Slack', 'm', ['alt', 'shift']);
-bindLaunch('Spotify', 'p', ['alt', 'shift']);
+bindLaunch('Psst', 'p', ['alt', 'shift']);
 bindLaunch('IntelliJ IDEA', 't', ['cmd', 'shift']);
 bindLaunch('Iterm', 't', ['alt', 'shift']);
 bindLaunch('Podcasts', 'p', ['alt', 'ctrl']);
