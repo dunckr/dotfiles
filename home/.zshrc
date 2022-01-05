@@ -196,6 +196,7 @@ export PATH=$PATH:/usr/local/opt/go/libexec
 # commands
 alias serve="python -m http.server"
 alias killall='pkill -f Python node bash nvim ruby ngrok spring'
+alias killchrome='pkill -f "Google Chrome"'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 
 # starship
