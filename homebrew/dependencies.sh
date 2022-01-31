@@ -28,6 +28,7 @@ FORMULAS=(
   shellcheck
   siege
   starship
+  svn
   terraform
   tree
   zsh-autosuggestions
@@ -53,6 +54,7 @@ CASKS=(
   skype
   slack
   spotify
+  superfly/tap/flyctl
   virtualbox
   vlc
   xquartz
