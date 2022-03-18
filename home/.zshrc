@@ -148,6 +148,7 @@ alias tc="tsc --pretty --noEmit --watch"
 
 # ruby
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
+alias secret_key="ruby -e \"require 'securerandom';puts SecureRandom.hex(64)\""
 
 # https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rails/rails.plugin.zsh
 function _rails_command () {
@@ -195,7 +196,7 @@ export PATH=$PATH:/usr/local/opt/go/libexec
 
 # commands
 alias serve="python -m http.server"
-alias killall='pkill -f Python node bash nvim ruby ngrok spring'
+alias killall='pkill -f node Python bash nvim ruby ngrok spring'
 alias killchrome='pkill -f "Google Chrome"'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 
