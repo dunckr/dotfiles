@@ -54,11 +54,9 @@ CASKS=(
   skype
   slack
   spotify
-  superfly/tap/flyctl
-  virtualbox
   vlc
   xquartz
-  zoomus
+  zoom
 )
 NPM_PACKAGES=(
   @prettier/plugin-ruby
