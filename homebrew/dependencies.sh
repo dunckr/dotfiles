@@ -87,7 +87,7 @@ done
 
 brew install "${FORMULAS[@]}"
 brew update
-brew cask install "${CASKS[@]}"
+brew install "${CASKS[@]}" --cask
 brew cleanup
 
 nodenv install $NODE_VERSION -s
