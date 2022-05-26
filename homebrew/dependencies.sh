@@ -1,8 +1,8 @@
 #!/bin/sh
 
-NODE_VERSION=14.17.0
-RUBY_VERSION=3.0.2
-PYTHON_VERSION=3.8.3
+NODE_VERSION=16.15.0
+RUBY_VERSION=3.0.4
+PYTHON_VERSION=3.10.4
 
 TAPS=(
   homebrew/cask
@@ -23,6 +23,7 @@ FORMULAS=(
   neovim
   nodenv
   postgres
+  pyenv
   rbenv
   ruby-build
   shellcheck
