@@ -38,6 +38,7 @@ FORMULAS=(
   zsh-syntax-highlighting
 )
 CASKS=(
+  bitwarden
   docker
   dropbox
   firefox
