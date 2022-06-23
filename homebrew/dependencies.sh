@@ -19,7 +19,6 @@ FORMULAS=(
   git-delta
   gnupg
   jq
-  kompose
   neovim
   nodenv
   postgres
@@ -52,12 +51,10 @@ CASKS=(
   ngrok
   pennywise
   phoenix
-  sketch
   skype
   slack
   spotify
   vlc
-  xquartz
   zoom
 )
 NPM_PACKAGES=(
