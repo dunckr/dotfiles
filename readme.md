@@ -14,6 +14,7 @@ bash <(curl -s https://raw.githubusercontent.com/dunckr/dotfiles/master/install.
 
 * [Emoji shortcuts](https://github.com/warpling/Macmoji)
 * [IE11](https://github.com/xdissent/ievms)
+* [PurePaste](https://sindresorhus.com/pure-paste)
 
 ## Update
 
