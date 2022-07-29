@@ -30,6 +30,9 @@
 [interactive]
   diffFilter = delta --color-only
 
+[commit]
+    verbose = true
+
 [help]
   autocorrect = 1
 
