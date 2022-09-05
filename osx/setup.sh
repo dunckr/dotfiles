@@ -1,3 +1,6 @@
+# Prevent crash on lid close:
+# pmset -a hibernatemode 0
+
 defaults write -g InitialKeyRepeat -int 10 # normal minimum is 15 (225 ms)
 defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
