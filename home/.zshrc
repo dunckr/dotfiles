@@ -107,10 +107,9 @@ alias pip3update='pip3 list -o | cut -f 1 -d " " | xargs -n 1 pip3 install --upg
 # brew
 alias cask='brew cask'
 alias macupdate='softwareupdate -i -a;'
-alias update='brew -v update; brew -v upgrade; brew cleanup; brew cask cleanup; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system -f; gem update -f; vim +PlugUpdate +PlugUpgrade +UpdateRemotePlugins +qall;'
+alias update='brew -v update; brew -v upgrade; brew cleanup; brew cleanup --cask; brew prune; npm install npm -g; npm update -g; pip3update; gem update --system -f; gem update -f; vim +PlugUpdate +PlugUpgrade +UpdateRemotePlugins +qall;'
 
 # applications
-alias sketch="/Applications/Sketch.app/Contents/MacOS/Sketch"
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
 alias idea='function __idea() { eval "$(/Applications/IntelliJ\ IDEA.app/Contents/MacOS/idea --args \"$@\")"; unset -f __idea; }; __idea'
 
@@ -198,6 +197,7 @@ export PATH=$PATH:/usr/local/opt/go/libexec
 alias serve="python -m http.server"
 alias killall='pkill -f node Python bash nvim ruby ngrok spring postgres'
 alias killchrome='pkill -f "Google Chrome"'
+alias killnode="ps -ef | grep 'ts-node' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 
 # starship
@@ -212,6 +212,14 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
 source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+# android
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_SDK_ROOT/emulator
+export PATH=$PATH:$ANDROID_SDK_ROOT/platform-tools
+
+# Commandline Path is determined by version "/cmdline-tools/[VERSION]/bin" latest is the default from Android studio but please check you setup within the SDK Manager
+export PATH=$PATH:$ANDROID_SDK_ROOT/cmdline-tools/latest/bin
 
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH

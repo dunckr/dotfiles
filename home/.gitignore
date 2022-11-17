@@ -45,3 +45,9 @@ tags.temp
 
 .yardoc
 *.rest
+tsconfig.tsbuildinfo
+
+.env.staging
+.env.stage
+.env.production
+.env.prod

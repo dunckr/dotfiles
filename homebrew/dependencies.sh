@@ -13,6 +13,7 @@ FORMULAS=(
   ack
   awscli
   cloc
+  cloudflare/cloudflare/cloudflared
   coreutils
   fzf
   git
@@ -48,7 +49,6 @@ CASKS=(
   licecap
   mongodb-compass
   muzzle
-  ngrok
   pennywise
   phoenix
   skype

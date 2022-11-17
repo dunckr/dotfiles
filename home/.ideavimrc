@@ -84,7 +84,7 @@ nnoremap <leader>gs :action GotoSuperMethod<cr>
 nnoremap <leader>gd :action GotoDeclaration<cr>
 nnoremap <leader>gr :action GotoRelated<cr>
 
-nnoremap <leader>gb :action Annotate<cr> " git blame
+nnoremap <leader>gb :action Annotate<cr>
 nnoremap <leader>gc :action Git.ResolveConflicts<cr>
 nnoremap <leader>gi :action Vcs.ShowHistoryForBlock<cr>
 vnoremap <leader>gi :action Vcs.ShowHistoryForBlock<CR>:action VimVisualExitMode<CR>
@@ -94,3 +94,7 @@ nnoremap g; :action JumpToLastChange<Enter>
 nnoremap g, :action JumpToNextChange<Enter>
 nnoremap [c :action VcsShowPrevChangeMarker<cr>
 nnoremap ]c :action VcsShowNextChangeMarker<cr>
+
+"noremap <leader>gb :action copilot.requestCompletions<CR>
+"noremap <leader>gb :action copilot.cycleNextInlays<CR>
+"noremap <leader>gb :action copilot.cyclePrevInlays<CR>
