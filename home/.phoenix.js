@@ -18,6 +18,7 @@ bindLaunch('Spotify', 'p', ['alt', 'shift']);
 bindLaunch('IntelliJ IDEA', 't', ['cmd', 'shift']);
 bindLaunch('Terminal', 't', ['alt', 'shift']);
 bindLaunch('Podcasts', 'p', ['alt', 'ctrl']);
+bindLaunch('Simulator', 'i', ['cmd', 'shift']);
 
 const maximise = (key) => {
 	Key.on(key, ['cmd', 'ctrl'], () => {
