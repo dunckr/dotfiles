@@ -45,7 +45,6 @@ CASKS=(
   font-source-code-pro
   google-chrome
   intellij-idea
-  iterm2
   licecap
   mongodb-compass
   muzzle

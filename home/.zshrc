@@ -199,6 +199,7 @@ alias killall='pkill -f node Python bash nvim ruby ngrok spring postgres'
 alias killchrome='pkill -f "Google Chrome"'
 alias killnode="ps -ef | grep 'ts-node' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias killperimeter='pkill -f "Perimeter 81"'
+alias killios='pkill -f "Simulator"'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 
 # starship
