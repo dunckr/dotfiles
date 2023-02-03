@@ -202,6 +202,7 @@ alias killperimeter='pkill -f "Perimeter 81"'
 alias killios='pkill -f "Simulator"'
 alias kill9000='kill -9 $(lsof -t -i:9000)'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
+alias linecount='cloc --exclude-dir=__test__,__tests__,test,spec,node_modules,dist,yarn.lock,package.json,package-lock.json'
 
 # starship
 eval "$(starship init zsh)"
