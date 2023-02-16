@@ -22,7 +22,6 @@ FORMULAS=(
   jq
   neovim
   nodenv
-  postgres
   pyenv
   rbenv
   ruby-build
@@ -54,7 +53,6 @@ CASKS=(
   slack
   spotify
   vlc
-  zoom
 )
 NPM_PACKAGES=(
   @prettier/plugin-ruby
@@ -102,3 +100,6 @@ gem install "${GEMS[@]}"
 pip3 install "${PIP_PACAKGES[@]}"
 
 vim +PlugUpdate +PlugUpgrade +UpdateRemotePlugins +qall
+
+# Fix permissions of zsh
+compaudit | xargs chmod g-w
