@@ -20,6 +20,7 @@ FORMULAS=(
   git-delta
   gnupg
   jq
+  libpq
   neovim
   nodenv
   pyenv
