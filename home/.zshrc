@@ -79,7 +79,8 @@ alias gst="git status"
 alias gup="git pull"
 alias glast="echo 'copied!' && git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 alias gprune='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch is merged into master and can be deleted"; done'
-alias gprunef='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias gprunefmaster='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias gprunef='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias gprunefdev='git checkout -q dev && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base dev $branch) && [[ $(git cherry dev $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias commithelp="echo '
 ^--^  ^------------^
@@ -201,6 +202,7 @@ alias killnode="ps -ef | grep 'ts-node' | grep -v grep | awk '{print $2}' | xarg
 alias killperimeter='pkill -f "Perimeter 81"'
 alias killios='pkill -f "Simulator"'
 alias kill9000='kill -9 $(lsof -t -i:9000)'
+alias kill8111='kill -9 $(lsof -t -i:8111)'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 alias linecount='cloc --exclude-dir=__test__,__tests__,test,spec,node_modules,dist,yarn.lock,package.json,package-lock.json'
 
@@ -233,3 +235,5 @@ if type brew &>/dev/null; then
 fi
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export NEXT_TELEMETRY_DISABLED=1
