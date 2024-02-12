@@ -1,7 +1,7 @@
 #!/bin/sh
 
-NODE_VERSION=16.15.0
-RUBY_VERSION=3.1.3
+NODE_VERSION=20.9.0
+RUBY_VERSION=3.3.0
 PYTHON_VERSION=3.10.4
 
 TAPS=(
@@ -13,7 +13,6 @@ FORMULAS=(
   ack
   awscli
   cloc
-  cloudflare/cloudflare/cloudflared
   coreutils
   fzf
   git
@@ -56,6 +55,7 @@ CASKS=(
   vlc
 )
 NPM_PACKAGES=(
+  @githubnext/github-copilot-cli
   @prettier/plugin-ruby
   javascript-typescript-langserver
   prettier

@@ -137,6 +137,7 @@ alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; 
 alias dclean='docker rmi $(docker images --filter dangling=true)'
 alias ddestroy='docker rmi $(docker images -a -q)'
 alias dprune='docker image prune -a -f && docker container prune -f && docker volume prune -f'
+alias dvolumeprunef='docker volume ls -q | xargs -r docker volume rm -f'
 alias dca='function __dca() { docker attach --sig-proxy=false --detach-keys=ctrl-c $(docker-compose ps -q "$1"); unset -f __dca; }; __dca'
 alias dkill='pkill -f docker'
 
@@ -149,47 +150,6 @@ alias tc="tsc --pretty --noEmit --watch"
 # ruby
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
 alias secret_key="ruby -e \"require 'securerandom';puts SecureRandom.hex(64)\""
-
-# https://github.com/ohmyzsh/ohmyzsh/blob/master/plugins/rails/rails.plugin.zsh
-function _rails_command () {
-  if [ -e "bin/stubs/rails" ]; then
-    bin/stubs/rails $@
-  elif [ -e "bin/rails" ]; then
-    bin/rails $@
-  elif [ -e "script/rails" ]; then
-    ruby script/rails $@
-  elif [ -e "script/server" ]; then
-    ruby script/$@
-  else
-    command rails $@
-  fi
-}
-
-function _rake_command () {
-  if [ -e "bin/stubs/rake" ]; then
-    bin/stubs/rake $@
-  elif [ -e "bin/rake" ]; then
-    bin/rake $@
-  elif type bundle &> /dev/null && ([ -e "Gemfile" ] || [ -e "gems.rb" ]); then
-    bundle exec rake $@
-  else
-    command rake $@
-  fi
-}
-
-function _rspec_command () {
-  if type bundle &> /dev/null && ([ -e "Gemfile" ] || [ -e "gems.rb" ]); then
-    bundle exec rspec $@
-  else
-    command rspec $@
-  fi
-}
-
-alias rails='_rails_command'
-
-alias rake='_rake_command'
-
-alias rspec='_rspec_command'
 
 # go
 export PATH=$PATH:/usr/local/opt/go/libexec
@@ -234,6 +194,10 @@ if type brew &>/dev/null; then
     compinit
 fi
 
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
+# Next.js
 export NEXT_TELEMETRY_DISABLED=1
+
+# Brew paths
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"

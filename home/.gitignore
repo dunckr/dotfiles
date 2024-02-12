@@ -29,6 +29,11 @@ bower_components
 .sass-cache
 .listen_test
 .tern-port
+.byebug_history
+.yardoc
+*.rest
+tsconfig.tsbuildinfo
+
 
 # Thumbnail cache files
 ._*
@@ -43,10 +48,7 @@ tags.temp
 *.crt
 *.key
 
-.yardoc
-*.rest
-tsconfig.tsbuildinfo
-
+# Env files
 .env.staging
 .env.stage
 .env.production
