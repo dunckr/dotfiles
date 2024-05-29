@@ -55,10 +55,10 @@ CASKS=(
   vlc
 )
 NPM_PACKAGES=(
-  @githubnext/github-copilot-cli
   @prettier/plugin-ruby
   javascript-typescript-langserver
   prettier
+  prettier-plugin-tailwindcss
   typescript
   yarn
 )
