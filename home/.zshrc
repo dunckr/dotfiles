@@ -158,13 +158,16 @@ export PATH=$PATH:/usr/local/opt/go/libexec
 alias serve="python -m http.server"
 alias killall='pkill -f node Python bash nvim ruby ngrok spring postgres'
 alias killchrome='pkill -f "Google Chrome"'
-alias killnode="ps -ef | grep 'ts-node' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
+alias killnode="ps -ef | grep 'node' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
+alias killnode="ps -ef | grep 'ruby' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias killperimeter='pkill -f "Perimeter 81"'
 alias killios='pkill -f "Simulator"'
+alias kill3000='kill -9 $(lsof -t -i:3000)'
 alias kill9000='kill -9 $(lsof -t -i:9000)'
 alias kill8111='kill -9 $(lsof -t -i:8111)'
 alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 alias linecount='cloc --exclude-dir=__test__,__tests__,test,spec,node_modules,dist,yarn.lock,package.json,package-lock.json'
+alias timestamp=date +%s
 
 # starship
 eval "$(starship init zsh)"
