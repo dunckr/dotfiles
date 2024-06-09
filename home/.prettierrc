@@ -3,6 +3,5 @@
   "tabWidth": 2,
   "preferSingleQuotes": false,
   "singleQuote": true,
-  "addTrailingCommas": true,
-  "plugins": ["prettier-plugin-tailwindcss"]
+  "addTrailingCommas": true
 }

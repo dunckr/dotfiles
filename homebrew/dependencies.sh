@@ -15,6 +15,7 @@ FORMULAS=(
   cloc
   coreutils
   fzf
+  gh
   git
   git-delta
   gnupg
