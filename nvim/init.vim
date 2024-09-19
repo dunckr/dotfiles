@@ -33,7 +33,7 @@ set ff=unix
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 syntax enable
-set background=light
+set background=dark
 colorscheme molokai
 
 " mouse
