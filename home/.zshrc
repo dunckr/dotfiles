@@ -146,6 +146,7 @@ alias k="kubectl"
 
 # node
 alias tc="tsc --pretty --noEmit --watch"
+export COREPACK_ENABLE_AUTO_PIN=0
 
 # ruby
 alias critic="rubycritic -f console && sandi_meter -d || true && rails_best_practices"
