@@ -82,8 +82,12 @@ set incsearch
 set hlsearch
 
 " spell checking
-set spell
-set spell spelllang=en_us
+if vim.g.vscode then
+    set nospell
+else
+    set spell
+    set spell spelllang=en_us
+endif
 
 " remove whitespace on save
 autocmd BufWritePre * :%s/\s\+$//e
