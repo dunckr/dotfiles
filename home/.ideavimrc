@@ -46,7 +46,6 @@ nnoremap <C-l> <C-W>l
 nnoremap <silent> <C-p> :action GotoFile<CR>
 
 nmap <leader>a :action GotoTest<CR>
-nmap <leader>o :action Github.Open.In.Browser<CR>
 
 nmap <leader>p :action CopyFileName<CR>
 nmap <leader>f :action FileStructurePopup<CR>
