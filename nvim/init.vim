@@ -82,7 +82,7 @@ set incsearch
 set hlsearch
 
 " spell checking
-if vim.g.vscode then
+if exists('g:vscode')
     set nospell
 else
     set spell
@@ -196,3 +196,9 @@ autocmd FileType javascript.jsx nnoremap <leader>t :call js_alternate#run()<cr>
 " ----------------------------------------------------------------------------"
 
 nmap <C-F> <Plug>CtrlSFPrompt
+
+
+if exists('g:vscode')
+    nnoremap <leader>e <Cmd>lua require('vscode').action('workbench.view.explorer')<CR>
+    nnoremap <leader>a <Cmd>lua require('vscode').action('alternate.alternateFile')<CR>
+endif

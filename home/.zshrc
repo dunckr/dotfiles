@@ -178,6 +178,8 @@ source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 bindkey '^B' backward-word
 bindkey '^F' forward-word
 bindkey '^D' delete-word
+bindkey '^E' end-of-line
+bindkey '^A' beginning-of-line
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
