@@ -56,3 +56,6 @@ tags.temp
 
 # Cursor rules
 .cursorrules
+
+# VSCode
+.vscode
