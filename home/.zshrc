@@ -207,3 +207,6 @@ export NEXT_TELEMETRY_DISABLED=1
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
+# Added by Windsurf
+export PATH="/Users/d/.codeium/windsurf/bin:$PATH"
