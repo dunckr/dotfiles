@@ -200,5 +200,5 @@ nmap <C-F> <Plug>CtrlSFPrompt
 
 if exists('g:vscode')
     nnoremap <leader>e <Cmd>lua require('vscode').action('workbench.view.explorer')<CR>
-    nnoremap <leader>a <Cmd>lua require('vscode').action('alternate.alternateFile')<CR>
+    nnoremap <leader>a <Cmd>lua require('vscode').action('test-switcher.switch')<CR>
 endif
