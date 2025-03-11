@@ -40,7 +40,7 @@ colorscheme molokai
 set mouse=a
 set cb=unnamed
 
-set clipboard+=unnamedplus
+set clipboard=
 
 " line numbers
 set relativenumber
@@ -198,6 +198,9 @@ autocmd FileType javascript.jsx nnoremap <leader>t :call js_alternate#run()<cr>
 nmap <C-F> <Plug>CtrlSFPrompt
 
 
+" ----------------------------------------------------------------------------
+" vscode
+" ----------------------------------------------------------------------------"
 if exists('g:vscode')
     nnoremap <leader>e <Cmd>lua require('vscode').action('workbench.view.explorer')<CR>
     nnoremap <leader>a <Cmd>lua require('vscode').action('test-switcher.switch')<CR>
