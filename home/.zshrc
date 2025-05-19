@@ -13,6 +13,11 @@ fi
 # nodenv
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
 
+# pnpm
+if [ -f ~/.pnpm-completion.zsh ]; then
+  source ~/.pnpm-completion.zsh
+fi
+
 # rbenv
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
@@ -145,6 +150,7 @@ alias dkill='pkill -f docker'
 alias k="kubectl"
 
 # node
+alias p="pnpm"
 alias tc="tsc --pretty --noEmit --watch"
 export COREPACK_ENABLE_AUTO_PIN=0
 
