@@ -1,26 +1,26 @@
-" Plugins
-" ============================================================================
+  " Plugins
+  " ============================================================================
 
-silent! if plug#begin('~/.config/nvim/plugged')
+  silent! if plug#begin('~/.config/nvim/plugged')
 
-Plug 'Raimondi/delimitMate'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'dunckr/molokai'
-Plug 'dyng/ctrlsf.vim'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'ervandew/supertab'
-Plug 'junegunn/fzf.vim'
-Plug 'mhinz/vim-hugefile'
-Plug 'mhinz/vim-signify'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'terryma/vim-multiple-cursors'
+  Plug 'Raimondi/delimitMate'
+  Plug 'christoomey/vim-tmux-navigator'
+  Plug 'dunckr/molokai'
+  Plug 'dyng/ctrlsf.vim'
+  Plug 'editorconfig/editorconfig-vim'
+  Plug 'ervandew/supertab'
+  Plug 'junegunn/fzf.vim'
+  Plug 'm4xshen/hardtime.nvim'
+  Plug 'mhinz/vim-hugefile'
+  Plug 'mhinz/vim-signify'
+  Plug 'nathanaelkane/vim-indent-guides'
+  Plug 'scrooloose/nerdcommenter'
+  Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+  Plug 'terryma/vim-multiple-cursors'
+  Plug 'tpope/vim-endwise'
 
-Plug 'tpope/vim-endwise'
-
-call plug#end()
-endif
+  call plug#end()
+  endif
 
 "
 " ============================================================================
