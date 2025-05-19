@@ -18,6 +18,7 @@ bindLaunch('Spotify', 'p', ['alt', 'shift']);
 // bindLaunch('IntelliJ IDEA', 't', ['ctrl', 'cmd']);
 // bindLaunch('Cursor', 't', ['cmd', 'shift']);
 bindLaunch('Windsurf', 't', ['cmd', 'shift']);
+bindLaunch('ChatGPT', 'y', ['cmd']);
 bindLaunch('Terminal', 't', ['alt', 'shift']);
 bindLaunch('Podcasts', 'p', ['alt', 'ctrl']);
 bindLaunch('Simulator', 'i', ['cmd', 'shift']);
