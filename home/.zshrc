@@ -133,17 +133,17 @@ alias vim="nvim"
 alias mux="tmuxinator"
 
 # docker
-alias dm="docker-machine"
-alias dc="docker-compose"
-alias dcr="docker-compose run --rm"
-alias dcrp="docker-compose run --rm --service-ports"
+alias dm="docker machine"
+alias dc="docker compose"
+alias dcr="docker compose run --rm"
+alias dcrp="docker compose run --rm --service-ports"
 alias denv='function __denv() { eval "$(dm env $@)"; unset -f __denv; }; __denv'
-alias dopen='function __dopen() { eval "$(open http://`docker-machine ip $@`)"; unset -f __dopen; }; __dopen'
+alias dopen='function __dopen() { eval "$(open http://`docker machine ip $@`)"; unset -f __dopen; }; __dopen'
 alias dclean='docker rmi $(docker images --filter dangling=true)'
 alias ddestroy='docker rmi $(docker images -a -q)'
 alias dprune='docker image prune -a -f && docker container prune -f && docker volume prune -f'
 alias dvolumeprunef='docker volume ls -q | xargs -r docker volume rm -f'
-alias dca='function __dca() { docker attach --sig-proxy=false --detach-keys=ctrl-c $(docker-compose ps -q "$1"); unset -f __dca; }; __dca'
+alias dca='function __dca() { docker attach --sig-proxy=false --detach-keys=ctrl-c $(docker compose ps -q "$1"); unset -f __dca; }; __dca'
 alias dkill='pkill -f docker'
 
 # kubernetes
