@@ -14,7 +14,7 @@
   Plug 'mhinz/vim-hugefile'
   Plug 'mhinz/vim-signify'
   Plug 'nathanaelkane/vim-indent-guides'
-  Plug 'scrooloose/nerdcommenter'
+  " Plug 'scrooloose/nerdcommenter'
   Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
   Plug 'terryma/vim-multiple-cursors'
   Plug 'tpope/vim-endwise'
@@ -197,11 +197,12 @@ autocmd FileType javascript.jsx nnoremap <leader>t :call js_alternate#run()<cr>
 
 nmap <C-F> <Plug>CtrlSFPrompt
 
-
 " ----------------------------------------------------------------------------
 " vscode
 " ----------------------------------------------------------------------------"
 if exists('g:vscode')
     nnoremap <leader>e <Cmd>lua require('vscode').action('workbench.view.explorer')<CR>
     nnoremap <leader>a <Cmd>lua require('vscode').action('test-switcher.switch')<CR>
+    nnoremap <leader>c <Cmd>lua require('vscode').action('editor.action.commentLine')<CR>
+    nnoremap <leader>` <Cmd>lua require('vscode').action('vscode-neovim.restart')<CR>
 endif
