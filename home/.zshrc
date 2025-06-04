@@ -78,10 +78,12 @@ alias gf="git fetch"
 alias gl="git log"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 alias gp="git push"
+alias gpr="git push origin \$(git branch --show-current) && gh pr create -f && gh pr view --web"
 alias grc="git rebase --continue"
 alias gsclone="git clone --depth=1"
 alias gst="git status"
 alias gup="git pull"
+
 alias glast="echo 'copied!' && git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 alias gprune='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch is merged into master and can be deleted"; done'
 alias gprunefmaster='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
