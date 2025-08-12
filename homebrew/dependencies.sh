@@ -6,7 +6,6 @@ PYTHON_VERSION=3.12.2
 
 TAPS=(
   homebrew/cask
-  homebrew/cask-fonts
   neovim/homebrew-neovim
 )
 FORMULAS=(
