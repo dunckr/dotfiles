@@ -9,8 +9,8 @@ const bindLaunch = (appName, key, modifiers) =>
     app.isActive() ? app.hide() : app.focus();
   });
 
-bindLaunch('Google Chrome', 'c', ['cmd', 'shift']);
-// bindLaunch('Firefox', 'c', ['alt', 'shift']);
+bindLaunch('Firefox', 'c', ['cmd', 'shift']);
+bindLaunch('Chrome', 'c', ['alt', 'shift']);
 bindLaunch('Safari', 'c', ['cmd', 'ctrl']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
 bindLaunch('Slack', 'm', ['alt', 'shift']);
