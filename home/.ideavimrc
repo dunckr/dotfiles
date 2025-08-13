@@ -18,6 +18,8 @@ set textobj-indent
 
 let mapleader = ','
 
+command! PasteLorem put ="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+
 noremap H ^
 noremap L $
 
@@ -64,6 +66,8 @@ nnoremap <silent> <C-S-F> :action FindInPath<CR>
 nnoremap <Leader>k :action HighlightUsagesInFile<cr>
 
 nnoremap <silent> <C-E> :action SelectInProjectView<cr>
+
+nnoremap <leader>li :PasteLorem<CR>
 
 nnoremap <leader>fu :action FindUsages<cr>
 nnoremap <leader>su :action ShowUsages<cr>
