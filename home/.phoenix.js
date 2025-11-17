@@ -21,6 +21,10 @@ bindLaunch('Terminal', 't', ['alt', 'shift']);
 bindLaunch('Podcasts', 'p', ['alt', 'ctrl']);
 bindLaunch('Simulator', 'i', ['cmd', 'shift']);
 
+Key.on('3', ['cmd', 'alt'], () => {
+  Task.run('/bin/zsh', ['-lc', '/Users/d/src/screenshot/command.sh'])
+});
+
 const maximise = (key) => {
   Key.on(key, ['cmd', 'ctrl'], () => {
     const win = Window.focused();

@@ -1,7 +1,5 @@
 dotfiles="$HOME/dotfiles"
 
-[ -s "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"
-
 # brew
 if type brew &>/dev/null; then
   FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
@@ -9,6 +7,9 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
   compinit
 fi
+
+# locals
+[ -s "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"
 
 # nodenv
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
@@ -154,6 +155,7 @@ alias k="kubectl"
 # node
 alias p="pnpm"
 alias tc="tsc --pretty --noEmit --watch"
+alias pall="pnpm lint && pnpm typecheck && pnpm format && pnpm test"
 export COREPACK_ENABLE_AUTO_PIN=0
 
 # ruby
