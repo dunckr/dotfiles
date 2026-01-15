@@ -13,8 +13,9 @@ bash <(curl -s https://raw.githubusercontent.com/dunckr/dotfiles/main/install.sh
 ### Manual
 
 * [Emoji shortcuts](https://github.com/warpling/Macmoji)
-* [IE11](https://github.com/xdissent/ievms)
+* [Focus](https://heyfocus.com/)
 * [PurePaste](https://sindresorhus.com/pure-paste)
+* [VoiceInk](https://tryvoiceink.com/)
 
 ## Update
 

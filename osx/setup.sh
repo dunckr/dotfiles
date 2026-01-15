@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Prevent crash on lid close:
 # pmset -a hibernatemode 0
 

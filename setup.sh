@@ -1,25 +1,55 @@
 #!/bin/bash
+set -euo pipefail
 
-dotfiles="$HOME/dotfiles"
+# Get absolute path to dotfiles directory
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES="$SCRIPT_DIR"
 
 link() {
   from="$1"
   to="$2"
-  echo "Linking '$from' to '$to'"
+
+  # Skip if already correctly linked
+  if [[ -L "$to" && "$(readlink "$to")" == "$from" ]]; then
+    echo "✓ Already linked: $to"
+    return 0
+  fi
+
+  # Create parent directory if needed
+  mkdir -p "$(dirname "$to")"
+
+  # Backup existing file if not a symlink
+  if [[ -e "$to" && ! -L "$to" ]]; then
+    backup="$to.backup.$(date +%s)"
+    echo "⚠ Backing up existing file to: $backup"
+    mv "$to" "$backup"
+  fi
+
+  echo "→ Linking '$from' to '$to'"
   rm -f "$to"
   ln -s "$from" "$to"
 }
 
-./osx/setup.sh
-./homebrew/install.sh
-./homebrew/dependencies.sh
-./nvim/setup.sh
+run_if_exists() {
+  local script="$1"
+  if [[ -f "$DOTFILES/$script" ]]; then
+    echo "Running $script..."
+    bash "$DOTFILES/$script"
+  else
+    echo "⚠ Skipping $script (not found)"
+  fi
+}
+
+run_if_exists "osx/setup.sh"
+run_if_exists "homebrew/install.sh"
+run_if_exists "homebrew/dependencies.sh"
+run_if_exists "nvim/setup.sh"
 
 for location in $(find home -name '.*'); do
   file="${location##*/}"
   file="${file%.sh}"
-  link "$dotfiles/$location" "$HOME/$file"
+  link "$DOTFILES/$location" "$HOME/$file"
 done
 
-link "$dotfiles/nvim/init.vim" "$HOME/.config/nvim/"
-link "$dotfiles/home/.config/agents/commands" "$HOME/.claude/commands"
+link "$DOTFILES/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+link "$DOTFILES/home/.config/agents/commands" "$HOME/.claude/commands"
