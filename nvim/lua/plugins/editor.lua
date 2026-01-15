@@ -52,4 +52,25 @@ return {
 	{
 		"tpope/vim-endwise",
 	},
+
+	-- Commenting (modern replacement for nerdcommenter)
+	{
+		"numToStr/Comment.nvim",
+		opts = {
+			-- Add a space between comment and line
+			padding = true,
+			-- Whether cursor should stay at position
+			sticky = true,
+			-- LHS of toggle mappings in NORMAL mode
+			toggler = {
+				line = "gcc", -- Line-comment toggle
+				block = "gbc", -- Block-comment toggle
+			},
+			-- LHS of operator-pending mappings in NORMAL and VISUAL mode
+			opleader = {
+				line = "gc", -- Line-comment operator
+				block = "gb", -- Block-comment operator
+			},
+		},
+	},
 }
