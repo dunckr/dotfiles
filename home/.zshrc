@@ -11,23 +11,99 @@ fi
 # locals
 [ -s "$HOME/.zshrc.local" ] && . "$HOME/.zshrc.local"
 
-# nodenv
-if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
+# nodenv - lazy loaded for faster shell startup
+if which nodenv > /dev/null; then
+  export PATH="$HOME/.nodenv/shims:$PATH"
+
+  nodenv() {
+    unset -f nodenv node npm npx
+    eval "$(command nodenv init -)"
+    nodenv "$@"
+  }
+
+  node() {
+    unset -f nodenv node npm npx
+    eval "$(command nodenv init -)"
+    node "$@"
+  }
+
+  npm() {
+    unset -f nodenv node npm npx
+    eval "$(command nodenv init -)"
+    npm "$@"
+  }
+
+  npx() {
+    unset -f nodenv node npm npx
+    eval "$(command nodenv init -)"
+    npx "$@"
+  }
+fi
 
 # pnpm
 if [ -f ~/.pnpm-completion.zsh ]; then
   source ~/.pnpm-completion.zsh
 fi
 
-# rbenv
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# rbenv - lazy loaded for faster shell startup
+if which rbenv > /dev/null; then
+  export PATH="$HOME/.rbenv/shims:$PATH"
 
-# pyenv
+  rbenv() {
+    unset -f rbenv ruby gem bundle
+    eval "$(command rbenv init -)"
+    rbenv "$@"
+  }
+
+  ruby() {
+    unset -f rbenv ruby gem bundle
+    eval "$(command rbenv init -)"
+    ruby "$@"
+  }
+
+  gem() {
+    unset -f rbenv ruby gem bundle
+    eval "$(command rbenv init -)"
+    gem "$@"
+  }
+
+  bundle() {
+    unset -f rbenv ruby gem bundle
+    eval "$(command rbenv init -)"
+    bundle "$@"
+  }
+fi
+
+# pyenv - lazy loaded for faster shell startup
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+  export PATH="$PYENV_ROOT/shims:$PATH"
+
+  pyenv() {
+    unset -f pyenv python pip pip3
+    eval "$(command pyenv init -)"
+    pyenv "$@"
+  }
+
+  python() {
+    unset -f pyenv python pip pip3
+    eval "$(command pyenv init -)"
+    python "$@"
+  }
+
+  pip() {
+    unset -f pyenv python pip pip3
+    eval "$(command pyenv init -)"
+    pip "$@"
+  }
+
+  pip3() {
+    unset -f pyenv python pip pip3
+    eval "$(command pyenv init -)"
+    pip3 "$@"
+  }
 fi
 
 export EDITOR=vim
