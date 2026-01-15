@@ -51,7 +51,6 @@ if [[ -f "$HOME/.Brewfile" ]]; then
 fi
 
 run_if_exists "homebrew/language-dependencies.sh"
-run_if_exists "nvim/setup.sh"
 
 for location in $(find home -name '.*'); do
   file="${location##*/}"
@@ -59,5 +58,6 @@ for location in $(find home -name '.*'); do
   link "$DOTFILES/$location" "$HOME/$file"
 done
 
-link "$DOTFILES/nvim/init.vim" "$HOME/.config/nvim/init.vim"
+link "$DOTFILES/nvim/init.lua" "$HOME/.config/nvim/init.lua"
+link "$DOTFILES/nvim/lua" "$HOME/.config/nvim/lua"
 link "$DOTFILES/home/.config/agents/commands" "$HOME/.claude/commands"
