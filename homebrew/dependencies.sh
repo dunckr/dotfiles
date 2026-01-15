@@ -1,7 +1,7 @@
 #!/bin/sh
 
 NODE_VERSION=22.11.0
-RUBY_VERSION=3.3.7
+RUBY_VERSION=3.3.10
 PYTHON_VERSION=3.12.2
 
 TAPS=(
@@ -24,6 +24,7 @@ FORMULAS=(
   nodenv
   pyenv
   rbenv
+  ripgrep
   ruby-build
   shellcheck
   siege

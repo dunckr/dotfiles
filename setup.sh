@@ -22,3 +22,4 @@ for location in $(find home -name '.*'); do
 done
 
 link "$dotfiles/nvim/init.vim" "$HOME/.config/nvim/"
+link "$dotfiles/home/.config/agents/commands" "$HOME/.claude/commands"
