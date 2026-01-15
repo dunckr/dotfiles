@@ -42,7 +42,15 @@ run_if_exists() {
 
 run_if_exists "osx/setup.sh"
 run_if_exists "homebrew/install.sh"
-run_if_exists "homebrew/dependencies.sh"
+
+link "$DOTFILES/home/.Brewfile" "$HOME/.Brewfile"
+
+if [[ -f "$HOME/.Brewfile" ]]; then
+  echo "Installing Homebrew packages from Brewfile..."
+  brew bundle install
+fi
+
+run_if_exists "homebrew/language-dependencies.sh"
 run_if_exists "nvim/setup.sh"
 
 for location in $(find home -name '.*'); do
