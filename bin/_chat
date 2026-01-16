@@ -1,0 +1,28 @@
+#compdef chat
+
+_chat() {
+  local -a templates
+  local dotfiles="$HOME/dotfiles"
+  local prompts_dir="$dotfiles/prompts"
+
+  # Get template names by listing .txt files without extension
+  if [[ -d "$prompts_dir" ]]; then
+    templates=(${(f)"$(ls -1 "$prompts_dir"/*.txt 2>/dev/null | xargs -n1 basename | sed 's/\.txt$//')"})
+  fi
+
+  local context state state_descr line
+  typeset -A opt_args
+
+  _arguments -C \
+    '(-t --template)'{-t,--template}'[Use a preloaded prompt template]:template:->templates' \
+    '(-h --help)'{-h,--help}'[Show help message]' \
+    '*: :_message "prompt text"'
+
+  case $state in
+    templates)
+      _describe 'template' templates
+      ;;
+  esac
+}
+
+_chat "$@"

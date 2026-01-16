@@ -1,0 +1,125 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage:
+#   chat explain this code to me
+#   chat customer-support reply to customer email about issue
+#   git diff | chat code-review
+#   chat -t customer-support "reply to this email"
+#
+# Templates:
+#   customer-support, code-review, commit-message, explain, proofread
+#   (automatically detected if first arg matches a template name)
+#
+# Notes:
+# - Requires Accessibility permission for your terminal app (to send keystrokes).
+# - Uses the clipboard to paste the prompt.
+# - No quotes needed for multi-word prompts!
+
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+PROMPTS_DIR="$(dirname "$SCRIPT_DIR")/prompts"
+
+template=""
+prompt=""
+
+# If no arguments and stdin is not available, show help
+if [[ $# -eq 0 ]] && [ -t 0 ]; then
+  echo "Usage: chat [TEMPLATE] PROMPT"
+  echo "   or: echo text | chat [TEMPLATE]"
+  echo ""
+  echo "Available templates:"
+  ls -1 "$PROMPTS_DIR" | sed 's/\.txt$//' | sed 's/^/  - /'
+  echo ""
+  echo "Examples:"
+  echo "  chat explain this code to me"
+  echo "  chat customer-support reply about refund issue"
+  echo "  git diff | chat code-review"
+  exit 0
+fi
+
+# Smart argument parsing
+if [[ $# -gt 0 ]]; then
+  # Check if first arg is a flag
+  if [[ "$1" =~ ^- ]]; then
+    case "$1" in
+      -t|--template)
+        if [[ -z "${2:-}" ]]; then
+          echo "Error: --template requires a template name" >&2
+          exit 2
+        fi
+        template="$2"
+        shift 2
+        prompt="$*"
+        ;;
+      -h|--help)
+        echo "Usage: chat [OPTIONS] PROMPT"
+        echo ""
+        echo "Options:"
+        echo "  -t, --template NAME    Use a preloaded prompt template"
+        echo "  -h, --help             Show this help message"
+        echo ""
+        echo "Available templates:"
+        ls -1 "$PROMPTS_DIR" | sed 's/\.txt$//' | sed 's/^/  - /'
+        exit 0
+        ;;
+      *)
+        echo "Error: Unknown option $1" >&2
+        exit 2
+        ;;
+    esac
+  else
+    # Check if first arg is a valid template name
+    potential_template="$1"
+    if [[ -f "$PROMPTS_DIR/${potential_template}.txt" ]]; then
+      template="$potential_template"
+      shift
+      prompt="$*"
+    else
+      # All args are the prompt
+      prompt="$*"
+    fi
+  fi
+fi
+
+# If no prompt yet, read from stdin
+if [[ -z "$prompt" ]]; then
+  if [ -t 0 ]; then
+    echo "Error: No prompt provided" >&2
+    exit 2
+  fi
+  prompt="$(cat)"
+fi
+
+# Load template if specified
+if [[ -n "$template" ]]; then
+  template_file="$PROMPTS_DIR/${template}.txt"
+  if [[ ! -f "$template_file" ]]; then
+    echo "Error: Template '$template' not found at $template_file" >&2
+    echo "Run 'chat --help' to see available templates" >&2
+    exit 2
+  fi
+  template_content="$(cat "$template_file")"
+  prompt="${template_content}${prompt}"
+fi
+
+# Avoid sending empty prompts
+if [[ -z "${prompt//$'\n'/}" ]]; then
+  echo "Empty prompt." >&2
+  exit 2
+fi
+
+# Copy prompt to clipboard
+printf "%s" "$prompt" | pbcopy
+
+# Drive the ChatGPT app: new chat, paste, submit
+osascript <<'EOF'
+tell application "ChatGPT" to activate
+delay 0.2
+tell application "System Events"
+  keystroke "n" using command down
+  delay 0.5
+  keystroke "v" using command down
+  delay 0.3
+  key code 36
+end tell
+EOF

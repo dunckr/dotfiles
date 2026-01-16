@@ -117,11 +117,16 @@ alias .....='cd ../../../..'
 alias ......='cd ../../../../..'
 alias ~='cd ~'
 
-alias ls='ls -FG'
 alias cp="cp -v"
 alias mv="mv -v"
-alias ls="ls -FGh"
 alias du="du -cksh"
+
+# Modern Rust replacements
+alias cat='bat'
+alias ls='eza --group-directories-first'
+alias find='fd'
+# Note: NOT aliasing grep to rg - too many compatibility issues
+# To use original commands when needed: \cat, \ls, \find or command cat, command ls, command find
 # Use modern regexps for sed, i.e. "(one|two)", not "\(one\|two\)"
 alias sed="sed -E"
 # Just print request/response headers
@@ -247,14 +252,16 @@ alias killall='pkill -f node Python bash nvim ruby ngrok spring postgres'
 alias killchrome='pkill -f "Google Chrome"'
 alias killnode="ps -ef | grep 'node' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias killnode="ps -ef | grep 'ruby' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
-alias killperimeter='pkill -f "Perimeter 81"'
 alias killios='pkill -f "Simulator"'
 alias kill3000='kill -9 $(lsof -t -i:3000)'
 alias kill9000='kill -9 $(lsof -t -i:9000)'
 alias kill8111='kill -9 $(lsof -t -i:8111)'
-alias largest='function _largest() { find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
+alias largest='function _largest() { command find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 alias linecount='cloc --exclude-dir=__test__,__tests__,test,spec,node_modules,dist,yarn.lock,package.json,package-lock.json'
 alias timestamp=date +%s
+
+# zoxide - smart cd replacement
+eval "$(zoxide init zsh)"
 
 # starship
 eval "$(starship init zsh)"
@@ -296,6 +303,11 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
 # Added by Windsurf
 export PATH="/Users/d/.codeium/windsurf/bin:$PATH"
+
+alias chat="$dotfiles/bin/chat"
+alias rename="$dotfiles/bin/renametab"
+alias worktree-add="$dotfiles/bin/worktree-add"
+fpath=($dotfiles/bin $fpath)
 
 # pnpm
 export PNPM_HOME="$HOME/Library/pnpm"

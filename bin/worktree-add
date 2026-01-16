@@ -1,0 +1,68 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage:
+#   worktree-add BRANCH_NAME
+#
+# Creates a git worktree with the specified branch name, copies .idea and .env
+# from main worktree, runs pnpm install, and opens in IntelliJ.
+#
+# Run this script from the worktree container directory (parent of all worktrees).
+
+# Check if branch name provided
+if [[ $# -eq 0 ]]; then
+  echo "Usage: worktree-add BRANCH_NAME" >&2
+  echo "" >&2
+  echo "Creates a git worktree with the specified branch name" >&2
+  echo "Run from the worktree container directory" >&2
+  exit 1
+fi
+
+BRANCH_NAME="$1"
+
+# Check if main worktree exists
+if [[ ! -d "main" ]]; then
+  echo "Error: 'main' directory not found in current directory" >&2
+  echo "Please run this script from the worktree container directory" >&2
+  echo "(the parent directory containing all worktrees)" >&2
+  exit 1
+fi
+
+# Create the worktree
+echo "Creating worktree for branch: $BRANCH_NAME"
+if ! git worktree add "$BRANCH_NAME"; then
+  echo "Error: Failed to create worktree" >&2
+  exit 1
+fi
+
+WORKTREE_PATH="$(cd "$BRANCH_NAME" && pwd)"
+
+# Copy .idea directory from main if it exists
+if [[ -d "main/.idea" ]]; then
+  echo "Copying .idea directory from main..."
+  cp -r "main/.idea" "$WORKTREE_PATH/"
+else
+  echo "Warning: main/.idea not found, skipping copy"
+fi
+
+# Copy .env file from main if it exists
+if [[ -f "main/.env" ]]; then
+  echo "Copying .env file from main..."
+  cp "main/.env" "$WORKTREE_PATH/"
+else
+  echo "Warning: main/.env not found, skipping copy"
+fi
+
+# Run pnpm install in the new worktree
+echo "Running pnpm install..."
+cd "$WORKTREE_PATH"
+if ! pnpm install; then
+  echo "Error: pnpm install failed" >&2
+  exit 1
+fi
+
+# Open in IntelliJ IDEA
+echo "Opening in IntelliJ IDEA..."
+open -a "IntelliJ IDEA" "$WORKTREE_PATH"
+
+echo "Worktree created successfully at: $WORKTREE_PATH"

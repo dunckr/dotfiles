@@ -43,11 +43,11 @@ run_if_exists() {
 run_if_exists "osx/setup.sh"
 run_if_exists "homebrew/install.sh"
 
-link "$DOTFILES/home/.Brewfile" "$HOME/.Brewfile"
+link "$DOTFILES/home/Brewfile" "$HOME/Brewfile"
 
-if [[ -f "$HOME/.Brewfile" ]]; then
+if [[ -f "$HOME/Brewfile" ]]; then
   echo "Installing Homebrew packages from Brewfile..."
-  brew bundle install
+  brew bundle
 fi
 
 run_if_exists "homebrew/language-dependencies.sh"
@@ -61,3 +61,4 @@ done
 link "$DOTFILES/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 link "$DOTFILES/nvim/lua" "$HOME/.config/nvim/lua"
 link "$DOTFILES/home/.config/agents/commands" "$HOME/.claude/commands"
+link "$DOTFILES/home/.config/agents/settings.json" "$HOME/.claude/settings.json"

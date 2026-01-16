@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Usage: renametab My Window Name
+# Sets the terminal tab/window title
+
+echo -ne "\033]0;${*}\007"
