@@ -28,6 +28,16 @@ if [[ ! -d "main" ]]; then
   exit 1
 fi
 
+# Pull latest changes in main worktree
+echo "Pulling latest changes in main worktree..."
+cd main
+if ! git pull origin main; then
+  echo "Error: Failed to pull latest changes from origin/main" >&2
+  cd ..
+  exit 1
+fi
+cd ..
+
 # Create the worktree
 echo "Creating worktree for branch: $BRANCH_NAME"
 if ! git worktree add "$BRANCH_NAME"; then
@@ -51,6 +61,30 @@ if [[ -f "main/.env" ]]; then
   cp "main/.env" "$WORKTREE_PATH/"
 else
   echo "Warning: main/.env not found, skipping copy"
+fi
+
+# Copy CLAUDE.md from main if it exists
+if [[ -f "main/CLAUDE.md" ]]; then
+  echo "Copying CLAUDE.md from main..."
+  cp "main/CLAUDE.md" "$WORKTREE_PATH/"
+else
+  echo "Warning: main/CLAUDE.md not found, skipping copy"
+fi
+
+# Copy AGENTS.md from main if it exists
+if [[ -f "main/AGENTS.md" ]]; then
+  echo "Copying AGENTS.md from main..."
+  cp "main/AGENTS.md" "$WORKTREE_PATH/"
+else
+  echo "Warning: main/AGENTS.md not found, skipping copy"
+fi
+
+# Copy .claude directory from main if it exists
+if [[ -d "main/.claude" ]]; then
+  echo "Copying .claude directory from main..."
+  cp -r "main/.claude" "$WORKTREE_PATH/"
+else
+  echo "Warning: main/.claude not found, skipping copy"
 fi
 
 # Run pnpm install in the new worktree

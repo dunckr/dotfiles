@@ -201,7 +201,7 @@ alias update='brew -v update; brew -v upgrade; brew cleanup; brew cleanup --cask
 
 # applications
 alias chrome="/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome"
-alias idea='function __idea() { eval "$(/Applications/IntelliJ\ IDEA.app/Contents/MacOS/idea --args \"$@\")"; unset -f __idea; }; __idea'
+alias idea='function __idea() { /Applications/IntelliJ\ IDEA.app/Contents/MacOS/idea "$@"; unset -f __idea; }; __idea'
 
 # shorthands
 alias cls="clear"
