@@ -160,7 +160,7 @@ alias gf="git fetch"
 alias gl="git log"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 alias gp="git push"
-alias gpr="git push origin \$(git branch --show-current) && gh pr create -f && gh pr view --web"
+alias gpr="git push origin \$(git branch --show-current) && git fetch origin main:main && gh pr create -f -B main && gh pr view --web"
 alias grc="git rebase --continue"
 alias gsclone="git clone --depth=1"
 alias gst="git status"
@@ -307,6 +307,8 @@ export PATH="/Users/d/.codeium/windsurf/bin:$PATH"
 alias chat="$dotfiles/bin/chat"
 alias rename="$dotfiles/bin/renametab"
 alias worktree-add="$dotfiles/bin/worktree-add"
+alias worktree-rm="$dotfiles/bin/worktree-rm"
+alias worktree-prune="$dotfiles/bin/worktree-prune"
 fpath=($dotfiles/bin $fpath)
 
 # pnpm

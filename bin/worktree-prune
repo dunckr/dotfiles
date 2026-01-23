@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage:
+#   worktree-prune
+#
+# Removes all git worktrees except main/master.
+# This deletes the folders, removes the worktrees from git, and prunes stale metadata.
+#
+# Run this script from the worktree container directory (parent of all worktrees).
+
+# Check if main or master worktree exists
+if [[ ! -d "main" ]] && [[ ! -d "master" ]]; then
+  echo "Error: Neither 'main' nor 'master' directory found in current directory" >&2
+  echo "Please run this script from the worktree container directory" >&2
+  echo "(the parent directory containing all worktrees)" >&2
+  exit 1
+fi
+
+# Get the list of all worktrees, excluding main/master
+# git worktree list outputs: <path> <commit> [<branch>]
+echo "Finding worktrees to remove..."
+WORKTREES_TO_REMOVE=$(git worktree list --porcelain | grep "^worktree" | cut -d' ' -f2 | while read -r path; do
+  basename_path=$(basename "$path")
+  if [[ "$basename_path" != "main" ]] && [[ "$basename_path" != "master" ]]; then
+    echo "$path"
+  fi
+done)
+
+if [[ -z "$WORKTREES_TO_REMOVE" ]]; then
+  echo "No worktrees to remove (only main/master found)"
+  exit 0
+fi
+
+# Confirm with user
+echo "The following worktrees will be removed:"
+echo "$WORKTREES_TO_REMOVE"
+echo ""
+read -p "Are you sure you want to remove these worktrees? (y/N): " -n 1 -r
+echo ""
+
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  echo "Aborted"
+  exit 0
+fi
+
+# Remove each worktree
+echo ""
+while IFS= read -r worktree_path; do
+  if [[ -n "$worktree_path" ]]; then
+    branch_name=$(basename "$worktree_path")
+    echo "Removing worktree: $branch_name"
+    if ! git worktree remove "$worktree_path" 2>/dev/null; then
+      echo "  Warning: Failed to remove $branch_name cleanly, trying with --force..."
+      if ! git worktree remove --force "$worktree_path"; then
+        echo "  Error: Failed to remove $branch_name" >&2
+        continue
+      fi
+    fi
+
+    # Delete the branch
+    echo "  Deleting branch: $branch_name"
+    if ! git branch -D "$branch_name" 2>/dev/null; then
+      echo "  Warning: Could not delete branch '$branch_name' (it may not exist or already be deleted)" >&2
+    fi
+  fi
+done <<< "$WORKTREES_TO_REMOVE"
+
+# Prune any stale worktree metadata
+echo ""
+echo "Pruning stale worktree metadata..."
+git worktree prune
+
+echo ""
+echo "All worktrees removed successfully (kept main/master)"
