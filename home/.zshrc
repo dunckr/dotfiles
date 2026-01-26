@@ -160,7 +160,7 @@ alias gf="git fetch"
 alias gl="git log"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 alias gp="git push"
-alias gpr="git push origin \$(git branch --show-current) && git fetch origin main:main && gh pr create -f -B main && gh pr view --web"
+alias gpr="git push -u origin \$(git branch --show-current) && gh pr create -f -B main && gh pr view --web"
 alias grc="git rebase --continue"
 alias gsclone="git clone --depth=1"
 alias gst="git status"
@@ -245,6 +245,7 @@ alias secret_key="ruby -e \"require 'securerandom';puts SecureRandom.hex(64)\""
 
 # go
 export PATH=$PATH:/usr/local/opt/go/libexec
+export PATH=$PATH:$(go env GOPATH)/bin
 
 # commands
 alias serve="python -m http.server"

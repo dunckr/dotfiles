@@ -47,6 +47,10 @@ fi
 
 WORKTREE_PATH="$(cd "$BRANCH_NAME" && pwd)"
 
+# Generate a random port number between 3000 and 9000
+PORT=$(( 3000 + RANDOM % 6001 ))
+echo "Generated port number: $PORT"
+
 # Copy .idea directory from main if it exists
 if [[ -d "main/.idea" ]]; then
   echo "Copying .idea directory from main..."
@@ -59,6 +63,19 @@ fi
 if [[ -f "main/.env" ]]; then
   echo "Copying .env file from main..."
   cp "main/.env" "$WORKTREE_PATH/"
+  # Replace port 3000 with the generated port number
+  if grep -q "3000" "$WORKTREE_PATH/.env"; then
+    sed -i '' "s/3000/$PORT/g" "$WORKTREE_PATH/.env"
+    echo "Updated port from 3000 to $PORT in .env"
+  fi
+  # Add or update PORT environment variable
+  if grep -q "^PORT=" "$WORKTREE_PATH/.env"; then
+    sed -i '' "s/^PORT=.*/PORT=$PORT/" "$WORKTREE_PATH/.env"
+    echo "Updated PORT=$PORT in .env"
+  else
+    echo "PORT=$PORT" >> "$WORKTREE_PATH/.env"
+    echo "Added PORT=$PORT to .env"
+  fi
 else
   echo "Warning: main/.env not found, skipping copy"
 fi
