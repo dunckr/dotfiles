@@ -117,3 +117,4 @@ echo "Opening in IntelliJ IDEA..."
 open -a "IntelliJ IDEA" "$WORKTREE_PATH"
 
 echo "Worktree created successfully at: $WORKTREE_PATH"
+echo "WORKTREE_PATH=$WORKTREE_PATH"

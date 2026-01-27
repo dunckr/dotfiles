@@ -307,9 +307,19 @@ export PATH="/Users/d/.codeium/windsurf/bin:$PATH"
 
 alias chat="$dotfiles/bin/chat"
 alias rename="$dotfiles/bin/renametab"
-alias worktree-add="$dotfiles/bin/worktree-add"
 alias worktree-rm="$dotfiles/bin/worktree-rm"
 alias worktree-prune="$dotfiles/bin/worktree-prune"
+
+# worktree-add function that changes to the new directory after creation
+worktree-add() {
+  local output=$("$dotfiles/bin/worktree-add" "$@")
+  echo "$output"
+  local worktree_path=$(echo "$output" | grep "^WORKTREE_PATH=" | cut -d= -f2)
+  if [[ -n "$worktree_path" && -d "$worktree_path" ]]; then
+    cd "$worktree_path"
+  fi
+}
+
 fpath=($dotfiles/bin $fpath)
 
 # pnpm
