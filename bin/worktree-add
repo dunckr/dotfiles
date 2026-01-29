@@ -112,9 +112,13 @@ if ! pnpm install; then
   exit 1
 fi
 
-# Open in IntelliJ IDEA
-echo "Opening in IntelliJ IDEA..."
-open -a "IntelliJ IDEA" "$WORKTREE_PATH"
+# Open in IntelliJ IDEA (skip if second argument provided)
+if [[ $# -lt 2 ]]; then
+  echo "Opening in IntelliJ IDEA..."
+  open -a "IntelliJ IDEA" "$WORKTREE_PATH"
+else
+  echo "Skipping IntelliJ IDEA (second argument provided)"
+fi
 
 echo "Worktree created successfully at: $WORKTREE_PATH"
 echo "WORKTREE_PATH=$WORKTREE_PATH"
