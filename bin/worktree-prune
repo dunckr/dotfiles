@@ -9,6 +9,10 @@ set -euo pipefail
 #
 # Run this script from the worktree container directory (parent of all worktrees).
 
+# Source the worktree library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/worktree-lib.sh"
+
 # Check if main or master worktree exists
 if [[ ! -d "main" ]] && [[ ! -d "master" ]]; then
   echo "Error: Neither 'main' nor 'master' directory found in current directory" >&2
@@ -50,6 +54,10 @@ while IFS= read -r worktree_path; do
   if [[ -n "$worktree_path" ]]; then
     branch_name=$(basename "$worktree_path")
     echo "Removing worktree: $branch_name"
+
+    # Remove from IntelliJ recent projects
+    remove_from_intellij_recent_projects "$worktree_path"
+
     if ! git worktree remove "$worktree_path" 2>/dev/null; then
       echo "  Warning: Failed to remove $branch_name cleanly, trying with --force..."
       if ! git worktree remove --force "$worktree_path"; then

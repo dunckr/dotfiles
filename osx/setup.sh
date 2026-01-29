@@ -37,3 +37,6 @@ defaults write com.apple.systemuiserver menuExtras -array \
 # Stop xQuartz opening XTern
 defaults write org.macosforge.xquartz.X11 nolisten_tcp 0
 defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
+
+# Prevent Music from opening on Play
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist

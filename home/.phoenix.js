@@ -25,6 +25,11 @@ Key.on('3', ['cmd', 'alt'], () => {
   Task.run('/bin/zsh', ['-lc', '/Users/d/src/screenshot/command.sh'])
 });
 
+// Prevent cmd + m from minimizing window
+Key.on('m', ['cmd'], () => {
+  // Do nothing - just intercept the key
+});
+
 const maximise = (key) => {
   Key.on(key, ['cmd', 'ctrl'], () => {
     const win = Window.focused();

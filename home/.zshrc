@@ -251,6 +251,7 @@ export PATH=$PATH:$(go env GOPATH)/bin
 alias serve="python -m http.server"
 alias killall='pkill -f node Python bash nvim ruby ngrok spring postgres'
 alias killchrome='pkill -f "Google Chrome"'
+alias killfirefox='pkill -f Firefox'
 alias killnode="ps -ef | grep 'node' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias killnode="ps -ef | grep 'ruby' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias killios='pkill -f "Simulator"'

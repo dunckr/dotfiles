@@ -9,6 +9,10 @@ set -euo pipefail
 #
 # Run this script from the worktree container directory (parent of all worktrees).
 
+# Source the worktree library
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+source "$SCRIPT_DIR/worktree-lib.sh"
+
 # Check if branch name provided
 if [[ $# -eq 0 ]]; then
   echo "Usage: worktree-rm BRANCH_NAME" >&2
@@ -27,6 +31,12 @@ if [[ ! -d "$BRANCH_NAME" ]]; then
   echo "(the parent directory containing all worktrees)" >&2
   exit 1
 fi
+
+# Get the absolute path before removing
+WORKTREE_PATH="$(cd "$BRANCH_NAME" && pwd)"
+
+# Remove from IntelliJ recent projects
+remove_from_intellij_recent_projects "$WORKTREE_PATH"
 
 # Remove the worktree using git worktree remove
 echo "Removing worktree: $BRANCH_NAME"
