@@ -6,6 +6,7 @@ PYTHON_VERSION=3.14.2
 
 NPM_PACKAGES=(
   @prettier/plugin-ruby
+  npm-check-updates
   prettier
   prettier-plugin-tailwindcss
   typescript
