@@ -217,3 +217,4 @@ Key.on('q', ['cmd'], () => {
     lastQuitTimestamp = timestamp;
   }
 });
+
