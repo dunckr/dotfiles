@@ -104,48 +104,12 @@ else
   echo "Warning: main/.claude not found, skipping copy"
 fi
 
-# Copy node_modules from main if it exists
-if [[ -d "main/node_modules" ]]; then
-  echo "Copying node_modules from main (this is faster than installing)..."
-  cp -r "main/node_modules" "$WORKTREE_PATH/"
-
-  # Copy node_modules from packages/* if they exist
-  if [[ -d "main/packages" ]]; then
-    for package_dir in main/packages/*; do
-      if [[ -d "$package_dir/node_modules" ]]; then
-        package_name=$(basename "$package_dir")
-        echo "Copying node_modules from packages/$package_name..."
-        cp -r "$package_dir/node_modules" "$WORKTREE_PATH/packages/$package_name/"
-      fi
-    done
-  fi
-
-  # Copy node_modules from apps/* if they exist
-  if [[ -d "main/apps" ]]; then
-    for app_dir in main/apps/*; do
-      if [[ -d "$app_dir/node_modules" ]]; then
-        app_name=$(basename "$app_dir")
-        echo "Copying node_modules from apps/$app_name..."
-        cp -r "$app_dir/node_modules" "$WORKTREE_PATH/apps/$app_name/"
-      fi
-    done
-  fi
-
-  # Run pnpm install with offline flags to verify/link packages (much faster)
-  echo "Verifying dependencies with pnpm..."
-  cd "$WORKTREE_PATH"
-  if ! pnpm install --offline --prefer-offline; then
-    echo "Error: pnpm install verification failed" >&2
-    exit 1
-  fi
-else
-  # No node_modules to copy, do a full install
-  echo "Running pnpm install..."
-  cd "$WORKTREE_PATH"
-  if ! pnpm install; then
-    echo "Error: pnpm install failed" >&2
-    exit 1
-  fi
+# Run pnpm install in the new worktree
+echo "Running pnpm install..."
+cd "$WORKTREE_PATH"
+if ! pnpm install --prefer-offline; then
+  echo "Error: pnpm install failed" >&2
+  exit 1
 fi
 
 # Open in IntelliJ IDEA (skip if second argument provided)
