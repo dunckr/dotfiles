@@ -160,7 +160,7 @@ alias gf="git fetch"
 alias gl="git log"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 alias gp="git push"
-alias gpr="git push -u origin \$(git branch --show-current) && gh pr create -f -B main && gh pr view --web"
+alias gpr="git fetch origin main && git push -u origin \$(git branch --show-current) && gh pr create -f -B main && gh pr view --web"
 alias grc="git rebase --continue"
 alias gsclone="git clone --depth=1"
 alias gst="git status"
@@ -171,6 +171,7 @@ alias gprune='git checkout -q main && git for-each-ref refs/heads/ "--format=%(r
 alias gprunefmaster='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias gprunef='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias gprunefdev='git checkout -q dev && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base dev $branch) && [[ $(git cherry dev $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+alias gprunefdevelop='git checkout -q develop && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base develop $branch) && [[ $(git cherry develop $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
 alias commithelp="echo '
 ^--^  ^------------^
 |     |
@@ -299,12 +300,12 @@ fi
 export NEXT_TELEMETRY_DISABLED=1
 
 # Brew paths
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-
-# Added by Windsurf
-export PATH="/Users/d/.codeium/windsurf/bin:$PATH"
+export PATH=/opt/homebrew/share/google-cloud-sdk/bin:"$PATH"
+export PATH="$HOME/fvm/default/bin:$PATH"
 
 alias chat="$dotfiles/bin/chat"
 alias rename="$dotfiles/bin/renametab"
