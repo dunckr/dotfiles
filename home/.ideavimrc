@@ -93,6 +93,7 @@ nnoremap <leader>gi :action Vcs.ShowHistoryForBlock<cr>
 vnoremap <leader>gi :action Vcs.ShowHistoryForBlock<CR>:action VimVisualExitMode<CR>
 nnoremap <leader>gh :action Vcs.ShowTabbedFileHistory<cr>
 nnoremap <leader>go :action Github.Open.In.Browser<CR>
+nnoremap <leader>gw :action Git.CompareWithBranch<CR>
 nnoremap <leader>cf :action CopyPathFromRepositoryRootProvider<CR>
 
 nnoremap g; :action JumpToLastChange<Enter>
