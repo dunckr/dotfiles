@@ -291,7 +291,7 @@ kport() {
     local pids
     pids=$(
       lsof -iTCP -sTCP:LISTEN -P -n \
-        | awk 'NR>1 { match($9, /[0-9]+$/, m); printf "%-6s  %-8s  %s\n", m[0], $2, $1 }' \
+        | awk 'NR>1 { n=split($9, a, ":"); printf "%-6s  %-8s  %s\n", a[n], $2, $1 }' \
         | sort -n \
         | fzf -m --header="PORT    PID       COMMAND" \
                --prompt="kill port> " \
