@@ -160,7 +160,15 @@ alias gf="git fetch"
 alias gl="git log"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 alias gp="git push"
-alias gpr="git fetch origin main && git push -u origin \$(git branch --show-current) && gh pr create -f -B main && gh pr view --web"
+gpr() {
+  local base
+  if git ls-remote --exit-code origin develop &>/dev/null; then
+    base=develop
+  else
+    base=main
+  fi
+  git fetch origin "$base" && git push -u origin "$(git branch --show-current)" && gh pr create -f -B "$base" && gh pr view --web
+}
 alias grc="git rebase --continue"
 alias gsclone="git clone --depth=1"
 alias gst="git status"
