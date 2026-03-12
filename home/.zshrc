@@ -175,11 +175,31 @@ alias gst="git status"
 alias gup="git pull"
 
 alias glast="echo 'copied!' && git log -1 --pretty=%B | tr -d '\n' | pbcopy"
-alias gprune='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && echo "$branch is merged into main and can be deleted"; done'
-alias gprunefmaster='git checkout -q master && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base master $branch) && [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
-alias gprunef='git checkout -q main && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base main $branch) && [[ $(git cherry main $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
-alias gprunefdev='git checkout -q dev && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base dev $branch) && [[ $(git cherry dev $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
-alias gprunefdevelop='git checkout -q develop && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do mergeBase=$(git merge-base develop $branch) && [[ $(git cherry develop $(git commit-tree $(git rev-parse $branch^{tree}) -p $mergeBase -m _)) == "-"* ]] && git branch -D $branch; done'
+gprune() {
+  local base dry_run=false
+  [[ "$1" == "-n" ]] && dry_run=true
+  for b in develop main master; do
+    if git show-ref --verify --quiet "refs/remotes/origin/$b"; then
+      base=$b
+      break
+    fi
+  done
+  if [[ -z "$base" ]]; then
+    echo "gprune: could not detect default branch (develop/main/master)"
+    return 1
+  fi
+  echo "Pruning branches merged into $base..."
+  git checkout -q "$base" && git for-each-ref refs/heads/ "--format=%(refname:short)" | while read branch; do
+    local mergeBase
+    mergeBase=$(git merge-base "$base" "$branch") || continue
+    [[ $(git cherry "$base" $(git commit-tree $(git rev-parse "$branch^{tree}") -p "$mergeBase" -m _)) == "-"* ]] || continue
+    if $dry_run; then
+      echo "$branch is merged and can be deleted"
+    else
+      git branch -D "$branch"
+    fi
+  done
+}
 alias commithelp="echo '
 ^--^  ^------------^
 |     |
