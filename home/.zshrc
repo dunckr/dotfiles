@@ -284,9 +284,24 @@ alias killfirefox='pkill -f Firefox'
 alias killnode="ps -ef | grep 'node' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias killnode="ps -ef | grep 'ruby' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias killios='pkill -f "Simulator"'
-alias kill3000='kill -9 $(lsof -t -i:3000)'
-alias kill9000='kill -9 $(lsof -t -i:9000)'
-alias kill8111='kill -9 $(lsof -t -i:8111)'
+kport() {
+  if [[ -n "$1" ]]; then
+    kill -9 $(lsof -t -i:"$1")
+  else
+    local pids
+    pids=$(
+      lsof -iTCP -sTCP:LISTEN -P -n \
+        | awk 'NR>1 { match($9, /[0-9]+$/, m); printf "%-6s  %-8s  %s\n", m[0], $2, $1 }' \
+        | sort -n \
+        | fzf -m --header="PORT    PID       COMMAND" \
+               --prompt="kill port> " \
+               --preview='ps -p {2} -o pid,user,%cpu,%mem,etime,args= 2>/dev/null' \
+               --preview-window=bottom:3:wrap \
+        | awk '{print $2}'
+    )
+    [[ -n "$pids" ]] && echo "$pids" | sort -u | xargs kill -9
+  fi
+}
 alias largest='function _largest() { command find . -name "*.$@" | xargs wc -l | sort -nr -k5 | head -n 25; unset -f _largest; }; _largest'
 alias linecount='cloc --exclude-dir=__test__,__tests__,test,spec,node_modules,dist,yarn.lock,package.json,package-lock.json'
 alias timestamp=date +%s
