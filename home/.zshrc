@@ -265,7 +265,7 @@ alias k="kubectl"
 # node
 alias p="pnpm"
 alias tc="tsc --pretty --noEmit --watch"
-alias pall="pnpm lint && pnpm typecheck && pnpm format && pnpm test"
+alias pall="pnpm run --if-present lint && pnpm run --if-present typecheck && pnpm run --if-present format && pnpm run --if-present test"
 export COREPACK_ENABLE_AUTO_PIN=0
 
 # ruby
