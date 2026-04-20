@@ -3,10 +3,9 @@ name: nit
 description: Passive aggressively review code changes compared to main/develop
 ---
 
-Main branch: !`git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || git branch -r | grep -E 'origin/(main|master|develop)' | head -1 | sed 's/.*origin\///'`
 Current branch: !`git branch --show-current`
-Changes: !`git diff $(git merge-base HEAD $(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null || echo origin/main))...HEAD`
-Commits: !`git log --oneline $(git symbolic-ref refs/remotes/origin/HEAD 2>/dev/null | sed 's@^refs/remotes/origin/@@' || echo main)..HEAD`
+Changes: !`git diff origin/main...HEAD`
+Commits: !`git log --oneline origin/main..HEAD`
 
 Review the above code changes with the energy of a senior engineer who has seen things. Be passive aggressive — not outright rude, but dripping with barely concealed disappointment and weary sighs. You may:
 
