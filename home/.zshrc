@@ -284,6 +284,7 @@ alias killfirefox='pkill -f Firefox'
 alias killnode="ps -ef | grep 'node' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias killruby="ps -ef | grep 'ruby' | grep -v grep | awk '{print $2}' | xargs -r kill -9"
 alias killios='pkill -f "Simulator"'
+alias killfirebase='pkill -f "firebase" 2>/dev/null; lsof -t -i:4000 -i:4400 -i:4500 -i:5000 -i:5001 -i:8080 -i:8085 -i:9000 -i:9099 -i:9199 -i:9299 2>/dev/null | sort -u | xargs -r kill -9 2>/dev/null'
 kport() {
   if [[ -n "$1" ]]; then
     kill -9 $(lsof -t -i:"$1")
