@@ -340,8 +340,10 @@ if type brew &>/dev/null; then
     compinit
 fi
 
-# Next.js
+# Telemetry
 export NEXT_TELEMETRY_DISABLED=1
+export GH_TELEMETRY=false
+export DO_NOT_TRACK=true
 
 # Brew paths
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
