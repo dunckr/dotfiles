@@ -157,6 +157,7 @@ alias gcm="git commit -v -m 'WIP' --no-verify"
 alias gd="git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
 alias gdf="git diff --color --color-words --abbrev"
 alias gf="git fetch"
+alias gauth="gcloud auth login && gcloud auth application-default login"
 alias gl="git log"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 alias gp="git push"
@@ -266,6 +267,7 @@ alias k="kubectl"
 alias p="pnpm"
 alias tc="tsc --pretty --noEmit --watch"
 alias pall="pnpm run --if-present lint && pnpm run --if-present typecheck && pnpm run --if-present format && pnpm run --if-present test"
+alias pfmt="$dotfiles/bin/format-branch"
 export COREPACK_ENABLE_AUTO_PIN=0
 
 # ruby
@@ -315,15 +317,16 @@ eval "$(starship init zsh)"
 
 # zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[OA' history-substring-search-up
+bindkey '^[OB' history-substring-search-down
+# zsh-syntax-highlighting must be sourced last
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 bindkey '^B' backward-word
 bindkey '^F' forward-word
 bindkey '^D' delete-word
 bindkey '^E' end-of-line
 bindkey '^A' beginning-of-line
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-bindkey '^[OA' history-substring-search-up
-bindkey '^[OB' history-substring-search-down
-source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # android
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk

@@ -60,5 +60,10 @@ done
 
 link "$DOTFILES/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 link "$DOTFILES/nvim/lua" "$HOME/.config/nvim/lua"
-link "$DOTFILES/home/.config/agents/commands" "$HOME/.claude/commands"
 link "$DOTFILES/home/.config/agents/settings.json" "$HOME/.claude/settings.json"
+
+for skill in "$DOTFILES/home/.config/agents/skills"/*; do
+  skill_name="$(basename "$skill")"
+  link "$skill" "$HOME/.claude/skills/$skill_name"
+  link "$skill" "$HOME/.agents/skills/$skill_name"
+done
