@@ -106,7 +106,7 @@ if command -v pyenv 1>/dev/null 2>&1; then
   }
 fi
 
-export EDITOR=vim
+export EDITOR=nvim
 
 # aliases
 alias ..='cd ..'
