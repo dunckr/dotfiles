@@ -52,7 +52,7 @@ fi
 
 run_if_exists "homebrew/language-dependencies.sh"
 
-for location in $(find home -name '.*'); do
+for location in $(find home -maxdepth 1 -type f -name '.*'); do
   file="${location##*/}"
   file="${file%.sh}"
   link "$DOTFILES/$location" "$HOME/$file"
@@ -60,6 +60,7 @@ done
 
 link "$DOTFILES/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 link "$DOTFILES/nvim/lua" "$HOME/.config/nvim/lua"
+link "$DOTFILES/home/.config/starship.toml" "$HOME/.config/starship.toml"
 link "$DOTFILES/home/.config/agents/settings.json" "$HOME/.claude/settings.json"
 
 for skill in "$DOTFILES/home/.config/agents/skills"/*; do
