@@ -47,7 +47,7 @@ link "$DOTFILES/home/Brewfile" "$HOME/Brewfile"
 
 if [[ -f "$HOME/Brewfile" ]]; then
   echo "Installing Homebrew packages from Brewfile..."
-  brew bundle
+  brew bundle --file="$HOME/Brewfile"
 fi
 
 run_if_exists "homebrew/language-dependencies.sh"
