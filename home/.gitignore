@@ -62,3 +62,5 @@ tags.temp
 
 # AI
 .claude
+CLAUDE.local.md
+settings.local.json
