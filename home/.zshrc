@@ -369,6 +369,15 @@ alias chat="$dotfiles/bin/chat"
 alias rename="$dotfiles/bin/renametab"
 alias worktree-rm="$dotfiles/bin/worktree-rm"
 alias worktree-prune="$dotfiles/bin/worktree-prune"
+worktree-init() {
+  local container_name
+  if [[ $# -ge 2 ]]; then
+    container_name="$2"
+  else
+    container_name="$(basename "$1" .git)"
+  fi
+  "$dotfiles/bin/worktree-init" "$@" && cd "$container_name"
+}
 
 # worktree-add function that changes to the new directory after creation
 worktree-add() {

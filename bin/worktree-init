@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage:
+#   worktree-init REPO_URL [CONTAINER_NAME]
+#
+# Bootstraps the bare-repo container structure that worktree-add expects:
+#   CONTAINER_NAME/        ← bare git repo
+#     main/                ← primary worktree
+#     <branch>/            ← future worktrees added via worktree-add
+#
+# Run this script from the directory where you want the container to live.
+
+if [[ $# -eq 0 ]]; then
+  echo "Usage: worktree-init REPO_URL [CONTAINER_NAME]" >&2
+  echo "" >&2
+  echo "  REPO_URL       Git repository URL to clone" >&2
+  echo "  CONTAINER_NAME Directory name for the container (default: repo name)" >&2
+  exit 1
+fi
+
+REPO_URL="$1"
+
+# Derive container name from repo URL if not provided
+if [[ $# -ge 2 ]]; then
+  CONTAINER_NAME="$2"
+else
+  CONTAINER_NAME="$(basename "$REPO_URL" .git)"
+fi
+
+# Clone as a bare repo
+echo "Cloning $REPO_URL as bare repo into $CONTAINER_NAME..."
+if ! git clone --bare "$REPO_URL" "$CONTAINER_NAME"; then
+  echo "Error: Failed to clone repository" >&2
+  exit 1
+fi
+
+cd "$CONTAINER_NAME"
+
+# Fix remote-tracking refs (bare clones omit these by default)
+echo "Configuring remote fetch refs..."
+git config remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
+git fetch origin
+
+# Add the main worktree
+echo "Creating main worktree..."
+if ! git worktree add main main; then
+  echo "Error: Failed to create main worktree" >&2
+  exit 1
+fi
+
+CONTAINER_PATH="$(pwd)"
+MAIN_PATH="$CONTAINER_PATH/main"
+
+# Run pnpm install in main
+echo "Running pnpm install in main..."
+cd main
+if ! pnpm install --prefer-offline; then
+  echo "Error: pnpm install failed" >&2
+  exit 1
+fi
+cd "$CONTAINER_PATH"
+
+# Open main in IntelliJ IDEA (skip if second argument provided)
+if [[ $# -lt 2 ]]; then
+  echo "Opening main in IntelliJ IDEA..."
+  open -a "IntelliJ IDEA" "$MAIN_PATH"
+else
+  echo "Skipping IntelliJ IDEA (second argument provided)"
+fi
+
+echo ""
+echo "Container ready at: $CONTAINER_PATH"
+echo "  cd $CONTAINER_NAME"
+echo "  worktree-add BRANCH_NAME"
