@@ -1,16 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if git ls-remote --exit-code origin develop &>/dev/null; then
-  base=develop
-else
-  base=main
-fi
-
-files=$(git diff "$base" --name-only --diff-filter=d)
+files=$(git diff HEAD~1 HEAD --name-only --diff-filter=d)
 
 if [[ -z "$files" ]]; then
-  echo "No changed files against $base"
+  echo "No changed files in last commit"
   exit 0
 fi
 

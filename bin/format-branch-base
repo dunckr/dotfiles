@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+if git ls-remote --exit-code origin develop &>/dev/null; then
+  base=develop
+else
+  base=main
+fi
+
+files=$(git diff "$base" --name-only --diff-filter=d)
+
+if [[ -z "$files" ]]; then
+  echo "No changed files against $base"
+  exit 0
+fi
+
+echo "$files" | xargs pnpm prettier --write

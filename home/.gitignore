@@ -64,3 +64,5 @@ tags.temp
 .claude
 CLAUDE.local.md
 settings.local.json
+
+**/.claude/settings.local.json

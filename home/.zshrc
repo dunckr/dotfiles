@@ -277,6 +277,7 @@ alias p="pnpm"
 alias tc="tsc --pretty --noEmit --watch"
 alias pall="pnpm run --if-present lint && pnpm run --if-present typecheck && pnpm run --if-present format && pnpm run --if-present test"
 alias pfmt="$dotfiles/bin/format-branch"
+alias pfmtb="$dotfiles/bin/format-branch-base"
 export COREPACK_ENABLE_AUTO_PIN=0
 
 # ruby
