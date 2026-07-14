@@ -168,16 +168,16 @@ gpr() {
   else
     base=main
   fi
-  git fetch origin "$base" && git push -u origin "$(git branch --show-current)" && gh pr create -f -B "$base" --draft && gh pr view --web
+  git fetch origin "$base" && git push -u origin "$(git branch --show-current)" && gh pr create -f -B "$base" && gh pr view --web
 }
-gprf() {
+gprd() {
   local base
   if git ls-remote --exit-code origin develop &>/dev/null; then
     base=develop
   else
     base=main
   fi
-  git fetch origin "$base" && git push -u origin "$(git branch --show-current)" && gh pr create -f -B "$base" && gh pr view --web
+  git fetch origin "$base" && git push -u origin "$(git branch --show-current)" && gh pr create -f -B "$base" --draft && gh pr view --web
 }
 alias grc="git rebase --continue"
 alias gsclone="git clone --depth=1"
