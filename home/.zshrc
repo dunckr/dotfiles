@@ -274,6 +274,7 @@ alias k="kubectl"
 
 # node
 alias p="pnpm"
+alias t="tsx"
 alias tc="tsc --pretty --noEmit --watch"
 alias pall="pnpm run --if-present lint && pnpm run --if-present typecheck && pnpm run --if-present format && pnpm run --if-present test"
 alias pfmt="$dotfiles/bin/format-branch"
