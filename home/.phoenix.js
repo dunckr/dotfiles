@@ -17,6 +17,7 @@ bindLaunch('Slack', 'm', ['alt', 'shift']);
 bindLaunch('Spotify', 'p', ['alt', 'shift']);
 bindLaunch('IntelliJ IDEA', 't', ['cmd', 'shift']);
 bindLaunch('ChatGPT', 'y', ['cmd']);
+bindLaunch('Claude', 'u', ['cmd']);
 bindLaunch('Terminal', 't', ['alt', 'shift']);
 bindLaunch('Podcasts', 'p', ['alt', 'ctrl']);
 bindLaunch('Simulator', 'i', ['cmd', 'shift']);
