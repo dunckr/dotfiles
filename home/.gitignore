@@ -33,7 +33,7 @@ bower_components
 .yardoc
 *.rest
 tsconfig.tsbuildinfo
-
+.playwright-mcp
 
 # Thumbnail cache files
 ._*
@@ -64,5 +64,4 @@ tags.temp
 .claude
 CLAUDE.local.md
 settings.local.json
-
 **/.claude/settings.local.json
