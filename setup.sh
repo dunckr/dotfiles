@@ -69,3 +69,12 @@ for skill in "$DOTFILES/home/.config/agents/skills"/*; do
   link "$skill" "$HOME/.claude/skills/$skill_name"
   link "$skill" "$HOME/.agents/skills/$skill_name"
 done
+
+# Reports agent session state to herdr's sidebar. Writes a managed hook to the
+# agent's config directory and adds a SessionStart entry to its settings.
+if command -v herdr >/dev/null; then
+  for integration in claude codex; do
+    echo "Installing herdr $integration integration..."
+    herdr integration install "$integration"
+  done
+fi
