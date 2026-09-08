@@ -34,6 +34,10 @@ defaults write com.apple.systemuiserver menuExtras -array \
     "/System/Library/CoreServices/Menu Extras/Battery.menu" \
     "/System/Library/CoreServices/Menu Extras/Clock.menu"
 
+# Terminal: only show the tab bar when there's more than one tab
+defaults write com.apple.Terminal \
+    "NSWindowTabbingShoudShowTabBarKey-TTWindow-TTWindowController-TTWindowController-VT-FS" -bool false
+
 # Stop xQuartz opening XTern
 defaults write org.macosforge.xquartz.X11 nolisten_tcp 0
 defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true

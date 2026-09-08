@@ -73,6 +73,9 @@ description = "focus pane right (vim-aware)"
 # tmux-style internal splitters, no frame around the pane area
 pane_outer_borders = false
 
+# only show the tab bar once there's more than one tab
+hide_tab_bar_when_single_tab = true
+
 status_indicators = "dots"
 [ui.toast]
 delivery = "system"
