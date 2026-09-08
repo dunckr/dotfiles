@@ -27,8 +27,12 @@ zoom = "prefix+f"
 reload_config = "prefix+r"
 resize_mode = "prefix+shift+r"
 
-# Copy mode with vi motions (tmux "bind [" + mode-keys vi)
-copy_mode = "prefix+["
+# Cycle through workspaces with prefix+[ and prefix+].
+previous_workspace = "prefix+["
+next_workspace = "prefix+]"
+
+# Copy mode with vi motions. Moved from prefix+[ to make room for workspace cycling.
+copy_mode = "prefix+shift+c"
 
 # Direct pane focus, no prefix. ctrl+alt+hjkl always moves herdr focus;
 # plain ctrl+hjkl goes through herdr-nav below, which hands the key to
