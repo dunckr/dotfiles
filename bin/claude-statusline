@@ -1,0 +1,58 @@
+#!/bin/bash
+# Claude Code statusline: "dir on branch [model] context%"
+# Configured from home/.config/agents/settings.json. Colors are One Dark Vivid.
+
+set -uo pipefail
+
+input="$(cat)"
+
+dir="$(jq -r '.workspace.current_dir // empty' <<<"$input")"
+model="$(jq -r '.model.display_name // empty' <<<"$input")"
+remaining="$(jq -r '.context_window.remaining_percentage // empty' <<<"$input")"
+
+# One Dark Vivid
+cyan=$'\033[38;2;43;186;197m'
+green=$'\033[38;2;137;202;120m'
+yellow=$'\033[38;2;229;192;123m'
+blue=$'\033[38;2;97;175;239m'
+red=$'\033[38;2;239;89;111m'
+grey=$'\033[38;2;127;132;142m'
+reset=$'\033[0m'
+
+[[ -n "$dir" ]] || dir="$PWD"
+status="${cyan}$(basename "$dir")${reset}"
+
+if git -C "$dir" rev-parse --git-dir >/dev/null 2>&1; then
+  branch="$(git -C "$dir" --no-optional-locks branch --show-current 2>/dev/null)"
+
+  if [[ -n "$branch" ]]; then
+    # Yellow when there are uncommitted changes to tracked files
+    if git -C "$dir" --no-optional-locks diff-index --quiet HEAD -- 2>/dev/null; then
+      branch_color="$green"
+    else
+      branch_color="$yellow"
+    fi
+
+    status="${status} ${grey}on${reset} ${branch_color}${branch}${reset}"
+  fi
+fi
+
+if [[ -n "$model" ]]; then
+  status="${status} ${grey}[${reset}${blue}${model}${reset}${grey}]${reset}"
+fi
+
+if [[ -n "$remaining" ]]; then
+  percent="${remaining%.*}"
+
+  if ((percent < 20)); then
+    percent_color="$red"
+  elif ((percent < 50)); then
+    percent_color="$yellow"
+  else
+    percent_color="$green"
+  fi
+
+  status="${status} ${percent_color}${percent}%${reset}"
+fi
+
+echo "$status"
