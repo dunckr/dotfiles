@@ -1,0 +1,51 @@
+#!/bin/bash
+# Vim-aware pane navigation for herdr, the equivalent of vim-tmux-navigator.
+#
+# Bound to ctrl+h/j/k/l in home/.config/herdr/config.toml. When the focused
+# pane runs vim/nvim the keypress is forwarded to it so it moves between its
+# own splits; from a split at the edge nvim calls back into `herdr pane focus`
+# (see nvim/lua/plugins/navigation.lua). Any other pane just moves focus.
+
+set -uo pipefail
+
+direction="${1:-}"
+
+case "$direction" in
+left) key="ctrl+h" ;;
+down) key="ctrl+j" ;;
+up) key="ctrl+k" ;;
+right) key="ctrl+l" ;;
+*)
+  echo "usage: herdr-nav <left|down|up|right>" >&2
+  exit 1
+  ;;
+esac
+
+herdr="${HERDR_BIN_PATH:-herdr}"
+pane="${HERDR_ACTIVE_PANE_ID:-${HERDR_PANE_ID:-}}"
+
+focus() {
+  if [[ -n "$pane" ]]; then
+    "$herdr" pane focus --pane "$pane" --direction "$direction"
+  else
+    "$herdr" pane focus --current --direction "$direction"
+  fi
+}
+
+# Without a pane id there is nothing to inspect, so just move.
+[[ -n "$pane" ]] || {
+  focus
+  exit
+}
+
+info="$("$herdr" pane process-info --pane "$pane" 2>/dev/null)" || {
+  focus
+  exit
+}
+
+# Same set of process names vim-tmux-navigator treats as vim.
+if grep -qE '"name":"(g?(view|n?vim?x?)(diff)?)"' <<<"$info"; then
+  "$herdr" pane send-keys "$pane" "$key"
+else
+  focus
+fi

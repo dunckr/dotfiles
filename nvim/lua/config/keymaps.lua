@@ -11,8 +11,8 @@ map("n", "L", "$", { desc = "Jump to line end" })
 map("n", "<Leader>t", ":set expandtab<CR>", { desc = "Enable expand tab" })
 map("n", "<Leader>r", ":source $MYVIMRC<CR>", { desc = "Reload config" })
 
--- Tmux navigation
-map("n", "<BS>", ":TmuxNavigateLeft<CR>", { silent = true, desc = "Tmux navigate left" })
+-- Split navigation (<C-h/j/k/l> across nvim, tmux and herdr) lives in
+-- lua/plugins/navigation.lua
 
 -- Telescope (replacing fzf)
 map("n", "<C-p>", ":Telescope git_files<CR>", { silent = true, desc = "Find git files" })

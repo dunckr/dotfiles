@@ -1,0 +1,81 @@
+# herdr configuration
+#
+# Keymap mirrors ~/.tmux.conf: C-w prefix (like vim window commands),
+# vim-style splits, and prefix-free C-h/j/k/l pane navigation that stays
+# seamless with nvim splits (see bin/herdr-nav).
+
+onboarding = false
+
+[theme]
+name = "one-dark"
+auto_switch = false
+
+[keys]
+# Prefix is C-w, like vim window commands
+prefix = "ctrl+w"
+
+# Splits: prefix+h stacks below, prefix+v splits to the right
+split_horizontal = "prefix+h"
+split_vertical = "prefix+v"
+
+# prefix+q kills the pane (tmux "bind q kill-pane"), so detach moves to prefix+d
+close_pane = "prefix+q"
+detach = "prefix+d"
+
+# prefix+f zooms, prefix+r reloads config (tmux "bind f" / "bind r")
+zoom = "prefix+f"
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+
+# Copy mode with vi motions (tmux "bind [" + mode-keys vi)
+copy_mode = "prefix+["
+
+# Direct pane focus, no prefix. ctrl+alt+hjkl always moves herdr focus;
+# plain ctrl+hjkl goes through herdr-nav below, which hands the key to
+# vim/nvim panes first so nvim splits keep working.
+focus_pane_left = "ctrl+alt+h"
+focus_pane_down = "ctrl+alt+j"
+focus_pane_up = "ctrl+alt+k"
+focus_pane_right = "ctrl+alt+l"
+
+# Resize with control+option+arrows (tmux C-M-arrow bindings)
+resize_pane_left = "ctrl+alt+left"
+resize_pane_down = "ctrl+alt+down"
+resize_pane_up = "ctrl+alt+up"
+resize_pane_right = "ctrl+alt+right"
+
+# Vim-aware pane navigation, the herdr equivalent of vim-tmux-navigator.
+[[keys.command]]
+key = "ctrl+h"
+type = "shell"
+command = "$HOME/dotfiles/bin/herdr-nav left"
+description = "focus pane left (vim-aware)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "shell"
+command = "$HOME/dotfiles/bin/herdr-nav down"
+description = "focus pane down (vim-aware)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "shell"
+command = "$HOME/dotfiles/bin/herdr-nav up"
+description = "focus pane up (vim-aware)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "shell"
+command = "$HOME/dotfiles/bin/herdr-nav right"
+description = "focus pane right (vim-aware)"
+
+[ui]
+# tmux-style internal splitters, no frame around the pane area
+pane_outer_borders = false
+
+status_indicators = "dots"
+[ui.toast]
+delivery = "system"
+
+[ui.sound]
+enabled = true

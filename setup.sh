@@ -61,6 +61,7 @@ done
 link "$DOTFILES/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 link "$DOTFILES/nvim/lua" "$HOME/.config/nvim/lua"
 link "$DOTFILES/home/.config/starship.toml" "$HOME/.config/starship.toml"
+link "$DOTFILES/home/.config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 link "$DOTFILES/home/.config/agents/settings.json" "$HOME/.claude/settings.json"
 
 for skill in "$DOTFILES/home/.config/agents/skills"/*; do
