@@ -1,4 +1,21 @@
 add_newline = false
+palette = "one_dark_vivid"
 
 [line_break]
 disabled = true
+
+# Overriding the standard color names recolors every module that uses them,
+# so directory, branch, languages and the prompt character all follow suit.
+[palettes.one_dark_vivid]
+black = "#3f4451"
+red = "#ef596f"
+green = "#89ca78"
+yellow = "#e5c07b"
+blue = "#61afef"
+purple = "#d55fde"
+cyan = "#2bbac5"
+white = "#abb2bf"
+
+# Yellow rather than red: uncommitted work is not an error
+[git_status]
+style = "bold yellow"
