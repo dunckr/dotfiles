@@ -14,6 +14,20 @@ map("n", "<Leader>r", ":source $MYVIMRC<CR>", { desc = "Reload config" })
 -- Split navigation (<C-h/j/k/l> across nvim, tmux and herdr) lives in
 -- lua/plugins/navigation.lua
 
+-- Jumplist: <D-[> pops back to where you were (e.g. after gd), <D-]> goes
+-- forward again. Needs the terminal to forward cmd-modified keys as CSI u
+-- (see readme); guarded so VSCode keeps cmd+[ for previousEditor.
+if not vim.g.vscode then
+	map({ "n", "v" }, "<D-[>", "<C-o>", { desc = "Jump back" })
+	map({ "n", "v" }, "<D-]>", "<C-i>", { desc = "Jump forward" })
+
+	-- <leader>a switches between a file and its test, like the VSCode
+	-- test-switcher binding below.
+	map("n", "<Leader>a", function()
+		require("config.test-switcher").switch()
+	end, { desc = "Switch to test/source" })
+end
+
 -- Telescope (replacing fzf)
 map("n", "<C-p>", ":Telescope git_files<CR>", { silent = true, desc = "Find git files" })
 map("n", "<C-t>", ":Telescope tags<CR>", { silent = true, desc = "Find tags" })

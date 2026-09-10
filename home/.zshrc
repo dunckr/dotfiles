@@ -333,6 +333,77 @@ bindkey '^[OA' history-substring-search-up
 bindkey '^[OB' history-substring-search-down
 # zsh-syntax-highlighting must be sourced last
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# One Dark Vivid, same palette as ~/.config/starship.toml. The plugins default to
+# raw ANSI names, which the terminal renders with its own harsh red/green, so
+# every style is pinned to an explicit hex instead.
+one_dark_red="#ef596f"
+one_dark_green="#89ca78"
+one_dark_yellow="#e5c07b"
+one_dark_blue="#61afef"
+one_dark_purple="#d55fde"
+one_dark_cyan="#2bbac5"
+one_dark_fg="#abb2bf"
+one_dark_grey="#5c6370"
+one_dark_orange="#d19a66"
+
+typeset -gA ZSH_HIGHLIGHT_STYLES
+
+# A mistyped command still reads as wrong, just in the theme's salmon
+ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=$one_dark_red"
+
+# Runnable things: commands, builtins, functions, aliases
+ZSH_HIGHLIGHT_STYLES[command]="fg=$one_dark_green"
+ZSH_HIGHLIGHT_STYLES[builtin]="fg=$one_dark_green"
+ZSH_HIGHLIGHT_STYLES[function]="fg=$one_dark_green"
+ZSH_HIGHLIGHT_STYLES[alias]="fg=$one_dark_green"
+ZSH_HIGHLIGHT_STYLES[suffix-alias]="fg=$one_dark_green"
+ZSH_HIGHLIGHT_STYLES[global-alias]="fg=$one_dark_green"
+ZSH_HIGHLIGHT_STYLES[hashed-command]="fg=$one_dark_green"
+ZSH_HIGHLIGHT_STYLES[precommand]="fg=$one_dark_green,italic"
+ZSH_HIGHLIGHT_STYLES[arg0]="fg=$one_dark_green"
+ZSH_HIGHLIGHT_STYLES[autodirectory]="fg=$one_dark_blue,italic"
+
+# Syntax: keywords, separators, redirections
+ZSH_HIGHLIGHT_STYLES[reserved-word]="fg=$one_dark_purple"
+ZSH_HIGHLIGHT_STYLES[commandseparator]="fg=$one_dark_purple"
+ZSH_HIGHLIGHT_STYLES[redirection]="fg=$one_dark_purple"
+ZSH_HIGHLIGHT_STYLES[named-fd]="fg=$one_dark_purple"
+ZSH_HIGHLIGHT_STYLES[numeric-fd]="fg=$one_dark_purple"
+ZSH_HIGHLIGHT_STYLES[assign]="fg=$one_dark_fg"
+
+# Paths underline only when they resolve, so a typo'd path is visible
+ZSH_HIGHLIGHT_STYLES[path]="fg=$one_dark_cyan,underline"
+ZSH_HIGHLIGHT_STYLES[path_prefix]="fg=$one_dark_cyan"
+ZSH_HIGHLIGHT_STYLES[path_pathseparator]="fg=$one_dark_cyan"
+ZSH_HIGHLIGHT_STYLES[path_prefix_pathseparator]="fg=$one_dark_cyan"
+
+# Strings and substitutions
+ZSH_HIGHLIGHT_STYLES[single-quoted-argument]="fg=$one_dark_yellow"
+ZSH_HIGHLIGHT_STYLES[double-quoted-argument]="fg=$one_dark_yellow"
+ZSH_HIGHLIGHT_STYLES[dollar-quoted-argument]="fg=$one_dark_yellow"
+ZSH_HIGHLIGHT_STYLES[rc-quote]="fg=$one_dark_yellow"
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument]="fg=$one_dark_fg"
+ZSH_HIGHLIGHT_STYLES[back-quoted-argument-delimiter]="fg=$one_dark_purple"
+ZSH_HIGHLIGHT_STYLES[dollar-double-quoted-argument]="fg=$one_dark_cyan"
+ZSH_HIGHLIGHT_STYLES[back-double-quoted-argument]="fg=$one_dark_cyan"
+ZSH_HIGHLIGHT_STYLES[back-dollar-quoted-argument]="fg=$one_dark_cyan"
+ZSH_HIGHLIGHT_STYLES[command-substitution-delimiter]="fg=$one_dark_purple"
+ZSH_HIGHLIGHT_STYLES[process-substitution-delimiter]="fg=$one_dark_purple"
+
+# Flags, globs, comments
+ZSH_HIGHLIGHT_STYLES[single-hyphen-option]="fg=$one_dark_orange"
+ZSH_HIGHLIGHT_STYLES[double-hyphen-option]="fg=$one_dark_orange"
+ZSH_HIGHLIGHT_STYLES[globbing]="fg=$one_dark_blue"
+ZSH_HIGHLIGHT_STYLES[history-expansion]="fg=$one_dark_blue"
+ZSH_HIGHLIGHT_STYLES[comment]="fg=$one_dark_grey,italic"
+ZSH_HIGHLIGHT_STYLES[default]="fg=$one_dark_fg"
+
+# Ghost text from zsh-autosuggestions, and the substring search hit/miss
+# (its not-found default is a full red background, which is worse than the red text)
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=$one_dark_grey"
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND="fg=$one_dark_green,bold"
+HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND="fg=$one_dark_red"
 bindkey '^B' backward-word
 bindkey '^F' forward-word
 bindkey '^D' delete-word

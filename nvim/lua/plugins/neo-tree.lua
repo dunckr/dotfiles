@@ -38,6 +38,10 @@ return {
 					width = 30,
 					mappings = {
 						["<cr>"] = "open",
+						["l"] = "open",
+						["<right>"] = "open",
+						["h"] = "close_node",
+						["<left>"] = "close_node",
 						["<esc>"] = "close_window",
 					},
 				},
