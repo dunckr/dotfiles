@@ -431,7 +431,8 @@ export GH_TELEMETRY=false
 export DO_NOT_TRACK=true
 
 # Brew paths
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+export JAVA_HOME="/opt/homebrew/opt/openjdk/libexec/openjdk.jdk/Contents/Home"
+export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"

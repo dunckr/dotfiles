@@ -1,0 +1,21 @@
+id = "open-link"
+name = "Open Link"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description ="Open clicked URLs in the default browser instead of copying them"
+platforms = ["macos"]
+
+# Herdr fires pane_link_activated when you click a detected URL. With no handler
+# registered it falls back to copying the URL, which is the "copied to clipboard"
+# toast. This claims http/https so the click opens the browser instead.
+[[link_handlers]]
+id = "browser"
+title = "Open in browser"
+pattern = "^https?://"
+action = "open-in-browser"
+
+[[actions]]
+id = "open-in-browser"
+title = "Open in browser"
+description = "Open the clicked URL with the system default handler"
+command = ["sh", "-c", 'exec open "$HERDR_PLUGIN_CLICKED_URL"']

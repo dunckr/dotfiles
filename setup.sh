@@ -76,4 +76,12 @@ if command -v herdr >/dev/null; then
     echo "Installing herdr $integration integration..."
     herdr integration install "$integration"
   done
+
+  # Link handlers, so clicking a URL in a pane opens the browser instead of
+  # just copying it to the clipboard.
+  for plugin in "$DOTFILES/home/.config/herdr/plugins"/*; do
+    [[ -f "$plugin/herdr-plugin.toml" ]] || continue
+    echo "Linking herdr plugin $(basename "$plugin")..."
+    herdr plugin link "$plugin" >/dev/null
+  done
 fi
