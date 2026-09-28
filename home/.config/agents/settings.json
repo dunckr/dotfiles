@@ -7,6 +7,11 @@
     "commit": "",
     "sessionUrl": false
   },
+  "permissions": {
+    "allow": [
+      "Bash(~/.claude/skills/marketing/marketing.sh:*)"
+    ]
+  },
   "model": "opus[1m]",
   "hooks": {
     "Notification": [
