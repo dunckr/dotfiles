@@ -31,6 +31,13 @@ resize_mode = "prefix+shift+r"
 previous_workspace = "prefix+["
 next_workspace = "prefix+]"
 
+# Jump straight to a workspace with prefix+1..9, like tmux select-window with
+# base-index 1. Workspaces are what prefix+[ and prefix+] cycle, so the digits
+# go there; switch_tab is unset to free them up (herdr defaults it to the same
+# chord, and tabs are per-workspace so numbering them rarely has a target).
+switch_tab = ""
+switch_workspace = "prefix+1..9"
+
 # Copy mode with vi motions. Moved from prefix+[ to make room for workspace cycling.
 copy_mode = "prefix+shift+c"
 
