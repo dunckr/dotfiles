@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# SessionStart hook: name the Claude session after the current git branch.
+
+cwd=$(jq -r '.cwd // empty')
+branch=$(git -C "${cwd:-.}" symbolic-ref --short -q HEAD 2>/dev/null) || exit 0
+
+jq -n --arg title "$branch" \
+  '{hookSpecificOutput: {hookEventName: "SessionStart", sessionTitle: $title}}'

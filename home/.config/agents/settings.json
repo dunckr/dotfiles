@@ -75,6 +75,16 @@
             "timeout": 10
           }
         ]
+      },
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/bin/claude-session-title",
+            "timeout": 5
+          }
+        ]
       }
     ]
   },
