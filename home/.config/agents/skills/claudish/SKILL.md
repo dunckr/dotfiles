@@ -1,3 +1,8 @@
+---
+name: claudish
+description: Rewrite Claude-style prose ("Claudish") into plain, direct, idiomatic English. Use when the user says claudish or asks to make Claude text plain.
+---
+
 Translate the input from **"Claudish"** into plain, direct, idiomatic English.
 
 "Claudish" is the characteristic prose style of Claude and Claude Code: rhetorically polished, contrast-heavy,
