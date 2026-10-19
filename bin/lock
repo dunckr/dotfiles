@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Usage: lock
+# Locks the screen but keeps the system awake so processes keep running.
+# Stays in the foreground until Ctrl-C.
+set -euo pipefail
+
+caffeinate -i &
+pid=$!
+trap 'kill "$pid" 2>/dev/null' EXIT INT TERM
+
+pmset displaysleepnow
+echo "Locked and caffeinated, Ctrl-C to stop"
+wait "$pid"

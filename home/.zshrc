@@ -180,6 +180,10 @@ gprd() {
   git fetch origin "$base" && git push -u origin "$(git branch --show-current)" && gh pr create -f -B "$base" --draft && gh pr view --web
 }
 alias grc="git rebase --continue"
+
+# lock the screen but keep processes running
+alias lock="$dotfiles/bin/lock"
+
 alias gsclone="git clone --depth=1"
 alias gst="git status"
 alias gup="git pull"
