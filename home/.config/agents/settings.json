@@ -10,10 +10,22 @@
   },
   "permissions": {
     "allow": [
-      "Bash(~/.claude/skills/marketing/marketing.sh:*)"
+      "Bash(~/.claude/skills/marketing/marketing.sh:*)",
+      "Bash(~/dotfiles/bin/pr-next:*)",
+      "Bash($HOME/dotfiles/bin/pr-next:*)",
+      "Bash(~/dotfiles/bin/preflight --list:*)",
+      "Bash(~/dotfiles/bin/preflight --manifest:*)",
+      "Bash(gh pr view:*)",
+      "Bash(gh pr list:*)",
+      "Bash(gh pr checks:*)",
+      "Bash(gh pr diff:*)",
+      "Bash(gh run view:*)",
+      "Bash(gh run list:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git merge-base:*)"
     ]
   },
-  "model": "opus[1m]",
   "hooks": {
     "Notification": [
       {
@@ -50,6 +62,11 @@
           {
             "type": "command",
             "command": "clack"
+          },
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/bin/claude-pr-reminder",
+            "timeout": 15
           }
         ]
       }
@@ -58,6 +75,11 @@
       {
         "matcher": "Bash",
         "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/bin/block-claude-branch-push",
+            "timeout": 10
+          },
           {
             "type": "command",
             "command": "rtk hook claude"
@@ -83,6 +105,16 @@
             "type": "command",
             "command": "$HOME/dotfiles/bin/claude-session-title",
             "timeout": 5
+          }
+        ]
+      },
+      {
+        "matcher": "startup|resume",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$HOME/dotfiles/bin/claude-preflight-context",
+            "timeout": 20
           }
         ]
       }

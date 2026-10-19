@@ -1,0 +1,48 @@
+#!/usr/bin/env python3
+"""PreToolUse hook: refuse git push / gh pr create from a branch named with "claude"."""
+import json
+import os
+import re
+import subprocess
+import sys
+
+payload = json.load(sys.stdin)
+command = payload.get("tool_input", {}).get("command", "")
+
+if not re.search(r"\bgit\s+(-C\s+\S+\s+)?push\b|\bgh\s+pr\s+create\b", command):
+    sys.exit(0)
+
+directory = payload.get("cwd") or os.getcwd()
+targets = re.findall(r"(?:^|&&|;)\s*cd\s+(\"[^\"]+\"|'[^']+'|\S+)", command)
+targets += re.findall(r"\bgit\s+-C\s+(\S+)\s+push\b", command)
+for target in targets:
+    candidate = os.path.expanduser(target.strip("\"'"))
+    directory = candidate if os.path.isabs(candidate) else os.path.join(directory, candidate)
+
+try:
+    branch = subprocess.run(
+        ["git", "-C", directory, "branch", "--show-current"],
+        capture_output=True, text=True, timeout=5,
+    ).stdout.strip()
+except Exception:
+    branch = ""
+
+names = [branch]
+names += re.findall(r"--head[ =](\S+)", command)
+names += re.findall(r"\bgit\b.*\bpush\b.*?\S+:(\S+)", command)
+
+offending = next((name for name in names if name and "claude" in name.lower()), None)
+if not offending:
+    sys.exit(0)
+
+json.dump({
+    "hookSpecificOutput": {
+        "hookEventName": "PreToolUse",
+        "permissionDecision": "deny",
+        "permissionDecisionReason": (
+            f'Branch "{offending}" contains "claude". Rename it before pushing, '
+            "using a ticket number (ABC-123) or a feat|fix|chore|refactor|docs|test "
+            "prefix, e.g. `git branch -m fix/short-description`, then push again."
+        ),
+    }
+}, sys.stdout)
