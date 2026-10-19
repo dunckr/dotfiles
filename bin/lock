@@ -1,13 +1,20 @@
 #!/usr/bin/env bash
 # Usage: lock
 # Locks the screen but keeps the system awake so processes keep running.
-# Stays in the foreground until Ctrl-C.
+# Stops when the screen is unlocked (or on Ctrl-C).
 set -euo pipefail
+
+locked() {
+  ioreg -n Root -d1 -a | grep -A1 -E 'IOConsoleLocked|CGSSessionScreenIsLocked' | grep -q '<true/>'
+}
 
 caffeinate -i &
 pid=$!
 trap 'kill "$pid" 2>/dev/null' EXIT INT TERM
 
 pmset displaysleepnow
-echo "Locked and caffeinated, Ctrl-C to stop"
-wait "$pid"
+echo "Locked and caffeinated, unlock or Ctrl-C to stop"
+
+# wait for the lock to kick in, then for it to be released
+for _ in {1..20}; do locked && break; sleep 0.5; done
+while locked; do sleep 2; done

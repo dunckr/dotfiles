@@ -26,6 +26,10 @@ Key.on('3', ['cmd', 'alt'], () => {
   Task.run('/bin/zsh', ['-lc', '/Users/d/src/screenshot/command.sh'])
 });
 
+Key.on('l', ['ctrl', 'alt', 'cmd'], () => {
+  Task.run('/bin/zsh', ['-lc', '/Users/d/dotfiles/bin/lock'])
+});
+
 // Prevent cmd + m from minimizing window
 Key.on('m', ['cmd'], () => {
   // Do nothing - just intercept the key
