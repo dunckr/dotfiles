@@ -180,6 +180,10 @@ gprd() {
   git fetch origin "$base" && git push -u origin "$(git branch --show-current)" && gh pr create -f -B "$base" --draft && gh pr view --web
 }
 alias grc="git rebase --continue"
+# PR flow: preflight runs what CI runs, pr-next says what to do next
+alias preflight="$dotfiles/bin/preflight"
+alias prn="$dotfiles/bin/pr-next"
+alias prhelp="$dotfiles/bin/pr-next help"
 
 # lock the screen but keep processes running
 alias lock="$dotfiles/bin/lock"

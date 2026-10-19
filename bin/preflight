@@ -1,0 +1,272 @@
+#!/usr/bin/env bash
+# Runs what CI runs, scoped to the paths changed since the base branch.
+# Only ever run by hand (or by a skill you invoked); no hook calls it.
+#
+# The checks come from a per-repo manifest, so nothing repo specific lives
+# here. Lookup order:
+#   1. $PREFLIGHT_MANIFEST
+#   2. ~/.config/preflight/<repo>.json   (<repo> is the origin repo name)
+#   3. <root>/.claude/preflight.json     (only after `git config preflight.trustRepoManifest true`,
+#                                         since a cloned repo could otherwise run its own code)
+#
+# Manifest shape:
+#   {
+#     "base": "develop",                        default: origin's HEAD branch
+#     "shell": "zsh",                           default: bash
+#     "prelude": "source ~/.zshrc.local",       run before every command
+#     "checks": [{
+#       "name": "members-test",
+#       "paths": ["apps/members/*"],            globs, * crosses /; empty means always
+#       "run": "cd apps/members && flutter test",
+#       "group": "frontend",                    optional; the plan says which groups were skipped
+#       "blocking": false,                      default true; false only warns
+#       "update": "...",                        --fix runs this when the check fails
+#       "commit": "test({ticket}): update golden baselines"
+#     }],
+#     "flaky": [{ "check": "members-test", "match": "test name", "ticket": "ABC-1" }]
+#   }
+set -uo pipefail
+
+usage() {
+  cat <<'EOF'
+usage: preflight [options]
+
+  (no options)   run checks for paths changed since the base branch, including uncommitted work
+  --fix          when a check with an "update" command fails, run it, rerun, and commit the result
+  --all          ignore path scoping and run every check
+  --only a,b     run only these checks
+  --skip a,b     skip these checks (logged)
+  --list         print the plan and exit
+  --manifest     print the manifest path and exit
+  -h, --help     this help
+EOF
+}
+
+bold=$'\033[1m' red=$'\033[38;2;239;89;111m' green=$'\033[38;2;137;202;120m'
+yellow=$'\033[38;2;229;192;123m' grey=$'\033[38;2;92;99;112m' reset=$'\033[0m'
+[[ -t 1 ]] || { bold='' red='' green='' yellow='' grey='' reset=''; }
+
+mode=run fix=0 all=0 list=0 only='' skip=''
+while (($#)); do
+  case "$1" in
+    --fix) fix=1 ;;
+    --all) all=1 ;;
+    --only) only="$2"; shift ;;
+    --skip) skip="$2"; shift ;;
+    --list) list=1 ;;
+    --manifest) mode=manifest ;;
+    -h|--help) usage; exit 0 ;;
+    *) echo "preflight: unknown option $1" >&2; usage >&2; exit 2 ;;
+  esac
+  shift
+done
+
+root="$(git rev-parse --show-toplevel 2>/dev/null)" || { echo "preflight: not in a git repo" >&2; exit 2; }
+cd "$root" || exit 2
+
+repo_name() {
+  local url
+  url="$(git remote get-url origin 2>/dev/null)" || { basename "$root"; return; }
+  url="${url%.git}"
+  echo "${url##*/}"
+}
+repo="$(repo_name)"
+
+manifest=''
+if [[ -n "${PREFLIGHT_MANIFEST:-}" ]]; then
+  manifest="$PREFLIGHT_MANIFEST"
+elif [[ -f "$HOME/.config/preflight/$repo.json" ]]; then
+  manifest="$HOME/.config/preflight/$repo.json"
+elif [[ -f "$root/.claude/preflight.json" && "$(git config --get preflight.trustRepoManifest)" == true ]]; then
+  manifest="$root/.claude/preflight.json"
+fi
+
+if [[ "$mode" == manifest ]]; then
+  [[ -n "$manifest" ]] && echo "$manifest" && exit 0
+  echo "no manifest for $repo (looked in \$PREFLIGHT_MANIFEST, ~/.config/preflight/$repo.json)" >&2
+  exit 1
+fi
+
+if [[ -z "$manifest" ]]; then
+  echo "preflight: no manifest for $repo, nothing to run"
+  echo "${grey}create ~/.config/preflight/$repo.json to add checks (see: preflight --help)${reset}"
+  exit 0
+fi
+jq empty "$manifest" 2>/dev/null || { echo "preflight: $manifest is not valid JSON" >&2; exit 2; }
+
+state="${XDG_STATE_HOME:-$HOME/.local/state}/pr-flow"
+mkdir -p "$state/logs"
+head_sha="$(git rev-parse HEAD)"
+branch="$(git branch --show-current)"
+ticket="$(grep -oE '[A-Z][A-Z0-9]+-[0-9]+' <<<"$branch" | head -1)"
+passed_file="$(git rev-parse --git-path preflight-passed)"
+
+log_run() {
+  local result="$1" failed="$2" skipped="$3" flaky="$4"
+  jq -nc --arg ts "$(date -u +%FT%TZ)" --arg repo "$repo" --arg branch "$branch" --arg sha "$head_sha" \
+    --arg mode "$mode" --arg result "$result" --arg failed "$failed" --arg skipped "$skipped" --arg flaky "$flaky" \
+    '{ts:$ts,repo:$repo,branch:$branch,sha:$sha,mode:$mode,result:$result,
+      failed:($failed|split(",")|map(select(.!=""))),skipped:($skipped|split(",")|map(select(.!=""))),
+      flaky:($flaky|split(",")|map(select(.!="")))}' >>"$state/preflight.jsonl"
+}
+
+base="$(jq -r '.base // empty' "$manifest")"
+if [[ -z "$base" ]]; then
+  base="$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null)"
+  base="${base#origin/}"
+  base="${base:-main}"
+fi
+merge_base="$(git merge-base HEAD "origin/$base" 2>/dev/null)" || {
+  echo "preflight: no merge base with origin/$base, run git fetch origin $base" >&2
+  exit 2
+}
+
+changed="$(git diff --name-only "$merge_base"; git ls-files --others --exclude-standard)"
+
+shell="$(jq -r '.shell // "bash"' "$manifest")"
+prelude="$(jq -r '.prelude // ":"' "$manifest")"
+
+in_list() { [[ ",$2," == *",$1,"* ]]; }
+
+matches_paths() {
+  local idx="$1" pattern file
+  [[ "$(jq -r ".checks[$idx].paths // [] | length" "$manifest")" == 0 ]] && return 0
+  while IFS= read -r pattern; do
+    while IFS= read -r file; do
+      [[ -n "$file" && "$file" == $pattern ]] && return 0
+    done <<<"$changed"
+  done < <(jq -r ".checks[$idx].paths[]" "$manifest")
+  return 1
+}
+
+# Work out the plan before running anything, so it can be printed first
+count="$(jq '.checks | length' "$manifest")"
+plan=() skipped_names='' groups_in='' groups_out=''
+for ((i = 0; i < count; i++)); do
+  name="$(jq -r ".checks[$i].name" "$manifest")"
+  group="$(jq -r ".checks[$i].group // empty" "$manifest")"
+  if [[ -n "$only" ]] && ! in_list "$name" "$only"; then continue; fi
+  if [[ -n "$skip" ]] && in_list "$name" "$skip"; then skipped_names+="$name,"; continue; fi
+  if ((all)) || [[ -n "$only" ]] || matches_paths "$i"; then
+    plan+=("$i")
+    [[ -n "$group" ]] && ! in_list "$group" "$groups_in" && groups_in+="$group,"
+  elif [[ -n "$group" ]] && ! in_list "$group" "$groups_out"; then
+    groups_out+="$group,"
+  fi
+done
+# A group is skipped only when none of its checks matched
+groups_skipped=''
+IFS=, read -ra out_list <<<"${groups_out%,}"
+for g in "${out_list[@]+"${out_list[@]}"}"; do
+  in_list "$g" "$groups_in" || groups_skipped+="$g,"
+done
+
+echo "${bold}preflight${reset} $repo @ $branch ${grey}(${head_sha:0:9} vs origin/$base, $(grep -c . <<<"$changed") files changed)${reset}"
+echo "${grey}manifest: $manifest${reset}"
+if ((${#plan[@]} == 0)); then
+  echo "no checks match the changed paths"
+else
+  for i in "${plan[@]}"; do
+    printf '  %-24s %s\n' "$(jq -r ".checks[$i].name" "$manifest")" "${grey}$(jq -r ".checks[$i].run" "$manifest")${reset}"
+  done
+fi
+[[ -n "$skipped_names" ]] && echo "${yellow}skipping: ${skipped_names%,}${reset}"
+[[ -n "$groups_in" ]] && echo "${green}changed: ${groups_in%,}${reset}"
+[[ -n "$groups_skipped" ]] && echo "${grey}unchanged, not run: ${groups_skipped%,}${reset}"
+((list)) && exit 0
+echo
+
+run_cmd() {
+  "$shell" -c "$prelude; $1"
+}
+
+flaky_match() {
+  local name="$1" logfile="$2" match
+  while IFS=$'\t' read -r match tk; do
+    [[ -n "$match" ]] && grep -qF -- "$match" "$logfile" && { echo "$tk"; return 0; }
+  done < <(jq -r --arg n "$name" '.flaky // [] | .[] | select((.check // $n) == $n) | [.match, (.ticket // "no ticket")] | @tsv' "$manifest")
+  return 1
+}
+
+failed='' warned='' flaky_hits='' fixed=() rows=()
+for i in "${plan[@]+"${plan[@]}"}"; do
+  name="$(jq -r ".checks[$i].name" "$manifest")"
+  cmd="$(jq -r ".checks[$i].run" "$manifest")"
+  blocking="$(jq -r ".checks[$i].blocking // true" "$manifest")"
+  update="$(jq -r ".checks[$i].update // empty" "$manifest")"
+  logfile="$state/logs/${repo}-${head_sha:0:9}-${name}.log"
+  printf '%s==>%s %s ' "$bold" "$reset" "$name"
+  start=$SECONDS
+  run_cmd "$cmd" >"$logfile" 2>&1
+  status=$?
+  note=''
+
+  if ((status != 0)) && tk="$(flaky_match "$name" "$logfile")"; then
+    printf '%sflaky (%s), rerunning%s ' "$yellow" "$tk" "$reset"
+    run_cmd "$cmd" >"$logfile" 2>&1
+    status=$?
+    flaky_hits+="$name:$tk,"
+    note=" (flaky rerun, $tk)"
+  fi
+
+  if ((status != 0)) && [[ -n "$update" ]]; then
+    if ((fix)); then
+      printf '%supdating%s ' "$yellow" "$reset"
+      before="$(git status --porcelain)"
+      if run_cmd "$update" >>"$logfile" 2>&1 && run_cmd "$cmd" >>"$logfile" 2>&1; then
+        status=0
+        changes="$(comm -13 <(sort <<<"$before") <(git status --porcelain | sort) | cut -c4-)"
+        if [[ -n "$changes" ]]; then
+          msg="$(jq -r ".checks[$i].commit // \"update $name output\"" "$manifest")"
+          msg="${msg//\{ticket\}/${ticket:-no-ticket}}"
+          xargs git add -- <<<"$changes" && git commit -q -m "$msg" --no-verify
+          fixed+=("$name: committed $(grep -c . <<<"$changes") files as \"$msg\"")
+          note=" (regenerated and committed)"
+        fi
+      fi
+    else
+      note=" (run: preflight --fix --only $name)"
+    fi
+  fi
+
+  secs=$((SECONDS - start))
+  if ((status == 0)); then
+    echo "${green}ok${reset} ${grey}${secs}s${reset}${note}"
+    rows+=("${green}✓${reset} $name${note}")
+  elif [[ "$blocking" == false ]]; then
+    echo "${yellow}warn${reset} ${grey}${secs}s${reset}"
+    warned+="$name,"
+    rows+=("${yellow}!${reset} $name (non-blocking) ${grey}$logfile${reset}")
+  else
+    echo "${red}failed${reset} ${grey}${secs}s${reset}${note}"
+    tail -n 25 "$logfile" | sed 's/^/    /'
+    failed+="$name,"
+    rows+=("${red}✗${reset} $name${note} ${grey}$logfile${reset}")
+  fi
+done
+
+echo
+echo "${bold}summary${reset}"
+for row in "${rows[@]+"${rows[@]}"}"; do echo "  $row"; done
+for f in "${fixed[@]+"${fixed[@]}"}"; do echo "  ${yellow}fixed${reset} $f"; done
+flaky_total="$(jq '.flaky // [] | length' "$manifest")"
+((flaky_total)) && echo "  ${grey}known flaky: $flaky_total entries in the manifest${reset}"
+
+if [[ -n "$failed" ]]; then
+  log_run failed "${failed%,}" "${skipped_names%,}" "${flaky_hits%,}"
+  echo
+  echo "${red}${bold}preflight failed:${reset} ${failed%,}"
+  echo "next: fix the failures and rerun ${bold}preflight${reset}, or in Claude ${bold}/preflight${reset}"
+  exit 1
+fi
+
+log_run passed '' "${skipped_names%,}" "${flaky_hits%,}"
+# Only record a pass when what was tested is exactly HEAD
+head_sha="$(git rev-parse HEAD)"
+if [[ -z "$skipped_names" && -z "$only" && -z "$(git status --porcelain)" ]]; then
+  echo "$head_sha" >>"$passed_file"
+fi
+echo
+echo "${green}${bold}preflight passed${reset}"
+echo "next: run ${bold}pr-next${reset} to see what comes after this"
+exit 0

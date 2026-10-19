@@ -1,0 +1,163 @@
+#!/usr/bin/env bash
+# Prints where the current branch is in the PR flow and the one thing to do next.
+#
+#   pr-next          state of this branch and its PR, then the next step
+#   pr-next --brief  one line, for hooks and prompts
+#   pr-next help     the whole flow, in order
+set -uo pipefail
+
+bold=$'\033[1m' red=$'\033[38;2;239;89;111m' green=$'\033[38;2;137;202;120m'
+yellow=$'\033[38;2;229;192;123m' grey=$'\033[38;2;92;99;112m' reset=$'\033[0m'
+[[ -t 1 ]] || { bold='' red='' green='' yellow='' grey='' reset=''; }
+
+flow() {
+  cat <<EOF
+${bold}PR flow${reset} (run ${bold}pr-next${reset} any time to see which step you are on)
+
+  1. branch     git checkout -b ABC-123/short-name   ${grey}ticket key in the branch name${reset}
+  2. preflight  preflight  ${grey}or /preflight in Claude; runs what CI runs, only when you run it${reset}
+  3. open       /pr-open   ${grey}title and body from Jira, self review, opens the PR${reset}
+  4. steward    /pr-steward <pr>  ${grey}optional: Claude watches CI and reviews until it is green${reset}
+  5. triage     /pr-triage <pr>   ${grey}reply to or resolve every review thread${reset}
+  6. restack    /pr-stack  ${grey}after a branch below this one merges${reset}
+  7. merge      gh pr merge <pr> --squash  ${grey}you press it, never Claude${reset}
+
+  daily         /pr-sweep  ${grey}your open PRs, one action each${reset}
+  monthly       /pr-retro  ${grey}metrics appended to the retro log${reset}
+
+  preflight --help    options (--fix regenerates goldens, --list shows the plan)
+EOF
+}
+
+brief=0
+case "${1:-}" in
+  help|-h|--help) flow; exit 0 ;;
+  --brief) brief=1 ;;
+esac
+
+root="$(git rev-parse --show-toplevel 2>/dev/null)" || { flow; exit 0; }
+cd "$root" || exit 1
+branch="$(git branch --show-current)"
+head_sha="$(git rev-parse HEAD)"
+dotfiles_bin="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+say() {
+  # $1 step, $2 next command, $3 reason
+  if ((brief)); then
+    echo "next: $2 ($3)"
+  else
+    echo
+    echo "${bold}step${reset}  $1"
+    echo "${bold}next${reset}  ${green}$2${reset}"
+    echo "      ${grey}$3${reset}"
+    echo
+    echo "${grey}pr-next help shows the whole flow${reset}"
+  fi
+  exit 0
+}
+
+base=''
+if manifest="$("$dotfiles_bin/preflight" --manifest 2>/dev/null)"; then
+  base="$(jq -r '.base // empty' "$manifest")"
+fi
+if [[ -z "$base" ]]; then
+  base="$(git symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null)"
+  base="${base#origin/}"
+fi
+
+if [[ -z "$branch" ]]; then
+  say "detached HEAD" "git switch -c ABC-123/short-name" "check out a ticket branch first"
+fi
+if [[ "$branch" == "${base:-main}" || "$branch" == main || "$branch" == master || "$branch" == develop ]]; then
+  say "1. branch" "git switch -c ABC-123/short-name" "you are on $branch"
+fi
+
+((brief)) || echo "${bold}$branch${reset} ${grey}${head_sha:0:9}${reset}"
+
+if [[ -n "$(git status --porcelain)" ]]; then
+  say "2. preflight" "commit your work (/commit), then preflight" "uncommitted changes"
+fi
+
+preflight_ok=1
+if [[ -n "${manifest:-}" ]]; then
+  passed_file="$(git rev-parse --git-path preflight-passed)"
+  if ! { [[ -f "$passed_file" ]] && grep -qx "$head_sha" "$passed_file"; }; then
+    preflight_ok=0
+  fi
+fi
+
+pr_json=''
+if command -v gh >/dev/null; then
+  pr_json="$(gh pr view --json number,title,body,state,isDraft,reviewDecision,mergeStateStatus,statusCheckRollup,baseRefName,headRefOid,url 2>/dev/null)"
+fi
+
+if [[ -z "$pr_json" ]] || [[ "$(jq -r .state <<<"$pr_json")" != OPEN ]]; then
+  ((preflight_ok)) || say "2. preflight" "preflight" "HEAD has not passed preflight yet"
+  say "3. open" "/pr-open" "no open PR for $branch"
+fi
+
+number="$(jq -r .number <<<"$pr_json")"
+title="$(jq -r .title <<<"$pr_json")"
+body="$(jq -r '.body // ""' <<<"$pr_json")"
+pr_base="$(jq -r .baseRefName <<<"$pr_json")"
+review="$(jq -r '.reviewDecision // ""' <<<"$pr_json")"
+merge_state="$(jq -r '.mergeStateStatus // ""' <<<"$pr_json")"
+draft="$(jq -r .isDraft <<<"$pr_json")"
+remote_sha="$(jq -r .headRefOid <<<"$pr_json")"
+url="$(jq -r .url <<<"$pr_json")"
+
+checks="$(jq -r '[.statusCheckRollup[]? |
+  (if .__typename == "CheckRun" then (if .status != "COMPLETED" then "pending"
+     elif (.conclusion | IN("SUCCESS","SKIPPED","NEUTRAL")) then "pass" else "fail" end)
+   else (if .state == "PENDING" or .state == "EXPECTED" then "pending"
+     elif .state == "SUCCESS" then "pass" else "fail" end) end)] |
+  {fail: map(select(. == "fail")) | length, pending: map(select(. == "pending")) | length,
+   pass: map(select(. == "pass")) | length} | "\(.fail) \(.pending) \(.pass)"' <<<"$pr_json")"
+read -r fail pending pass <<<"$checks"
+failing_names="$(jq -r '[.statusCheckRollup[]? | select((.conclusion // .state) | IN("FAILURE","ERROR","CANCELLED","TIMED_OUT","ACTION_REQUIRED")) | (.name // .context)] | unique | join(", ")' <<<"$pr_json")"
+
+unresolved=0
+nwo="$(sed -E 's#https://github.com/([^/]+/[^/]+)/pull/.*#\1#' <<<"$url")"
+if threads="$(gh api graphql -f query='query($o:String!,$r:String!,$n:Int!){repository(owner:$o,name:$r){pullRequest(number:$n){reviewThreads(first:100){nodes{isResolved}}}}}' \
+  -F o="${nwo%/*}" -F r="${nwo#*/}" -F n="$number" 2>/dev/null)"; then
+  unresolved="$(jq '[.data.repository.pullRequest.reviewThreads.nodes[] | select(.isResolved | not)] | length' <<<"$threads")"
+fi
+
+if ((!brief)); then
+  echo "${grey}#$number $title -> $pr_base${reset}"
+  printf '  checks   %s%s failing%s, %s pending, %s passing\n' "$([[ $fail != 0 ]] && echo "$red")" "$fail" "$reset" "$pending" "$pass"
+  echo "  review   ${review:-none yet}$([[ $draft == true ]] && echo ', draft')"
+  echo "  threads  $unresolved unresolved"
+  echo "  merge    ${merge_state:-unknown}"
+fi
+
+ahead="$(git rev-list --count "origin/$branch..HEAD" 2>/dev/null || echo 0)"
+if [[ "$remote_sha" != "$head_sha" && "$ahead" != 0 ]]; then
+  ((preflight_ok)) || say "2. preflight" "preflight" "local commits have not passed preflight; run it before pushing"
+  say "push" "git push" "$ahead local commit(s) not on the PR yet"
+fi
+if [[ -z "${body//[[:space:]]/}" ]] || ! grep -qE '[A-Z][A-Z0-9]+-[0-9]+' <<<"$title$body"; then
+  say "3. open" "/pr-open $number" "PR has no body or no ticket key, so Jira sync and reviewers lack context"
+fi
+if [[ "$merge_state" == DIRTY ]]; then
+  say "6. restack" "/pr-stack (or merge origin/$pr_base and resolve)" "PR has merge conflicts with $pr_base"
+fi
+if [[ "$fail" != 0 ]]; then
+  say "4. steward" "/pr-steward $number" "failing: ${failing_names:-$fail checks}"
+fi
+if [[ "$review" == CHANGES_REQUESTED || "$unresolved" != 0 ]]; then
+  say "5. triage" "/pr-triage $number" "$unresolved unresolved thread(s)$([[ $review == CHANGES_REQUESTED ]] && echo ', changes requested')"
+fi
+if [[ "$merge_state" == BEHIND ]]; then
+  say "6. restack" "/pr-stack" "$branch is behind $pr_base"
+fi
+if [[ "$pending" != 0 ]]; then
+  say "4. steward" "/pr-steward $number (or wait)" "$pending check(s) still running"
+fi
+if [[ "$draft" == true ]]; then
+  say "3. open" "gh pr ready $number" "PR is a draft, so no reviewer has been asked"
+fi
+if [[ "$review" == APPROVED ]]; then
+  say "7. merge" "gh pr merge $number --squash" "approved, green, no open threads. merge today"
+fi
+say "5. triage" "wait for review, then /pr-triage $number" "green with no review yet ($url)"

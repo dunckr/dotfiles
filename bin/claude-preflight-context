@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# SessionStart hook: tells the session which preflight manifest applies, which
+# tests are known flaky, and what the next PR step is for this branch.
+input="$(command cat)"
+cwd="$(jq -r '.cwd // ""' <<<"$input")"
+[[ -n "$cwd" ]] && cd "$cwd" 2>/dev/null
+git rev-parse --git-dir >/dev/null 2>&1 || exit 0
+bin="$(dirname "$0")"
+manifest="$("$bin/preflight" --manifest 2>/dev/null)" || exit 0
+
+flaky="$(jq -r '.flaky // [] | .[] | "- \(.match) (\(.check // "any check"), \(.ticket // "no ticket"))"' "$manifest")"
+next="$("$bin/pr-next" --brief 2>/dev/null)"
+context="Preflight manifest: $manifest. Preflight never runs automatically. Do not run it unless the user asks or invokes /preflight; suggest it before a push instead.
+Known flaky tests (preflight reruns these once; never skip or quarantine them):
+${flaky:-none}
+PR flow, $next. Run $bin/pr-next for detail, $bin/pr-next help for the full flow."
+jq -nc --arg c "$context" --arg m "$next" \
+  '{systemMessage: $m, hookSpecificOutput: {hookEventName: "SessionStart", additionalContext: $c}}'
