@@ -1,135 +1,190 @@
-brew "ack"
-brew "aom"
-brew "awscli"
-brew "bat"
-brew "circleci"
-brew "codex"
-brew "cloc"
-brew "cloudflared"
-brew "cocoapods"
-brew "coreutils"
-brew "docutils"
-brew "eza"
-brew "fd"
-brew "ffmpeg"
-brew "flyctl"
-brew "fzf"
-brew "gh"
-brew "git"
-brew "git-delta"
-brew "glib"
-brew "glow"
-brew "gnupg"
-brew "gnutls"
-brew "go"
-brew "harfbuzz"
-brew "herdr"
-brew "hunspell"
-brew "hyperfine"
-brew "icu4c@76"
-brew "imagemagick"
-brew "jpeg-xl"
-brew "jq"
-brew "kompose"
-brew "krb5"
-brew "lastpass-cli"
-brew "lazygit"
-brew "libarchive"
-brew "libass"
-brew "libbluray"
-brew "libmicrohttpd"
-brew "libpq"
-brew "loc"
-brew "mongodb/brew/mongodb-database-tools"
-brew "mongosh"
-brew "neovim"
-brew "node"
-brew "node-build"
-brew "nodenv"
-brew "ollama", restart_service: :changed
-brew "openai-whisper"
-brew "openssl@3"
-brew "osmium-tool"
-brew "p11-kit"
-brew "pandoc"
-brew "pngquant"
-brew "pnpm"
-brew "poppler"
-brew "postgresql@16"
-brew "pyenv"
-brew "python-setuptools"
-brew "python@3.11"
-brew "python@3.12"
-brew "python@3.9"
-brew "rbenv"
-brew "redis"
-brew "ripgrep"
-brew "ruby-build"
-brew "shellcheck"
-brew "siege"
-brew "sops"
-brew "starship"
-brew "stripe/stripe-cli/stripe"
-brew "subversion"
-brew "tailscale"
-brew "tealdeer"
-brew "terraform"
-brew "tesseract"
-brew "tree"
-brew "tylerbrock/saw/saw"
-brew "unbound"
-brew "webp"
-brew "wget"
-brew "whisper-cpp"
-brew "wix/brew/applesimutils"
-brew "yt-dlp"
-brew "zoxide"
-brew "zsh-autosuggestions"
-brew "zsh-completions"
-brew "zsh-history-substring-search"
-brew "zsh-syntax-highlighting"
-cask "bitwarden"
-cask "chatgpt"
-cask "chromedriver"
-cask "chromium"
-cask "claude"
-cask "claude-code"
-cask "docker-desktop"
-cask "dropbox"
-cask "firefox"
-cask "font-sf-mono-nerd-font-ligaturized"
-cask "gcloud-cli"
-cask "google-chrome"
-cask "intellij-idea"
-cask "iterm2"
-cask "licecap"
-cask "mongodb-compass"
-cask "muzzle"
-cask "ngrok"
-cask "pennywise"
-cask "phoenix"
-cask "postman"
-cask "sketch"
-cask "skype"
-cask "slack"
-cask "spotify"
-cask "transmission"
-cask "visual-studio-code"
-cask "vlc"
-cask "voiceink"
-cask "zoom"
-cask "zulu@21"
+tap "btwld/fvm", "https://github.com/btwld/homebrew-fvm.git"
 tap "cloudflare/cloudflare"
+tap "heroku/brew"
+tap "homebrew/services"
+tap "manaflow-ai/cmux"
 tap "mongodb/brew"
 tap "neovim/neovim"
+tap "oven-sh/bun"
 tap "puma/puma"
 tap "robsalasco/libpostal"
+tap "steipete/tap"
 tap "stripe/stripe-cli"
 tap "superfly/tap"
-tap "tylerbrock/saw"
-tap "wix/brew"
+tap "tylerbrock/saw", "https://github.com/TylerBrock/homebrew-saw"
+tap "wix-incubator/brew", "https://github.com/wix-incubator/homebrew-brew.git"
+# Codec library for encoding and decoding AV1 video streams
+brew "aom"
+# Official Amazon AWS command-line interface
+brew "awscli"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Core application library for C
+brew "glib"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
+# Modern, maintained replacement for ls
+brew "eza"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# Manage Flutter SDK versions per project
+brew "fvm"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Syntax-highlighting pager for git and diff output
+brew "git-delta"
+# Library to load and enumerate PKCS#11 modules
+brew "p11-kit"
+# GNU Transport Layer Security (TLS) Library
+brew "gnutls"
+# GNU Privacy Guard (OpenPGP)
+brew "gnupg"
+# Open source programming language to build simple/reliable/efficient software
+brew "go"
+# OpenType text shaping engine
+brew "harfbuzz"
+# Agent multiplexer that lives in your terminal
+brew "herdr"
+# Image format providing lossless and lossy compression for web images
+brew "webp"
+# Tools and libraries to manipulate images in select formats
+brew "imagemagick"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Network authentication protocol
+brew "krb5"
+# Multi-format archive and compression library
+brew "libarchive"
+# Postgres C API library
+brew "libpq"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Install NodeJS versions
+brew "node-build"
+# Node.js version manager
+brew "nodenv"
+# General-purpose speech recognition model
+brew "openai-whisper"
+# Development kit for the Java programming language
+brew "openjdk"
+# PNG image optimizing utility
+brew "pngquant"
+# Fast, disk space efficient package manager
+brew "pnpm"
+# PDF rendering library (based on the xpdf-3.0 code base)
+brew "poppler"
+# Object-relational database system
+brew "postgresql@16"
+# Python version management
+brew "pyenv"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.11"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.12"
+# Install various Ruby versions and implementations
+brew "ruby-build"
+# Ruby version manager
+brew "rbenv"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
+# CLI proxy to minimize LLM token consumption
+brew "rtk"
+# Static analysis and lint tool, for (ba)sh scripts
+brew "shellcheck"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Easiest, most secure way to use WireGuard and 2FA
+brew "tailscale"
+# Send macOS User Notifications from the command-line
+brew "terminal-notifier"
+# Tool to build, change, and version infrastructure
+brew "terraform"
+# Terminal multiplexer
+brew "tmux"
+# Display directories as trees (with optional color/HTML output)
+brew "tree"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# Internet file retriever
+brew "wget"
+# CLI for Git worktree management, designed for parallel AI agent workflows
+brew "worktrunk"
+# Find security issues in GitHub Actions setups
+brew "zizmor"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
+# Fish-like fast/unobtrusive autosuggestions for zsh
+brew "zsh-autosuggestions"
+# Additional completion definitions for zsh
+brew "zsh-completions"
+# Zsh port of Fish shell's history search
+brew "zsh-history-substring-search"
+# Fish shell like syntax highlighting for zsh
+brew "zsh-syntax-highlighting"
+# Command-line tools for building and debugging Android apps
+cask "android-commandlinetools"
+# OpenAI's official ChatGPT desktop app
+cask "chatgpt"
+# Automated testing of webapps for Google Chrome
+cask "chromedriver"
+# Anthropic's official Claude AI desktop app
+cask "claude"
+# Terminal-based AI coding assistant
+cask "claude-code"
+# OpenAI's coding agent that runs in your terminal
+cask "codex"
+cask "codexbar"
+# Brings the power of Copilot coding agent directly to your terminal
+cask "copilot-cli"
+# App to build and share containerised applications and microservices
+cask "docker-desktop"
+# Client for the Dropbox cloud storage service
+cask "dropbox"
+# Web browser
+cask "firefox"
+cask "font-sf-mono-nerd-font-ligaturized"
+cask "font-source-code-pro"
+# Set of tools to manage resources and applications hosted on Google Cloud
+cask "gcloud-cli"
+# Web browser
+cask "google-chrome"
+# Java IDE by JetBrains
+cask "intellij-idea"
+# Animated screen capture application
+cask "licecap"
+# Reverse proxy, secure introspectable tunnels to localhost
+cask "ngrok"
+# Window and app manager scriptable with JavaScript
+cask "phoenix"
+# Team communication and collaboration software
+cask "slack"
+# Music streaming service
+cask "spotify"
+# Open-source code editor
+cask "visual-studio-code"
+# Voice to text app
+cask "voiceink"
+# Video communication and virtual meeting platform
+cask "zoom"
+# OpenJDK distribution from Azul
+cask "zulu@11"
 vscode "asvetliakov.vscode-neovim"
 vscode "google.geminicodeassist"
 vscode "k--kato.intellij-idea-keybindings"
 vscode "vscodevim.vim"
 vscode "zhuangtongfa.material-theme"
+go "github.com/dunckr/ccinit/cmd/ccinit"
+go "github.com/duncanbeaton/ccping/cmd/ccping"
+uv "neighbourhoodwatch"
+npm "@shopify/cli"
+npm "yarn"
