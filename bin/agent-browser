@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+# run a browser mcp attached to a visible chrome that never takes focus
+# chrome activates itself when it opens its startup window, so launch it windowless
+# in the background and open windows over cdp with background: true instead
+set -euo pipefail
+
+port=9333
+url="http://127.0.0.1:$port"
+profile="$HOME/.cache/agent-browser/profile"
+
+up() { curl -sf -o /dev/null "$url/json/version"; }
+
+if ! up; then
+  mkdir -p "$profile"
+  open -g -n -a "Google Chrome" --args \
+    --remote-debugging-port="$port" \
+    --user-data-dir="$profile" \
+    --no-first-run \
+    --no-default-browser-check \
+    --no-startup-window
+  for _ in $(seq 50); do up && break; sleep 0.2; done
+fi
+
+# tabs can only be opened into an existing window, so make sure one is there
+node --input-type=module -e "
+const base = '$url';
+const pages = (await (await fetch(base + '/json/list')).json()).filter(t => t.type === 'page');
+if (!pages.length) {
+  const { webSocketDebuggerUrl } = await (await fetch(base + '/json/version')).json();
+  const ws = new WebSocket(webSocketDebuggerUrl);
+  await new Promise(r => (ws.onopen = r));
+  ws.send(JSON.stringify({ id: 1, method: 'Target.createTarget', params: { url: 'about:blank', newWindow: true, background: true } }));
+  await new Promise(r => (ws.onmessage = r));
+  ws.close();
+}
+"
+
+case "${1:-}" in
+  puppeteer) exec npx -y chrome-devtools-mcp@latest --browserUrl "$url" ;;
+  playwright) exec npx -y @playwright/mcp@latest --cdp-endpoint "$url" ;;
+  *) echo "usage: agent-browser puppeteer|playwright" >&2; exit 1 ;;
+esac
