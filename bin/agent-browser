@@ -2,6 +2,7 @@
 # run a browser mcp attached to a visible chrome that never takes focus
 # chrome activates itself when it opens its startup window, so launch it windowless
 # in the background and open windows over cdp with background: true instead
+# the mock keychain keeps cookies readable when the profile is copied from playwright-mcp
 set -euo pipefail
 
 port=9333
@@ -17,7 +18,8 @@ if ! up; then
     --user-data-dir="$profile" \
     --no-first-run \
     --no-default-browser-check \
-    --no-startup-window
+    --no-startup-window \
+    --use-mock-keychain
   for _ in $(seq 50); do up && break; sleep 0.2; done
 fi
 
