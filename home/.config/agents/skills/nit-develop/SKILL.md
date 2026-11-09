@@ -7,6 +7,8 @@ Current branch: !`git branch --show-current`
 Changes: !`git diff origin/develop...HEAD`
 Commits: !`git log --oneline origin/develop..HEAD`
 PR: !`gh pr view --json url,headRefOid --jq '.url + " " + .headRefOid' 2>/dev/null || echo none`
+Local HEAD: !`git rev-parse HEAD`
+File anchors: !`git diff --name-only origin/develop...HEAD | while IFS= read -r f; do printf 'diff-%s %s\n' "$(printf '%s' "$f" | shasum -a 256 | cut -c1-64)" "$f"; done`
 
 Review the above code changes with the energy of a senior engineer who has seen things. Be passive aggressive, not
 rude: open with "I wonder if...", "I don't love...", "Not sure this...", "Hmm", then ask a question whose answer is
@@ -74,16 +76,20 @@ bigger job, offer to pick it up. If it is a team decision, say so and name who s
 ## Links
 
 When there is a PR (the `PR:` line above, or a PR number or URL you were given to review), make every `path:line` a
-markdown link that opens the PR's Files tab with that line focused, keeping `path:line` as the link text:
+markdown link that opens the PR's Files tab at that line, keeping `path:line` as the link text:
 
 `[path:line](<pr-url>/files#diff-<sha>R<line>)`
 
-- `<sha>` is the SHA-256 hex of the repo-relative path: `printf '%s' 'path/to/file.ts' | shasum -a 256 | cut -c1-64`.
-  Compute it with that command for every file; never guess or reuse one.
+- Take `diff-<sha>` from the `File anchors:` line for that path. For a PR you were given by number or URL, compute it:
+  `printf '%s' 'path/to/file.ts' | shasum -a 256 | cut -c1-64`. Never guess or reuse one.
 - `R<line>` is the line in the new file. For a deleted line use `L<line>` with the old file's line number. For a range
-  use `R<start>-R<end>`.
-- GitHub only focuses lines inside the diff. For a line outside any hunk, link the file at the PR head instead:
+  use `R<start>-R<end>`; the page scrolls to the first line.
+- Link muted files (lockfiles, generated code, snapshots) the same way. The diffmute extension opens a muted or
+  collapsed file when its line is linked, so these links work too.
+- GitHub only shows lines inside the diff. For a line outside any hunk, link the file at the PR head instead:
   `https://github.com/<owner>/<repo>/blob/<headRefOid>/path#L<line>`.
+- If `Local HEAD` is not the PR's `headRefOid`, the PR is behind the local branch and line numbers may not match. Say so
+  in one line at the top and ask to push before the links are used.
 - With no PR, keep the plain `path:line`.
 
 End with a vibe rating out of 10 and a one-line verdict in the same voice: "👍", "Nice one, two nits", or, only for
