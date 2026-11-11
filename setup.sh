@@ -64,6 +64,7 @@ link "$DOTFILES/home/.config/starship.toml" "$HOME/.config/starship.toml"
 link "$DOTFILES/home/.config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 link "$DOTFILES/home/.config/agents/settings.json" "$HOME/.claude/settings.json"
 link "$DOTFILES/home/.config/agents/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
+link "$DOTFILES/home/.config/agents/AGENTS.md" "$HOME/.claude/AGENTS.md"
 link "$DOTFILES/home/.config/agents/RTK.md" "$HOME/.claude/RTK.md"
 
 for skill in "$DOTFILES/home/.config/agents/skills"/*; do

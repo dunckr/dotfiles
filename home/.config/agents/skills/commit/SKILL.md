@@ -3,6 +3,7 @@ name: commit
 description: Create commit based on changes
 ---
 
+Current branch: !`git branch --show-current`
 Current git status: !`git status`
 Recent commits compared to main: !`git log --oneline main..HEAD`
 Recent commit style: !`git log --oneline -10`
@@ -15,4 +16,5 @@ Message rules (write it in plain English per the rules in ~/.claude/skills/claud
 - under ~50 chars, no trailing period
 - no conventional-commit prefix (`feat:`), no scope, no fluff
 - separate unrelated changes with `; `
+- if the branch name starts with a ticket number, prefix it in uppercase: branch `abc-123-tab-bar` gives `ABC-123 fix tab bar`
 - examples: `fix tab bar`, `add herdr split navigation`, `use one dark vivid; add nerd font symbols`
