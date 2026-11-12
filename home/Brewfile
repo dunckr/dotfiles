@@ -158,6 +158,8 @@ cask "font-source-code-pro"
 cask "gcloud-cli"
 # Web browser
 cask "google-chrome"
+# Desktop app for terminals and coding agents
+cask "herdr-app"
 # Java IDE by JetBrains
 cask "intellij-idea"
 # Animated screen capture application

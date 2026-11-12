@@ -2,8 +2,8 @@
 --
 -- <C-h/j/k/l> move between nvim windows first. At the edge they hand off to
 -- whichever multiplexer is running: tmux via vim-tmux-navigator, herdr via
--- `herdr pane focus`. herdr sends the keypress here in the first place, see
--- bin/herdr-nav.
+-- `herdr pane focus`, herdr-app via `herdr-app do pane.go`. herdr sends the
+-- keypress here in the first place, see bin/herdr-nav.
 
 local directions = {
 	{ key = "<C-h>", wincmd = "h", herdr = "left", tmux = "TmuxNavigateLeft" },
@@ -26,6 +26,9 @@ local function navigate(spec)
 
 		if vim.env.HERDR_ENV == "1" then
 			vim.fn.jobstart({ "herdr", "pane", "focus", "--current", "--direction", spec.herdr }, { detach = true })
+		elseif vim.env.HC_TERMINAL_ID then
+			-- herdr-app has no vim-aware keys, so only the edge handoff applies
+			vim.fn.jobstart({ "herdr-app", "do", "pane.go", "--direction", spec.herdr }, { detach = true })
 		elseif vim.env.TMUX then
 			vim.cmd(spec.tmux)
 		end
