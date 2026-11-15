@@ -441,7 +441,6 @@ export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 export PATH=/opt/homebrew/share/google-cloud-sdk/bin:"$PATH"
-export PATH="$HOME/fvm/default/bin:$PATH"
 
 alias chat="$dotfiles/bin/chat"
 alias rename="$dotfiles/bin/renametab"

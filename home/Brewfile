@@ -1,4 +1,3 @@
-tap "btwld/fvm", "https://github.com/btwld/homebrew-fvm.git"
 tap "cloudflare/cloudflare"
 tap "heroku/brew"
 tap "homebrew/services"
@@ -31,8 +30,6 @@ brew "eza"
 brew "fd"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
-# Manage Flutter SDK versions per project
-brew "fvm"
 # Command-line fuzzy finder written in Go
 brew "fzf"
 # GitHub command-line tool
