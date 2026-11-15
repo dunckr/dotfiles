@@ -41,3 +41,8 @@ defaults write com.apple.Terminal \
 # Stop xQuartz opening XTern
 defaults write org.macosforge.xquartz.X11 nolisten_tcp 0
 defaults write org.macosforge.xquartz.X11 app_to_run /usr/bin/true
+
+# Claude: toggle the terminal pane with ⌘ + T
+defaults write com.anthropic.claudefordesktop NSUserKeyEquivalents -dict-add \
+    "Show Terminal" "@t" \
+    "Hide Terminal" "@t"
