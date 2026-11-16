@@ -9,7 +9,28 @@ const bindLaunch = (appName, key, modifiers) =>
     app.isActive() ? app.hide() : app.focus();
   });
 
-bindLaunch('Firefox', 'c', ['cmd', 'shift']);
+// Cycle through running Firefox profiles, starting from the last one used
+let lastFirefoxPid = 0;
+
+Key.on('c', ['cmd', 'shift'], () => {
+  const firefoxes = App.all()
+    .filter((a) => a.name() === 'Firefox')
+    .sort((a, b) => a.processIdentifier() - b.processIdentifier());
+  if (!firefoxes.length) {
+    App.launch('Firefox').focus();
+    return;
+  }
+  const active = firefoxes.findIndex((a) => a.isActive());
+  if (active !== -1 && firefoxes.length === 1) {
+    firefoxes[0].hide();
+    return;
+  }
+  const last = firefoxes.findIndex((a) => a.processIdentifier() === lastFirefoxPid);
+  const next = active !== -1 ? firefoxes[(active + 1) % firefoxes.length] : firefoxes[Math.max(last, 0)];
+  lastFirefoxPid = next.processIdentifier();
+  next.focus();
+});
+
 bindLaunch('Chrome', 'c', ['alt', 'shift']);
 bindLaunch('Safari', 'c', ['cmd', 'ctrl']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
