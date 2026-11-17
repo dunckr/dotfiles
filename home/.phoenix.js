@@ -31,7 +31,7 @@ Key.on('c', ['cmd', 'shift'], () => {
   next.focus();
 });
 
-bindLaunch('Chrome', 'c', ['alt', 'shift']);
+bindLaunch('Google Chrome', 'c', ['alt', 'shift']);
 bindLaunch('Safari', 'c', ['cmd', 'ctrl']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
 bindLaunch('Slack', 'm', ['alt', 'shift']);
