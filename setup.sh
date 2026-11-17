@@ -47,7 +47,15 @@ link "$DOTFILES/home/Brewfile" "$HOME/Brewfile"
 
 if [[ -f "$HOME/Brewfile" ]]; then
   echo "Installing Homebrew packages from Brewfile..."
+  # Homebrew refuses formulae from third-party taps until they are trusted.
+  brew tap atlassian/acli
+  brew trust --formula atlassian/acli/acli
   brew bundle --file="$HOME/Brewfile"
+fi
+
+if ! gh extension list | grep -q github/gh-stack; then
+  echo "Installing gh extension github/gh-stack..."
+  gh extension install github/gh-stack
 fi
 
 run_if_exists "homebrew/language-dependencies.sh"

@@ -1,3 +1,4 @@
+tap "atlassian/acli"
 tap "cloudflare/cloudflare"
 tap "heroku/brew"
 tap "homebrew/services"
@@ -12,6 +13,8 @@ tap "stripe/stripe-cli"
 tap "superfly/tap"
 tap "tylerbrock/saw", "https://github.com/TylerBrock/homebrew-saw"
 tap "wix-incubator/brew", "https://github.com/wix-incubator/homebrew-brew.git"
+# Atlassian command-line interface for Jira
+brew "atlassian/acli/acli"
 # Codec library for encoding and decoding AV1 video streams
 brew "aom"
 # Official Amazon AWS command-line interface
