@@ -99,7 +99,9 @@
     "playwright@claude-plugins-official": false,
     "swift-lsp@claude-plugins-official": true,
     "typescript-lsp@claude-plugins-official": true,
-    "ruby-lsp@claude-plugins-official": true
+    "ruby-lsp@claude-plugins-official": true,
+    "pe@powerful-engine": true,
+    "mattpocock-skills@powerful-engine": true
   },
   "tui": "fullscreen",
   "editorMode": "vim",
