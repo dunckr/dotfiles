@@ -162,22 +162,10 @@ alias gl="git log"
 alias glog="git log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --"
 alias gp="git push"
 gpr() {
-  local base
-  if git ls-remote --exit-code origin develop &>/dev/null; then
-    base=develop
-  else
-    base=main
-  fi
-  git fetch origin "$base" && git push -u origin "$(git branch --show-current)" && gh pr create -f -B "$base" && gh pr view --web
+  git fetch origin main && git push -u origin "$(git branch --show-current)" && gh pr create -f -B main && gh pr view --web
 }
 gprd() {
-  local base
-  if git ls-remote --exit-code origin develop &>/dev/null; then
-    base=develop
-  else
-    base=main
-  fi
-  git fetch origin "$base" && git push -u origin "$(git branch --show-current)" && gh pr create -f -B "$base" --draft && gh pr view --web
+  git fetch origin main && git push -u origin "$(git branch --show-current)" && gh pr create -f -B main --draft && gh pr view --web
 }
 alias grc="git rebase --continue"
 
@@ -192,14 +180,14 @@ alias glast="echo 'copied!' && git log -1 --pretty=%B | tr -d '\n' | pbcopy"
 gprune() {
   local base dry_run=false
   [[ "$1" == "-n" ]] && dry_run=true
-  for b in develop main master; do
+  for b in main master; do
     if git show-ref --verify --quiet "refs/remotes/origin/$b"; then
       base=$b
       break
     fi
   done
   if [[ -z "$base" ]]; then
-    echo "gprune: could not detect default branch (develop/main/master)"
+    echo "gprune: could not detect default branch (main/master)"
     return 1
   fi
   echo "Pruning branches merged into $base..."
