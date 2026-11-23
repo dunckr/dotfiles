@@ -104,6 +104,11 @@
     "mattpocock-skills@powerful-engine": true
   },
   "tui": "fullscreen",
+  "voiceEnabled": true,
+  "voice": {
+    "enabled": true,
+    "mode": "tap"
+  },
   "editorMode": "vim",
   "preferredNotifChannel": "iterm2_with_bell",
   "agentPushNotifEnabled": true,

@@ -80,6 +80,9 @@ link "$DOTFILES/home/.config/herdr-app/mods/new-space" "$HOME/.config/herdr-app/
 link "$DOTFILES/home/.config/herdr-app/mods/new-space-here" "$HOME/.config/herdr-app/mods/new-space-here"
 link "$DOTFILES/home/.config/herdr-app/mods/chrome" "$HOME/.config/herdr-app/mods/chrome"
 link "$DOTFILES/home/.config/agents/settings.json" "$HOME/.claude/settings.json"
+# herdr sends cmd-k as meta+k, bound here to voice (see herdr-app/keys.json)
+link "$DOTFILES/home/.config/agents/keybindings.json" "$HOME/.claude/keybindings.json"
+link "$DOTFILES/home/.config/agents/keybindings.json" "$HOME/.claude-legend/keybindings.json"
 link "$DOTFILES/home/.config/agents/CLAUDE.md" "$HOME/.claude/CLAUDE.md"
 link "$DOTFILES/home/.config/agents/AGENTS.md" "$HOME/.claude/AGENTS.md"
 link "$DOTFILES/home/.config/agents/RTK.md" "$HOME/.claude/RTK.md"
