@@ -77,6 +77,7 @@ link "$DOTFILES/home/.config/herdr-app/themes/warm.json" "$HOME/.config/herdr-ap
 link "$DOTFILES/home/.config/herdr-app/layouts/desk.json" "$HOME/.config/herdr-app/layouts/desk.json"
 link "$DOTFILES/home/.config/herdr-app/layouts/desk.svg" "$HOME/.config/herdr-app/layouts/desk.svg"
 link "$DOTFILES/home/.config/herdr-app/mods/new-space" "$HOME/.config/herdr-app/mods/new-space"
+link "$DOTFILES/home/.config/herdr-app/mods/new-space-here" "$HOME/.config/herdr-app/mods/new-space-here"
 link "$DOTFILES/home/.config/herdr-app/mods/chrome" "$HOME/.config/herdr-app/mods/chrome"
 link "$DOTFILES/home/.config/agents/settings.json" "$HOME/.claude/settings.json"
 link "$DOTFILES/home/.config/agents/CLAUDE.md" "$HOME/.claude/CLAUDE.md"

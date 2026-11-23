@@ -1,0 +1,71 @@
+#!/usr/bin/env bash
+# Makes a fresh git worktree ready to work in. worktree-new runs it with
+# --env-only; Herdr's new-space mods then run it in full in a background
+# "setup" tab. It also works by hand from inside a worktree.
+#
+#   worktree-setup [--env-only] [main-checkout]
+#
+# 1. Copies the main checkout's ignored local config (.env*, .envrc,
+#    .claude/settings.local.json), keeping each file's relative path.
+#    Files already present are left alone. --env-only stops here.
+# 2. Loads the folder's direnv environment.
+# 3. Installs dependencies from whichever lockfile is present.
+# 4. Runs $WORKTREE_SETUP <main-checkout> if direnv set it, for per-project
+#    steps like codegen and builds (e.g. ~/legend/.envrc).
+set -euo pipefail
+
+env_only=false
+if [[ "${1:-}" == --env-only ]]; then env_only=true; shift; fi
+
+here="$(git rev-parse --show-toplevel)"
+main="${1:-$(dirname "$(git rev-parse --path-format=absolute --git-common-dir)")}"
+cd "$here"
+if [[ "$main" == "$here" ]]; then
+  echo "worktree-setup: this is the main checkout, nothing to copy from" >&2
+  exit 1
+fi
+
+step() { printf '\n\033[1;34m==> %s\033[0m\n' "$*"; }
+
+step "Copying local config from $main"
+envrc_copied=false
+while IFS= read -r -d '' file; do
+  rel="${file#"$main"/}"
+  # Only files git ignores and does not track; tracked ones came with checkout.
+  git -C "$main" ls-files --error-unmatch -- "$rel" >/dev/null 2>&1 && continue
+  git -C "$main" check-ignore -q -- "$rel" || continue
+  [[ -e "$rel" ]] && continue
+  mkdir -p "$(dirname "$rel")"
+  cp -p "$file" "$rel"
+  echo "  $rel"
+  [[ "$rel" == .envrc ]] && envrc_copied=true
+done < <(find "$main" \
+  \( -name node_modules -o -name .git -o -name dist -o -name worktrees -o -name .worktrees \) -prune -o \
+  -type f \( -name '.env*' -o -path "$main/.claude/settings.local.json" \) -print0)
+
+$envrc_copied && command -v direnv >/dev/null 2>&1 && direnv allow "$here"
+$env_only && exit 0
+
+if command -v direnv >/dev/null 2>&1; then
+  eval "$(direnv export bash 2>/dev/null)"
+fi
+
+step "Installing dependencies"
+if [[ -f pnpm-lock.yaml ]]; then
+  pnpm install --frozen-lockfile
+elif [[ -f package-lock.json ]]; then
+  npm ci
+elif [[ -f yarn.lock ]]; then
+  yarn install --frozen-lockfile
+elif [[ -f bun.lock || -f bun.lockb ]]; then
+  bun install --frozen-lockfile
+else
+  echo "  no lockfile, skipped"
+fi
+
+if [[ -n "${WORKTREE_SETUP:-}" ]]; then
+  step "Running $WORKTREE_SETUP"
+  "$WORKTREE_SETUP" "$main"
+fi
+
+step "Ready: $here ($(git branch --show-current))"

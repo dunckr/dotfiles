@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+# Makes a new worktree of the repo containing <folder>, off the freshly fetched
+# origin default branch, on a generated branch, with the main checkout's local
+# config copied in. Herdr's new-space mods call it; the slow part (install,
+# build) is left to worktree-setup.
+#
+#   worktree-new <folder>
+#
+# Prints {"folder","name","main"} as JSON. Exits 2 if <folder> isn't in a git repo.
+#
+# Location: $WORKTREE_DIR/<repo>/<branch> when the repo's direnv sets it (e.g.
+# ~/legend/.envrc, so that .envrc applies inside), else ~/.herdr/worktrees.
+set -euo pipefail
+export PATH="/opt/homebrew/bin:$PATH" # Herdr's PATH may lack Homebrew
+
+common="$(git -C "$1" rev-parse --path-format=absolute --git-common-dir 2>/dev/null)" || exit 2
+main="${common%/.git}"
+main="${main%/.git/}"
+repo="$(basename "$main")"
+
+dir=""
+command -v direnv >/dev/null && dir="$(direnv exec "$main" printenv WORKTREE_DIR 2>/dev/null || true)"
+root="${dir:-$HOME/.herdr/worktrees}/$repo"
+
+# No ssh overrides: per-repo identities (core.sshCommand) must apply.
+base="$(git -C "$main" symbolic-ref --short refs/remotes/origin/HEAD 2>/dev/null || echo origin/main)"
+if ! timeout 60 git -C "$main" fetch --quiet origin "${base#origin/}" >&2; then
+  base=main
+fi
+
+adjectives=(brave calm clever eager gentle happy keen lucky quiet swift witty bold)
+nouns=(otter falcon maple comet harbor willow ember lynx pebble heron cedar orbit)
+for _ in 1 2 3 4 5; do
+  branch="${adjectives[RANDOM % ${#adjectives[@]}]}-${nouns[RANDOM % ${#nouns[@]}]}"
+  path="$root/$branch"
+  git -C "$main" show-ref --quiet "refs/heads/$branch" && continue
+  [[ -e "$path" ]] && continue
+  git -C "$main" worktree add --quiet --no-track -b "$branch" "$path" "$base" >&2
+  (cd "$path" && "$(dirname "$0")/worktree-setup" --env-only "$main") >&2
+  printf '{"folder":"%s","name":"%s","main":"%s"}\n' "$path" "$repo" "$main"
+  exit 0
+done
+echo "no free branch name" >&2
+exit 1

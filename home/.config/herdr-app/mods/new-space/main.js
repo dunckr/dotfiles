@@ -1,31 +1,26 @@
-// Opened by cmd-n (keys.json): pick a folder, then set it up like a new
-// session in Claude desktop. A git repo gets a fresh worktree off main on a
-// generated branch (in Herdr's worktree folder, so the sidebar nests it under the repo);
-// any other folder becomes a plain space. The system picker only opens from
-// a click or keypress, hence the button.
+// Opened by cmd-shift-n (keys.json): pick a folder, then set it up like a new
+// session in Claude desktop. A git repo gets a fresh worktree (see
+// ~/dotfiles/bin/worktree-new), opened as a space whose shell is ready at once,
+// with install and build running in a background "setup" tab. Any other
+// folder becomes a plain space. new-space-here (cmd-n) does the same for the
+// focused space's folder. The system picker only opens from a click or
+// keypress, hence the button.
 import { View, div } from "gpui-kit";
 import { v_flex } from "gpui-base";
-import { closeOverlay, exec, home, notify, pickFolder, props, run, theme } from "herdr";
+import { closeOverlay, exec, home, notify, pickFolder, props, run, spaces, theme } from "herdr";
 
-const ADJECTIVES = ["brave", "calm", "clever", "eager", "gentle", "happy", "keen", "lucky", "quiet", "swift", "witty", "bold"];
-const NOUNS = ["otter", "falcon", "maple", "comet", "harbor", "willow", "ember", "lynx", "pebble", "heron", "cedar", "orbit"];
-const pick = (list) => list[Math.floor(Math.random() * list.length)];
-
-const git = (cwd, args) => exec("git", args, { cwd, timeout: 600_000 }).catch(() => null);
-
-async function newWorktree(folder) {
-  const common = await git(folder, ["rev-parse", "--path-format=absolute", "--git-common-dir"]);
-  if (common?.code !== 0) return null;
-  // The main checkout holds the shared .git folder, so it names the repo.
-  const repo = common.stdout.trim().replace(/\/\.git\/?$/, "").split("/").pop();
-  for (let i = 0; i < 5; i++) {
-    const branch = `${pick(ADJECTIVES)}-${pick(NOUNS)}`;
-    const path = `${home()}/.herdr/worktrees/${repo}/${branch}`;
-    const r = await git(folder, ["worktree", "add", "-b", branch, path, "main"]);
-    if (r?.code === 0) return { folder: path, name: repo };
-    if (!/already exists/.test(r?.stderr ?? "")) throw new Error(r?.stderr?.trim() || "git worktree add failed");
-  }
-  throw new Error("no free branch name");
+// Kept in step with new-space-here/main.js.
+async function openSpace(folder) {
+  const bin = `${home()}/dotfiles/bin`;
+  const r = await exec(`${bin}/worktree-new`, [folder], { timeout: 180_000 });
+  if (r.code === 2) return run("space.new", { folder, machine: "" });
+  if (r.code !== 0) throw new Error(r.stderr.trim().split("\n").pop() || "worktree-new failed");
+  const wt = JSON.parse(r.stdout);
+  const before = new Set(spaces().map((s) => s.id));
+  // Named after the repo: left unnamed, Herdr would call it by its branch.
+  run("space.new", { folder: wt.folder, name: wt.name, machine: "" });
+  const space = spaces().find((s) => !before.has(s.id))?.id;
+  run("tab.new", { space, name: "setup", folder: wt.folder, argv: [`${bin}/worktree-setup`, wt.main], focus: false });
 }
 
 export default class NewSpace extends View {
@@ -40,12 +35,10 @@ export default class NewSpace extends View {
       const overlay = props()?.overlay;
       const folder = await pickFolder({ prompt: "New space" });
       if (folder) {
-        this.status = "Setting up…";
+        this.status = "Making worktree…";
         cx.notify();
         try {
-          // Named after the repo: left unnamed, Herdr would call it by its branch.
-          const worktree = await newWorktree(folder);
-          run("space.new", { folder: worktree?.folder ?? folder, name: worktree?.name, machine: "" });
+          await openSpace(folder);
         } catch (e) {
           notify({ title: "Couldn't make a worktree", body: String(e?.message ?? e), level: "error" });
         }
