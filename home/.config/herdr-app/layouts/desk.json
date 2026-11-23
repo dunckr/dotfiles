@@ -34,7 +34,7 @@
       "type": "column",
       "resizable": false,
       "children": [
-        { "id": "tabs", "type": "block", "size": { "px": 42 }, "window_drag": true, "content": { "mod": "tabs" } },
+        { "id": "tabs", "type": "block", "size": { "px": 47 }, "window_drag": true, "content": { "mod": "tabs" } },
         {
           "id": "work-body",
           "type": "row",
