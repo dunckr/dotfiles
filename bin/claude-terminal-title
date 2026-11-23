@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Copy the Claude session name (set by /rename) into the terminal title, so
+# herdr's agent sidebar shows it. Reads statusline JSON on stdin.
+
+set -uo pipefail
+
+input="$(cat)"
+session_id="$(jq -r '.session_id // empty' <<<"$input")"
+transcript="$(jq -r '.transcript_path // empty' <<<"$input")"
+title="$(jq -r '.session_name // empty' <<<"$input")"
+
+if [[ -z "$title" && -f "$transcript" ]]; then
+  title="$(grep '"type":"custom-title"' "$transcript" | tail -n 1 | jq -r '.customTitle // empty' 2>/dev/null)"
+fi
+[[ -n "$title" && -n "$session_id" ]] || exit 0
+
+# Only write when the name changes
+cache="${TMPDIR:-/tmp}/claude-terminal-title-$session_id"
+[[ "$(cat "$cache" 2>/dev/null)" == "$title" ]] && exit 0
+
+# Find the controlling tty by walking up to the claude process
+pid=$$
+tty=""
+while [[ -n "$pid" && "$pid" != 1 ]]; do
+  tty="$(ps -o tty= -p "$pid" | tr -d ' ')"
+  [[ -n "$tty" && "$tty" != "??" ]] && break
+  pid="$(ps -o ppid= -p "$pid" | tr -d ' ')"
+done
+[[ -n "$tty" && "$tty" != "??" && -w "/dev/$tty" ]] || exit 0
+
+printf '\033]2;%s\007' "$title" >"/dev/$tty" && printf '%s' "$title" >"$cache"

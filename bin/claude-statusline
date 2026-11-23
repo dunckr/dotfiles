@@ -6,6 +6,8 @@ set -uo pipefail
 
 input="$(cat)"
 
+"$(dirname "$0")/claude-terminal-title" <<<"$input" &
+
 dir="$(jq -r '.workspace.current_dir // empty' <<<"$input")"
 model="$(jq -r '.model.display_name // empty' <<<"$input")"
 remaining="$(jq -r '.context_window.remaining_percentage // empty' <<<"$input")"
