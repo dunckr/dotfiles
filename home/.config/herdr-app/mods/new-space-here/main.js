@@ -3,15 +3,29 @@
 // Outside a git repo it opens a plain space in the same folder.
 import { View, div } from "gpui-kit";
 import { v_flex } from "gpui-base";
-import { closeOverlay, exec, focused, home, notify, panes, props, run, spaces, theme } from "herdr";
+import { closeOverlay, exec, focused, home, notify, panes, props, run, setShared, shared, spaces, theme } from "herdr";
+
+// Shared with new-space, which lists these.
+const RECENT = "new-space.recent";
+const KEEP = 8;
+
+function remember(folder) {
+  const list = shared(RECENT);
+  const rest = Array.isArray(list) ? list.filter((f) => f !== folder) : [];
+  setShared(RECENT, [folder, ...rest].slice(0, KEEP));
+}
 
 // Kept in step with new-space/main.js.
 async function openSpace(folder) {
   const bin = `${home()}/dotfiles/bin`;
   const r = await exec(`${bin}/worktree-new`, [folder], { timeout: 180_000 });
-  if (r.code === 2) return run("space.new", { folder, machine: "" });
+  if (r.code === 2) {
+    remember(folder);
+    return run("space.new", { folder, machine: "" });
+  }
   if (r.code !== 0) throw new Error(r.stderr.trim().split("\n").pop() || "worktree-new failed");
   const wt = JSON.parse(r.stdout);
+  remember(wt.main);
   const before = new Set(spaces().map((s) => s.id));
   // Named after the repo: left unnamed, Herdr would call it by its branch.
   run("space.new", { folder: wt.folder, name: wt.name, machine: "" });
