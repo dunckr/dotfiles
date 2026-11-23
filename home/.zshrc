@@ -107,6 +107,8 @@ if command -v pyenv 1>/dev/null 2>&1; then
 fi
 
 export EDITOR=nvim
+# herdr draws kitty images but claude code doesn't detect it
+export CLAUDE_CODE_FORCE_TERMINAL_IMAGES=1
 
 # aliases
 alias ..='cd ..'
