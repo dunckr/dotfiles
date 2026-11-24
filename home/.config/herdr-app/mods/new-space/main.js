@@ -1,8 +1,8 @@
 // Opened by cmd-shift-n (keys.json): pick a folder, then set it up like a new
 // session in Claude desktop. A git repo gets a fresh worktree (see
-// ~/dotfiles/bin/worktree-new), opened as a space whose shell is ready at once,
+// ~/dotfiles/bin/worktree-new), opened as a space with claude in its first tab,
 // with install and build running in a background "setup" tab. Any other
-// folder becomes a plain space. new-space-here (cmd-n) does the same for the
+// folder becomes a plain space, also with claude. new-space-here (cmd-n) does the same for the
 // focused space's folder. Recent folders (repos by their main checkout) are
 // listed first, sorted by path with a divider between parent folders: type to
 // fuzzy filter them, then up/down and enter, or cmd-1-9, open one. The system
@@ -74,14 +74,14 @@ async function openSpace(folder) {
   const r = await exec(`${bin}/worktree-new`, [folder], { timeout: 180_000 });
   if (r.code === 2) {
     remember(folder);
-    return run("space.new", { folder, machine: "" });
+    return run("space.new", { folder, machine: "", argv: ["claude"] });
   }
   if (r.code !== 0) throw new Error(r.stderr.trim().split("\n").pop() || "worktree-new failed");
   const wt = JSON.parse(r.stdout);
   remember(wt.main);
   const before = new Set(spaces().map((s) => s.id));
   // Named after the repo: left unnamed, Herdr would call it by its branch.
-  run("space.new", { folder: wt.folder, name: wt.name, machine: "" });
+  run("space.new", { folder: wt.folder, name: wt.name, machine: "", argv: ["claude"] });
   const space = spaces().find((s) => !before.has(s.id))?.id;
   run("tab.new", { space, name: "setup", folder: wt.folder, argv: [`${bin}/worktree-setup`, wt.main], focus: false });
 }
