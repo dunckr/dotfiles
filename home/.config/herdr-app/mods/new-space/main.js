@@ -4,9 +4,9 @@
 // with install and build running in a background "setup" tab. Any other
 // folder becomes a plain space. new-space-here (cmd-n) does the same for the
 // focused space's folder. Recent folders (repos by their main checkout) are
-// listed first: type to fuzzy filter them, then up/down and enter, or cmd-1-9,
-// open one. The system picker only opens from a click or keypress, hence the
-// button.
+// listed first, sorted by path with a divider between parent folders: type to
+// fuzzy filter them, then up/down and enter, or cmd-1-9, open one. The system
+// picker only opens from a click or keypress, hence the button.
 import { View, div } from "gpui-kit";
 import { h_flex, v_flex } from "gpui-base";
 import { closeOverlay, exec, home, notify, pickFolder, props, run, setShared, shared, spaces, theme } from "herdr";
@@ -38,13 +38,21 @@ function score(query, path) {
   return total;
 }
 
+const parentOf = (folder) => folder.replace(/\/+$/, "").replace(/\/[^/]*$/, "") || "/";
+
+// Without a query, the most recent folders sorted by parent then name, so
+// siblings (all of ~/legend, say) sit together.
 function filter(list, query) {
-  if (!query.trim()) return list;
+  if (!query.trim()) {
+    return list.slice(0, SHOW).sort((a, b) =>
+      parentOf(a).localeCompare(parentOf(b)) || a.localeCompare(b));
+  }
   return list
     .map((folder, i) => ({ folder, i, s: score(query, folder.replace(home(), "~")) }))
     .filter((m) => m.s !== null)
     .sort((a, b) => b.s - a.s || a.i - b.i)
-    .map((m) => m.folder);
+    .map((m) => m.folder)
+    .slice(0, SHOW);
 }
 
 function recent() {
@@ -113,7 +121,7 @@ export default class NewSpace extends View {
   }
 
   shown() {
-    return filter(recent(), this.query).slice(0, SHOW);
+    return filter(recent(), this.query);
   }
 
   setQuery(query) {
@@ -143,17 +151,21 @@ export default class NewSpace extends View {
   render() {
     const t = theme();
     const list = this.shown();
-    const rows = list.map((folder, i) => {
+    const grouped = !this.query.trim();
+    const rows = list.flatMap((folder, i) => {
+      const divider = grouped && i > 0 && parentOf(folder) !== parentOf(list[i - 1])
+        ? [div().id(`divider-${i}`).h(1).mx(8).my(4).bg(t.input)]
+        : [];
       const path = folder.replace(home(), "~");
       const name = path.split("/").pop() || path;
       const parent = path.slice(0, path.length - name.length - 1) || "/";
-      return h_flex().id(`recent-${i}`).gap(8).px(8).py(4).rounded(6).cursor_pointer()
+      return [...divider, h_flex().id(`recent-${i}`).gap(8).px(8).py(4).rounded(6).cursor_pointer()
         .when(i === this.selected, (s) => s.bg(t.selected))
         .hover((s) => s.bg(t.hover))
         .on_click((_e, cx) => this.open(cx, folder))
         .child(div().w(20).text_color(t.dim).child(i < 9 ? `⌘${i + 1}` : ""))
         .child(div().text_color(t.foreground).whitespace_nowrap().child(name))
-        .child(div().flex_1().min_w(0).text_color(t.dim).truncate().child(parent));
+        .child(div().flex_1().min_w(0).text_color(t.dim).truncate().child(parent))];
     });
     const button = this.selected === list.length;
     return v_flex().id("root").size_full().p(16).gap(12).text_size(13)
