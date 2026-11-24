@@ -48,6 +48,10 @@ hc run --bg --name <name> --cwd <dir> --outlive-parent claude "<prompt>"
 
 A slash command works as the first prompt, for example `claude "/pe:factory FOC-712"`.
 
+In a folder Claude Code has not seen before (a new worktree, a temp dir), it first asks whether to trust the folder and
+holds the prompt until that is answered. Herdr does not report this as blocked: `status` stays null and `hc wait` runs
+until its timeout. After starting, run `hc read <t>`; if it shows the trust question, ask the user before answering it.
+
 ## Talk to it and wait
 
 ```bash
