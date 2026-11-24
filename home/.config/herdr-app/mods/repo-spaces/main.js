@@ -1,7 +1,9 @@
 // Cloned from Herdr's spaces mod. Workspace spaces: stable colored avatars,
-// under a header per repo, grouped by machine when more than one is known. After a space's name, the repo
+// under a header per repo, grouped by machine when more than one is known.
+// Repos are sorted by folder, with a line between parent folders (all of
+// ~/legend together, say). After a space's name, the repo
 // its first terminal is in now, only where unusual: branch, ahead/behind. Agent state lives in the agents list, not here. Click to
-// switch, right-click for its menu, drag to reorder.
+// switch, right-click for its menu, drag to reorder within a repo.
 
 import { View, div, svg } from "gpui-kit";
 import { v_flex, h_flex, ScrollHandle } from "gpui-base";
@@ -40,6 +42,12 @@ const repoName = (common) => {
   const own = base(common);
   return own === ".bare" ? base(common.slice(0, -own.length - 1)) : own.replace(/\.git$/, "");
 };
+// A repo's own folder from its git folder, by the same rules as repoName.
+const repoRoot = (common) => {
+  if (common.endsWith("/.git")) return common.slice(0, -5);
+  return base(common) === ".bare" ? common.replace(/\/+$/, "").slice(0, -6) : common.replace(/\.git$/, "");
+};
+const parentOf = (path) => path.replace(/\/+$/, "").replace(/\/[^/]*$/, "") || "/";
 // Changes made outside Herdr (an editor's save, a commit in another app): looked
 // for this often, in repos the list shows, while the window is in front.
 const FALLBACK = 60000;
@@ -292,7 +300,7 @@ export default class Spaces extends View {
       );
       const name = repoName(repo);
       const [ahead, behind] = counts.code === 0 ? counts.stdout.trim().split(/\s+/).map(Number) : [0, 0];
-      const info = { name, branch: branch.code === 0 ? branch.stdout.trim().replace(/^refs\/heads\//, "") : "(detached)", ahead, behind, repo: JSON.stringify([on, repo]), linked: repo !== `${top}/.git` };
+      const info = { name, branch: branch.code === 0 ? branch.stdout.trim().replace(/^refs\/heads\//, "") : "(detached)", ahead, behind, repo: JSON.stringify([on, repo]), root: repoRoot(repo), linked: repo !== `${top}/.git` };
       this.git[key] = info;
       if (!on) this.watch(repo, cx);
     } catch {
@@ -334,9 +342,10 @@ export default class Spaces extends View {
       && this.ordering.machines.every(name => machines().some(m => m.name === name && m.layout === "ready"));
   }
 
-  // Spaces in order, grouped by repo within each machine: groups in the order
-  // their first space comes, each repo's main checkout first, spaces outside a
-  // repo last under Other. Until git answers, a space groups by its name.
+  // Spaces in order, grouped by repo within each machine: groups sorted by the
+  // repo's folder, each repo's main checkout first, spaces outside a repo last
+  // under Other. Until git answers, a space groups by its name and sorts by
+  // where it is.
   ordered() {
     const sp = spaces(), ps = panes();
     const ready = (w) => this.shown.has(w.id) || where(w, ps) in this.git || Date.now() - (this.born[w.id] ??= Date.now()) > 1500;
@@ -344,22 +353,24 @@ export default class Spaces extends View {
     const leads = leadPanes(ps);
     const list = sp.map((w, i) => {
       const k = where(w, ps);
-      return { w, i, g: this.git[k] ?? null, known: k in this.git, session: session(w, leads) };
+      return { w, i, g: this.git[k] ?? null, known: k in this.git, session: session(w, leads), at: place(w, ps) ?? "" };
     });
     const groups = new Map();
     for (const r of list) {
       const m = JSON.stringify(r.w.machine ?? null);
       const other = !r.g && r.known;
       const key = `${m}|${r.g ? r.g.repo : other ? "other" : `name:${r.w.name.toLowerCase()}`}`;
-      if (!groups.has(key)) groups.set(key, { m, other, label: r.g?.name ?? (other ? "Other" : r.w.name), rows: [] });
+      const root = r.g?.root ?? r.at;
+      if (!groups.has(key)) groups.set(key, { m, other, root, parent: other ? null : parentOf(root), label: r.g?.name ?? (other ? "Other" : r.w.name), rows: [] });
       groups.get(key).rows.push(r);
     }
     const out = [];
     for (const m of new Set([...groups.values()].map((g) => g.m))) {
       const mine = [...groups.entries()].filter(([, g]) => g.m === m);
-      for (const [key, g] of [...mine.filter(([, g]) => !g.other), ...mine.filter(([, g]) => g.other)]) {
+      const byFolder = ([, a], [, b]) => a.parent.localeCompare(b.parent) || a.root.localeCompare(b.root);
+      for (const [key, g] of [...mine.filter(([, g]) => !g.other).sort(byFolder), ...mine.filter(([, g]) => g.other)]) {
         const rows = [...g.rows.filter((r) => !r.g?.linked), ...g.rows.filter((r) => r.g?.linked)];
-        for (const r of rows) out.push({ ...r, tree: null, group: key, label: g.label, other: g.other });
+        for (const r of rows) out.push({ ...r, tree: null, group: key, label: g.label, other: g.other, parent: g.parent });
       }
     }
     // Simulate the batch so later indexes include earlier moves. An attempted
@@ -398,6 +409,8 @@ export default class Spaces extends View {
       const folded = !collapsed && this.foldedGroups.has(r.group);
       if (first || rows[n - 1].group !== r.group) {
         const count = rows.filter((k) => k.group === r.group).length;
+        // A line where the parent folder changes: ~/legend's repos apart from the rest.
+        if (!collapsed && !first && rows[n - 1].parent !== r.parent) items.push(div().id(`divider-${r.group}`).h(1).flex_none().mx(8).mt(8).bg(t.border));
         if (!collapsed) items.push(h_flex().id(`group-${r.group}`).h(24).flex_none().px(8).gap(6).when(!first, (el) => el.mt(8))
           .items_center().text_size(11).text_color(t.dim).cursor_pointer().hover((s) => s.text_color(t.foreground))
           .on_click((_e, cx) => {
