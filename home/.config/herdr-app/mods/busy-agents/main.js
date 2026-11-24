@@ -166,8 +166,9 @@ export default class Agents extends View {
         .when(s.id === on, (el) => el.child(svg("mods/workspace-chrome/check.svg").size(14).flex_none().text_color(t.foreground)))));
   }
 
-  peek(addr) {
-    run("terminal.peek", { terminal: addr });
+  // A sub-agent opens in its own tab, like any other session, not in a peek overlay.
+  open(addr) {
+    run("terminal.keep", { terminal: addr, place: "tab" });
   }
 
   // Live sub-agents of `addr`, depth first, each with the tree lines in front of it.
@@ -199,7 +200,7 @@ export default class Agents extends View {
       .text_size(12.5)
       .when(on, (el) => el.bg(t.raised))
       .hover((s) => s.bg(t.hover))
-      .on_click(() => (this.listed.has(k.address) ? run("pane.focus", { terminal: k.address }) : this.peek(k.address)))
+      .on_click(() => (this.listed.has(k.address) ? run("pane.focus", { terminal: k.address }) : this.open(k.address)))
       .children(s.lines.map(l => div().self_start().mt(-4).w(9).h(17).mr(4).flex_none()
         .when(Boolean(l), el => el.border_l(1.5).border_color(t.input))
         .when(l === "└" || l === "├", el => el.border_b(1.5).rounded_bl(6))))
