@@ -4,14 +4,48 @@
 // with install and build running in a background "setup" tab. Any other
 // folder becomes a plain space. new-space-here (cmd-n) does the same for the
 // focused space's folder. Recent folders (repos by their main checkout) are
-// listed first: up/down and enter, or 1-9, open one. The system picker only
-// opens from a click or keypress, hence the button.
+// listed first: type to fuzzy filter them, then up/down and enter, or cmd-1-9,
+// open one. The system picker only opens from a click or keypress, hence the
+// button.
 import { View, div } from "gpui-kit";
 import { h_flex, v_flex } from "gpui-base";
 import { closeOverlay, exec, home, notify, pickFolder, props, run, setShared, shared, spaces, theme } from "herdr";
 
 const RECENT = "new-space.recent";
-const KEEP = 8;
+const KEEP = 50;
+const SHOW = 8;
+
+// Subsequence match, case-insensitive. Higher is better; null is no match.
+// Rewards runs of adjacent letters, letters at word starts, and matches in
+// the folder's own name over its parents.
+function score(query, path) {
+  const q = query.toLowerCase();
+  const s = path.toLowerCase();
+  const nameStart = s.lastIndexOf("/") + 1;
+  let total = 0;
+  let streak = 0;
+  let from = 0;
+  for (const c of q) {
+    if (c === " ") continue;
+    const i = s.indexOf(c, from);
+    if (i < 0) return null;
+    streak = i === from && from > 0 ? streak + 1 : 0;
+    total += 1 + streak * 2;
+    if (i === 0 || "/-_. ".includes(s[i - 1])) total += 3;
+    if (i >= nameStart) total += 2;
+    from = i + 1;
+  }
+  return total;
+}
+
+function filter(list, query) {
+  if (!query.trim()) return list;
+  return list
+    .map((folder, i) => ({ folder, i, s: score(query, folder.replace(home(), "~")) }))
+    .filter((m) => m.s !== null)
+    .sort((a, b) => b.s - a.s || a.i - b.i)
+    .map((m) => m.folder);
+}
 
 function recent() {
   const list = shared(RECENT);
@@ -47,6 +81,7 @@ async function openSpace(folder) {
 export default class NewSpace extends View {
   init(_props, cx) {
     this.selected = 0;
+    this.query = "";
     this.handle = cx.focus_handle();
     this.handle.focus();
   }
@@ -77,21 +112,37 @@ export default class NewSpace extends View {
     });
   }
 
+  shown() {
+    return filter(recent(), this.query).slice(0, SHOW);
+  }
+
+  setQuery(query) {
+    this.query = query;
+    this.selected = 0;
+  }
+
   key(e, cx) {
-    const list = recent();
-    const n = list.length + 1; // the recent folders, then the button
+    if (this.busy) return;
+    const list = this.shown();
+    const n = list.length + 1; // the matching folders, then the button
     const k = e.keystroke;
-    if (k === "down") this.selected = (this.selected + 1) % n;
-    else if (k === "up") this.selected = (this.selected + n - 1) % n;
+    const m = e.modifiers ?? {};
+    if (k === "down" || k === "ctrl-n") this.selected = (this.selected + 1) % n;
+    else if (k === "up" || k === "ctrl-p") this.selected = (this.selected + n - 1) % n;
     else if (k === "enter") return this.open(cx, list[this.selected]);
-    else if (/^[1-9]$/.test(k) && list[k - 1]) return this.open(cx, list[k - 1]);
+    else if (/^cmd-[1-9]$/.test(k) && list[k.slice(4) - 1]) return this.open(cx, list[k.slice(4) - 1]);
+    else if (k === "backspace") this.setQuery(this.query.slice(0, -1));
+    else if (k === "alt-backspace") this.setQuery(this.query.replace(/[^\s/]*[\s/]*$/, ""));
+    else if (k === "cmd-backspace" || k === "ctrl-u") this.setQuery("");
+    else if (e.key_char && !m.control && !m.platform) this.setQuery(this.query + e.key_char);
     else return;
+    cx.stop_propagation();
     cx.notify();
   }
 
   render() {
     const t = theme();
-    const list = recent();
+    const list = this.shown();
     const rows = list.map((folder, i) => {
       const path = folder.replace(home(), "~");
       const name = path.split("/").pop() || path;
@@ -100,7 +151,7 @@ export default class NewSpace extends View {
         .when(i === this.selected, (s) => s.bg(t.selected))
         .hover((s) => s.bg(t.hover))
         .on_click((_e, cx) => this.open(cx, folder))
-        .child(div().w(12).text_color(t.dim).child(i < 9 ? String(i + 1) : ""))
+        .child(div().w(20).text_color(t.dim).child(i < 9 ? `⌘${i + 1}` : ""))
         .child(div().text_color(t.foreground).whitespace_nowrap().child(name))
         .child(div().flex_1().min_w(0).text_color(t.dim).truncate().child(parent));
     });
@@ -109,6 +160,10 @@ export default class NewSpace extends View {
       .track_focus(this.handle)
       .on_key_down((e, cx) => this.key(e, cx))
       .child(div().text_color(t.foreground).font_semibold().child("New space"))
+      .when(recent().length > 0, (s) => s.child(h_flex().px(8).py(4).rounded(6).border_1().border_color(t.input)
+        .child(this.query
+          ? div().text_color(t.foreground).child(this.query + "▏")
+          : div().text_color(t.dim).child("Type to filter recent folders"))))
       .when(rows.length > 0, (s) => s.child(v_flex().gap(2).children(rows)))
       .child(div().id("choose").px(12).py(6).rounded(6)
         .bg(button ? t.accent : t.input)

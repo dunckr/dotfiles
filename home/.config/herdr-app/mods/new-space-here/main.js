@@ -7,7 +7,7 @@ import { closeOverlay, exec, focused, home, notify, panes, props, run, setShared
 
 // Shared with new-space, which lists these.
 const RECENT = "new-space.recent";
-const KEEP = 8;
+const KEEP = 50; // Kept in step with new-space/main.js.
 
 function remember(folder) {
   const list = shared(RECENT);
