@@ -22,7 +22,7 @@
           "id": "sidebar-lists",
           "type": "column",
           "children": [
-            { "id": "agents", "type": "block", "size": { "weight": 3 }, "min": 120, "content": { "mod": "agents" } },
+            { "id": "agents", "type": "block", "size": { "weight": 3 }, "min": 120, "content": { "mod": "busy-agents" } },
             { "id": "spaces", "type": "block", "size": { "weight": 1 }, "min": 90, "content": { "mod": "repo-spaces" } }
           ]
         },
