@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# SessionStart hook: name the Claude session after the current git branch.
+# SessionStart hook: name the Claude session after CLAUDE_SESSION_NAME when an
+# agent that started it set one (see the herdr skill), else the git branch.
 
 cwd=$(jq -r '.cwd // empty')
-branch=$(git -C "${cwd:-.}" symbolic-ref --short -q HEAD 2>/dev/null) || exit 0
+title="${CLAUDE_SESSION_NAME:-}"
+[[ -n "$title" ]] || title=$(git -C "${cwd:-.}" symbolic-ref --short -q HEAD 2>/dev/null) || exit 0
 
-jq -n --arg title "$branch" \
+jq -n --arg title "$title" \
   '{hookSpecificOutput: {hookEventName: "SessionStart", sessionTitle: $title}}'

@@ -5,23 +5,26 @@
 # Outside a git repo it opens a plain space in <folder>. For agents and scripts;
 # the mods do the same through the app's own API.
 #
-#   space-new <folder> [--task TEXT] [--argv JSON] [--focus]
+#   space-new <folder> [--task TEXT] [--title TEXT] [--argv JSON] [--focus]
 #
 # --task starts an agent in the first tab with TEXT as its first message;
-# --argv picks the agent (default ["claude"]). Without --focus the person stays
-# on the space they are looking at. Prints {"space","folder","main"} as JSON.
+# --argv picks the agent (default ["claude"]). --title names the first tab and,
+# for claude, the session (CLAUDE_SESSION_NAME, read by claude-session-title).
+# Without --focus the person stays on the space they are looking at. Prints
+# {"space","folder","main"} as JSON.
 set -euo pipefail
 export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
 bin="$(cd "$(dirname "$0")" && pwd)"
 
-usage() { echo "usage: space-new <folder> [--task TEXT] [--argv JSON] [--focus]" >&2; exit 2; }
+usage() { echo "usage: space-new <folder> [--task TEXT] [--title TEXT] [--argv JSON] [--focus]" >&2; exit 2; }
 [[ $# -ge 1 ]] || usage
 folder="$1"; shift
-task=""; argv='["claude"]'; focus=false
+task=""; title=""; argv='["claude"]'; focus=false
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --task) [[ $# -ge 2 ]] || usage; task="$2"; shift 2 ;;
     --argv) [[ $# -ge 2 ]] || usage; argv="$2"; shift 2 ;;
+    --title) [[ $# -ge 2 ]] || usage; title="$2"; shift 2 ;;
     --focus) focus=true; shift ;;
     *) usage ;;
   esac
@@ -38,9 +41,14 @@ else
   exit "$rc"
 fi
 
-args="$(jq -nc --arg name "$name" --arg folder "$target" --argjson focus "$focus" \
+if [[ -n "$title" ]] && [[ "$(jq -r '.[0]' <<<"$argv")" == claude ]]; then
+  argv="$(jq -c --arg t "$title" '["env", "CLAUDE_SESSION_NAME=\($t)"] + .' <<<"$argv")"
+fi
+
+args="$(jq -nc --arg name "$name" --arg tab "$title" --arg folder "$target" --argjson focus "$focus" \
   --arg task "$task" --argjson argv "$argv" \
   '{name: $name, folder: $folder, machine: "", focus: $focus}
+   + (if $tab == "" then {} else {tab: $tab} end)
    + (if $task == "" then {} else {argv: $argv, task: $task} end)')"
 out="$(herdr-app do space.new "$args")"
 space="$(jq -r '.space // empty' <<<"$out")"

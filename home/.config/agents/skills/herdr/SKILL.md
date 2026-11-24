@@ -25,23 +25,31 @@ unfamiliar command.
 The installed binaries are the authority for syntax. Read `hc --help`, then `hc <command> --help` for the command you
 need. Do not run bare `hc`: it opens a picker and attaches. Output is JSON when piped; pass `--json` when you parse it.
 
+## Name every session
+
+Give every session you start a short title that says what it is doing, such as `FOC-712 factory` or
+`review: login fix`. Without one, the session is named after its git branch (`claude-session-title`), which says
+nothing about the work. The title comes from `CLAUDE_SESSION_NAME`: `space-new --title` sets it for you, and with
+`hc run` you put `env CLAUDE_SESSION_NAME="<title>"` before `claude`. It shows as the terminal title in Herdr's
+sidebar and in the session picker. Do not use `claude -n`: the SessionStart hook overwrites it.
+
 ## Open a new space
 
 When the user asks for a new space or workspace, use `space-new`. It does what cmd-n does: a fresh worktree of the
 repo off the latest default branch, a space named after the repo, and install and build in a background "setup" tab.
 
 ```bash
-~/dotfiles/bin/space-new <repo-folder> --task "<first message>"
+~/dotfiles/bin/space-new <repo-folder> --title "<title>" --task "<first message>"
 ```
 
 - `--task` starts Claude in the space's first tab with that first message, such as `/pe:factory FOC-712`. Leave it
   off for a space with only a shell.
+- `--title` names the Claude session and the space's first tab.
 - `--argv '["codex"]'` picks another agent.
 - The user stays on the space they are looking at; pass `--focus` only when they ask to go there.
 - It prints `{"space","folder","main"}`. Find the agent's terminal with `hc ls` (match `cwd` to `folder`) and use the
   steps below to read or wait on it.
 - Outside a git repo it opens a plain space in that folder.
-
 
 ## Find terminals
 
@@ -58,7 +66,7 @@ or from the result of `hc run`; never guess them.
 For a separate session without a new space or worktree, start Claude Code in a new terminal, in the right directory, with its first prompt:
 
 ```bash
-hc run --bg --name <name> --cwd <dir> --outlive-parent claude "<prompt>"
+hc run --bg --name <name> --cwd <dir> --outlive-parent env CLAUDE_SESSION_NAME="<title>" claude "<prompt>"
 ```
 
 - `--name`: unique among live terminals, 1 to 32 of `a-z 0-9 - _`. Use it as `<t>` afterwards.
