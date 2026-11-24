@@ -111,8 +111,9 @@ export default class NewSpace extends View {
       .child(div().text_color(t.foreground).font_semibold().child("New space"))
       .when(rows.length > 0, (s) => s.child(v_flex().gap(2).children(rows)))
       .child(div().id("choose").px(12).py(6).rounded(6)
-        .bg(button ? t.accent : t.solid).text_color(t.solid_foreground)
-        .hover((s) => s.bg(t.accent))
+        .bg(button ? t.accent : t.input)
+        .text_color(button ? t.accent_foreground : t.foreground)
+        .hover((s) => s.bg(t.accent).text_color(t.accent_foreground))
         .on_click((_e, cx) => this.open(cx, null))
         .child(this.status ?? "Choose folder…"));
   }
