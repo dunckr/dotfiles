@@ -174,8 +174,6 @@ cask "slack"
 cask "spotify"
 # Open-source code editor
 cask "visual-studio-code"
-# Voice to text app
-cask "voiceink"
 # Video communication and virtual meeting platform
 cask "zoom"
 # OpenJDK distribution from Azul
