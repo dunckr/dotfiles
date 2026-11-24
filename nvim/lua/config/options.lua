@@ -6,7 +6,6 @@ opt.fileformat = "unix"
 -- Color scheme settings
 vim.g.nvim_tui_enable_true_color = 1
 opt.termguicolors = true
-vim.cmd("syntax enable")
 opt.background = "dark"
 
 -- Mouse

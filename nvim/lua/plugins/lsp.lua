@@ -58,6 +58,36 @@ return {
 					vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 					vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
 					vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+
+					-- IdeaVim equivalents (see home/.ideavimrc)
+					local function o(desc)
+						return vim.tbl_extend("force", opts, { desc = desc })
+					end
+					local builtin = require("telescope.builtin")
+					vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, o("Show error under cursor"))
+					vim.keymap.set("n", "<leader>f", builtin.lsp_document_symbols, o("File structure"))
+					vim.keymap.set("n", "<leader>qi", vim.lsp.buf.implementation, o("Go to implementations"))
+					-- Most servers (lua_ls, ts_ls) don't do declaration; IntelliJ's
+					-- GotoDeclaration behaves like definition, so fall back to it.
+					vim.keymap.set("n", "<leader>gd", function()
+						if #vim.lsp.get_clients({ bufnr = 0, method = "textDocument/declaration" }) > 0 then
+							vim.lsp.buf.declaration()
+						else
+							vim.lsp.buf.definition()
+						end
+					end, o("Go to declaration"))
+					vim.keymap.set("n", "<leader>fu", builtin.lsp_references, o("Find usages"))
+					vim.keymap.set("n", "<leader>su", builtin.lsp_references, o("Show usages"))
+					vim.keymap.set("n", "<leader><space>", vim.lsp.buf.hover, o("Quick docs"))
+					vim.keymap.set("n", "<leader>re", vim.lsp.buf.rename, o("Rename symbol"))
+					vim.keymap.set("n", "<leader>k", function()
+						vim.lsp.buf.clear_references()
+						vim.lsp.buf.document_highlight()
+					end, o("Highlight usages"))
+					vim.api.nvim_create_autocmd("InsertEnter", {
+						buffer = bufnr,
+						callback = vim.lsp.buf.clear_references,
+					})
 				end,
 			})
 

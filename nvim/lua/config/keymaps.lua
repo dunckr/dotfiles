@@ -21,6 +21,61 @@ if not vim.g.vscode then
 	map({ "n", "v" }, "<D-[>", "<C-o>", { desc = "Jump back" })
 	map({ "n", "v" }, "<D-]>", "<C-i>", { desc = "Jump forward" })
 
+	-- <D-1> toggles the file tree, like cmd+1 for the project view in JetBrains.
+	map("n", "<D-1>", "<Cmd>Neotree toggle<CR>", { desc = "Toggle file tree" })
+
+	-- IdeaVim equivalents (see home/.ideavimrc). LSP ones live in
+	-- lua/plugins/lsp.lua since they only make sense with a server attached.
+	map("n", "]c", function()
+		if vim.wo.diff then
+			vim.cmd.normal({ "]c", bang = true })
+		else
+			require("gitsigns").nav_hunk("next")
+		end
+	end, { desc = "Next changed hunk" })
+	map("n", "[c", function()
+		if vim.wo.diff then
+			vim.cmd.normal({ "[c", bang = true })
+		else
+			require("gitsigns").nav_hunk("prev")
+		end
+	end, { desc = "Previous changed hunk" })
+	map("n", "<Leader>gb", function()
+		require("gitsigns").blame()
+	end, { desc = "Git blame" })
+	map("n", "<Leader>gw", function()
+		require("gitsigns").diffthis("main")
+	end, { desc = "Compare with main" })
+
+	map("n", "<Leader>c<Space>", "gcc", { remap = true, desc = "Toggle comment" })
+	map("v", "<Leader>c<Space>", "gc", { remap = true, desc = "Toggle comment" })
+
+	local function repo_path()
+		local file = vim.fn.expand("%:p")
+		local root = vim.fs.root(file, ".git")
+		if not root then
+			return nil, nil
+		end
+		return root, file:sub(#root + 2)
+	end
+
+	map("n", "<Leader>cf", function()
+		local _, rel = repo_path()
+		if not rel then
+			return vim.notify("Not in a git repo", vim.log.levels.WARN)
+		end
+		vim.fn.setreg("+", rel)
+		vim.notify("Copied " .. rel)
+	end, { desc = "Copy path from repo root" })
+
+	map("n", "<Leader>go", function()
+		local root, rel = repo_path()
+		if not rel then
+			return vim.notify("Not in a git repo", vim.log.levels.WARN)
+		end
+		vim.system({ "gh", "browse", rel .. ":" .. vim.fn.line(".") }, { cwd = root })
+	end, { desc = "Open in GitHub" })
+
 	-- <leader>a switches between a file and its test, like the VSCode
 	-- test-switcher binding below.
 	map("n", "<Leader>a", function()

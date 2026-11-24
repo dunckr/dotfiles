@@ -38,7 +38,7 @@ bindLaunch('Safari', 'c', ['cmd', 'ctrl']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
 bindLaunch('Slack', 'm', ['alt', 'shift']);
 bindLaunch('Spotify', 'p', ['alt', 'shift']);
-bindLaunch('IntelliJ IDEA', 'u', ['cmd']);
+bindLaunch('Claude', 'u', ['cmd']);
 bindLaunch('ChatGPT', 'y', ['cmd']);
 bindLaunch('Herdr', 't', ['cmd', 'shift']);
 bindLaunch('Terminal', 't', ['alt', 'shift']);
