@@ -169,6 +169,7 @@ export default class Agents extends View {
   // A sub-agent opens in its own tab, like any other session, not in a peek overlay.
   open(addr) {
     run("terminal.keep", { terminal: addr, place: "tab" });
+    run("pane.focus", { terminal: addr });
   }
 
   // Live sub-agents of `addr`, depth first, each with the tree lines in front of it.
