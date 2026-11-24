@@ -1,17 +1,16 @@
--- Seamless split navigation with tmux and herdr.
+-- Seamless split navigation with tmux and herdr-app.
 --
 -- <C-h/j/k/l> move between nvim windows first. At the edge they hand off to
--- whichever multiplexer is running: tmux via vim-tmux-navigator, herdr via
--- `herdr pane focus`, herdr-app via `herdr-app do pane.go`. herdr sends the
--- keypress here in the first place, see bin/herdr-nav.
+-- whichever multiplexer is running: tmux via vim-tmux-navigator, herdr-app via
+-- `herdr-app do pane.go`.
 
 local directions = {
-	{ key = "<C-h>", wincmd = "h", herdr = "left", tmux = "TmuxNavigateLeft" },
-	{ key = "<C-j>", wincmd = "j", herdr = "down", tmux = "TmuxNavigateDown" },
-	{ key = "<C-k>", wincmd = "k", herdr = "up", tmux = "TmuxNavigateUp" },
-	{ key = "<C-l>", wincmd = "l", herdr = "right", tmux = "TmuxNavigateRight" },
+	{ key = "<C-h>", wincmd = "h", dir = "left", tmux = "TmuxNavigateLeft" },
+	{ key = "<C-j>", wincmd = "j", dir = "down", tmux = "TmuxNavigateDown" },
+	{ key = "<C-k>", wincmd = "k", dir = "up", tmux = "TmuxNavigateUp" },
+	{ key = "<C-l>", wincmd = "l", dir = "right", tmux = "TmuxNavigateRight" },
 	-- Terminals send <C-h> as backspace
-	{ key = "<BS>", wincmd = "h", herdr = "left", tmux = "TmuxNavigateLeft" },
+	{ key = "<BS>", wincmd = "h", dir = "left", tmux = "TmuxNavigateLeft" },
 }
 
 local function navigate(spec)
@@ -24,11 +23,9 @@ local function navigate(spec)
 			return
 		end
 
-		if vim.env.HERDR_ENV == "1" then
-			vim.fn.jobstart({ "herdr", "pane", "focus", "--current", "--direction", spec.herdr }, { detach = true })
-		elseif vim.env.HC_TERMINAL_ID then
+		if vim.env.HC_TERMINAL_ID then
 			-- herdr-app has no vim-aware keys, so only the edge handoff applies
-			vim.fn.jobstart({ "herdr-app", "do", "pane.go", "--direction", spec.herdr }, { detach = true })
+			vim.fn.jobstart({ "herdr-app", "do", "pane.go", "--direction", spec.dir }, { detach = true })
 		elseif vim.env.TMUX then
 			vim.cmd(spec.tmux)
 		end
@@ -40,7 +37,7 @@ return {
 	{
 		"christoomey/vim-tmux-navigator",
 		init = function()
-			-- Own the mappings so herdr gets the same treatment as tmux
+			-- Own the mappings so herdr-app gets the same treatment as tmux
 			vim.g.tmux_navigator_no_mappings = 1
 
 			for _, spec in ipairs(directions) do
@@ -48,7 +45,7 @@ return {
 					"n",
 					spec.key,
 					navigate(spec),
-					{ silent = true, desc = "Navigate " .. spec.herdr .. " (nvim/tmux/herdr)" }
+					{ silent = true, desc = "Navigate " .. spec.dir .. " (nvim/tmux/herdr-app)" }
 				)
 			end
 		end,

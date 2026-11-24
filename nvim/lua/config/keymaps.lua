@@ -11,7 +11,7 @@ map("n", "L", "$", { desc = "Jump to line end" })
 map("n", "<Leader>t", ":set expandtab<CR>", { desc = "Enable expand tab" })
 map("n", "<Leader>r", ":source $MYVIMRC<CR>", { desc = "Reload config" })
 
--- Split navigation (<C-h/j/k/l> across nvim, tmux and herdr) lives in
+-- Split navigation (<C-h/j/k/l> across nvim, tmux and herdr-app) lives in
 -- lua/plugins/navigation.lua
 
 -- Jumplist: <D-[> pops back to where you were (e.g. after gd), <D-]> goes

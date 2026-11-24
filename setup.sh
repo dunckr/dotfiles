@@ -69,7 +69,6 @@ done
 link "$DOTFILES/nvim/init.lua" "$HOME/.config/nvim/init.lua"
 link "$DOTFILES/nvim/lua" "$HOME/.config/nvim/lua"
 link "$DOTFILES/home/.config/starship.toml" "$HOME/.config/starship.toml"
-link "$DOTFILES/home/.config/herdr/config.toml" "$HOME/.config/herdr/config.toml"
 link "$DOTFILES/home/.config/herdr-app/keys.json" "$HOME/.config/herdr-app/keys.json"
 link "$DOTFILES/home/.config/herdr-app/settings.json" "$HOME/.config/herdr-app/settings.json"
 link "$DOTFILES/home/.config/herdr-app/themes/one-dark.json" "$HOME/.config/herdr-app/themes/one-dark.json"
@@ -92,19 +91,3 @@ for skill in "$DOTFILES/home/.config/agents/skills"/*; do
   link "$skill" "$HOME/.claude/skills/$skill_name"
 done
 
-# Reports agent session state to herdr's sidebar. Writes a managed hook to the
-# agent's config directory and adds a SessionStart entry to its settings.
-if command -v herdr >/dev/null; then
-  for integration in claude codex; do
-    echo "Installing herdr $integration integration..."
-    herdr integration install "$integration"
-  done
-
-  # Link handlers, so clicking a URL in a pane opens the browser instead of
-  # just copying it to the clipboard.
-  for plugin in "$DOTFILES/home/.config/herdr/plugins"/*; do
-    [[ -f "$plugin/herdr-plugin.toml" ]] || continue
-    echo "Linking herdr plugin $(basename "$plugin")..."
-    herdr plugin link "$plugin" >/dev/null
-  done
-fi

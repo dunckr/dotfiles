@@ -53,8 +53,6 @@ brew "gnupg"
 brew "go"
 # OpenType text shaping engine
 brew "harfbuzz"
-# Agent multiplexer that lives in your terminal
-brew "herdr"
 # Image format providing lossless and lossy compression for web images
 brew "webp"
 # Tools and libraries to manipulate images in select formats
