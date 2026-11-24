@@ -1,6 +1,6 @@
 ---
 name: herdr
-description: "Control Herdr (the Herdr app) through its `hc` CLI: start coding agents such as Claude Code in new terminals, send them prompts, wait for them, and read their output. Use when the user mentions Herdr or hc, or asks to fork, spawn or hand work to a separate interactive agent session. Requires HC_TERMINAL_ID to be set."
+description: "Control the Herdr app from an agent: open a new space (a fresh worktree with its own Claude, like cmd-n), or start a separate interactive agent session in a new terminal, then send it prompts, wait for it and read its output. Use when the user says new space, new workspace, fork, new session, or asks for an agent or subagent in Herdr. A plain \"subagent\" request without Herdr means the built-in Agent tool, not this skill. Requires HC_TERMINAL_ID to be set."
 ---
 
 # Herdr
@@ -18,8 +18,30 @@ If the check fails, say that you are not running inside Herdr and stop.
 
 ## Learn the CLI
 
-The installed binary is the authority for syntax. Read `hc --help`, then `hc <command> --help` for the command you
+Two CLIs, each with its own guide: `hc` runs and talks to terminals, and `herdr-app` changes what the window shows
+(spaces, tabs, panes). `hc --skill` and `herdr-app --skill` print those guides; read the one you need before an
+unfamiliar command.
+
+The installed binaries are the authority for syntax. Read `hc --help`, then `hc <command> --help` for the command you
 need. Do not run bare `hc`: it opens a picker and attaches. Output is JSON when piped; pass `--json` when you parse it.
+
+## Open a new space
+
+When the user asks for a new space or workspace, use `space-new`. It does what cmd-n does: a fresh worktree of the
+repo off the latest default branch, a space named after the repo, and install and build in a background "setup" tab.
+
+```bash
+~/dotfiles/bin/space-new <repo-folder> --task "<first message>"
+```
+
+- `--task` starts Claude in the space's first tab with that first message, such as `/pe:factory FOC-712`. Leave it
+  off for a space with only a shell.
+- `--argv '["codex"]'` picks another agent.
+- The user stays on the space they are looking at; pass `--focus` only when they ask to go there.
+- It prints `{"space","folder","main"}`. Find the agent's terminal with `hc ls` (match `cwd` to `folder`) and use the
+  steps below to read or wait on it.
+- Outside a git repo it opens a plain space in that folder.
+
 
 ## Find terminals
 
@@ -31,9 +53,9 @@ hc get <t>     # one terminal
 `<t>` is an address such as `t4f` or a name. This agent's own address is `$HC_TERMINAL_ID`. Read addresses from `hc ls`
 or from the result of `hc run`; never guess them.
 
-## Start an agent
+## Start an agent in a new terminal
 
-Start Claude Code in a new terminal, in the right directory, with its first prompt:
+For a separate session without a new space or worktree, start Claude Code in a new terminal, in the right directory, with its first prompt:
 
 ```bash
 hc run --bg --name <name> --cwd <dir> --outlive-parent claude "<prompt>"

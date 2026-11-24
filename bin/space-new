@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+# Opens a new Herdr space the way cmd-n does (new-space-here): a fresh worktree
+# of the repo containing <folder> (worktree-new), shown as a space named after
+# the repo, with install and build in a background "setup" tab (worktree-setup).
+# Outside a git repo it opens a plain space in <folder>. For agents and scripts;
+# the mods do the same through the app's own API.
+#
+#   space-new <folder> [--task TEXT] [--argv JSON] [--focus]
+#
+# --task starts an agent in the first tab with TEXT as its first message;
+# --argv picks the agent (default ["claude"]). Without --focus the person stays
+# on the space they are looking at. Prints {"space","folder","main"} as JSON.
+set -euo pipefail
+export PATH="/opt/homebrew/bin:$HOME/.local/bin:$PATH"
+bin="$(cd "$(dirname "$0")" && pwd)"
+
+usage() { echo "usage: space-new <folder> [--task TEXT] [--argv JSON] [--focus]" >&2; exit 2; }
+[[ $# -ge 1 ]] || usage
+folder="$1"; shift
+task=""; argv='["claude"]'; focus=false
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --task) [[ $# -ge 2 ]] || usage; task="$2"; shift 2 ;;
+    --argv) [[ $# -ge 2 ]] || usage; argv="$2"; shift 2 ;;
+    --focus) focus=true; shift ;;
+    *) usage ;;
+  esac
+done
+[[ -d "$folder" ]] || { echo "no such folder: $folder" >&2; exit 1; }
+folder="$(cd "$folder" && pwd)"
+
+rc=0; wt="$("$bin/worktree-new" "$folder")" || rc=$?
+if [[ $rc -eq 2 ]]; then
+  target="$folder"; name="$(basename "$folder")"; main=""
+elif [[ $rc -eq 0 ]]; then
+  target="$(jq -r .folder <<<"$wt")"; name="$(jq -r .name <<<"$wt")"; main="$(jq -r .main <<<"$wt")"
+else
+  exit "$rc"
+fi
+
+args="$(jq -nc --arg name "$name" --arg folder "$target" --argjson focus "$focus" \
+  --arg task "$task" --argjson argv "$argv" \
+  '{name: $name, folder: $folder, machine: "", focus: $focus}
+   + (if $task == "" then {} else {argv: $argv, task: $task} end)')"
+out="$(herdr-app do space.new "$args")"
+space="$(jq -r '.space // empty' <<<"$out")"
+[[ -n "$space" ]] || { echo "space.new failed: $out" >&2; exit 1; }
+
+if [[ -n "$main" ]]; then
+  herdr-app do tab.new "$(jq -nc --arg space "$space" --arg folder "$target" \
+    --argjson argv "$(jq -nc --arg s "$bin/worktree-setup" --arg m "$main" '[$s, $m]')" \
+    '{space: $space, name: "setup", folder: $folder, argv: $argv, focus: false}')" >/dev/null
+fi
+
+jq -nc --arg space "$space" --arg folder "$target" --arg main "$main" '{space: $space, folder: $folder, main: $main}'
