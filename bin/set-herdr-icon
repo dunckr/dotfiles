@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Usage: set-herdr-icon [image]
+# Sets Herdr.app's icon to the given image (default: the one in dotfiles).
+# Herdr updates replace the app bundle, so run this again after updating.
+set -euo pipefail
+
+DOTFILES="${DOTFILES:-$HOME/dotfiles}"
+icon="${1:-$DOTFILES/home/.config/herdr-app/app-icon.png}"
+app="/Applications/Herdr.app"
+
+[[ -f "$icon" ]] || { echo "No icon at $icon" >&2; exit 1; }
+[[ -d "$app" ]] || { echo "No app at $app" >&2; exit 1; }
+
+osascript -l JavaScript - "$icon" "$app" <<'EOF' >/dev/null
+ObjC.import('AppKit')
+function run([icon, app]) {
+  const image = $.NSImage.alloc.initWithContentsOfFile(icon)
+  if (!image.isValid) throw new Error('Not an image: ' + icon)
+  if (!$.NSWorkspace.sharedWorkspace.setIconForFileOptions(image, app, 0))
+    throw new Error('Could not set the icon on ' + app)
+}
+EOF
+
+# make Finder and the Dock pick up the new icon
+touch "$app"
+killall Dock
+echo "Set Herdr's icon, restart Herdr if it's running"
