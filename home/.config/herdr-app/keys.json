@@ -74,7 +74,8 @@
     "ctrl-9": "tab.select:9"
   },
   "terminal": {
-    "cmd-f": "terminal.search",
+    "cmd-f": "send:\u001b[102;9u",
+    "cmd-shift-f": "terminal.search",
     "cmd-c": "terminal.copy",
     "cmd-v": "terminal.paste",
     "ctrl-v": "terminal.paste_image",

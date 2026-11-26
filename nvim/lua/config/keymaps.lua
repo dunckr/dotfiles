@@ -87,8 +87,27 @@ end
 map("n", "<C-p>", ":Telescope git_files<CR>", { silent = true, desc = "Find git files" })
 map("n", "<C-t>", ":Telescope tags<CR>", { silent = true, desc = "Find tags" })
 
+-- Project search: live grep from the git root of the current buffer (or cwd
+-- outside a repo). rg skips gitignored files; hidden files are searched but
+-- .git itself is not (see vimgrep_arguments in lua/plugins/telescope.lua).
+local function grep_project(opts)
+	opts = opts or {}
+	opts.cwd = vim.fs.root(0, ".git") or vim.fn.getcwd()
+	require("telescope.builtin").live_grep(opts)
+end
+
 -- Search (replacing CtrlSF - using Telescope live_grep)
-map("n", "<C-F>", ":Telescope live_grep<CR>", { desc = "Live grep search" })
+map("n", "<C-F>", grep_project, { desc = "Search in project" })
+
+-- <D-f> searches the whole project, like Find in Files in JetBrains. herdr-app
+-- sends cmd+f as CSI u (see home/.config/herdr-app/keys.json). In visual mode
+-- the selection is the starting query.
+map("n", "<D-f>", grep_project, { desc = "Search in project" })
+map("v", "<D-f>", function()
+	local lines = vim.fn.getregion(vim.fn.getpos("v"), vim.fn.getpos("."), { type = vim.fn.mode() })
+	vim.api.nvim_feedkeys(vim.keycode("<Esc>"), "nx", false)
+	grep_project({ default_text = table.concat(lines, " ") })
+end, { desc = "Search selection in project" })
 
 -- Format with Prettier (for specific filetypes)
 map(

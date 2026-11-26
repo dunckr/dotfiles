@@ -245,6 +245,7 @@ alias vk="vagrant halt -f"
 
 # neovim
 alias vim="nvim"
+alias v="nvim"
 
 # tmux
 alias mux="tmuxinator"
@@ -403,6 +404,9 @@ bindkey '^F' forward-word
 bindkey '^D' delete-word
 bindkey '^E' end-of-line
 bindkey '^A' beginning-of-line
+# herdr-app sends cmd+f as CSI u for nvim; ignore it at the prompt
+zle -N noop true
+bindkey '^[[102;9u' noop
 
 # android
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
