@@ -247,6 +247,9 @@ alias vk="vagrant halt -f"
 alias vim="nvim"
 alias v="nvim"
 
+# claude
+alias c="claude"
+
 # tmux
 alias mux="tmuxinator"
 
