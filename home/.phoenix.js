@@ -9,31 +9,39 @@ const bindLaunch = (appName, key, modifiers) =>
     app.isActive() ? app.hide() : app.focus();
   });
 
-// Cycle through running instances of an app (one per profile), starting from the last one used
-const bindCycle = (appName, key, modifiers) => {
-  let lastPid = 0;
+// Cycle through the windows (hidden and minimized ones too) of every running instance of an app (one per
+// profile, and the agent browsers' own Chromes), starting from the last one used.
+// Instances with no window of their own (only helper windows) are passed over.
+// `launch`: start the app when none runs.
+const bindCycle = (appName, key, modifiers, { launch = true } = {}) => {
+  let lastId = 0;
   Key.on(key, modifiers, () => {
-    const instances = App.all()
+    const windows = App.all()
       .filter((a) => a.name() === appName)
-      .sort((a, b) => a.processIdentifier() - b.processIdentifier());
-    if (!instances.length) {
-      App.launch(appName).focus();
+      .sort((a, b) => a.processIdentifier() - b.processIdentifier())
+      .flatMap((a) => a.windows().filter((w) => w.isNormal()))
+      .sort((a, b) => a.app().processIdentifier() - b.app().processIdentifier() || a.hash() - b.hash());
+    if (!windows.length) {
+      if (launch) App.launch(appName).focus();
       return;
     }
-    const active = instances.findIndex((a) => a.isActive());
-    if (active !== -1 && instances.length === 1) {
-      instances[0].hide();
+    const focused = Window.focused();
+    const at = focused ? windows.findIndex((w) => w.isEqual(focused)) : -1;
+    if (at !== -1 && windows.length === 1) {
+      windows[0].app().hide();
       return;
     }
-    const last = instances.findIndex((a) => a.processIdentifier() === lastPid);
-    const next = active !== -1 ? instances[(active + 1) % instances.length] : instances[Math.max(last, 0)];
-    lastPid = next.processIdentifier();
+    const last = windows.findIndex((w) => w.hash() === lastId);
+    const next = at !== -1 ? windows[(at + 1) % windows.length] : windows[Math.max(last, 0)];
+    lastId = next.hash();
+    next.app().show();
+    if (next.isMinimized()) next.unminimize();
     next.focus();
   });
 };
 
 bindCycle('Firefox', 'c', ['cmd', 'shift']);
-bindCycle('Google Chrome', 'c', ['alt', 'shift']);
+bindCycle('Google Chrome', 'c', ['alt', 'shift'], { launch: false });
 bindLaunch('Safari', 'c', ['cmd', 'ctrl']);
 bindLaunch('Notes', 'n', ['alt', 'shift']);
 bindLaunch('Slack', 'm', ['alt', 'shift']);
