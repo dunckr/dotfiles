@@ -41,7 +41,7 @@ function score(query, path) {
 const parentOf = (folder) => folder.replace(/\/+$/, "").replace(/\/[^/]*$/, "") || "/";
 
 // Without a query, the most recent folders sorted by parent then name, so
-// siblings (all of ~/legend, say) sit together.
+// siblings ((all of ~/work, say)) sit together.
 function filter(list, query) {
   if (!query.trim()) {
     return list.slice(0, SHOW).sort((a, b) =>

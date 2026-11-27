@@ -1,13 +1,17 @@
 // Cloned from Herdr's spaces mod. Workspace spaces: stable colored avatars,
 // under a header per repo, grouped by machine when more than one is known.
 // Repos are sorted by folder, with a line between parent folders (all of
-// ~/legend together, say). After a space's name, the repo
+// ~/work together, say). After a space's name, the repo
 // its first terminal is in now, only where unusual: branch, ahead/behind. Agent state lives in the agents list, not here. Click to
 // switch, right-click for its menu, drag to reorder within a repo.
+// Under a space's name, when it has them: its GitHub PR (from gh, by a "PR 123"
+// in its name, its branch or its commit) and its Jira ticket (from the branch,
+// PR title or name, on the site its direnv's JIRA_SITE or acli's config gives).
+// Click one to open it.
 
 import { View, div, svg } from "gpui-kit";
 import { v_flex, h_flex, ScrollHandle } from "gpui-base";
-import { spaces, machines, panes, run, openOverlay, exec, hc, theme, shared, setShared, watchFolder, window, layout } from "herdr";
+import { spaces, machines, panes, run, openOverlay, exec, hc, theme, shared, setShared, watchFolder, window, layout, readTextFile, home } from "herdr";
 
 function find(node, id) {
   if (node?.id === id) return node;
@@ -63,6 +67,27 @@ async function both(a, b) {
   if (failed) throw failed.reason;
   return done.map((d) => d.value);
 }
+
+// A space's PR is asked of GitHub at most this often, while the window is in front.
+const PR_EVERY = 60000;
+const PR_FIELDS = "number,url,state,isDraft,title";
+// What a space's PR is found by: a number in its name or session ("PR 380 FOC-1442"),
+// else its branch, else (detached) its commit. The trunk has none.
+function prTarget(w, g, session) {
+  if (!g) return null;
+  const n = `${w.name} ${session ?? ""}`.match(/\bPR\s*#?(\d+)\b/i)?.[1];
+  if (n) return { key: `${g.repo}|#${n}`, args: ["pr", "view", n] };
+  if (g.branch === "(detached)") return g.sha ? { key: `${g.repo}|@${g.sha}`, args: ["pr", "list", "--state", "all", "--limit", "1", "--search", g.sha], list: true } : null;
+  if (g.branch === "main" || g.branch === "master") return null;
+  return { key: `${g.repo}|${g.branch}`, args: ["pr", "view", g.branch] };
+}
+// A Jira key after the start, a slash, a bracket or a space: "abc-123-tab-bar",
+// "feature/FOC-1442-file-type", "feat(FOC-1442): ...". Branches may be lowercase;
+// in prose only capitals count ("covid-19" isn't one). Not a branch prefix followed
+// by a number ("fix-2-crash").
+const ticketIn = (s, anyCase) => (s ?? "").match(new RegExp("(?:^|[/(\\[\\s])(?!(?:feat|fix|chore|refactor|docs|test|v)-)([A-Z][A-Z0-9]+-\\d+)(?![A-Za-z0-9])", anyCase ? "i" : ""))?.[1]?.toUpperCase() ?? null;
+const siteUrl = (s) => (s ? (/^https?:\/\//.test(s) ? s : `https://${s}`).replace(/\/+$/, "") : null);
+const openUrl = (url) => exec(window()?.platform === "windows" ? "explorer" : window()?.platform === "linux" ? "xdg-open" : "open", [url]).catch(() => {});
 
 // What a stored color name looks like on an avatar (the same in every mod
 // that draws space avatars): one strong color per hue, light and dark alike.
@@ -127,6 +152,18 @@ export default class Spaces extends View {
     this.scroll = ScrollHandle.new(); // the list's position: the active space is brought into view through it
     this.activeAt = -1; // the active space's place among the list's children (headers and rows), -1 when not drawn
     this.machines = [];
+    this.prs = {}; // prTarget().key -> { number, url, state, draft, title }, null: no PR
+    this.prChecked = {}; // prTarget().key -> when GitHub was last asked
+    this.prPending = new Map(); // prTarget().key -> { cwd, on, args, list } to ask about next
+    this.sites = {}; // repo -> its Jira site, from JIRA_SITE in its direnv
+    this.jira = null; // the Jira site elsewhere, from acli's config
+    cx.spawn(async (cx) => {
+      try {
+        const yaml = await readTextFile(`${home()}/.config/acli/jira_config.yaml`);
+        const site = yaml.match(/site:\s*["']?([\w.-]+)/)?.[1];
+        if (site) { this.jira = `https://${site}`; cx.notify(); }
+      } catch {}
+    });
     try {
       this.reconnecting = JSON.parse(localStorage.getItem("machines.reconnecting") ?? "{}");
       if (!this.reconnecting || typeof this.reconnecting !== "object" || Array.isArray(this.reconnecting)) this.reconnecting = {};
@@ -146,6 +183,10 @@ export default class Spaces extends View {
     for (const s of sp) if (!this.shown.has(s.id)) this.born[s.id] ??= now;
     const due = this.due(now, sp, panes());
     if (due.size) this.refreshGit(due, cx);
+    if (now - (this.prScan ?? 0) > 2000) {
+      this.prScan = now;
+      this.queuePrs(sp, cx);
+    }
     if (sp.some((s) => !this.shown.has(s.id)) || this.orderingDue(now)) cx.notify();
   }
 
@@ -299,8 +340,10 @@ export default class Spaces extends View {
         exec("git", ["rev-list", "--left-right", "--count", "HEAD...@{upstream}"], { cwd, on }),
       );
       const name = repoName(repo);
+      // A detached HEAD's PR is found by its commit.
+      const sha = branch.code !== 0 ? (await exec("git", ["rev-parse", "HEAD"], { cwd, on })).stdout.trim() || null : null;
       const [ahead, behind] = counts.code === 0 ? counts.stdout.trim().split(/\s+/).map(Number) : [0, 0];
-      const info = { name, branch: branch.code === 0 ? branch.stdout.trim().replace(/^refs\/heads\//, "") : "(detached)", ahead, behind, repo: JSON.stringify([on, repo]), root: repoRoot(repo), linked: repo !== `${top}/.git` };
+      const info = { name, branch: branch.code === 0 ? branch.stdout.trim().replace(/^refs\/heads\//, "") : "(detached)", ahead, behind, repo: JSON.stringify([on, repo]), root: repoRoot(repo), linked: repo !== `${top}/.git`, sha };
       this.git[key] = info;
       if (!on) this.watch(repo, cx);
     } catch {
@@ -308,6 +351,60 @@ export default class Spaces extends View {
       this.git[key] ??= null;
       this.unsure.add(key);
     }
+  }
+
+  // Each space's PR, from gh in its folder: new ones at once, the rest once per
+  // PR_EVERY while the window is in front. Asked two at a time in the background.
+  queuePrs(sp, cx) {
+    const ps = panes(), leads = leadPanes(ps), now = Date.now();
+    for (const s of sp) {
+      const g = this.git[where(s, ps)];
+      const target = prTarget(s, g, session(s, leads));
+      if (!target) continue;
+      const at = this.prChecked[target.key];
+      if (at && (!window().active || now - at < PR_EVERY)) continue;
+      this.prChecked[target.key] = now;
+      this.prPending.set(target.key, { ...target, cwd: place(s, ps), on: s.machine ?? null, repo: g.repo });
+    }
+    if (this.prAsking || !this.prPending.size) return;
+    this.prAsking = true;
+    cx.spawn(async (cx) => {
+      const one = async () => {
+        for (let next; (next = this.prPending.entries().next().value);) {
+          const [k, ask] = next;
+          this.prPending.delete(k);
+          await this.askPr(k, ask);
+          cx.notify();
+        }
+      };
+      await Promise.all([one(), one()]);
+      this.prAsking = false;
+    });
+  }
+
+  // One PR. gh runs under the folder's direnv when there is one (a repo can set its
+  // own GH_CONFIG_DIR, a work account), which also says its JIRA_SITE.
+  async askPr(k, { cwd, on, args, list, repo }) {
+    const gh = [...args, "--json", PR_FIELDS];
+    let r, site = null;
+    try {
+      r = await exec("direnv", ["exec", cwd, "sh", "-c", 'printf "%s\\n" "$JIRA_SITE"; exec gh "$@"', "sh", ...gh], { cwd, on, timeout: 20000 });
+      const nl = r.stdout.indexOf("\n");
+      site = r.stdout.slice(0, nl).trim();
+      r = { ...r, stdout: r.stdout.slice(nl + 1) };
+    } catch {
+      // No direnv there.
+      try { r = await exec("gh", gh, { cwd, on, timeout: 20000 }); } catch { return; }
+    }
+    if (site) this.sites[repo] = siteUrl(site);
+    try {
+      if (r.code === 0) {
+        const found = JSON.parse(r.stdout);
+        const pr = list ? found[0] : found;
+        this.prs[k] = pr ? { number: pr.number, url: pr.url, state: pr.state, draft: pr.isDraft, title: pr.title } : null;
+      } else if (/no pull requests found/i.test(r.stderr)) this.prs[k] = null;
+      // Anything else (offline, no gh there, not GitHub): keep what it showed.
+    } catch {}
   }
 
   watch(repo, cx) {
@@ -409,7 +506,7 @@ export default class Spaces extends View {
       const folded = !collapsed && this.foldedGroups.has(r.group);
       if (first || rows[n - 1].group !== r.group) {
         const count = rows.filter((k) => k.group === r.group).length;
-        // A line where the parent folder changes: ~/legend's repos apart from the rest.
+        // A line where the parent folder changes: one folder's repos apart from the rest.
         if (!collapsed && !first && rows[n - 1].parent !== r.parent) items.push(div().id(`divider-${r.group}`).h(1).flex_none().mx(8).mt(8).bg(t.border));
         if (!collapsed) items.push(h_flex().id(`group-${r.group}`).h(24).flex_none().px(8).gap(6).when(!first, (el) => el.mt(8))
           .items_center().text_size(11).text_color(t.dim).cursor_pointer().hover((s) => s.text_color(t.foreground))
@@ -539,6 +636,29 @@ export default class Spaces extends View {
       .when(g.behind > 0, (el) => el.child(div().flex_none().text_color(t.ansi1).child(`\u2193${g.behind}`)));
   }
 
+  // The line under a space's name: its PR and Jira ticket, each opened by a click.
+  // Null when its branch has neither.
+  links(w, g, session, t) {
+    if (!g) return null;
+    const target = prTarget(w, g, session);
+    const pr = target ? this.prs[target.key] ?? null : null;
+    const jira = this.sites[g.repo] ?? this.jira;
+    const ticket = jira ? ticketIn(g.branch, true) ?? ticketIn(pr?.title) ?? ticketIn(w.name) ?? ticketIn(session) : null;
+    if (!pr && !ticket) return null;
+    const tint = !pr ? t.dim : pr.state === "MERGED" ? t.ansi5 : pr.state === "CLOSED" || pr.draft ? t.dim : t.ansi2;
+    const chip = (id, icon, color, text, tip, url) => h_flex().id(`${id}-${w.id}`).h(16).px(4).gap(4).flex_none().items_center().rounded(4)
+      .text_size(11).text_color(t.muted).hover((s) => s.bg(t.hover).text_color(t.foreground)).cursor_pointer().tooltip(tip)
+      // Not a press on the row: no select, no drag.
+      .on_mouse_down("left", (_e, cx) => cx.stop_propagation())
+      .on_click((_e, cx) => { cx.stop_propagation(); openUrl(url); })
+      .child(svg(`mods/repo-spaces/${icon}.svg`).size(11).flex_none().text_color(color))
+      .child(text);
+    const state = pr && (pr.draft && pr.state === "OPEN" ? "draft" : pr.state.toLowerCase());
+    return h_flex().pl(23).gap(2).items_center()
+      .when(Boolean(pr), (el) => el.child(chip("pr", "pull-request", tint, `#${pr.number}`, `${pr.title} (${state})`, pr.url)))
+      .when(Boolean(ticket), (el) => el.child(chip("jira", "ticket", t.ansi4, ticket, `Open ${ticket} in Jira`, `${jira}/browse/${ticket}`)));
+  }
+
   row({ w, i, g, tree, session, other }, t) {
     const on = w.active;
     const fromIndex = this.pressed === null ? -1 : spaces().findIndex(s => s.id === this.pressed);
@@ -549,11 +669,13 @@ export default class Spaces extends View {
     // session's name, else its branch. Under Other, the session follows the name.
     const label = g?.linked && g.name.toLowerCase() === w.name.toLowerCase() ? (session || g.branch || w.name) : w.name;
     const extra = other && session && session !== w.name ? session : null;
+    const links = this.links(w, g, session, t);
     return v_flex()
       .relative()
       .id(`space-${w.id}`)
       .px(8)
-      .h(rowHeight({ tree }))
+      .h(rowHeight({ tree }) + (links ? 18 : 0))
+      .gap(2)
       .flex_none()
       .justify_center()
       .rounded(8)
@@ -599,7 +721,8 @@ export default class Spaces extends View {
           .child(g ? this.gitTail(g, true, label, t)
             : extra ? div().flex_1().min_w(0).truncate().text_size(11.5).text_color(t.dim).child(`· ${extra}`)
             : div().flex_1()),
-      );
+      )
+      .when(Boolean(links), (el) => el.child(links));
   }
 
   compact({ w, i }, t) {
