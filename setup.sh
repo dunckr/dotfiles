@@ -78,6 +78,9 @@ link "$DOTFILES/home/.config/herdr-app/layouts/desk.svg" "$HOME/.config/herdr-ap
 link "$DOTFILES/home/.config/herdr-app/mods/new-space" "$HOME/.config/herdr-app/mods/new-space"
 link "$DOTFILES/home/.config/herdr-app/mods/new-space-here" "$HOME/.config/herdr-app/mods/new-space-here"
 link "$DOTFILES/home/.config/herdr-app/mods/chrome" "$HOME/.config/herdr-app/mods/chrome"
+link "$DOTFILES/home/.config/herdr-app/mods/busy-agents" "$HOME/.config/herdr-app/mods/busy-agents"
+link "$DOTFILES/home/.config/herdr-app/mods/repo-spaces" "$HOME/.config/herdr-app/mods/repo-spaces"
+link "$DOTFILES/home/.config/herdr-app/mods/close" "$HOME/.config/herdr-app/mods/close"
 link "$DOTFILES/home/.config/agents/settings.json" "$HOME/.claude/settings.json"
 # herdr sends cmd-k as meta+k, bound here to voice (see herdr-app/keys.json)
 link "$DOTFILES/home/.config/agents/keybindings.json" "$HOME/.claude/keybindings.json"
