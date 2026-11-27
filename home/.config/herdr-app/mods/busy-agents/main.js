@@ -16,6 +16,17 @@ function find(node, id) {
 // The sidebar's rail goes by its width, not a flag: dragging its edge narrows it too.
 const narrow = () => (find(layout(), "sidebar")?.size?.px ?? Infinity) < 160;
 
+// A space's avatar as the spaces list draws it: its color, and its number, what
+// space.select (cmd-1 to cmd-9) picks. MARK is copied from repo-spaces.
+const MARK = { ansi6: "#22a99a", ansi3: "#e3814f", ansi4: "#5b8def", ansi5: "#8b7cf6", ansi2: "#3fae6a", ansi1: "#d9649a" };
+function spaceBadge(t, id) {
+  const n = spaces().findIndex((s) => s.id === id);
+  if (n < 0) return null;
+  const color = (shared("space.colors") ?? {})[id] ?? "ansi6";
+  return h_flex().size(18).flex_none().rounded(5).bg(color.startsWith("#") ? color : (MARK[color] ?? t[color]))
+    .items_center().justify_center().text_size(10.5).font_bold().text_color("#ffffff").child(String(n + 1));
+}
+
 // To the rail (on macOS wide enough for the traffic lights), or back to the width it had.
 function toggleSidebar() {
   const width = find(layout(), "sidebar")?.size?.px;
@@ -328,6 +339,12 @@ export default class Agents extends View {
       }
       const when = this.since(a);
       const idle = a.status === "idle" && !a.focused;
+      // Its space's number where the program's icon was; a program other than
+      // Claude keeps its icon as a small mark on the corner.
+      const badge = spaceBadge(t, a.space);
+      const claude = /claude/i.test(`${a.program?.key ?? ""} ${a.program?.name ?? ""}`);
+      const mark = !badge || claude ? null : icon(a.program, 10, t.foreground);
+      const avatar = !badge ? pic : mark ? div().relative().child(badge).child(div().absolute().right(-4).bottom(-4).p(1).rounded(3).bg(t.chrome).child(mark)) : badge;
       const isPinned = a.pinned;
       const pin = div()
         .id(`pin-${a.address}`)
@@ -367,12 +384,12 @@ export default class Agents extends View {
           cx.notify();
         })
         .on_click(() => run("pane.focus", { pane: a.pane }))
-        .when(Boolean(pic), el => el.child(div().id(`agent-fold-${a.address}`)
+        .when(Boolean(avatar), el => el.child(div().id(`agent-fold-${a.address}`)
           .when(subs.length > 0, el => el.on_click((_e, cx) => {
             cx.stop_propagation();
             this.folded.has(a.address) ? this.folded.delete(a.address) : this.folded.add(a.address);
             cx.notify();
-          })).child(pic)))
+          })).child(avatar)))
         .child(h_flex().flex_1().min_w(0).gap(5).items_center()
           .child(div().min_w(0).max_w(full && more ? 120 : 200).truncate().text_color(idle ? t.muted : t.foreground).child(name))
           .when(full && Boolean(more), el => el.child(div().flex_1().min_w(0).truncate().text_color(t.dim).child(`\u00b7 ${more}`))))

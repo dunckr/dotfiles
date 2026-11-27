@@ -1,12 +1,13 @@
-// Cloned from Herdr's spaces mod. Workspace spaces: stable colored avatars,
+// Cloned from Herdr's spaces mod. Workspace spaces: stable colored avatars
+// with the space's number (what space.select, cmd-1 to cmd-9, picks),
 // under a header per repo, grouped by machine when more than one is known.
 // Repos are sorted by folder, with a line between parent folders (all of
 // ~/work together, say). After a space's name, the repo
 // its first terminal is in now, only where unusual: branch, ahead/behind. Agent state lives in the agents list, not here. Click to
 // switch, right-click for its menu, drag to reorder within a repo.
 // Under a space's name, when it has them: its GitHub PR (from gh, by a "PR 123"
-// in its name, its branch or its commit) and its Jira ticket (from the branch,
-// PR title or name, on the site its direnv's JIRA_SITE or acli's config gives),
+// in its name, its branch or its commit) and its Jira ticket (from the PR title,
+// name or branch; a branch is lowercase, so it goes last: "stack-760" isn't one), on the site its direnv's JIRA_SITE or acli's config gives),
 // and while the PR is open, its checks: failed, running or passed.
 // Click one to open it.
 
@@ -661,7 +662,7 @@ export default class Spaces extends View {
     const target = prTarget(w, g, session);
     const pr = target ? this.prs[target.key] ?? null : null;
     const jira = this.sites[g.repo] ?? this.jira;
-    const ticket = jira ? ticketIn(g.branch, true) ?? ticketIn(pr?.title) ?? ticketIn(w.name) ?? ticketIn(session) : null;
+    const ticket = jira ? ticketIn(pr?.title) ?? ticketIn(w.name) ?? ticketIn(session) ?? ticketIn(g.branch, true) : null;
     if (!pr && !ticket) return null;
     const tint = !pr ? t.dim : pr.state === "MERGED" ? t.ansi5 : pr.state === "CLOSED" || pr.draft ? t.dim : t.ansi2;
     const chip = (id, icon, color, text, tip, url, spin) => h_flex().id(`${id}-${w.id}`).h(16).px(4).gap(4).flex_none().items_center().rounded(4)
@@ -741,7 +742,7 @@ export default class Spaces extends View {
           .gap(9)
           .items_center()
           .when(Boolean(tree), el => el.pl(22).child(svg("mods/workspace-chrome/branch.svg").size(13).flex_none().text_color(t.dim)))
-          .when(!tree, el => el.child(h_flex().size(18).flex_none().rounded(5).bg(fill).items_center().justify_center().text_size(10.5).font_bold().text_color("#ffffff").child([...label][0]?.toUpperCase() ?? "?")))
+          .when(!tree, el => el.child(h_flex().size(18).flex_none().rounded(5).bg(fill).items_center().justify_center().text_size(10.5).font_bold().text_color("#ffffff").child(String(i + 1))))
           .child(div().flex_initial().min_w(SIDE_MIN).truncate().text_color(t.foreground).child(label))
           .child(g ? this.gitTail(g, true, label, t)
             : extra ? div().flex_1().min_w(0).truncate().text_size(11.5).text_color(t.dim).child(`· ${extra}`)
