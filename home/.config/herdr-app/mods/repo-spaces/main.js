@@ -6,7 +6,8 @@
 // switch, right-click for its menu, drag to reorder within a repo.
 // Under a space's name, when it has them: its GitHub PR (from gh, by a "PR 123"
 // in its name, its branch or its commit) and its Jira ticket (from the branch,
-// PR title or name, on the site its direnv's JIRA_SITE or acli's config gives).
+// PR title or name, on the site its direnv's JIRA_SITE or acli's config gives),
+// and while the PR is open, its checks: failed, running or passed.
 // Click one to open it.
 
 import { View, div, svg } from "gpui-kit";
@@ -70,7 +71,23 @@ async function both(a, b) {
 
 // A space's PR is asked of GitHub at most this often, while the window is in front.
 const PR_EVERY = 60000;
-const PR_FIELDS = "number,url,state,isDraft,title";
+// Sooner while its checks run, so the result shows soon after they finish.
+const PR_RUNNING_EVERY = 20000;
+const PR_FIELDS = "number,url,state,isDraft,title,statusCheckRollup";
+// A PR's checks (GitHub Actions runs and commit statuses) in one: how many failed,
+// how many still run, of how many, and the failed ones' names. Null when it has none.
+function rollup(list) {
+  const done = ["SUCCESS", "NEUTRAL", "SKIPPED", "STALE"];
+  const runs = (list ?? []).map((c) => ({
+    name: c.name || c.context || "check",
+    is: c.__typename === "StatusContext"
+      ? (c.state === "SUCCESS" ? "pass" : c.state === "PENDING" || c.state === "EXPECTED" ? "run" : "fail")
+      : c.status !== "COMPLETED" ? "run" : done.includes(c.conclusion) ? "pass" : "fail",
+  }));
+  if (!runs.length) return null;
+  const failed = runs.filter((r) => r.is === "fail").map((r) => r.name);
+  return { fail: failed.length, run: runs.filter((r) => r.is === "run").length, total: runs.length, failed };
+}
 // What a space's PR is found by: a number in its name or session ("PR 380 FOC-1442"),
 // else its branch, else (detached) its commit. The trunk has none.
 function prTarget(w, g, session) {
@@ -362,7 +379,8 @@ export default class Spaces extends View {
       const target = prTarget(s, g, session(s, leads));
       if (!target) continue;
       const at = this.prChecked[target.key];
-      if (at && (!window().active || now - at < PR_EVERY)) continue;
+      const every = this.prs[target.key]?.checks?.run ? PR_RUNNING_EVERY : PR_EVERY;
+      if (at && (!window().active || now - at < every)) continue;
       this.prChecked[target.key] = now;
       this.prPending.set(target.key, { ...target, cwd: place(s, ps), on: s.machine ?? null, repo: g.repo });
     }
@@ -401,7 +419,7 @@ export default class Spaces extends View {
       if (r.code === 0) {
         const found = JSON.parse(r.stdout);
         const pr = list ? found[0] : found;
-        this.prs[k] = pr ? { number: pr.number, url: pr.url, state: pr.state, draft: pr.isDraft, title: pr.title } : null;
+        this.prs[k] = pr ? { number: pr.number, url: pr.url, state: pr.state, draft: pr.isDraft, title: pr.title, checks: rollup(pr.statusCheckRollup) } : null;
       } else if (/no pull requests found/i.test(r.stderr)) this.prs[k] = null;
       // Anything else (offline, no gh there, not GitHub): keep what it showed.
     } catch {}
@@ -646,16 +664,23 @@ export default class Spaces extends View {
     const ticket = jira ? ticketIn(g.branch, true) ?? ticketIn(pr?.title) ?? ticketIn(w.name) ?? ticketIn(session) : null;
     if (!pr && !ticket) return null;
     const tint = !pr ? t.dim : pr.state === "MERGED" ? t.ansi5 : pr.state === "CLOSED" || pr.draft ? t.dim : t.ansi2;
-    const chip = (id, icon, color, text, tip, url) => h_flex().id(`${id}-${w.id}`).h(16).px(4).gap(4).flex_none().items_center().rounded(4)
+    const chip = (id, icon, color, text, tip, url, spin) => h_flex().id(`${id}-${w.id}`).h(16).px(4).gap(4).flex_none().items_center().rounded(4)
       .text_size(11).text_color(t.muted).hover((s) => s.bg(t.hover).text_color(t.foreground)).cursor_pointer().tooltip(tip)
       // Not a press on the row: no select, no drag.
       .on_mouse_down("left", (_e, cx) => cx.stop_propagation())
       .on_click((_e, cx) => { cx.stop_propagation(); openUrl(url); })
-      .child(svg(`mods/repo-spaces/${icon}.svg`).size(11).flex_none().text_color(color))
-      .child(text);
+      .child(svg(icon.includes("/") ? icon : `mods/repo-spaces/${icon}.svg`).size(11).flex_none().text_color(color).when(Boolean(spin), (el) => el.spin(900)))
+      .when(Boolean(text), (el) => el.child(text));
+    // Checks only matter while the PR is open.
+    const c = pr?.state === "OPEN" ? pr.checks : null;
+    const checks = !c ? null
+      : c.fail ? chip("checks", "mods/workspace-chrome/x.svg", t.blocked, String(c.fail), `Failed: ${c.failed.join(", ")}`, `${pr.url}/checks`)
+      : c.run ? chip("checks", "mods/workspace-chrome/spinner.svg", t.working, `${c.total - c.run}/${c.total}`, `${c.run} of ${c.total} checks running`, `${pr.url}/checks`, true)
+      : chip("checks", "mods/workspace-chrome/check.svg", t.ansi2, null, `All ${c.total} checks passed`, `${pr.url}/checks`);
     const state = pr && (pr.draft && pr.state === "OPEN" ? "draft" : pr.state.toLowerCase());
     return h_flex().pl(23).gap(2).items_center()
       .when(Boolean(pr), (el) => el.child(chip("pr", "pull-request", tint, `#${pr.number}`, `${pr.title} (${state})`, pr.url)))
+      .when(Boolean(checks), (el) => el.child(checks))
       .when(Boolean(ticket), (el) => el.child(chip("jira", "ticket", t.ansi4, ticket, `Open ${ticket} in Jira`, `${jira}/browse/${ticket}`)));
   }
 
